@@ -21,8 +21,8 @@
           <div class="weui_cell_bd weui_cell_primary">
             <p class="editinfo_title">头像</p>
           </div>
-          <div class="weui_cell_img">
-            <img id="headimg" style="width: 40px; height: 40px; border-radius: 50%;" src="<?php echo ($my["headimgurl"]); ?>"></div>
+          <div class="">
+            <img id="headimg" style="width: 40px; height: 40px; border-radius: 50%;" src="<?php echo ($account["headimgurl"]); ?>"></div>
           <input type="file" name="shoplogo" id="shoplogo">
           <div id="img_upload_loading">
             <img src="<?php echo RES;?>/original/images/loading.gif" alt=""></div>
@@ -30,31 +30,55 @@
         </a>
         <a class="weui_cell editinfo_btn" href="javascript:;">
           <div class="weui_cell_bd weui_cell_primary">
-            <p class="editinfo_title">账号昵称</p>
+            <p class="editinfo_title">真实姓名</p>
           </div>
-          <div class="weui_cell_ft editinfo_con" data-name="nickname"><?php echo ($my["nickname"]); ?></div>
+          <div class="weui_cell_ft editinfo_con" data-name="nickname"><?php echo ($account["nickname"]); ?></div>
         </a>
         <a class="weui_cell editinfo_btn" href="javascript:;">
           <div class="weui_cell_bd weui_cell_primary">
-            <p class="editinfo_title">绑定手机号</p>
+            <p class="editinfo_title">手机号</p>
           </div>
-          <div class="weui_cell_ft editinfo_con" data-name="tele"><?php echo ($my["tele"]); ?></div>
+          <div class="weui_cell_ft editinfo_con" data-name="tele"><?php echo ($account["tele"]); ?></div>
+        </a>
+        <a class="weui_cell editinfo_btn" href="javascript:;">
+          <div class="weui_cell_bd weui_cell_primary">
+            <p class="editinfo_title">微信名</p>
+          </div>
+          <div class="weui_cell_ft editinfo_con" data-name="petname"><?php echo ($account["petname"]); ?></div>
+        </a>
+        <a class="weui_cell" href="javascript:;">
+          <div class="weui_cell_bd weui_cell_primary">
+            <p class="editinfo_title">当前账号</p>
+          </div>
+          <div class=" editinfo_con"><?php echo ($account["username"]); ?></div>
+        </a>
+        <a class="weui_cell editinfo_btn" href="javascript:;">
+          <div class="weui_cell_bd weui_cell_primary">
+            <p class="editinfo_title">设置新密码</p>
+          </div>
+          <div class="weui_cell_ft editinfo_con" data-name="password"></div>
         </a>
 
       </div>
 
     </div>
     <!-- 修改页面 -->
-    <div id="info_edit_wrap" class='show_wrap2'>
+    <div id="info_edit_wrap">
       <div class="info_edit_wrap_title">
         <div class="info_edit_wrap_title_item info_edit_wrap_title_left" id="close_info_edit">返回</div>
         <div class="info_edit_wrap_title_item info_edit_wrap_title_center" id="eidt_info_title"></div>
         <div class="info_edit_wrap_title_item info_edit_wrap_title_right"></div>
       </div>
       <div class="weui_cells_form" style="padding-top: 10px;">
+        <div class="weui_cell info_edit_old_password" style="display: none;">
+          <div class="weui_cell_bd weui_cell_primary weui_cell_infoedit" style="box-shadow: 0 0 5px #D6D6D6;">
+            <input id="info_edit_old_password" class="weui_input weui_input_infoedit" type="password" placeholder="输入原密码" value="">
+            <span class="weui_infoedit_delete">×</span>
+          </div>
+        </div>
         <div class="weui_cell">
           <div class="weui_cell_bd weui_cell_primary weui_cell_infoedit" style="box-shadow: 0 0 5px #D6D6D6;">
-            <input id="info_edit_item" class="weui_input weui_input_infoedit" type="text" placeholder="输入文本信息" value="2222">
+            <input id="info_edit_item" class="weui_input weui_input_infoedit" type="text" placeholder="输入信息" value="2222">
             <span class="weui_infoedit_delete">×</span>
           </div>
         </div>
@@ -64,6 +88,7 @@
         <a href="javascript:;" class="weui_btn weui_btn_primary" id="save_info">保存</a>
       </div>
     </div>
+    <!-- 修改页面 -->
   </div>
 </body>
 </html>

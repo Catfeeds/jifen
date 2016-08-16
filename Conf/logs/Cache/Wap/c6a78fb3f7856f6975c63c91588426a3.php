@@ -65,7 +65,7 @@
       </div>
       <div class="weui-col-25">
         <a href="<?php echo U('Distribution/index');?>">
-          <p class="iconfont">&#xe60a;</p>
+          <p class="iconfont">&#xe6ca;</p>
           <p>我的</p>
         </a>
       </div>

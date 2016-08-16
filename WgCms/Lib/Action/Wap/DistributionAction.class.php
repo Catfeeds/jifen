@@ -7,40 +7,44 @@ class DistributionAction extends WapAction{
 		if(!strpos($agent,"icroMessenger")) {
 			//echo '此功能只能在微信浏览器中使用';exit;
 		}
-		$token		= $this->
-token;
+		$token		= $this->token;
 		$wecha_id	= $this->wecha_id;
 		$my = M('Distribution_member')->where(array('token'=>$token,'wecha_id'=>$wecha_id))->find();
-		if($my['handle']==0&&$my['bindmid']!=0){
-			$db = M('Distribution_member');
-			$from_member = $db->where('id='.$my['bindmid'])->find();
-			$db->where('id='.$my['bindmid'])->setInc('followNums');//关注累加
-			$db->where('id='.$my['bindmid'])->setInc('firstNums');//一级会员累加
-			if($from_member){
-				$leveData['fid'] = $from_member['id'];
-			}
-			if($from_member&&$from_member['fid']!=0){
-				$db->where('id='.$from_member['fid'])->setInc('secondNums');//二级会员累加
-				$leveData['sid'] = $from_member['fid'];
-			}
-			if($from_member&&$from_member['sid']!=0){
-				$db->where('id='.$from_member['sid'])->setInc('thirdNums');//三级会员累加
-				$leveData['tid'] = $from_member['sid'];
-			}
-			$leveData['handle'] = 1;//处理结束
-			$db->where('id='.$my['id'])->save($leveData);//会员所属绑定
-		}
-		//推荐人昵称
-		// $my['recommended'] = M('Distribution_member')->where('id='.$my['bindmid'])->getField('nickname');
+		//公司信息
+		$company = M('company')->where(array('token'=>$this->token))->find();
+		$this->assign('company',$company);
 
 		$this->my = $my;
 		$set = M('Distribution_set')->where(array('token'=>$token))->find();
-		// $totalMoney = M('Distribution_ordermoney')->where(array('token'=>$token,'mid'=>$my['id'],'status'=>array('gt',0)))->sum('orderMoney');//累计销售
-		// $totalOfferMoney = M('Distribution_ordermoney')->where(array('token'=>$token,'mid'=>$my['id'],'status'=>array('gt',0)))->sum('offerMoney');//累计佣金
-		// $this->assign('totalMoney',$totalMoney);
-		// $this->assign('totalOfferMoney',$totalOfferMoney);
+
 		$this->assign('set',$set);
         $this->assign('my',$my);
+
+		//判断是否登陆
+		if(!$_COOKIE['login_user'] && ACTION_NAME !='register' && ACTION_NAME !='login' && ACTION_NAME !='test'){
+			if(ACTION_NAME == 'generateQrcode' && $_GET['aid'] != ''){
+
+			}else{
+				$this->redirect(U('Distribution/login'));
+			}
+		}
+		if($_COOKIE['login_user']){
+			$account = D('Account')->where(array('username'=>$_COOKIE['login_user'],'delete'=>0))->relation(true)->find();
+			if($account){
+				if(!$account['wecha_id']){
+    				$Wdata['wecha_id'] = $this->wecha_id;
+					//更新wecha_id
+					D('Account')->where(array('username'=>$_COOKIE['login_user']))->save($Wdata);
+    			}
+				$account['petname'] =base64_decode($account['petname']);
+				$this->account = $account;
+				$this->assign('account',$account);
+			}else{
+    			setcookie('login_user',NULL);
+    			$this->error('请登陆',U('Distribution/login'));
+			}
+		}
+
         //标题赋值
         switch (ACTION_NAME) {
         	case 'index':
@@ -269,15 +273,41 @@ token;
 		$this->display();
 	}
 	//个人信息
+	//个人信息
 	public function myInfo(){
 		if(IS_POST){
 			$name = $this->_post('name');
+			//姓名只能修改一次
+			// if($name == 'nickname'){
+			// 	if($this->account['editname'] == 1){
+			// 		$this->ajaxReturn('','真实姓名只能修改一次',2);
+			// 	}
+			// }
 			$info = $this->_post('info');
-			$data = array(
-				$name => $info,
-			);
-			$r = M('Distribution_member')->where(array('wecha_id'=>$this->wecha_id))->setField($data);
+			if($name == 'password'){
+				$data = array(
+					$name => md5($info),
+				);
+			}else{
+				if($name =='petname'){
+					$oinfo = $info;
+					$info = base64_encode($info);
+					$data = array(
+						$name => $info,
+						'petnamebak' => $oinfo,
+					);
+				}else{
+					$data = array(
+						$name => $info,
+					);
+				}
+			}
+			$data['updatetime'] = time();
+			$r = M('Distribution_account')->where(array('id'=>$this->account['id']))->setField($data);
 			if($r){
+				if($name = 'nickname'){
+					M('Distribution_account')->where(array('id'=>$this->account['id']))->setField('editname',1);
+				}
 				$this->ajaxReturn('','修改成功',1);
 			}else{
 				$this->ajaxReturn('','修改失败',2);
@@ -419,6 +449,24 @@ token;
 
 	//我的分店
 	public function myShop(){
+		$data = array(
+			'gold' => $this->statistical('gold',$this->account['id']),
+			'ordernums' => $this->statistical('ordernums',$this->account['id']),
+			'totalearn' => $this->statistical('totalearn',$this->account['id']),
+		);
+		$this->assign('info',$data);
+		//判断有没有充值退款
+		$hasrefund = M('LevelOrders')->where(array('bindaid'=>$this->account['id'],'return'=>array('eq',1)))->select();
+		if($hasrefund){
+			$this->assign('hasrefund',$hasrefund);
+		}
+		$this->display();
+	}
+	//团队管理
+	public function myTeam(){
+		// $team = $this->statisticalTeam((string)$this->account['id']);
+		$team = D('Account')->where(array('bindaid'=>$this->account['id'],'delete'=>0))->relation(true)->select();
+		$this->assign('list',$team);
 		$this->display();
 	}
 	//我的团队
@@ -447,6 +495,65 @@ token;
 		$this->assign('distriCount',$distriCount);
 		$this->assign('order',$order);
 		$this->display();
+	}
+	//充值页面
+	public function topUp(){
+		// if($this->account['lid'] == 0){
+		// 	$this->error('非会员不能进行充值',U('Distribution/index'));
+		// }
+		//判断是否有下级退款充值
+		// $hasrefund = M('LevelOrders')->where(array('bindaid'=>$this->account['id'],'return'=>array('neq',0),'type'=>1))->select();
+		// if($hasrefund){
+		// 	$this->assign('hasrefund',$hasrefund);
+		// }
+		$this->display();
+	}
+	//充值AJAX判断
+	public function topupCondtionAjax(){
+		$gold = $this->_post('gold');
+		// $gold = $this->_get('gold');
+		$con = $this->topupCondtion($gold);
+		$this->ajaxReturn('',$con['info'],$con['status']);
+	}
+	/*
+		*判断充值条件
+		*$gold:充值金额
+		*1： OK
+	 */
+	public function topupCondtion($gold){
+		return array('status'=>1,'info'=>'');
+	}
+	//充值提交
+	public function topupSubmit(){
+		$gold = $this->_post('gold');
+		$condition = $this->topupCondtion($gold);
+		if($condition['status'] != 1){
+			$this->error($condition['info']);
+		}
+		if($condition['status'] == 1){
+			//插入充值订单表
+			$orderid = substr($this->wecha_id, -1, 4) . date("YmdHis");
+			$price = $gold;
+			$_POST['orderid'] = $orderid;
+			$_POST['price'] = $price;
+			$_POST['type'] = 1;
+			$_POST['aid'] = $this->account['id'];
+			$_POST['bindaid'] = $this->account['bindaid'];
+			$_POST['mid'] = $this->my['id'];
+			$_POST['wecha_id'] = $this->my['wecha_id'];
+			$db = D('LevelOrders');
+
+			if ($db->create() === false) {
+			    $this->error($db->getError());
+			} else {
+			    $result = $db->add();
+			}
+			if($result){
+				$this->success('正在提交中...', U('Alipay/pay',array('token' => $this->token, 'wecha_id' => $this->wecha_id, 'success' => 1, 'from'=> 'Distribution', 'orderName' => $orderid, 'single_orderid' => $orderid, 'price' => $price)));
+			}else {
+				$this->error('提交失败', U('Distribution/topUp'));
+			}
+		}
 	}
 	//累计销售
 	public function followOrder(){
@@ -596,11 +703,11 @@ token;
 	public function getMoney(){
 		$token	= $this->token;
 		$wecha_id	= $this->wecha_id;
-		if($this->my['distritime']==0){
-			$url = U('Distribution/myDistribution',array('token'=>$token,'notBe'=>1));
-			$this->redirect($url);//跳回
-			exit();
-		}
+		// if($this->my['distritime']==0){
+		// 	$url = U('Distribution/myDistribution',array('token'=>$token,'notBe'=>1));
+		// 	$this->redirect($url);//跳回
+		// 	exit();
+		// }
 		$id = $this->my['id'];
 		$order['status_4'] = M('Distribution_ordermoney')->where(array('token'=>$token,'mid'=>$id,'status'=>4))->sum('offerMoney');//已审核
 		$this->assign('order',$order);
@@ -609,11 +716,11 @@ token;
 			$tele = $this->_post('tele');
 			$bankname = $this->_post('bankname');
 			$banknumber = $this->_post('banknumber');
+			$aliname = $this->_post('aliname');
+			$alinumber = $this->_post('alinumber');
 			$money = intval($this->_post('money'));
-			if($money
-<=0){
-				$arr = array('success'=>
-	-1,'info'=>'提现金额不能为零或负值');
+			if($money<=0){
+				$arr = array('success'=>-1,'info'=>'提现金额不能为零或负值');
 				echo json_encode($arr);
 				exit;
 			}
@@ -629,15 +736,15 @@ token;
 				$data['tele'] = $tele;
 				$data['bankName'] = $bankname;
 				$data['bankNumber'] = $banknumber;
+				$data['aliName'] = $aliname;
+				$data['aliNumber'] = $alinumber;
 				$data['mid'] = $this->my['id'];
 				$data['wecha_id'] = $wecha_id;
 				$data['money'] = $money*100;
 				$data['token'] = $this->token;
 				$data['applytime'] = time();
-				if(($order['status_4']-$this->my['alreadyGetMoney'])
-	<$money*100){
-					$arr = array('success'=>
-		-1,'info'=>'提现金额超出可提现值');
+				if(($order['status_4']-$this->my['alreadyGetMoney'])<$money*100){
+					$arr = array('success'=>-1,'info'=>'提现金额超出可提现值');
 					echo json_encode($arr);
 					exit;
 				}
@@ -965,6 +1072,217 @@ token;
 		}
 		$this->assign('list',$list);
 		$this->display();
+	}
+	//判断个人资料完善度
+	public function checkPersonalInfoPerfect($aid){
+		$account = D('Account')->where('id='.$aid)->find();
+		if(!$account['petname']||!$account['nickname']||!$account['tele']||$account['headimgurl'] == 'http://qchpt.b0.upaiyun.com/mhfcjx1421158741/2016/07/28/1469701369_ltmojad1p43nanvx.jpg' || $account['headimgurl'] == ''){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	//推荐二维码
+	public function generateQrcode(){
+		$aid = $this->_get('aid');
+		if($aid){
+			$account = D('Account')->where('id='.$aid)->find();
+			$account['petname'] =base64_decode($account['petname']);
+			$this->assign('account',$account);
+		}else{
+			if($this->account['lid'] == 0){
+				$this->error('请升级后获取二维码',U('Distribution/upgrade'));
+			}
+			if(!$this->checkPersonalInfoPerfect($this->account['id'])){
+				$this->error('请完善个人资料',U('Distribution/index'));
+			}
+			if(!$this->account['wxcode']){
+				$wxcode = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$this->makeCode($this->token,'',$this->account['id']);
+				D('Account')->where('id='.$this->account['id'])->setField('wxcode',$wxcode);
+				$this->account['wxcode'] = $wxcode;
+				$this->assign('account',$this->account);
+			}
+		}
+		// if($aid){
+		// 	$img_src = D('Account')->where('id='.$aid)->getField('qrcode');
+		// }else{
+		// 	if(!$this->account['qrcode']){
+		// 		session('uid',7);
+		// 		$upyun = A('User/Upyun');
+		// 		session('uid',NULL);
+		// 		//拼接图片
+		// 		$path = $this->qrcodecom();
+		// 		$fh = fopen($path, 'r');
+		// 		$dir_pic = '/'.$this->token.'/'.date('Y').'/'.date('m').'/'.date('d').'/'.$this->account['id'].'_'.time().'.jpg';
+		// 		//判断存储到本地还是上传到云
+		// 		$upload_type=C('upload_type')?C('upload_type'):'local';
+		// 		if($upload_type == 'upyun'){
+		// 			$result = $upyun->test($dir_pic, $fh);
+		// 			$img_src = "http://".UNYUN_DOMAIN.$dir_pic;
+		// 			unlink($path);
+		// 		}else{
+		// 			$img_src = C('site_url').'/'.$path;
+		// 		}
+		// 		fclose($fh);
+		// 		$data = array(
+		// 			'qrcode' => $img_src,
+		// 		);
+		// 		M('Distribution_account')->where('id='.$this->account['id'])->save($data);
+		// 	}else{
+		// 		$img_src = $this->account['qrcode'];
+		// 	}
+		// }
+		// $this->assign('img',$img_src);
+		$this->display();
+
+	}
+	//生成组合二维码
+	public function qrcodecom(){
+		// $qrcode=$this->makeCode($this->token,$this->wecha_id,$this->member['id']);
+		// $qrcode='https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$qrcode;
+		$code = M('Membercode')->where(array('wecha_id'=>$this->wecha_id))->find();
+		// $qrcode = $code['code_url']?'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$code['code_url']:'';
+		import("@.ORG.ImageCombine");
+		$arr=array(
+			'dst' => 'uploads/qchbg.jpg',
+	        // 'text' => '我是'.mb_substr($this->account['petname'],0,4,'utf-8'),
+	        'text' => '我是'.$this->account['petname'],
+			'fontsize' => 30,
+	        'fontX' => 263,
+			'fontY' => 462,
+	        'qrcodesize' => 376,
+	        'qrcodX' => 127,
+	        'qrcodY' => 590,
+	        'token' => $this->token,
+	        'openid' => $this->wecha_id,
+	        'id' => $this->account['id'],
+			'path' => 'uploads/qrcode/',
+			'img_src' => $this->account['headimgurl'],
+			'headimgsize' => 130,
+			'headX' => 122,
+	        'headY' => 400,
+		);
+		$combine=new ImageCombine($arr);
+		$qrcode=$combine->mergerImg();
+		return $qrcode;
+	}
+	//店铺统计
+	public function charts(){
+		$this->assign('title','店铺统计');
+		$this->display();
+	}
+	//获取店铺统计数据（AJAX）
+	public function getChartsAjax(){
+		$type = $this->_get('type');
+		$days = $this->_get('days');
+		$info=$this->getCharts($type,$days);
+		if($info){
+			$this->ajaxReturn($info,'',1);
+		}else{
+			$this->ajaxReturn("","",2);
+		}
+	}
+	//店铺统计获取数据（访客数1，订单数2，佣金3）
+	public function getCharts($type,$days){
+		$info = array();
+		switch ($type) {
+			//访客数
+			case '1':
+				$list=M('Distribution_visitcount')->where(array('mid'=>$this->my['id']))->limit($days)->select();
+				$str = $this->chartsDataHtml($list);
+				$categories.="[";
+				foreach ($list as $k => $v) {
+					$categories.="'".date("m-d",$v['addtime'])."',";
+				}
+				$categories.="]";
+				$data.="[";
+				foreach ($list as $k => $v) {
+					$data.=$v['count'].",";
+					$count += $v['count'];
+				}
+				$data.="]";
+				break;
+			//订单数(下级所有人)
+			case '2':
+				$ids = $this->statisticalIds();
+				// $member=M("Distribution_member")->field('wecha_id')->where(array('id'=>array('in',$ids)))->select();
+				// $wecha_str = '('."'".$this->wecha_id."'";
+				// foreach ($member as $k => $v) {
+				// 	$wecha_str .=' ,'."'".$v['wecha_id']."'";
+				// }
+				// $wecha_str .= ')';
+				if(!$ids){
+					$ids = 0;
+				}
+				$sql = 'SELECT count(id) as count,time as addtime FROM `pigcms_product_cart` WHERE aid in ('.$ids.') and paid=1 group by year,month,day order by time asc limit '.$days;
+				$list = M()->query($sql);
+				$str = $this->chartsDataHtml($list);
+				//$list = M("Product_cart")->where(array('wecha_id'=>$this->wecha_id,'paid'=>1))->select();
+				$categories.="[";
+				foreach ($list as $k => $v) {
+					$categories.="'".date("m-d",$v['addtime'])."',";
+				}
+				$categories.="]";
+				$data.="[";
+				foreach ($list as $k => $v) {
+					$data.=$v['count'].",";
+					$count += $v['count'];
+				}
+				$data.="]";
+				break;
+			//金币收入
+			case '3':
+				$sql = 'SELECT SUM(gold) as count,addtime FROM `pigcms_distribution_earning` WHERE aid ='.$this->account['id'].' group by year,month,day order by addtime asc limit '.$days;
+				$list = M()->query($sql);
+				$str = $this->chartsDataHtml($list);
+				//$list = M("Product_cart")->where(array('wecha_id'=>$this->wecha_id,'paid'=>1))->select();
+				$categories.="[";
+				foreach ($list as $k => $v) {
+					$categories.="'".date("m-d",$v['addtime'])."',";
+				}
+				$categories.="]";
+				$data.="[";
+				foreach ($list as $k => $v) {
+					$data.=($v['count']).",";
+					$count += ($v['count']);
+				}
+				$data.="]";
+				break;
+			//现金收入
+			case '4':
+				$sql = 'SELECT SUM(earn) as count,addtime FROM `pigcms_distribution_earning` WHERE aid ='.$this->account['id'].' group by year,month,day order by addtime asc limit '.$days;
+				$list = M()->query($sql);
+				$str = $this->chartsDataHtml($list);
+				//$list = M("Product_cart")->where(array('wecha_id'=>$this->wecha_id,'paid'=>1))->select();
+				$categories.="[";
+				foreach ($list as $k => $v) {
+					$categories.="'".date("m-d",$v['addtime'])."',";
+				}
+				$categories.="]";
+				$data.="[";
+				foreach ($list as $k => $v) {
+					$data.=($v['count']).",";
+					$count += ($v['count']);
+				}
+				$data.="]";
+				break;
+		}
+		$info[0]=$categories;
+		$info[1]=$data;
+		$info[2]=$count?$count:0;
+		$info[3]=$str;
+		return $info;
+	}
+	//拼接数据HTML
+	public function chartsDataHtml($list){
+		foreach ($list as $k => $v) {
+			$str.="<div class='tongji2'>";
+			$str.="<div class='tongji3'>".date('Y-m-d',$v['addtime'])."</div>";
+			$str.="<div class='tongji3'>".$v['count']."</div>";
+			$str.="<div class='clear'></div>";
+			$str.="</div>";
+		}
+		return $str;
 	}
 	private function get_user_info($wecha_id){
 		$access_str = $this->get_access_token();

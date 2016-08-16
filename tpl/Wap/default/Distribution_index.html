@@ -25,10 +25,10 @@
     </div>
     <!-- 轮播背景 -->
     <div class="content_wrap index_wrap">
-        <div class="dis_head info_edit">
-            <img id="index_headimgurl" src="{wghd:$my.headimgurl}">
-            <p id="index_nickname">{wghd:$my.nickname}</p>
-        </div>
+        <a class="dis_head info_edit" href="{wghd::U('Distribution/myInfo')}">
+            <img id="index_headimgurl" src="{wghd:$account.headimgurl}">
+            <p id="index_nickname">{wghd:$account.nickname}</p>
+        </a>
         <div class="weui_cells weui_cells_extend weui_cells_access">
             <a class="weui_cell weui_cell_extend coad_lnfo_bage cursor_ios" href="{wghd::U('Store/my')}">
                 <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe603;</div>
@@ -41,7 +41,9 @@
                 <div class="weui-col-25 cursor_ios">
                     <a href="{wghd::U('Store/my',array('status'=>
                         0))}" class="coad_lnfo_bage">
-                        <span>{wghd:$cart_data.unpaid}</span>
+                        <notempty name="cart_data.unpaid">
+                            <span>{wghd:$cart_data.unpaid}</span>
+                        </notempty>
                         <p class="iconfont">&#xe606;</p>
                         <p>待付款</p>
                     </a>
@@ -49,7 +51,9 @@
                 <div class="weui-col-25 cursor_ios">
                     <a href="{wghd::U('Store/my',array('status'=>
                         1))}" class="coad_lnfo_bage">
-                        <span>{wghd:$cart_data.unsent}</span>
+                        <notempty name="cart_data.unsent">
+                            <span>{wghd:$cart_data.unsent}</span>
+                        </notempty>
                         <p class="iconfont">&#xe605;</p>
                         <p>待发货</p>
                     </a>
@@ -57,7 +61,9 @@
                 <div class="weui-col-25 cursor_ios">
                     <a href="{wghd::U('Store/my',array('status'=>
                         2))}" class="coad_lnfo_bage">
-                        <span>{wghd:$cart_data.unreceive}</span>
+                        <notempty name="cart_data.unreceive">
+                            <span>{wghd:$cart_data.unreceive}</span>
+                        </notempty>
                         <p class="iconfont">&#xe604;</p>
                         <p>待收货</p>
                     </a>
@@ -65,7 +71,9 @@
                 <div class="weui-col-25 cursor_ios">
                     <a href="{wghd::U('Store/my',array('status'=>
                         3))}" class="coad_lnfo_bage">
-                        <span>{wghd:$cart_data.finished}</span>
+                        <notempty name="cart_data.finished">
+                            <span>{wghd:$cart_data.finished}</span>
+                        </notempty>
                         <p class="iconfont">&#xe608;</p>
                         <p>已完成</p>
                     </a>
@@ -104,6 +112,13 @@
             <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe609;</div>
             <div class="weui_cell_bd weui_cell_primary">
                 <p>地址列表</p>
+            </div>
+            <div class="weui_cell_ft"></div>
+        </a>
+        <a class="weui_cell weui_cell_extend" href="javascript:;" onclick="if(window.confirm('确认退出？')){location.href='{wghd::U('Distribution/loginoutAjax')}'}">
+            <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe61b;</div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>退出登陆</p>
             </div>
             <div class="weui_cell_ft"></div>
         </a>

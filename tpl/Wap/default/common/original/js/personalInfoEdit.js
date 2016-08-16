@@ -17,6 +17,8 @@ define(['jquery','ajaxfileupload'],function($,aimg){
 			name = info_item.data('name');
 			if(name == 'password'){
 				$("#info_edit_item").attr('type','password');
+				$("#info_edit_item").attr('placeholder','输入新密码');
+				$('.info_edit_old_password').show();
 			}else{
 				$("#info_edit_item").attr('type','text');
 			}
@@ -25,7 +27,7 @@ define(['jquery','ajaxfileupload'],function($,aimg){
 			// $('.show_wrap2').html($('#info_edit_wrap').html());
 			$('#eidt_info_title').text(title);
 			$("#info_edit_item").val(data);
-			$('#info_edit_wrap').show().animate({'left':0},300);
+			$('#info_edit_wrap').animate({'left':0},300);
 		})
 	}
 	PInfoEdit.prototype._EditClose=function(){
@@ -40,6 +42,32 @@ define(['jquery','ajaxfileupload'],function($,aimg){
 			if (new_info) {
 				//如果是判断密码输入
 				if(name == 'password'){
+					var old_password = $('#info_edit_old_password').val();
+					if(old_password == ''){
+						return floatNotify.simple('原密码不能为空');
+					}
+					//判断原密码正确性
+					var check_old_password = 1;
+					$.ajax({
+						url: getAction('Distribution','judgeOldPwd'),
+						data: {
+							password: old_password,
+						},
+						type: 'post',
+						dataType: 'json',
+						async:false,
+						success: function(data) {
+							console.log(data);
+							if(data.status == 2){
+								check_old_password = 0;
+								return floatNotify.simple(data.info);
+							}
+						}
+					})
+					if(check_old_password == 0){
+						return;
+					}
+					//判断新密码格式
 					var reg = /^[A-Za-z0-9]{6,16}$/;
 					if(reg.test(new_info) == false){
 					    return floatNotify.simple('密码必须由6-16位字母、数字组成');
@@ -80,24 +108,25 @@ define(['jquery','ajaxfileupload'],function($,aimg){
 	PInfoEdit.prototype._IputController=function(){
 		var edit_input = $('.weui_input_infoedit');
 		var delete_btn = $('.weui_infoedit_delete');
-		var input_info = edit_input.val();
 		//起始判断
-		if(input_info){
-		  delete_btn.css('opacity',1);
-		}
+		edit_input.each(function(index, el) {
+			if($(this).val()){
+				$(this).next().css('opacity',1);
+			}
+		});
 		//输入
 		edit_input.on('keyup',function(){
-		  input_info = edit_input.val();
+		  var input_info = $(this).val();
 		  if(input_info){
-		    delete_btn.css('opacity',1);
+		    $(this).next('.weui_infoedit_delete').css('opacity',1);
 		  }else{
-		    delete_btn.css('opacity',0);
+		    $(this).next('.weui_infoedit_delete').css('opacity',0);
 		  }
 		})
 		//删除
 		delete_btn.on('click',function(){
-		  edit_input.val('');
-		  delete_btn.css('opacity',0);
+			$(this).prev('.weui_input_infoedit').val('');
+			$(this).css('opacity',0);
 		})
 	}
 	PInfoEdit.prototype._ImgChange=function(){

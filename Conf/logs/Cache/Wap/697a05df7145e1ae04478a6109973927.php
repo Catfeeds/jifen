@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title><?php echo ($metaTitle); ?></title>
-<link href="<?php echo RES;?>/original/others/iconfont.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<?php echo RES;?>/original/css/style.css">
 <link href="<?php echo RES;?>/original/others/gwc.css" rel="stylesheet" type="text/css" />
 <link type="text/css" rel="stylesheet" href="<?php echo RES;?>/css/store/css/style_touch11.css">
 <link rel="stylesheet" href="<?php echo RES;?>/original/css/notification.css">
@@ -14,7 +14,7 @@
 
 <body style="background:#fff;" id="scnhtm5">
 <?php if(empty($products) != true ): ?><div class="title">
-	<span id="chooseall" style="display: none;"><i class="icon iconfont">&#xe621;</i>全选</span>
+	<span id="chooseall" style="display: none;"><i class="icon iconfont">&#xe61c;</i>全选</span>
 	<a href="#"><span id="product-edit-btn" class="tit">编辑</span></a></div>
 <ul class="m-cart-list text">
 <?php if(is_array($products)): $i = 0; $__LIST__ = $products;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$p): $mod = ($i % 2 );++$i; if(empty($p['detail']) != true): if(is_array($p['detail'])): $i = 0; $__LIST__ = $p['detail'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?><li number="1">
@@ -85,13 +85,18 @@
 
 <?php else: ?>
 	    	<div class="gw cart_empty">
-	    	<div class="gwc"><i class="icon1 iconfont icon-jianxianxing"></i><i class="icon2 iconfont icon-gouwuche1"></i><i class="icon1 iconfont icon-jianxianxing"></i></div>
-	        <div class="clear"></div>
-	        <div class="tet">购物车快饿瘪了T.T</div>
-	        <div class="text5">主人快给挑点宝贝吧</div>
-	        <div class="gg"><a href="<?php echo U('Store/products',array('token'=>$_GET['token'],'wecha_id'=>$wecha_id));?>" class="btn-sm button-light empty-btn">去逛逛</a></div>
-	    
-			</div><?php endif; ?>
+	    		<div class="gwc"> <i class="icon1 iconfont">&#xe61e;</i> <i class="icon2 iconfont">&#xe61d;</i>
+	    			<i class="icon1 iconfont">&#xe61e;</i>
+	    		</div>
+	    		<div class="clear"></div>
+	    		<div class="tet">购物车快饿瘪了T.T</div>
+	    		<div class="text5">主人快给挑点宝贝吧</div>
+	    		<div class="gg">
+	    			<a href="<?php echo U('Store/products',array('token'=> $_GET['token'],'wecha_id'=>$wecha_id));?>" class="btn-sm button-light empty-btn">去逛逛
+	    			</a>
+	    		</div>
+
+	    	</div><?php endif; ?>
 <script type="text/javascript">
 (function($){
 	var product_edit=$("#product-edit-btn");

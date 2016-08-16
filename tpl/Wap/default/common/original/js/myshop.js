@@ -5,7 +5,7 @@ requirejs.config({
 	urlArgs:"bust=" + (new Date()).getTime(),
 });
 var index_wrap = $('.content_wrap');
-requirejs(['jquery','common'],function($){
+requirejs(['jquery','topup','common'],function($){
 	//累计收入
     // $(document).on('click','.coad_bnfo_lage',function(e){
     // 	loadPage(e,$(this),function(){

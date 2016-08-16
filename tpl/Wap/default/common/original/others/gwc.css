@@ -190,7 +190,7 @@ ul{
 }
 
 .regular-checkbox:checked + label:after {
-	content: '\e621';
+	content: '\e61c';
 	font-size: 14px;
 	position: absolute;
 	top: 0px;

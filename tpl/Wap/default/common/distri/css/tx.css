@@ -66,13 +66,12 @@ ul{
 
 .cont1{
 	width:100%;
-	height:65px;
 	float:left;
 	border-bottom:1px solid #ebe9e9;
 	font-size:1.6em;
 	color:#e16262;
 	text-align:center;
-	line-height:65px;
+	line-height:60px;
 }
 .cont2{
 	font-size:1.8em;

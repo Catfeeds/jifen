@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>{wghd:$metaTitle}</title>
-<link href="{wghd::RES}/original/others/iconfont.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{wghd::RES}/original/css/style.css">
 <link href="{wghd::RES}/original/others/gwc.css" rel="stylesheet" type="text/css" />
 <link type="text/css" rel="stylesheet" href="{wghd::RES}/css/store/css/style_touch11.css">
 <link rel="stylesheet" href="{wghd::RES}/original/css/notification.css">
@@ -15,7 +15,7 @@
 <body style="background:#fff;" id="scnhtm5">
 <if condition="empty($products) neq true ">
 <div class="title">
-	<span id="chooseall" style="display: none;"><i class="icon iconfont">&#xe621;</i>全选</span>
+	<span id="chooseall" style="display: none;"><i class="icon iconfont">&#xe61c;</i>全选</span>
 	<a href="#"><span id="product-edit-btn" class="tit">编辑</span></a></div>
 <ul class="m-cart-list text">
 <volist name="products" id="p">
@@ -93,13 +93,19 @@
 
 <else/>
 	    	<div class="gw cart_empty">
-	    	<div class="gwc"><i class="icon1 iconfont icon-jianxianxing"></i><i class="icon2 iconfont icon-gouwuche1"></i><i class="icon1 iconfont icon-jianxianxing"></i></div>
-	        <div class="clear"></div>
-	        <div class="tet">购物车快饿瘪了T.T</div>
-	        <div class="text5">主人快给挑点宝贝吧</div>
-	        <div class="gg"><a href="{wghd::U('Store/products',array('token'=>$_GET['token'],'wecha_id'=>$wecha_id))}" class="btn-sm button-light empty-btn">去逛逛</a></div>
-	    
-			</div>
+	    		<div class="gwc"> <i class="icon1 iconfont">&#xe61e;</i> <i class="icon2 iconfont">&#xe61d;</i>
+	    			<i class="icon1 iconfont">&#xe61e;</i>
+	    		</div>
+	    		<div class="clear"></div>
+	    		<div class="tet">购物车快饿瘪了T.T</div>
+	    		<div class="text5">主人快给挑点宝贝吧</div>
+	    		<div class="gg">
+	    			<a href="{wghd::U('Store/products',array('token'=>
+	    				$_GET['token'],'wecha_id'=>$wecha_id))}" class="btn-sm button-light empty-btn">去逛逛
+	    			</a>
+	    		</div>
+
+	    	</div>
 
 </if>
 <script type="text/javascript">

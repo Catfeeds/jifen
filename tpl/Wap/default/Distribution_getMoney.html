@@ -3,13 +3,45 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta content="target-densitydpi=device-dpi, width=640,user-scalable=0" name="viewport">
-<title>用户中心-我的提现</title>
+<title>用户中心-<eq name="_GET['type']" value="2">余额提现<else/>佣金提现</eq></title>
 <link href="{wghd::RES}/distri/css/head.css" rel="stylesheet" type="text/css" />
 <link href="{wghd::RES}/distri/css/tx.css" rel="stylesheet" type="text/css" />
 <script src="{wghd::RES}/distri/js/jquery-1.8.3.min.js"></script>
 <style>
 .deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}.deploy_ctype_tip p{display:inline-block;padding:23px 34px;border:solid #d6d482 1px;background:#f5f4c5;font-size:1.6em;color:#8f772f;line-height:30px;border-radius:3px;}
+#pay-way-box{
+	position: relative;
+	height: 140px;
+	width: 100%;
+	overflow: hidden;
+}
+.ali-box,.bank-box{
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+.bank-box{
+	left: 100%;
+}
+.pay-icon{
+	display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-top: -10px;
+    vertical-align: middle;
+    background-size: 100%;
+}
+.ali-icon{
+	background: url("{wghd::RES}/distri/images/aliicon.jpg") no-repeat center top;
+}
+.bank-icon{
+	background: url("{wghd::RES}/distri/images/bankicon.png") no-repeat center top;
+	width: 60px;
+	margin-top: -2px;
+}
 </style>
+<script src="{wghd::RES}/distri/js/require.js" data-main="{wghd::RES}/distri/js/getmoney" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>
@@ -28,11 +60,51 @@
                   <input type="text" name="tele" id="tele" value="{wghd:$my.tele}" class="bd" placeholder="请输入联系电话"/>
                 </div><!--cont_right-->
        	    </div><!--cont-->
-        </div><!--text-->
+       	    <div class="cont3 choose-pay">
+       	    	<div class="cont_left1"><span class="pay-icon ali-icon"></span><span class="dd" data-type="1">切换到银行卡</span></div><!--cont_left-->
+       	        <div class="cont_right2"><a href="javascript:;">></a></div><!--cont_right-->
+       	    </div>
+       	    <div class="clear"></div>
+       	    <div id="pay-way-box">
+	       	    <div class="ali-box">
+		       	    <div class="cont">
+		       	   	    <div class="cont_left">支付宝账号:</div>
+		                <div class="cont_right">
+		                  <input type="text" name="aliNumber" id="aliNumber" value="" class="bd" placeholder="请输入支付宝账号"/>
+		                </div>
+		            </div>
+		            <div class="cont">
+		        		<div class="cont_left">支付宝姓名:</div>
+		                <div class="cont_right">
+		                  <input type="text" name="aliName" id="aliName" value="" class="bd" placeholder="请输入支付宝姓名"/>
+		                </div>
+		       	    </div>
+		       	    <div class="clear"></div>
+				</div>
+				<div class="bank-box">
+		       	    <div class="cont">
+		        		<div class="cont_left">开户行:</div>
+		                <div class="cont_right">
+		                  <input type="text" name="bankName" id="bankName" value="" class="bd" placeholder="请输入开户行名称"/>
+		                </div>
+		       	    </div>
+		       	    <div class="cont">
+		        		<div class="cont_left">银行卡号:</div>
+		                <div class="cont_right">
+		                  <input type="text" name="bankNumber" id="bankNumber" value="" class="bd" placeholder="请输入银行卡号"/>
+		                </div>
+		       	    </div>
+		       	    <div class="clear"></div>
+		       	</div>
+		    </div>
+        </div>
         
         <div class="text">
-       	  <div class="cont1">您当前可提现的金额是{wghd::sprintf("%.2f",($order['status_4']-$my['alreadyGetMoney'])/100)}元</div><!--cont-->
-          <div class="cont1 cont2">注：每次提现金额不能大于200元</div><!--cont-->
+       	  <div class="cont1">您当前可提现的金额是{wghd::$getmoney}元</div><!--cont-->
+       	  <div class="cont1">(注:请核对好您的账号与姓名,出现错误概不负责)</div><!--cont-->
+       	  <input type="hidden" id="nowMoney" value="{wghd::$getmoney}" />
+       	  <div class="cont1" style="font-size: 1.1rem;line-height: 30px;height: 30px;">提现将扣除<eq name="_GET['type']" value="2">2%<else/>5%</eq>的手续费</div><!--cont-->
+          <div class="cont1 cont2">注：每次提现金额在50到5万之间</div><!--cont-->
             <div class="cont1"><input name="money" id="money" type="text" class="bd1" value="" placeholder="请输入提现金额"/></div><!--cont-->
             
             
@@ -50,7 +122,6 @@
             <div class="cont_right2"><a href="{wghd::U('Distribution/getMoneyProcess',array('token'=>$token))}">></a></div><!--cont_right-->
         </div><!--cont3-->
 		</a>
-<include file="Public:footer"/>
     
     </div><!--container-->
 <script>
@@ -64,6 +135,10 @@
 			var name = $('#name').val();
 			var tele = $('#tele').val();
 			var money = $('#money').val();
+			var bankname = $('#bankName').val();
+			var banknumber = $('#bankNumber').val();
+			var alinumber = $('#aliNumber').val();
+			var aliname = $('#aliName').val();
 
 			if (wecha_id == '') {
 
@@ -82,6 +157,31 @@
 
 				return;
 			}
+			var type=$(".choose-pay").find(".dd").attr("data-type");
+			if(type==1){
+				if(aliname==''){
+					showTip("支付宝姓名不能为空");
+
+					return;
+				}
+				if(alinumber==''){
+					showTip("支付宝账号不能为空");
+
+					return;
+				}
+			}else{
+				if(bankname==''){
+					showTip("开户银行不能为空");
+
+					return;
+				}
+				if(banknumber==''){
+					showTip("银行卡号不能为空");
+
+					return;
+				}
+			}
+
 			if(money==''){
 				showTip("提现金额不能为空");
 
@@ -92,28 +192,31 @@
 
 				return;
 			}
-			if(parseInt(money)>parseInt($('#nowMoney').text())){
+			if(parseInt(money)>parseInt($('#nowMoney').val())){
 				showTip("提现金额超出可提现值");
 
 				return;
 			}
-			if(parseInt(money)>200){
-				showTip("每次提现金额不能大于200元");
+			if(parseInt(money)<50||parseInt(money)>50000){
+				showTip("每次提现金额在50到5万之间");
 
 				return;
 			}
 			var submitData = {
 				name: name,
 				tele: tele,
-				money: money
+				money: money,
+				bankname:bankname,
+				banknumber:banknumber,				
+				alinumber:alinumber,				
+				aliname:aliname,
+				paytype:type			
 			};
-
-			$.post("{wghd::U('Distribution/getMoney',array('token'=>$token))}", submitData,
+			$.post("{wghd::U('Distribution/getMoney',array('token'=>$token,'wecha_id'=>$wecha_id,'type'=>$type))}", submitData,
 			function(bakcdata) {
 				var obj = eval('(' + bakcdata + ')');
 
 				if (obj.success == 1) {
-
 					showTip(obj.info);
 					setTimeout("window.location.href='{wghd::U('Distribution/getMoneyList',array('token'=>$token))}'", 2000);
 

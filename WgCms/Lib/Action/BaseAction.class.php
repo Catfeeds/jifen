@@ -192,4 +192,26 @@ class BaseAction extends Action
             $this->ajaxReturn('操作失败', U(MODULE_NAME . $back));
         }
     }
+    //统计账号数据
+    public function statistical($type,$aid){
+        switch ($type) {
+            case 'balance'://余额
+                
+                break;
+            case 'ordernums'://处理订单数
+                $return = M('Product_cart')->where(array('bindaid'=>$aid,'paid'=>1))->count();
+                break;
+            case 'shoporders'://购买订单总数
+                $return = M('Product_cart')->where(array('aid'=>$aid,'paid'=>1))->count();
+                break;
+            case 'totalearn'://总收入
+                break;
+            case 'gold'://金币
+                break;
+            case 'applymoney'://已提现
+                $return = M('Distribution_applystore')->where(array('aid'=>$aid,'status'=>2))->sum('money')/100;
+                break;
+        }
+        return $return;
+    }
 }

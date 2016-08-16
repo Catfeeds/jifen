@@ -12,7 +12,6 @@ class StoreAction extends WapAction{
 		if (!strpos($agent, "MicroMessenger")) {
 			//	echo '此功能只能在微信浏览器中使用';exit;
 		}
-		//$this->token = isset($_REQUEST['token']) ? htmlspecialchars($_REQUEST['token']) : session('token');
 		$this->session_cart_name = 'session_cart_products_' . $this->token;
 		$this->assign('token', $this->token);
 		$this->assign('wecha_id', $this->wecha_id);
@@ -26,31 +25,34 @@ class StoreAction extends WapAction{
 		$my = M('Distribution_member')->where(array('token'=>$this->token,'wecha_id'=>$this->wecha_id))->find();
 		$this->my = $my;
 		$this->assign('my',$my);
+
 		$company = M('company')->where(array('token'=>$this->token))->find();
 		$this->assign('company',$company);
-		$mid = $this->_get('mid');
-		if($mid&&$mid!=$my['id']){//增加上级关联关系
-			$click = M('Distribution_click')->where(array('token'=>$this->token,'wecha_id'=>$this->wecha_id))->find();
-			if($click){
-				$data['mid'] = $mid;
-				$data['updatetime'] = time();
-				M('Distribution_click')->where('id='.$click['id'])->save($data);
-				M('Distribution_click')->where('id='.$click['id'])->setInc('count');
+
+		//判断是否登陆
+		if(!$_COOKIE['login_user'] && ACTION_NAME !='register' && ACTION_NAME !='login' && ACTION_NAME !='test'){
+			if(ACTION_NAME == 'generateQrcode' && $_GET['aid'] != ''){
+
 			}else{
-				//$user_info = $this->get_user_info($wecha_id);
-				//$data['nickname'] = $user_info['nickname'];
-				//$data['headimgurl'] = $user_info['headimgurl'];
-				$data['updatetime'] = time();
-				$data['token'] = $this->token;
-				$data['wecha_id'] = $this->wecha_id;
-				$data['mid'] = $mid;
-				$data['count'] = 1;
-				$clickid = M('Distribution_click')->add($data);
-				M('Distribution_member')->where('id='.$mid)->setInc('clickNums');
+				$this->redirect(U('Distribution/login'));
 			}
 		}
-		/*$cats = $this->product_cat_model->where(array('token' => $this->token))->order('id asc')->select();
-		$this->assign('cats', $cats);*/
+		if($_COOKIE['login_user']){
+			$account = D('Account')->where(array('username'=>$_COOKIE['login_user'],'delete'=>0))->relation(true)->find();
+			if($account){
+				if(!$account['wecha_id']){
+    				$Wdata['wecha_id'] = $this->wecha_id;
+					//更新wecha_id
+					D('Account')->where(array('username'=>$_COOKIE['login_user']))->save($Wdata);
+    			}
+				$account['petname'] =base64_decode($account['petname']);
+				$this->account = $account;
+				$this->assign('account',$account);
+			}else{
+    			setcookie('login_user',NULL);
+    			$this->error('请登陆',U('Distribution/login'));
+			}
+		}
 	}
 	
 	function remove_html_tag($str){  //清除HTML代码、空格、回车换行符
@@ -79,10 +81,20 @@ class StoreAction extends WapAction{
 				}
 			}
 		}
-		$cats = $this->product_cat_model->where(array('token' => $this->token))->order('sort desc,id asc')->select();
+		$cats = $this->product_cat_model->where(array('token' => $this->token,'id'=>array('neq',$this->level_cat_id)))->order('sort asc,id asc')->select();
 		foreach($cats as $key=>$value){
-			$cats[$key]['products'] = $this->product_model->where(array('catid'=>$value['id'],'isopen'=>1))->limit(8)->order('sort ASC,id DESC')->select();
+			$cats[$key]['products'] = $this->product_model->where(array('catid'=>$value['id'],'isopen'=>1))->limit(4)->order('sort desc,id DESC')->select();
+			$cats[$key]['products'] = $this->showPrice($cats[$key]['products'],'saleprice');
+			//如果有商品详情 显示对应价格
+			// foreach ($cats[$key]['products'] as $k => $v) {
+			// 	$cats[$k]['products'][$k]['showprice'] = $this->showPrice($v['id'],'saleprice');
+			// }
 		}
+		//底部商品
+		$bproducts=$this->product_model->limit(20)->where(array('lid'=>0,'isopen'=>1))->order('fakemembercount DESC,id desc')->select();
+		$bproducts = $this->showPrice($bproducts,'saleprice');
+		$this->assign('bproducts',$bproducts);
+
 		$res = M('Distribution_forward_set')->where(array('token'=>$this->token))->find();
 		$banner = M('Product_banner')->where(array('token'=>$this->token))->order('sort desc,id asc')->select();
 		$this->assign('banner',$banner);
@@ -92,6 +104,58 @@ class StoreAction extends WapAction{
 		$this->assign('totalNums',$totalNums);
 		$this->assign('cats', $cats);
 		$this->display();
+	}
+	//遍历显示价格
+	public function showPrice($info,$type = ''){
+		if(is_array($info)){
+			foreach ($info as $k => $v) {
+				if($v['lid']){
+					$info[$k]['showprice'] = $info[$k]['price'];
+				}else{
+					if($type == 'saleprice'){
+						$info[$k]['showprice'] = $info[$k]['price'] == 0 ? $this->showPrice($v['id'],$type) :$info[$k]['price'];
+					}else{
+						$info[$k]['showprice'] = $this->showPrice($v['id']) == 0 ? $info[$k][$this->myPrice()] :$this->showPrice($v['id']);
+					}
+				}
+			}
+			return $info;
+		}else{//详情返回显示价格$info 为产品ID
+			$detail = M('Product_detail')->where(array('pid'=>$info))->order('price asc')->find();
+			if($detail){
+				if($type == 'saleprice'){
+					return $detail['price'];
+				}else{
+					return $detail[$this->myPrice()];
+				}
+			}
+		}
+	}
+	//根据会员等级返回价格
+	public function myPrice(){
+		switch ($this->account['lid']) {
+			case '1':
+				return 'price';
+				break;
+			case '2':
+				return 'price2';
+				break;
+			case '3':
+				return 'price3';
+				break;
+			case '4':
+				return 'price4';
+				break;
+			case '5':
+				return 'price5';
+				break;
+			case '6':
+				return 'price6';
+				break;
+			default:
+				return 'price7';
+				break;
+		}
 	}
 	
 	public function cats() {
@@ -140,7 +204,7 @@ class StoreAction extends WapAction{
 				}
 			}
 		}
-		$where = array('token' => $this->token, 'groupon' => 0, 'dining' => 0);
+		$where = array('token' => $this->token, 'groupon' => 0, 'dining' => 0,'catid'=>array('neq',$this->level_cat_id));
 		$catid = isset($_GET['catid']) ? intval($_GET['catid']) : 0;
 		if ($catid) {
 			$where['catid'] = array("in",$this->getCatIds($catid));
@@ -164,10 +228,11 @@ class StoreAction extends WapAction{
 		$order = isset($_GET['order']) && in_array($_GET['order'], $orders) ? $_GET['order'] : 'time';
 		$this->assign('order', $order);
 		$this->assign('method', $method);
-        	
-		$products = $this->product_model->where($where)->order("sort DESC,id DESC")->limit('0, 8')->select();
-		$this->assign('products', $products);
+        
 		$name = isset($thisCat['name']) ? $thisCat['name'] . '列表' : "商品列表";
+		$products = $this->product_model->where($where)->order("sort DESC,id DESC")->limit('0, 8')->select();
+		$products = $this->showPrice($products,'saleprice');
+		$this->assign('products', $products);
 		$this->assign('metaTitle', $name);
 		$this->display();
 	}
@@ -337,13 +402,26 @@ class StoreAction extends WapAction{
 	 */
 	public function addProductToCart() {
 		$count = isset($_GET['count']) ? intval($_GET['count']) : 1;
-		if (empty($this->wecha_id)) {
-			echo false;
-			die;
-		}
+		// if (empty($this->wecha_id)) {
+		// 	echo false;
+		// 	die;
+		// }
 		$carts = $this->_getCart();
 		$id = intval($_GET['id']);
 		$did = isset($_GET['did']) ? intval($_GET['did']) : 0;//商品的详细id,即颜色与尺寸
+		$calCartInfo = $this->calCartInfo();
+		$product_limitnum = M('Product')->where('id='.$id)->getField('limitnum');
+		//判断购物车限购
+		if(!$this->limitShopping($id)){
+			echo 'limit|'.$product_limitnum;
+			exit();
+		}
+		//判断直接购买限购
+		if(!$this->judgePorductLimit($id,$count)){
+			echo 'limit|'.$product_limitnum;
+			exit();
+		}
+
 		if (isset($carts[$id])) {
 			if ($did) {
 				if (isset($carts[$id][$did])) {
@@ -365,6 +443,70 @@ class StoreAction extends WapAction{
 		$calCartInfo = $this->calCartInfo();
 		echo $calCartInfo[0].'|'.$calCartInfo[1];
 	}
+	//购物车判断限购（AJAX）
+	public function checkLimitAjax(){
+		$order_id = $this->_get('order_id');
+		if($order_id){
+			$info = M('Product_cart')->where('id='.$order_id)->getField('info');
+		}
+		if($info){
+			$cart = unserialize($info);
+		}else{
+			$cart = $this->_getCart();
+		}
+		$check = $this->limitShoppingInfo($cart);
+		if($check['status'] == 2){
+			$this->ajaxReturn('',$check['info'],2);
+		}else{
+			$this->ajaxReturn('','',1);
+		}
+	}
+	//判断限购(序列商品)
+	public function limitShoppingInfo($info){
+		foreach ($info as $k => $v) {
+			$total = 0;
+			if(is_array($v)){
+				foreach ($v as $k2 => $v2) {
+					$total += $v2['count'];
+				}
+			}else{
+				$total = $v;
+			}
+			$product = M('Product')->field('limitnum,name,id')->where(array('id'=>$k))->find();
+			if($total>$product['limitnum'] && $product['limitnum'] > 0){
+				return array('data'=>$product['id'],'info'=>$product['name'].'的限购次数为'.$product['limitnum'],'status'=>2);
+			}
+		}
+		return array('','',1);
+	}
+	//判断购物车里的限购(单个商品)
+	public function limitShopping($pid){
+		$cart = $this->_getCart();
+		$limitnum = M('Product')->where('id='.$pid)->getField('limitnum');
+		foreach ($cart as $k => $v) {
+			$total = 0;
+			if(is_array($v)){
+				foreach ($v as $k2 => $v2) {
+					$total += $v2['count'];
+				}
+			}else{
+				$total = $v;
+			}
+			if($pid == $k && $total >= $limitnum && $limitnum > 0){
+				return false;
+			}
+		}
+		return true;
+	}
+	//判断商品限购次数
+	public function judgePorductLimit($pid,$count){
+		$limitnum = M('Product')->where('id='.$pid)->getField('limitnum');
+		if($count > $limitnum && $limitnum > 0){
+			return false;
+		}else{
+			return true;
+		}
+	}
 	/**
 	 * 添加收藏
 	 */
@@ -373,7 +515,7 @@ class StoreAction extends WapAction{
 		$token = $this->_get('token');
 		$id = $this->_get('id');
 		if($id!='' && !M('Product_collection')->where(array('productid'=>$id))->find()){
-			if(M('Product_collection')->where(array('productid'=>$id,'wecha_id'=>$wecha_id,'token'=>$token))->find()){
+			if(M('Product_collection')->where(array('productid'=>$id))->find()){
 				echo 1;
 			}else{
 				$data['productid'] = $id;
@@ -391,10 +533,9 @@ class StoreAction extends WapAction{
 	 * 删除收藏
 	 */
 	public function delCollection() {
-		$token = $this->_get('token');
 		$id = $this->_get('id');
 		if($id!=''){
-			if(M('Product_collection')->where(array('productid'=>$id,'aid'=>$this->account['id'],'token'=>$token))->delete()){
+			if(M('Product_collection')->where(array('productid'=>$id,'aid'=>$this->account['id']))->delete()){
 				echo 1;
 			}else{
 				echo 2;
@@ -740,6 +881,31 @@ class StoreAction extends WapAction{
 		} 
 	}
 	
+	//我的订单立即支付
+	public function payNow(){
+		$order_id = $this->_get('id');
+		$order = M('Product_cart')->where(array('id'=>$order_id))->find();
+		$check = $this->limitShoppingInfo(unserialize($order['info']));
+		if($check['status'] == 2){
+			$this->error('商品超出购买次数');
+		}
+		if($order && $order['paid'] ==0){
+			$orderid = substr($this->wecha_id, -1, 4) . date("YmdHis");
+			M('Product_cart')->where(array('id'=>$order_id))->setField('orderid',$orderid);
+			log::write('order_id1='.$order_id,'DEBUG');
+			if($order['gold']){
+				if($this->memberPay($order_id)){
+					$this->success('支付成功');
+				}else{
+					$this->error('支付失败');
+				}
+			}else{
+				$this->success('正在提交中...', U('Alipay/pay',array('token' => $this->token, 'wecha_id' => $this->wecha_id, 'success' => 1, 'from'=> 'Store', 'orderName' => $orderid, 'single_orderid' => $orderid, 'price' => $totalprice)));
+			}
+		}else{
+			$this->error('支付失败');
+		}
+	}
 	
 	public function orderCart() {
 		if (empty($this->wecha_id)) {
@@ -989,16 +1155,16 @@ class StoreAction extends WapAction{
 		$token = $this->_get('token');
 		$wecha_id = $this->wecha_id;
 		$product_cart_model = M('product_cart');
-		if($product_cart_model->where(array('id'=>$id,'wecha_id'=>$wecha_id,'token'=>$token,'receive'=>0))->find()){
+		if($product_cart_model->where(array('id'=>$id,'receive'=>0))->find()){
 			$data['receive'] = 1;
-			if($product_cart_model->where(array('id'=>$id,'wecha_id'=>$wecha_id,'token'=>$token,'receive'=>0))->save($data)){
+			if($product_cart_model->where(array('id'=>$id,'receive'=>0))->save($data)){
 				//订单处理
 				/*$userInfo = M('Distribution_member')->where(array('wecha_id' => $this->wecha_id, 'token' => $this->token))->find();
 				if($userInfo['distritime']==0){
 					$datas['distritime'] = time();
 					if(M('Distribution_member')->where(array('wecha_id' => $this->wecha_id, 'token' => $this->token))->save($datas)){
 						$dataDistri['beDistri'] = 1;
-						$product_cart_model->where(array('id'=>$id,'wecha_id'=>$wecha_id,'token'=>$token))->save($dataDistri);
+						$product_cart_model->where(array('id'=>$id))->save($dataDistri);
 						//消息通知
 						$access_token = $this->get_access_token();
 						$data1 = '{"touser":"'.$wecha_id.'","msgtype":"text","text":{"content":"亲：恭喜您已成为梦美春财富股东！立即行动！百万财富 轻松搞定！"}}';

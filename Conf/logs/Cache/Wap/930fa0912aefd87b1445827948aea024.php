@@ -25,10 +25,10 @@
     </div>
     <!-- 轮播背景 -->
     <div class="content_wrap index_wrap">
-        <div class="dis_head info_edit">
-            <img id="index_headimgurl" src="<?php echo ($my["headimgurl"]); ?>">
-            <p id="index_nickname"><?php echo ($my["nickname"]); ?></p>
-        </div>
+        <a class="dis_head info_edit" href="<?php echo U('Distribution/myInfo');?>">
+            <img id="index_headimgurl" src="<?php echo ($account["headimgurl"]); ?>">
+            <p id="index_nickname"><?php echo ($account["nickname"]); ?></p>
+        </a>
         <div class="weui_cells weui_cells_extend weui_cells_access">
             <a class="weui_cell weui_cell_extend coad_lnfo_bage cursor_ios" href="<?php echo U('Store/my');?>">
                 <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe603;</div>
@@ -40,28 +40,28 @@
             <div class="weui-row weui-row-extend weui-no-gutter">
                 <div class="weui-col-25 cursor_ios">
                     <a href="<?php echo U('Store/my',array('status'=> 0));?>" class="coad_lnfo_bage">
-                        <span><?php echo ($cart_data["unpaid"]); ?></span>
+                        <?php if(!empty($cart_data["unpaid"])): ?><span><?php echo ($cart_data["unpaid"]); ?></span><?php endif; ?>
                         <p class="iconfont">&#xe606;</p>
                         <p>待付款</p>
                     </a>
                 </div>
                 <div class="weui-col-25 cursor_ios">
                     <a href="<?php echo U('Store/my',array('status'=> 1));?>" class="coad_lnfo_bage">
-                        <span><?php echo ($cart_data["unsent"]); ?></span>
+                        <?php if(!empty($cart_data["unsent"])): ?><span><?php echo ($cart_data["unsent"]); ?></span><?php endif; ?>
                         <p class="iconfont">&#xe605;</p>
                         <p>待发货</p>
                     </a>
                 </div>
                 <div class="weui-col-25 cursor_ios">
                     <a href="<?php echo U('Store/my',array('status'=> 2));?>" class="coad_lnfo_bage">
-                        <span><?php echo ($cart_data["unreceive"]); ?></span>
+                        <?php if(!empty($cart_data["unreceive"])): ?><span><?php echo ($cart_data["unreceive"]); ?></span><?php endif; ?>
                         <p class="iconfont">&#xe604;</p>
                         <p>待收货</p>
                     </a>
                 </div>
                 <div class="weui-col-25 cursor_ios">
                     <a href="<?php echo U('Store/my',array('status'=> 3));?>" class="coad_lnfo_bage">
-                        <span><?php echo ($cart_data["finished"]); ?></span>
+                        <?php if(!empty($cart_data["finished"])): ?><span><?php echo ($cart_data["finished"]); ?></span><?php endif; ?>
                         <p class="iconfont">&#xe608;</p>
                         <p>已完成</p>
                     </a>
@@ -103,6 +103,13 @@
             </div>
             <div class="weui_cell_ft"></div>
         </a>
+        <a class="weui_cell weui_cell_extend" href="javascript:;" onclick="if(window.confirm('确认退出？')){location.href='<?php echo U('Distribution/loginoutAjax');?>'}">
+            <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe61b;</div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>退出登陆</p>
+            </div>
+            <div class="weui_cell_ft"></div>
+        </a>
     </div>
     <!--foot开始-->
 <div style="height: 60px;"></div>
@@ -128,7 +135,7 @@
       </div>
       <div class="weui-col-25">
         <a href="<?php echo U('Distribution/index');?>">
-          <p class="iconfont">&#xe60a;</p>
+          <p class="iconfont">&#xe6ca;</p>
           <p>我的</p>
         </a>
       </div>

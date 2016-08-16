@@ -160,7 +160,7 @@
       </div>
       <div class="weui-col-25">
         <a href="<?php echo U('Distribution/index');?>">
-          <p class="iconfont">&#xe60a;</p>
+          <p class="iconfont">&#xe6ca;</p>
           <p>我的</p>
         </a>
       </div>
@@ -205,7 +205,6 @@ if (typeof WeixinJSBridge == "undefined"){
 }
 </script>
   <div class="clear"></div>
-    <!-- <?php if((MODULE_NAME == 'Distribution') AND (ACTION_NAME == 'index')): ?><div class="copy" style="text-align:center; margin-top: 20px; font-size: 12px;">技术支持：微广互动</div><?php endif; ?> -->
     <?php if((ACTION_NAME) != "herolist"): ?><section class="foot"></section><?php endif; ?>
 
 </div>

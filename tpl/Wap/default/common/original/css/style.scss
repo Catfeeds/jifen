@@ -17,13 +17,14 @@ body{
 	margin: 0 auto;
 }
 @font-face {
-	font-family: 'iconfont';
-	src: url('//at.alicdn.com/t/font_1467768983_1379948.eot'); /* IE9*/
-	src: url('//at.alicdn.com/t/font_1467768983_1379948.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-	url('//at.alicdn.com/t/font_1467768983_1379948.woff') format('woff'), /* chrome、firefox */
-	url('//at.alicdn.com/t/font_1467768983_1379948.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-	url('//at.alicdn.com/t/font_1467768983_1379948.svg#iconfont') format('svg'); /* iOS 4.1- */
+  font-family: 'iconfont';
+  src: url('//at.alicdn.com/t/font_1471327294_904261.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/font_1471327294_904261.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/font_1471327294_904261.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/font_1471327294_904261.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/font_1471327294_904261.svg#iconfont') format('svg'); /* iOS 4.1- */
 }
+                    
 a {
 	color: #000;
 }
@@ -35,11 +36,14 @@ a {
 	-webkit-text-stroke-width: 0.2px;
 	-moz-osx-font-smoothing: grayscale;
 }
+
 $font1:15px;
-$color-collection: (#FA4294, #F02051, #30C5E0, #F6D810, #1CAD34, #F346E9, #F66060);
+$index-color-collection: (#ed746c, #ed746c, #77a1f3, #60d0e4, #52d1be, #fb8d2e);
+$color-collection: (#FA4294, #F02051, #30C5E0, #F6D810, #1CAD34, #F346E9, #F66060,#ed746c, #ed746c, #77a1f3, #60d0e4, #52d1be, #fb8d2e);
 $box_bg: rgba(255, 255, 255, 0.7);
 $fontColor: #404040;
 
+/* COMMON */
 .plus_sign {
 	position: relative;
 	cursor: pointer;
@@ -93,10 +97,10 @@ $fontColor: #404040;
 	height: 100%;
 	left: 100%;
 	display: none;
+	background-color: #fff;
 }
 .show_wrap {
 	overflow-y: auto;
-	background: #ececec;
 }
 .show_wrap2 {
 	background: #ececec;
@@ -110,6 +114,7 @@ $fontColor: #404040;
 
 	img {
 		width: 5rem;
+		height: 5rem;
 		border-radius: 50%;
 		margin: 0 auto;
 		display: block;
@@ -127,8 +132,148 @@ $fontColor: #404040;
 .order_color1 {
 	color: #30C5E0 !important;
 }
+/* COMMON */
 
-/*INDEX WEUI*/
+/* STORE_INDEX */
+.index_nav li{
+	width:20%;
+	text-align:center;
+	float:left;
+	margin-top: 10px;
+	p{
+		font-size:13px;
+		color:#5b5858;
+		line-height: 30px;
+	}
+	i{
+		border:0px;
+		text-align:center;
+		height:43px;
+		font-size: 25px;
+		color:#fff;
+		border-radius:100%;
+		width:45px;
+		line-height:43px;
+		display: inline-block;
+	}
+}
+@for $i from 0 to length($index-color-collection) {
+	.index_nav li:nth-of-type(#{$i}) i{
+		background-color: nth($index-color-collection, $i+1);
+	}
+}
+/* STORE_INDEX */
+
+/* DISTRIBUTION_LOGIN_REGISTER */
+@charset "utf-8";
+*{
+	margin:0px;
+	padding:0px;
+	border:none;
+	text-decoration:none;
+	color:#000;
+	list-style-type:none;
+	box-sizing:border-box;
+}
+ul li{
+	list-style:none;
+}
+.clear{
+	clear:both;
+}
+ul{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+body{
+	background:#f4f4f4;
+}
+
+
+
+
+/**content**/
+.login_content{
+	width:100%;
+	.bg{
+		float:left;
+		img{
+			width:100%;
+		}
+	}
+	.xx{
+		position:absolute;
+		width:100%;
+		.top{
+			margin:30px 0px;
+			.tx{
+				width:100px;
+				height:100px;
+				margin:0 auto;
+				background-color: #fff;
+			    border-radius: 50%;
+			    padding-top: 5px;
+			    img{
+			    	width: 90%;
+			        margin: 0 auto;
+			        display: block;
+			        border-radius: 100px;
+			    }
+			}
+		}
+		.text{
+			width:70%;
+			height:40px;
+			margin-bottom:15px;
+			margin-left:15%;
+			background:#a6d8d0;
+			border-radius:100px;
+			.name{
+				width:80%;
+				height:38px;
+				background:#a6d8d0;
+				border-radius:100px;
+				color:#fefefe;
+				font-size:16px;
+				float:left;
+				margin-top:1px;
+				-webkit-tap-highlight-color: rgba(0,0,0,0);
+				outline: none;
+			}
+			.icon1{
+			  font-size: 22px;
+			  color:#fefefe;
+			  line-height: 38px;
+			  padding-left:10px;
+			  padding-right:10px;
+			  float:left;
+			}
+		}
+		.text1{
+			width:70%;
+			height:auto;
+			margin-top:30px;
+			margin-left:15%;
+			background:#a6d8d0;
+			border-radius:100px;
+			.tj{
+				width:100%;
+				height:40px;
+				background:url(../images/bg2.jpg);
+				border-radius:100px;
+				line-height:30px;
+				font-size:20px;
+				color:#6b6c6c;
+				letter-spacing:1px;
+				word-spacing:1px;
+			}
+		}
+	}
+}
+/* DISTRIBUTION_LOGIN_REGISTER */
+
+/*DISTRIBUTION_INDEX WEUI*/
 .weui_cell_extend {
 	padding: 6px 8px;
 
@@ -184,16 +329,13 @@ $fontColor: #404040;
 
 		span {
 			position: absolute;
-			left: 50%;
-			top: -0.1rem;
-			background-color: white;
-			width: 1rem;
-			height: 1rem;
+			left: 55%;
+			background-color: #F35508;
+			width: 0.7rem;
+			height: 0.7rem;
 			border-radius: 50%;
 			text-align: center;
-			line-height: 1rem;
 			color: #F35508;
-			border: 2px solid #F35508;
 			z-index: 1;
 			font-size: 0.5rem;
 			font-weight: bold;
@@ -218,7 +360,7 @@ $fontColor: #404040;
 	left: 0;
 }
 
-/*INDEX WEUI*/
+/*DISTRIBUTION_INDEX WEUI*/
 
 /*MYDISTRIBUTION WEUI*/
 .weui-row-extend2 {
@@ -310,7 +452,7 @@ $fontColor: #404040;
 	position: absolute;
 	width: 40px;
 	height: 40px;
-	right: 32px;
+	right: 14px;
 	top: 10px;
 	padding: 5px 0 0 5px;
 	box-sizing: border-box;

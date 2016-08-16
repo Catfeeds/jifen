@@ -20,13 +20,23 @@ class WapAction extends BaseAction
         $this->token = 'mhfcjx1421158741';
         $this->assign('token', $this->token);
         $this->wxuser = S('wxuser_' . $this->token);
+        $agent = $_SERVER['HTTP_USER_AGENT']; 
         if (!$this->wxuser || 1) {
             $this->wxuser = D('Wxuser')->where(array('token' => $this->token))->find();
             S('wxuser_' . $this->token, $this->wxuser);
         }
-		session('wecha_id','oR4d_woAEqK5U4pKSuu87VjgbhXA');
+		// if($this->_get('wecha_id')){
+		// 	session('qchwecha_id',$this->_get('wecha_id'));
+		// }
+		// session('qchwecha_id',null);
+		// if($this->_get('test') == 1){
+		// 	session('qchwecha_id',null);
+		// 	setcookie('login_user',null);
+		// }
+		session('qchwecha_id','oIZlMvw4x3ObFxTdV5lBcTAmgwQI');
         $this->assign('wxuser', $this->wxuser);
-        if (!session('wecha_id') && $this->wxuser['winxintype'] == 3 && !isset($_GET['code']) && $this->wxuser['oauth']) {
+        // strpos($agent,"icroMessenger") && 
+        if (!session('qchwecha_id') && $this->wxuser['winxintype'] == 3 && !isset($_GET['code']) && $this->wxuser['oauth']) {
             $customeUrl = 'http://'.$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
             $scope = 'snsapi_base';
             $oauth = 'base_oauth';
@@ -38,12 +48,14 @@ class WapAction extends BaseAction
             $rt = $this->curlGet('https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $this->wxuser['appid'] . '&secret=' . $this->wxuser['appsecret'] . '&code=' . $_GET['code'] . '&grant_type=authorization_code');
             $jsonrt = json_decode($rt, 1);
             $openid = $jsonrt['openid'];
+            $access_token=$jsonrt['access_token'];
             $this->wecha_id = $openid;
-			session('wecha_id',$openid);
-			
+			session('qchwecha_id',$openid);
+
+
             $my = D('Distribution_member')->where(array('token'=>$this->token,'wecha_id'=>$openid))->find();
             if(!$my&&$_GET['state']!='user_oauth'){
-                $customeUrl = 'http://'.$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            	$customeUrl = 'http://'.$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                 $scope = 'snsapi_userinfo';
                 $oauth = 'user_oauth';
                 $oauthUrl = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' . $this->wxuser['appid'] . '&redirect_uri=' . urlencode($customeUrl) . '&response_type=code&scope=' . $scope . '&state=' .$oauth. '#wechat_redirect';
@@ -64,41 +76,83 @@ class WapAction extends BaseAction
 							'province'=>$json_user_info['province'],
 							'city'=>$json_user_info['city'],
 							'country'=>$json_user_info['country'],
-							'sex'=>$json_user_info['sex'],
 							'headimgurl'=>$json_user_info['headimgurl'],
 							'wecha_id'=>$json_user_info['openid'],
 							'status'=>1,
 							'createtime'=>time(),
 						);
 						$db = M('Distribution_member');
+						$mid = $_GET['mid'];
+						if($mid){
+						    $data['bindmid'] = $mid;
+						    //绑定账号
+						    $account = M('Distribution_account')->where(array('mid'=>$mid))->find();
+						    if($account){
+						        $data['bindaid'] = $account['id'];
+						    }
+						}
 						$myid=$db->add($data);
-						$mid = $this->_get('mid');
-						$from_member = $db->where('id='.$mid)->find();
-						if($mid&&$from_member){
-							$db->where('id='.$from_member['id'])->setInc('followNums');//关注累加
-							$db->where('id='.$from_member['id'])->setInc('firstNums');//一级会员累加
-							$leveData['fid'] = $from_member['id'];
-							if($from_member['fid']!=0){
-								$db->where('id='.$from_member['fid'])->setInc('secondNums');//二级会员累加
-								$leveData['sid'] = $from_member['fid'];
+
+						if($mid){
+							$from_member = $db->where('id='.$mid)->find();
+							if($mid&&$from_member){
+								$db->where('id='.$from_member['id'])->setInc('followNums');//关注累加
+								
+								$leveData['handle'] = 1;//处理结束
+								$db->where('id='.$myid)->save($leveData);//会员所属绑定
+								//上级消息推送
+								$access_token_p = $this->get_access_token();
+								$data_p = '{"touser":"'.$from_member['wecha_id'].'","msgtype":"news","news":{"articles":[{"title":"您有新朋友加入，赶紧看看吧","description":"亲：新朋友的消费您都将有提成哦","url":"'.C('site_url').U('Wap/Distribution/followList',array('token'=>$this->token,'wecha_id'=>$from_member['wecha_id'])).'","picurl":""}]}}';
+								$result_p = $this->api_notice_increment('https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='.$access_token_p,$data_p);
 							}
-							if($from_member['sid']!=0){
-								$db->where('id='.$from_member['sid'])->setInc('thirdNums');//三级会员累加
-								$leveData['tid'] = $from_member['sid'];
+						}
+					}else{
+						$mid = $_GET['mid'];
+						if($mid){
+							if($my['bindmid'] == 0){
+								$data2['bindmid'] = $mid;
 							}
-							$leveData['handle'] = 1;//处理结束
-							$db->where('id='.$myid)->save($leveData);//会员所属绑定
-							//上级消息推送
-							$access_token_p = $this->get_access_token();
-							$data_p = '{"touser":"'.$from_member['wecha_id'].'","msgtype":"news","news":{"articles":[{"title":"您有新朋友加入，赶紧看看吧","description":"亲：新朋友的消费您都将有提成哦","url":"'.C('site_url').U('Wap/Distribution/followList',array('token'=>$this->token,'wecha_id'=>$from_member['wecha_id'])).'","picurl":""}]}}';
-							$result_p = $this->api_notice_increment('https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='.$access_token_p,$data_p);
+							// if($my['bindaid'] == 0){
+								$account = M('Distribution_account')->where(array('mid'=>$mid))->find();
+								if($account){
+								    $data2['bindaid'] = $account['id'];
+								}
+							// }
+							if($data2){
+								D('Distribution_member')->where(array('token'=>$this->token,'wecha_id'=>$openid))->save($data2);
+							}
 						}
 					}
                 }
 			}
         } else {
-            $this->wecha_id = session('wecha_id');
+        	if(session('qchwecha_id')){
+           	 	$this->wecha_id = session('qchwecha_id');
+        	}else{
+        		$account = D('Account')->where(array('username'=>$_COOKIE['login_user']))->find();
+        		if($account['mid']){
+        			$this->wecha_id = M('Distribution_member')->where(array('id'=>$account['mid']))->getField('wecha_id');
+        		}
+        	}
         }
+        //绑定关系
+        // if(session('qchwecha_id')){
+        // 	$mid = $_GET['mid'];
+        // 	if($my['bindmid'] == 0 && $mid){
+        // 		$data3['bindmid'] = $mid;
+        // 	}
+        // 	// if($my['bindaid'] == 0){
+        // 		$aid = $_GET['aid'];
+        // 		$account = M('Distribution_account')->where(array('id'=>$aid))->find();
+        // 		if($account){
+        // 		    $data3['bindaid'] = $account['id'];
+        // 		}
+        // 	// }
+        // 	if($data3){
+        // 		D('Distribution_member')->where(array('token'=>$this->token,'wecha_id'=>session('qchwecha_id')))->save($data3);
+        // 	}
+        // }
+
         $this->assign('wecha_id', $this->wecha_id);
         $fansInfo = S('fans_' . $this->token . '_' . $this->wecha_id);
         if (!$fansInfo || 1) {
@@ -205,6 +259,21 @@ class WapAction extends BaseAction
 
 			$this->assign('shareScript', $this->shareScript);
 		}
+    }
+    //向上级发送信息
+	public function sendupMessage($aid,$title,$content,$url){
+		$bindm = D('Account')->where(array('id'=>$aid))->relation(true)->find();
+		if($bindm){
+			$this->sendMessage($bindm['member']['wecha_id'],$title,$content,$url);
+		}
+	}
+    //发送信息
+    public function sendMessage($touser,$title,$content,$url){
+    	$access_token_p = $this->get_access_token();
+    	$data_p = '{"touser":"'.$touser.'","msgtype":"news","news":{"articles":[{"title":"'.$title.'","description":"'.$content.'","url":"'.C('site_url').$url.'","picurl":""}]}}';
+    	// $data_p = '{"touser":"'.$touser.'","msgtype":"text","text":{"content":"'.$content.'"}}';
+    	Log::write("ccsql=".$data_p,'DEBUG');
+    	$this->api_notice_increment('https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='.$access_token_p,$data_p);
     }
 	private function jsapi_ticket(){
 		if($this->token!=''&&preg_match('/^[0-9a-zA-Z]{3,42}$/', $this->token)){

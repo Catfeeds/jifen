@@ -1,0 +1,302 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  text-decoration: none;
+  box-sizing: border-box; }
+
+body, ul, ol, li, p, h1, h2, h3, h4, h5, h6, form, fieldset, table, td, img, div, dl, dt, dd {
+  margin: 0;
+  padding: 0;
+  border: 0; }
+
+body {
+  color: #333;
+  font: 14px "Microsoft YaHei" !important;
+  line-height: 24px;
+  margin: 0 auto;
+  min-width: 320px;
+  max-width: 640px; }
+
+li {
+  list-style-type: none;
+  padding-bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 14px;
+  font-weight: normal; }
+
+input, button, textarea, select {
+  font: 100% "Microsoft YaHei" !important; }
+
+img {
+  display: block; }
+
+.clear {
+  clear: both; }
+
+/*.per_top{
+	-webkit-filter:blur(4px);
+	width: 100%;
+	overflow: hidden;
+	position: absolute;
+	z-index: -111;
+	height: 175px;
+	opacity: 0.8;
+	img{
+		max-width: 100%;
+	}
+}*/
+.per_top_all {
+  background: #f1bf64;
+  height: 175px; }
+  .per_top_all .per_top_img {
+    text-align: center;
+    width: 95px;
+    height: 95px;
+    margin-left: 2%;
+    margin-top: 40px;
+    vertical-align: middle;
+    display: inline-block;
+    background: url(../images/personal-_03.png) no-repeat;
+    padding-top: 10px;
+    padding-left: 10px; }
+    .per_top_all .per_top_img img {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%; }
+  .per_top_all .per_top_explain {
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 5px; }
+    .per_top_all .per_top_explain .per_top_name {
+      line-height: 36px;
+      margin-top: 40px;
+      color: #fff; }
+    .per_top_all .per_top_explain .per_top_see {
+      line-height: 36px;
+      color: #9c4704; }
+    .per_top_all .per_top_explain .per_top_time {
+      color: #fff; }
+
+.weui_btn_submit {
+  width: 96%;
+  margin: 50px auto 0px; }
+
+.recharge_record_top {
+  width: 100%;
+  height: 40px;
+  background: #ebab37; }
+  .recharge_record_top .return {
+    position: absolute;
+    margin-left: 2%;
+    line-height: 40px;
+    color: #fff; }
+  .recharge_record_top .return_name {
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold; }
+
+.weui_media_fafang {
+  width: 70px;
+  height: 30px;
+  background: #ebab37;
+  line-height: 30px;
+  text-align: center;
+  color: #fff;
+  float: right;
+  border-radius: 5px; }
+
+.buy_all .unchoose:before {
+  content: "\e602"; }
+
+.buy_all .choose:before {
+  content: "\e601";
+  color: #000; }
+
+.buy_all {
+  width: 100%;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-top: 10px;
+  position: relative; }
+  .buy_all .buy_all_choose {
+    vertical-align: middle;
+    display: inline-block;
+    padding: 10px 0px;
+    font-size: 26px;
+    margin-left: 2%; }
+  .buy_all .buy_all_icon {
+    vertical-align: middle;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin-left: 10px; }
+    .buy_all .buy_all_icon img {
+      width: 80px;
+      height: 80px; }
+  .buy_all .buy_all_price {
+    position: absolute;
+    right: 2%;
+    top: 50%;
+    height: 20px;
+    margin-top: -10px;
+    font-size: 20px; }
+
+.user_foot {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid #ccc;
+  background-color: #fff; }
+  .user_foot .agree_submit {
+    width: 150px;
+    height: 36px;
+    line-height: 36px;
+    background: #d6107f;
+    margin: 5px auto 5px;
+    text-align: center;
+    color: #fff; }
+  .user_foot .agree_title {
+    text-align: center;
+    color: #d6107f;
+    line-height: 20px; }
+
+.fahuo_money {
+  width: 100%;
+  background: #fff;
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 15px; }
+  .fahuo_money .fahuo_zhichi {
+    margin-left: 2%;
+    line-height: 24px;
+    color: #333;
+    padding-top: 8px; }
+  .fahuo_money .fahuo_money_num {
+    float: right;
+    font-size: 14px;
+    margin-right: 2%;
+    color: #333;
+    padding-bottom: 10px; }
+    .fahuo_money .fahuo_money_num span {
+      font-size: 24px;
+      color: #000; }
+
+.fahuo_all {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  padding: 10px 5px; }
+  .fahuo_all .fahuo_box .fahuo_item {
+    vertical-align: middle;
+    display: inline-block;
+    width: 90px;
+    color: #333;
+    line-height: 24px; }
+  .fahuo_all .fahuo_box .fahuo_item1 {
+    vertical-align: middle;
+    display: inline-block;
+    color: #3;
+    line-height: 24px; }
+
+.fahuo_information {
+  margin-left: 2%;
+  font-size: 16px;
+  line-height: 36px;
+  color: #000; }
+
+.send {
+  width: 100%;
+  background: #ffffff;
+  overflow: hidden; }
+
+.send .send_name {
+  float: left;
+  width: 50%;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  line-height: 30px;
+  color: #333; }
+
+.send .send_box {
+  width: 100%;
+  margin: 0 auto; }
+
+.send .send_box img {
+  max-width: 100%; }
+
+.send .send_all .send_click {
+  border-bottom: 1px solid #ebab37;
+  color: #ebab37; }
+
+.send .send_box > div:not(:first-of-type) {
+  display: none; }
+
+.send .send_box .send_details .send_company {
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  height: 34px; }
+  .send .send_box .send_details .send_company .send_company_name {
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 34px;
+    width: 70px;
+    margin-left: 2%; }
+  .send .send_box .send_details .send_company .send_select {
+    vertical-align: middle;
+    display: inline-block;
+    width: 70%; }
+    .send .send_box .send_details .send_company .send_select select, .send .send_box .send_details .send_company .send_select input {
+      width: 100%;
+      border: 0px;
+      outline: none; }
+
+.gain_all {
+  width: 100%;
+  border-bottom: 1px solid #d9d5d5;
+  position: relative;
+  background: #fff; }
+
+.gain_all .gain_all1 {
+  width: 96%;
+  margin: 0 auto; }
+
+.gain_all .gain_all1 .gain_pic {
+  margin-left: 2%;
+  margin: 8px 0px;
+  vertical-align: middle;
+  display: inline-block; }
+
+.gain_all .gain_all1 .gain_pic img {
+  width: 80px;
+  height: 66px;
+  border: 1px solid #d9d5d5; }
+
+.gain_all .gain_all1 .gain_right {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+  margin-top: 8px; }
+
+.gain_all .gain_all1 .gain_right .gain_name {
+  color: #333; }
+
+.gain_all .gain_all1 .gain_right .gain_details {
+  color: #a1a1a0;
+  font-size: 12px;
+  line-height: 16px; }
+
+.gain_all .gain_all1 .zhuangtai {
+  position: absolute;
+  top: 50%;
+  height: 22px;
+  margin-top: -11px;
+  right: 0;
+  margin-right: 2%;
+  color: #ebab37; }
+
+/*# sourceMappingURL=main.css.map */

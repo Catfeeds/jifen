@@ -14,7 +14,6 @@
 <body>
 	<div class="container">
 	<volist name="follow" id="vo">
-    <a href="{wghd::U('Distribution/memberIndex',array('token'=>$token,'id'=>$vo[id]))}">
     <div <neq name="vo.distritime" value="0">class="fd fd1"<else/>class="fd"</neq>>
     	<div class="tx"><img <eq name="vo.headimgurl" value="">src="{wghd::RES}/distri/images/portrait.jpg"<else/>src="{wghd:$vo.headimgurl}"</eq> width="115px;"></div><!--tx-->
         <div class="left">
@@ -27,10 +26,8 @@
         <div class="right"><img src="{wghd::RES}/distri/images/jt.png"></div><!--right-->
         <div class="clear"></div>
     </div>
-    </a>
     </volist>
     	
-<include file="Public:footer"/>
     
     </div><!--container-->
 </body>

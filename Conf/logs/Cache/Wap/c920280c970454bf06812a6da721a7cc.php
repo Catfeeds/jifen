@@ -1,0 +1,197 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<title>店铺统计</title>
+    <link rel="stylesheet" href="<?php echo RES;?>/original/others/main.css">
+    <script src="<?php echo RES;?>/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+<body>
+	<div class="count_top">
+		<div class="count_left">
+			<div class="count_left_name" id="data_name">下级订单数</div>
+			<div class="clear"></div>
+		</div>
+		<div class="line"></div>
+		<div class="count_right">
+			<div class="count_right_name" id="data_days">7天</div>
+			<div class="clear"></div>
+		</div>
+	    <div class="clear"></div>
+	</div>
+	<div id="container" style="height: 300px;"></div>
+
+	<div class="tongji">
+	     <div class="tongji1">日期</div>
+	     <div class="tongji1"><span id="data_type_item">访客数</span>（<span id="all_count"></span>）</div>
+	     <div class="clear"></div>
+	</div>   
+	<div id="data_show_wrap">
+
+	</div>
+
+	<div class="count_tanchu">
+		<div class="count_tanchu_fangke">
+		    <div class="count_tanchu_fangke1">
+			     <div class="count_choose">请选择</div>
+			     <div class="count_close iconfont close">×</div>
+			</div>
+			<div id="data1" style="display: none;">
+				<!-- <div class="count_tanchu_fangke2" data-type="1">
+			         <div class="count_order_name">金币收入</div>
+		             <div class="count_more">></div>
+				</div> -->
+			    <div class="count_tanchu_fangke2" data-type="2">
+			         <div class="count_order_name">下级订单数</div>
+		             <div class="count_more">></div>
+				</div>
+				<div class="count_tanchu_fangke2" data-type="3">
+			         <div class="count_order_name">金币收入</div>
+		             <div class="count_more">></div>
+				</div>
+				<div class="count_tanchu_fangke2" data-type="4">
+			         <div class="count_order_name">现金收入</div>
+		             <div class="count_more">></div>
+				</div>
+			</div>
+			<div id="data2" style="display: none;">
+			    <div class="count_tanchu_fangke2" data-days="7">
+			         <div class="count_order_name">7天</div>
+		             <div class="count_more">></div>
+				</div>
+				<div class="count_tanchu_fangke2" data-days="15">
+			         <div class="count_order_name">15天</div>
+		             <div class="count_more">></div>
+				</div>
+				<div class="count_tanchu_fangke2" data-days="30">
+			         <div class="count_order_name">30天</div>
+		             <div class="count_more">></div>
+				</div>
+			</div>
+		</div>
+	</div>  
+
+</body>
+<script src="<?php echo RES;?>/original/js/highcharts.js"></script>
+<script type="text/javascript">
+var y_data;
+var x_data;
+var data_name = '下级订单数';//数据名
+var all_count = $("#all_count");//总数
+var data_type_item = $("#data_type_item");//数据名显示位置
+var close = $(".close");//关闭弹出框
+var data_type_btn = $("#data_name")//选择数据类型弹出按钮
+var data_days_btn = $("#data_days")//选择数据类型弹出按钮
+var tanchu_wrap = $(".count_tanchu");//弹出框
+var choose_data_type = $("#data1").find(".count_tanchu_fangke2");//选择数据
+var choose_data_days = $("#data2").find(".count_tanchu_fangke2");//选择日期
+var type = 2;
+var days = 7;
+var data_show_wrap = $("#data_show_wrap");
+(function () {
+	//默认选中访客数
+	charts_init(type,data_name,days);
+	//数据弹出框
+	data_type_btn.on("click",function(){
+		tanchu_wrap.show();
+		$("#data1").show();
+		$("#data2").hide();
+	})
+	//时间弹出框
+	data_days_btn.on("click",function(){
+		tanchu_wrap.show();
+		$("#data1").hide();
+		$("#data2").show();
+	})
+	//关闭弹出框
+	close.on("click",function(){
+		tanchu_wrap.hide();
+	})
+	//选择数据类型
+	choose_data_type.on("click",function(){
+		type = $(this).data('type');
+		data_name = $(this).find('.count_order_name').text();
+		data_type_btn.text(data_name);
+		charts_init(type,data_name,days);
+		tanchu_wrap.hide();
+	})  
+	//选择时间
+	choose_data_days.on("click",function(){
+		console.log(type);
+		days = $(this).data('days');
+		data_days = $(this).find('.count_order_name').text();
+		data_days_btn.text(data_days);
+		charts_init(type,data_name,days);
+		tanchu_wrap.hide();
+	})    
+})(jQuery);
+
+function charts_init(type,data_name,days){
+	console.log(type);
+	console.log(data_name);
+	console.log(days);
+	$.ajax({
+		url:"<?php echo U('Distribution/getChartsAjax');?>",
+		data:{type:type,days:days},
+		dataType:"json",
+		success:function(data){
+			console.log(data);
+			y_data = eval(data.data[0]);
+			x_data = eval(data.data[1]);
+			init(y_data,x_data,data_name);//绘制图标 
+			all_count.text(data.data[2]);//总数量
+			data_type_item.text(data_name);//数据名
+			data_show_wrap.html(data.data[3]);//显示数据
+		}
+	});
+}
+function init(categories,data,data_name){
+	$('#container').highcharts({
+	    chart: {
+	        backgroundColor: '#f15353',
+	    },
+	    title: {
+	        text: '',
+	        x: -20 //center
+	    },
+	    credits: {
+	        enabled: false,
+	    },
+	    legend: {
+	        itemStyle: {
+	            color: '#fff'
+	        },
+	    },
+	    xAxis: {
+	        categories: categories,
+	        labels: {
+	            style: {
+	                color: '#fff',
+	                fontSize: '14px',
+	            }
+	        },
+	    },
+	    yAxis: {
+	        title: {
+	            text: ''
+	        },
+	        gridLineColor: '#fff',
+	        labels: {
+	            style: {
+	                color: '#fff',
+	                fontSize: '14px',
+	            }
+	        },
+	    },
+	    series: [{
+	        enabled: false,
+	        name: data_name,
+	        data: data,
+	        color: '#fff',
+	    },]
+	});
+}
+</script>
+</html>

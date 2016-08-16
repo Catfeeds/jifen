@@ -402,12 +402,17 @@ function add_cart() {
 		url: "<?php echo U('Store/addProductToCart',array('token'=>$token,'id'=>$product['id']));?>" + '&count='+count + '&did=' + did,
 		success: function(data) {
 			if(data){
+				console.log(data);
 				var datas=data.split('|');
-                $('.cart_com').text(datas[0]); 
-                $("#btn_add_cart").attr("disable", true);
-				$("#TB_overlayBG").css("display","none");
-				$(".box").css("display","none");
-                return floatNotify.simple('加入购物车成功');
+				if(datas[0] == 'limit'){
+					return floatNotify.simple('超出商品限购数量'+datas[1]+'件');
+				}else{
+	                $('.cart_com').text(datas[0]); 
+	                $("#btn_add_cart").attr("disable", true);
+					$("#TB_overlayBG").css("display","none");
+					$(".box").css("display","none");
+	                return floatNotify.simple('加入购物车成功');
+				}
 			} else {
 				return floatNotify.simple('抱歉，您的请求不正确');
 			}
@@ -432,13 +437,19 @@ function QuickBuy() {
 	if (count > parseInt($("#stock").text())) {
 		return floatNotify.simple('抱歉，您的购买量超过了库存了');
 	}
+	// alert("<?php echo U('Store/addProductToCart',array('token'=>$token,'id'=>$product['id']));?>" + '&count='+count + '&did=' + did);
 	$.ajax({
 		url: "<?php echo U('Store/addProductToCart',array('token'=>$token,'id'=>$product['id']));?>" + '&count='+count + '&did=' + did,
 		success: function(data) {
-			if(data){
-				location.href = "<?php echo U('Store/cart',array('token' => $token,'wecha_id'=>$_GET['wecha_id']));?>";
-			} else {
-				return floatNotify.simple('抱歉，您的请求不正确');
+			var datas=data.split('|');
+			if(datas[0] == 'limit'){
+				return floatNotify.simple('超出商品限购数量'+datas[1]+'件');
+			}else{
+				if(datas){
+					location.href = "<?php echo U('Store/cart',array('token' => $token,'wecha_id'=>$_GET['wecha_id']));?>";
+				} else {
+					return floatNotify.simple('抱歉，您的请求不正确');
+				}
 			}
 		}
 	});

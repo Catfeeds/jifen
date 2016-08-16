@@ -9,8 +9,6 @@
 <link rel="stylesheet" href="<?php echo RES;?>/original/css/style.css">
 <script type="text/javascript" src="<?php echo RES;?>/css/store/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="<?php echo RES;?>/css/store/js/jquery.lazyload.js"></script> 
-<link rel="stylesheet" href="<?php echo RES;?>/original/other3/iconfont.css">
-<link rel="stylesheet" href="<?php echo RES;?>/original/other3/index.css">
 <script type="text/javascript"> 
 jQuery(document).ready(function ($) { 
  $("img").lazyload({
@@ -46,38 +44,38 @@ jQuery(document).ready(function ($) {
 
 
 <div class="clear"></div>
-<nav class="nav">
+<div class="index_nav">
   <li>
     <a href="<?php echo U('Store/products',array('token'=>$_GET['token']));?>">
-        <div style="width:45px;margin:0 auto"><i class="icon2 iconfont icon-moban2"></i></div>
-          <span>全部商品</span>
+        <div style="width:45px;margin:0 auto"><i class="iconfont">&#xe616;</i></div>
+          <p>全部商品</p>
       </a>
   </li>
   <li>
     <a href="<?php echo U('Store/cats',array('token'=>$_GET['token']));?>">
-        <div style="width:45px;margin:0 auto"><i class="icon2 icon3 iconfont icon-liebiao"></i></div>
-          <span>商品分类</span>
+        <div style="width:45px;margin:0 auto"><i class="iconfont">&#xe615;</i></div>
+          <p>商品分类</p>
       </a>
   </li>
   <li>
     <a href="<?php echo U('Store/my',array('token'=>$_GET['token']));?>">
-        <div style="width:45px;margin:0 auto"><i class="icon2 icon4 iconfont icon-dingdan"></i></div>
-          <span>我的订单</span>
+        <div style="width:45px;margin:0 auto"><i class="iconfont">&#xe617;</i></div>
+          <p>我的订单</p>
       </a>
   </li>
   <li>
     <a href="<?php echo U('Store/cart',array('token'=>$_GET['token']));?>">
-        <div style="width:45px;margin:0 auto"><i class="icon2 icon5 iconfont icon-gouwuche1"></i></div>
-          <span>购物车</span>
+        <div style="width:45px;margin:0 auto"><i class="iconfont">&#xe60e;</i></div>
+          <p>购物车</p>
       </a>
   </li>
   <li>
     <a href="<?php echo U('Distribution/index',array('token'=>$_GET['token']));?>">
-        <div style="width:45px;margin:0 auto"><i class="icon2 icon6 iconfont icon-wode"></i></div>
-          <span>个人中心</span>
+        <div style="width:45px;margin:0 auto"><i class="iconfont">&#xe6ca;</i></div>
+          <p>个人中心</p>
       </a>
   </li>
-</nav>
+</div>
 <?php if(is_array($guanggao)): $i = 0; $__LIST__ = $guanggao;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($i % 2 );++$i;?><div class="ad" style="margin-top: 0;">
     <a href="<?php echo ($list["url"]); ?>">
       <img src="<?php echo ($list["picurl"]); ?>" />
@@ -243,7 +241,7 @@ jQuery(document).ready(function ($) {
       </div>
       <div class="weui-col-25">
         <a href="<?php echo U('Distribution/index');?>">
-          <p class="iconfont">&#xe60a;</p>
+          <p class="iconfont">&#xe6ca;</p>
           <p>我的</p>
         </a>
       </div>
