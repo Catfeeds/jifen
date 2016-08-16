@@ -1,0 +1,74 @@
+@charset "utf-8";
+*{
+	margin:0px;
+	padding:0px;
+	border:none;
+	text-decoration:none;
+	color:#000;
+	list-style-type:none;
+}
+ul li{
+	list-style:none;
+}
+.clear{
+	clear:both;
+}
+ul{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+.container{
+	background:#f4f4f4;
+}
+
+
+/**fd**/
+.fd{
+	width: 95%;
+	border:1px solid #b1b1b1;
+	background:#fff;
+	margin: 6px auto;
+	padding: 7px 0 7px 7px;
+}
+.fd1{
+	background:#fb883d;
+}
+.fd .tx{
+	width:20%;
+	float:left;
+}
+.fd .tx img{
+	width: 100%;
+	display: block;
+}
+.fd .left{
+	width: 67%;
+	padding: 0 0 0 7px;
+	float: left;
+}
+.fd .left .left_ul li{
+	font-family: "黑体";
+	color: #000;
+	line-height: 20px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.fd .right{
+	width: 32px;
+	float: right;
+	padding-top: 14px;
+}
+.fd .right img{
+	width: 100%;
+}
+
+.fd .left .left_ul1 li{
+	width:100%;
+	float:left;
+	margin-top:24px;
+	font-size:1.7em;
+	font-family:"黑体";
+	color:#fff;
+}

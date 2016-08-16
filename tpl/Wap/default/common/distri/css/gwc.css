@@ -1,0 +1,169 @@
+@charset "utf-8";
+*{
+	margin:0px;
+	padding:0px;
+	border:none;
+	text-decoration:none;
+	color:#000;
+	list-style-type:none;
+}
+ul li{
+	list-style:none;
+}
+.clear{
+	clear:both;
+}
+ul{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+
+
+
+/**text**/
+.text{
+	width:92%;
+	float:left;
+	padding-left:8%;
+	margin-top:25px;
+	margin-bottom:30px;
+	height:200px;
+}
+.text .text_left{
+	width:32%;
+	float:left;
+	height:200px;
+}
+.text .text_left .img2{
+	width:100%;
+	float:left;
+	height:200px;
+}
+.text .text_right{
+	width:61%;
+	float:left;
+	height:200px;
+}
+.text .text_right .text1{
+	width:94%;
+	float:left;
+	height:50px;
+	padding-left:5%;
+	font-size:1.8em;
+	line-height:50px;
+}
+.text .text_right .text2{
+	width:94%;
+	float:left;
+	height:50px;
+	padding-left:5%;
+	font-size:1.6em;
+	line-height:50px;
+}
+.text2 .zi{
+	color:#ff6501;
+}
+.text2 .zi1{
+	float:right;
+	padding-right:5%;
+	margin-top:5px;
+}
+.text2 .img4{
+	width:90px;
+	float:left;
+	height:40px;
+}
+.text2 .zi3{
+	float:left;
+	height:100px;
+	line-height:50px;
+	width:23%;
+}
+.text2 .bdj{
+	width:65px;
+	float:left;
+	height:30px;
+	margin-top:10px;
+}
+.text2 .bdj .img3{
+	width:65px;
+	float:left;
+	height:30px;
+	border:1px solid #cccccc;
+}
+.text2 .bd{
+	width:65px;
+	float:left;
+	height:30px;
+}
+.text2 .bd .bd1{
+	width:65px;
+	float:left;
+	height:30px;
+	text-align:center;
+	margin-top:10px;
+	border-top:1px solid #cccccc;
+	border-left:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+	font-size:1.0em;
+	color:#222;
+	line-height:30px;
+}
+
+/**text3**/
+.text3{
+	width:100%;
+	float:left;
+	text-align:right;
+	height:60px;
+	line-height:60px;
+	font-size:1.7em;
+	color:#000;
+	border-top:1px solid #b1b1b1;
+}
+.text3 .zi2{
+	padding-right:8%;
+	color:#ff6501;
+}
+
+/**text4**/
+.text4{
+	width:84%;
+	float:left;
+	height:70px;
+	margin-top:20px;
+	padding-left:8%;
+}
+.text4 .img5{
+	width:194px;
+	height:65px;
+	border:1px solid #cccccc;
+	float:left;
+	border-radius:10px;
+	box-sizing:border-box;
+	-webkit-border-radius:10px;/**IE**/
+	-moz-border-radius:10px;/**Firefox**/
+}
+.text4 .img6{
+	width:292px;
+	height:65px;
+	border:1px solid #cccccc;
+	float:right;
+	border-radius:10px;
+	box-sizing:border-box;
+	-webkit-border-radius:10px;/**IE**/
+	-moz-border-radius:10px;/**Firefox**/
+}
+
+
+
+
+
+
+
+
+
+
+
+

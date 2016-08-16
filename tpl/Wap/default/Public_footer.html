@@ -1,0 +1,72 @@
+<!--foot开始-->
+<div style="height: 60px;"></div>
+<div class="public_foot">
+    <div class="weui-row weui-no-gutter">
+      <div class="weui-col-25">
+        <a href="{wghd::U('Store/index')}">
+          <p class="iconfont">&#xe60d;</p>
+          <p>首页</p>
+        </a>
+      </div>
+      <div class="weui-col-25">
+        <a href="{wghd::U('Store/cats')}">
+          <p class="iconfont">&#xe60c;</p>
+          <p>分类</p>
+        </a>
+      </div>
+      <div class="weui-col-25">
+        <a href="{wghd::U('Store/cart')}">
+          <p class="iconfont">&#xe60e;</p>
+          <p>购物车</p>
+        </a>
+      </div>
+      <div class="weui-col-25">
+        <a href="{wghd::U('Distribution/index')}">
+          <p class="iconfont">&#xe60a;</p>
+          <p>我的</p>
+        </a>
+      </div>
+    </div>
+</div>
+
+<script>
+    (function($){
+      var module = "{wghd::MODULE_NAME}";
+      var action = "{wghd::ACTION_NAME}";
+      var rule_wrap = $(".rule");
+      if(module == "Store" && action == "daily"){
+        $('.daily').addClass('choose');
+      }
+      if(module == "Store" && action == "cats"){
+        $('.cats').addClass('choose');
+      }
+      if(module == "Store" && action == "index"){
+        $('.Sindex').addClass('choose');
+      }
+      if(module == "Distribution" && action == "index"){
+        $('.Dindex').addClass('choose');
+      }
+    })(jQuery)
+  </script>
+<!--foot结束-->
+
+<script>
+function onBridgeReady(){
+ WeixinJSBridge.call('hideOptionMenu');
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+    if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+}else{
+    onBridgeReady();
+}
+</script>
+  <div class="clear"></div>
+    <neq name="ACTION_NAME" value="herolist">
+    <section class="foot"></section>
+    </neq>

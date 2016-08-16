@@ -1,0 +1,4 @@
+[ 2016-07-05T11:28:40+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:myDistribution
+[ 2016-07-05T11:29:33+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:myDistribution
+[ 2016-07-05T11:29:42+08:00 ] ERR: (ThinkException) _TEMPLATE_NOT_EXIST_[./tpl/Wap/default/Distribution_myDistribution.html]
+[ 2016-07-05T14:22:43+08:00 ] ERR: (ThinkException) Model:getLstsql_METHOD_NOT_EXIST_

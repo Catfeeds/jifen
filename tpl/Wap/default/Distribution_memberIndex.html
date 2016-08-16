@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>分店详情</title>
+    <link href="{wghd::RES}/distri/css/wdfd.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{wghd::RES}/original/css/weui.min.css"></head>
+    <link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.css">
+    <link rel="stylesheet" href="{wghd::RES}/original/css/style.css"></head>
+    <style>
+            .weui_cell_hd img{
+                width:20px;margin-right:5px;display:block
+            }
+        </style>
+<body>
+    <div class="container">
+
+        <div class="title title1">
+            <div class="title_left">
+                <img <eq name="my.headimgurl" value="">
+                src="{wghd::RES}/distri/images/portrait.jpg"
+                <else/>
+                src="{wghd:$member.headimgurl}"
+            </eq>
+            class="img">
+        </div>
+        <div class="title_right">
+            <ul class="title_ul">
+                <li>
+                    昵称:
+                    <eq name="my.headimgurl" value="">
+                        未获取
+                        <else/>
+                        {wghd:$member.nickname}
+                    </eq>
+                </li>
+                <li>关注时间:{wghd:$member.createtime|date='Y-m-d',###}</li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="weui-row weui-no-gutter">
+      <div class="weui-col-50 weui-col-50-extend">累计销售：
+        <span style="color:#ff6501;">{wghd::sprintf("%.2f",$member['totalMoney']/100)}元</span></div>
+      <div class="weui-col-50 weui-col-50-extend">贡献佣金：
+        <span style="color:#ff6501;">{wghd::sprintf("%.2f",$offerMoney/100)}元</span></div>
+    </div>
+
+    <div class="weui_cells_title">
+        他的A分店：{wghd:$member.firstNums}家
+    </div>
+    <div class="weui_cells weui_cells_access">
+        <a class="weui_cell" href="{wghd::U('Distribution/agentList',array('token'=>
+                    $token,'mid'=>$member['id'],'type'=>'first'))}">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>分店数</p>
+            </div>
+            <div class="weui_cell_ft">{wghd:$member.firstNums}家</div>
+        </a>
+        <a class="weui_cell" href="javascript:;">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>消费金额</p>
+            </div>
+            <div class="weui_cell_ft">{wghd::sprintf("%.2f",$member['first_member_totalMoney']/100)}元</div>
+        </a>
+        <a class="weui_cell" href="javascript:;">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>贡献佣金</p>
+            </div>
+            <div class="weui_cell_ft">{wghd::sprintf("%.2f",$member['first_member_offerMoney']/100)}元</div>
+        </a>
+    </div>
+
+    <div class="weui_cells_title">
+        他的B分店：{wghd:$member.secondNums}家
+    </div>
+    <div class="weui_cells weui_cells_access">
+        <a class="weui_cell" href="{wghd::U('Distribution/agentList',array('token'=>
+                    $token,'mid'=>$member['id'],'type'=>'second'))}">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>分店数</p>
+            </div>
+            <div class="weui_cell_ft">{wghd:$member.secondNums}家</div>
+        </a>
+        <a class="weui_cell" href="javascript:;">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>消费金额</p>
+            </div>
+            <div class="weui_cell_ft">{wghd::sprintf("%.2f",$member['second_member_totalMoney']/100)}元</div>
+        </a>
+        <a class="weui_cell" href="javascript:;">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>贡献佣金</p>
+            </div>
+            <div class="weui_cell_ft">{wghd::sprintf("%.2f",$member['second_member_offerMoney']/100)}元</div>
+        </a>
+    </div>
+
+    <div class="weui_cells_title">
+        他的C分店：{wghd:$member.thirdNums}家
+    </div>
+    <div class="weui_cells weui_cells_access">
+        <a class="weui_cell" href="{wghd::U('Distribution/agentList',array('token'=>
+                    $token,'mid'=>$member['id'],'type'=>'second'))}">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>分店数</p>
+            </div>
+            <div class="weui_cell_ft">{wghd:$member.thirdNums}家</div>
+        </a>
+        <a class="weui_cell" href="javascript:;">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>消费金额</p>
+            </div>
+            <div class="weui_cell_ft">{wghd::sprintf("%.2f",$member['third_member_totalMoney']/100)}元</div>
+        </a>
+        <a class="weui_cell" href="javascript:;">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>贡献佣金</p>
+            </div>
+            <div class="weui_cell_ft">{wghd::sprintf("%.2f",$member['third_member_offerMoney']/100)}元</div>
+        </a>
+    </div>
+
+    <include file="Public:footer"/>
+
+</div>
+<!--container-->
+</body>
+</html>

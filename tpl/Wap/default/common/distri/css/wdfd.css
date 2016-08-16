@@ -1,0 +1,66 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  text-decoration: none;
+  color: #000;
+  list-style-type: none;
+}
+ul li {
+  list-style: none;
+}
+.clear {
+  clear: both;
+}
+ul {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+.mydis_container {
+  background: #f4f4f4;
+}
+
+/**title**/
+.title {
+  width: 100%;
+  background: url(../images/bj1.jpg);
+  padding: 15px 5px;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
+.title1 {
+  background: url(../images/bj2.jpg);
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
+.title .title_left {
+  float: left;
+}
+.title .title_left .img {
+  width: 60px;
+  height: 60px;
+  float: left;
+  border-radius: 100px;
+  border: 1px solid #b1b1b1;
+}
+.title .title_right {
+  width: 70%;
+  float: left;
+}
+.title .title_right .title_ul {
+  width: 100%;
+}
+.title .title_right .title_ul li {
+  width: 100%;
+  float: left;
+  height: 27px;
+  font-size: 1.1em;
+  line-height: 30px;
+  text-indent: 7px;
+}
+.weui-col-50-extend{
+  text-align: center;
+  line-height: 44px;
+  font-size: 1.3rem;
+}

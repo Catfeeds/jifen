@@ -1,0 +1,17 @@
+﻿#scnhtm5 .c-float-modePop .warnMsg {color: #FFFFFF;padding: 10px;}
+#scnhtm5 .c-float-modePop button {border: 0 none;border-radius: 2px 2px 2px 2px;color: #949494;padding: 6px 9px;}
+#scnhtm5 .c-float-shade {background-color: #000000;display: block;left: 0;opacity: 0.5;position: absolute;top: 0;width: 100%;z-index: 99;}
+#scnhtm5 .c-float-shade.hide {display: none;}
+#scnhtm5 .c-float-popWrap { border-radius: 2px 2px 2px 2px;overflow: hidden;position: absolute;left: 50%;margin-left: -110px; width: 220px;z-index: 9999999999999999999999999999999999999;}
+#scnhtm5 .c-float-popWrap .c-float-modePop {background-color: rgba(51, 51, 51, 0.9); border-radius: 2px 2px 2px 2px;padding: 15px;}
+#scnhtm5 .c-float-popWrap .c-float-modePop .warnMsg {font-size: 14px;padding: 0;     text-align: center;}
+#scnhtm5 .c-float-popWrap .c-float-modePop .content {margin-top: 10px;}
+#scnhtm5 .c-float-popWrap .c-float-modePop .doBtn {margin-top: 10px;width: 190px;}
+#scnhtm5 .c-float-popWrap .c-float-modePop button {border: 0 none;border-radius: 2px 2px 2px 2px;color: #444444;font-size: 14px;height: 30px;line-height: 30px;margin: 10px 5px 0;padding: 0;width: 80px;}
+#scnhtm5 .c-float-popWrap.hide {display: none;}
+#scnhtm5 .c-float-popWrap.show {display: block;-webkit-box-shadow: 0 0 2px 2px rgba(0,0,0,0.3);}
+#scnhtm5 .c-float-popWrap.msgMode .c-float-modePop .content, #scnhtm5 .c-float-popWrap.msgMode .c-float-modePop .doBtn {display: none;}
+#scnhtm5 .c-float-popWrap.alertMode .c-float-modePop .content {display: none;}
+#scnhtm5 .c-float-popWrap.alertMode .c-float-modePop .doBtn .cancel {display: none;}
+#scnhtm5 .c-float-popWrap.confirmMode .c-float-modePop .content, #scnhtm5 .c-float-popWrap.confirmMode .c-float-modePop .doBtn {display: block}
+#scnhtm5 .c-float-popWrap .c-float-modePop button {width: 80px;height: 30px;line-height: 30px;color: #444;font-size: 14px;background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#EEE),color-stop(100%,#999));border: 0;border-radius: 2px;padding: 0;margin: 10px 5px 0;}

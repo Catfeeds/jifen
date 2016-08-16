@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>我的分店-正式A分店</title>
+    <link href="{wghd::RES}/distri/css/fdlb.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.css">
+    <link rel="stylesheet" href="{wghd::RES}/original/css/style.css">
+</head>
+
+<body>
+	<div class="container">
+	<volist name="member" id="vo">
+    <a href="{wghd::U('Distribution/memberIndex',array('token'=>$token,'id'=>$vo[id]))}">
+    <div <neq name="vo.distritime" value="0">class="fd fd1"<else/>class="fd"</neq>>
+    	<div class="tx"><img <eq name="vo.headimgurl" value="">src="{wghd::RES}/distri/images/portrait.jpg"<else/>src="{wghd:$vo.headimgurl}"</eq> width="115px;"></div><!--tx-->
+        <div class="left">
+        	<ul class="left_ul">
+            	<li>分店ID：{wghd::$vo['id']+$set['startNums']}</li>
+                <li>昵称：<eq name="vo.headimgurl" value="">未获取<else/>{wghd:$vo.nickname}</eq></li>
+                <li>关注时间：{wghd:$vo.createtime|date='Y-m-d',###}</li>
+            </ul>
+        </div><!--left-->
+        <div class="right"><img src="{wghd::RES}/distri/images/jt.png"></div><!--right-->
+        <div class="clear"></div>
+    </div>
+    </a>
+    </volist>
+    	
+<include file="Public:footer"/>
+    
+    </div><!--container-->
+</body>
+</html>

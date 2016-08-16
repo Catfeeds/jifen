@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>用户中心-我的银行卡</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="{wghd::RES}/distri/css/jquery.mobile-1.3.2.min.css">
+<script src="{wghd::RES}/distri/js/jquery-1.8.3.min.js"></script>
+<script src="{wghd::RES}/distri/js/jquery.mobile-1.3.2.min.js"></script>
+<script src="{wghd::STATICS}/vote/wap/jquery.icheck.min.js?v=0.9.1"></script>
+<style>
+.ui-content{padding:0}
+.ui-btn{text-align:left}
+.header{display:-webkit-box;-webkit-box-align:center;}
+.header img{width:25%;display:block}
+.header div{padding-left:5%;font-size:16px;line-height:30px;font-weight:bold}
+.middleShow{display:-webkit-box;text-align:center;height:50px;line-height:50px;color:#fff;}
+.middleShow span{display:block;background:url(http://www.xiaomiguzi.com/bg2014.jpg) repeat;width:50%;}
+.middleShow span.leftInfo{border-right:1px #fff solid;border-top:1px #fff solid}
+.middleShow span.rightInfo{border-top:1px #fff solid}
+input{text-align:center}
+.deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}.deploy_ctype_tip p{display:inline-block;padding:13px 24px;border:solid #d6d482 1px;background:#f5f4c5;font-size:16px;color:#8f772f;line-height:18px;border-radius:3px;}
+</style>
+</head>
+<!-- 线路分类控制器 -->
+<script type="text/javascript">
+/*
+ * 显示出下一个子类
+ */
+function addNextType(pid,num,id,display){
+	var typeStr = '';
+	num++;
+	$.ajaxSetup({  
+		async: false //设置成同步模式
+	});
+	$('#classid').val(pid);
+	$.post('index.php?g=Wap&m=Store&a=queryNextType', {'pid' : pid}, function(type) {
+		$('#type'+(num-1)).nextAll().remove();//移除父类别下所有子类框，以免重复添加
+		if(type){
+			typeStr += '<div data-role="none" id="type'+num+'" class="select" style="margin-right:3px"><div><select style="width:100%" data-role="none" name="type'+num+'" onChange="addNextType($(this).val(),'+num+');">';
+			typeStr += '<option value="-1">==请选择==</option>';
+			for(var i in type){
+				if(type[i]["id"]==id){
+					typeStr += '<option value="'+type[i]["id"]+'" selected>'+type[i]["name"]+'</option>';
+				}else{
+					typeStr += '<option value="'+type[i]["id"]+'">'+type[i]["name"]+'</option>';
+				}
+			}
+			typeStr += '</select></div></div>';
+			$('#typeSpan').append(typeStr);
+		}
+	},'json');
+	$.ajaxSetup({  
+		async: true //设置成异步模式
+	}); 
+}
+
+/*
+ * 设置分类的层数
+ */
+function setTypeNum(){
+	var typeNum = $('#typeSpan').find('select').length;
+	$('#typeNum').val(typeNum);
+}
+</script>
+<body >
+
+<div data-role="page" id="pageone" style="background:#fff4a7">
+  <div data-role="content" data-theme="e">
+   <div style="padding:10px 20px;text-align:center">
+		<div data-role="fieldcontain" style="line-height:60px;border:1px #000 solid;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;padding:5px;background:#fff">
+			<label for="name" style="line-height:60px;">真实姓名：</label>
+			<input type="text" name="name" value="{wghd:$bank.name}" id="name" placeholder="请输入您的真实姓名..">
+			<label for="name" style="line-height:60px;">开户行地区：</label>
+			<input id="classid" name="classid" value="{wghd:$bank.classid}" type="hidden" /><input id="typeNum" name="typeNum" type="hidden" /><span id="typeSpan"><if condition="$typeNumArr">
+					<volist name="typeNumArr" id="vo" ><notempty name="typeNumArr[$i]">
+						<script type="text/javascript">addNextType({wghd:$vo},{wghd:$key},{wghd:$typeNumArr[$i]},'off');</script>
+					</notempty></volist>
+				<else/><script type="text/javascript">addNextType(0,0,null,'off');</script>
+				</if></span>
+			<label for="bankName" style="line-height:60px;">开户行名称：</label>
+			<input type="text" name="bankName" id="bankName" value="{wghd:$bank.bankName}" placeholder="请输入您的开户行名称..">
+			<label for="bankNumber" style="line-height:60px;">银行卡：</label>
+			<input type="text" name="bankNumber" id="bankNumber" value="{wghd:$bank.bankNumber}" placeholder="请输入您的银行卡..">
+			<label for="tele" style="line-height:60px;">手机号码：</label>
+			<input type="text" name="tele" id="tele" value="{wghd:$bank.tele}" placeholder="请输入您的手机号码..">
+		</div><br/>
+		<a href="#" data-role="button" id="pxbtn" style="text-align:center;width:60%;margin:0 auto;">保存</a>
+   </div>
+  </div>
+</div> 
+<script>
+function onBridgeReady(){
+ WeixinJSBridge.call('hideOptionMenu');
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+    if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+}else{
+    onBridgeReady();
+}
+</script>
+	<script>
+                    $(document).ready(function() {
+
+					 $("#pxbtn").bind("click",
+                        function() {
+
+                            var self = $(this);
+							var wecha_id = "{wghd:$wecha_id}";
+                            var name = $('#name').val();
+                            var bankName = $('#bankName').val();
+                            var bankNumber = $('#bankNumber').val();
+                            var tele = $('#tele').val();
+
+                            if (wecha_id == '') {
+
+                                showTip("异常的访问链接");
+
+                                return;
+
+                            }
+							if(name==''){
+								showTip("姓名不能为空");
+
+                                return;
+							}
+							var classid = $('#classid').val();
+							var flag = 0;
+							$('#typeSpan select').each(function(){
+								if($(this).val()==-1){
+									flag = 1;
+								}
+							});
+							if(flag==1){
+								showTip('请选择开户行地区');
+								return false;
+							}
+							if(bankName==''){
+								showTip("开户行名称不能为空");
+
+                                return;
+							}
+							if(bankNumber==''){
+								showTip("银行卡号不能为空");
+
+                                return;
+							}
+							if(tele==''){
+								showTip("手机号码不能为空");
+
+                                return;
+							}
+							var submitData = {
+								name: name,
+								bankName: bankName,
+								bankNumber: bankNumber,
+								tele: tele,
+								classid: classid
+							};
+
+							$.post("{wghd::U('Distribution/myBank',array('token'=>$token))}", submitData,
+							function(bakcdata) {
+								var obj = eval('(' + bakcdata + ')');
+
+								if (obj.success == 1) {
+
+									showTip(obj.info);
+									setTimeout("window.location.href='{wghd::U('Distribution/myBank',array('token'=>$token))}'", 2000);
+
+									return
+
+								} else {
+
+									showTip(obj.info);
+
+									return
+
+								}
+
+							});
+
+                        });
+                    });
+					function showTip(tipTxt) {
+					  var div = document.createElement('div');
+					  div.innerHTML = '<div class="deploy_ctype_tip"><p>' + tipTxt + '</p></div>';
+					  var tipNode = div.firstChild;
+					  $("#pageone").after(tipNode);
+					  setTimeout(function () {
+						$(tipNode).remove();
+					  }, 1500);
+					}
+                </script>
+</body>
+</html>

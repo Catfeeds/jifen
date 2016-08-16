@@ -1,0 +1,759 @@
+[ 2016-06-16T17:14:03+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=Home&m=Index&a=login
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: HTTP_REFERER D:\www\wg_fenxiao\Extend\Vendor\tongji\hm.php 第 74 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-0.003000s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.004000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.047003s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.051003s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.051003s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.052003s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.052003s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.053003s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-16T17:14:04+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=Home&m=Index&a=login
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: HTTP_REFERER D:\www\wg_fenxiao\Extend\Vendor\tongji\hm.php 第 74 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-0.004000s ]
+INFO: [ view_template ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.004000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.010001s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.011001s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.011001s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.011001s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.012001s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-06-16T17:14:05+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=Home&m=Index&a=login
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: HTTP_REFERER D:\www\wg_fenxiao\Extend\Vendor\tongji\hm.php 第 74 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-0.002000s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.005000s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.008000s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.009000s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.009000s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.009000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.010000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-06-16T17:14:05+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=Home&m=Index&a=login
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: HTTP_REFERER D:\www\wg_fenxiao\Extend\Vendor\tongji\hm.php 第 74 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-0.002000s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.003000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006000s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.009000s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.009000s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.010000s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.010000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.011000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-06-16T17:14:14+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=Home&m=Index&a=login
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+NOTIC: [8] Undefined index: HTTP_REFERER D:\www\wg_fenxiao\Extend\Vendor\tongji\hm.php 第 74 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-0.003000s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.004000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009000s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.013000s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.013000s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.014000s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.014000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.015000s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-06-16T17:22:02+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=Home&m=Index&a=login
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: HTTP_REFERER D:\www\wg_fenxiao\Extend\Vendor\tongji\hm.php 第 74 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-0.004000s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.005000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.022001s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.023001s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.024001s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.024001s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.025001s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-16T17:22:10+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?m=Users&a=checklogin
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-1.080061s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-1.081061s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.050003s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-1.131064s ]
+INFO: Run TokenBuild Behavior [ RunTime:-1.132064s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-1.132064s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-1.132064s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-1.133064s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-06-16T17:22:12+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Index&a=index
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2048] Declaration of IndexAction::insert() should be compatible with BaseAction::insert($name = '', $back = '/index') D:\www\wg_fenxiao\WgCms\Lib\Action\User\IndexAction.class.php 第 2 行.
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-1.095062s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\56f7804e54d354c9c14b7fc522e75478.php 第 49 行.
+NOTIC: [8] Use of undefined constant Common - assumed 'Common' D:\www\wg_fenxiao\Conf\logs\Cache\User\56f7804e54d354c9c14b7fc522e75478.php 第 97 行.
+NOTIC: [8] Undefined variable: demo D:\www\wg_fenxiao\Conf\logs\Cache\User\56f7804e54d354c9c14b7fc522e75478.php 第 161 行.
+NOTIC: [8] Undefined variable: thisAD D:\www\wg_fenxiao\Conf\logs\Cache\User\56f7804e54d354c9c14b7fc522e75478.php 第 183 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\56f7804e54d354c9c14b7fc522e75478.php 第 230 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-1.096062s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-1.108063s ]
+INFO: Run TokenBuild Behavior [ RunTime:-1.109063s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-1.109063s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-1.110063s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-1.110063s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-16T17:22:16+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Areply&a=index&id=15&token=mhfcjx1421158741
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2048] Declaration of AreplyAction::insert() should be compatible with BaseAction::insert($name = '', $back = '/index') D:\www\wg_fenxiao\WgCms\Lib\Action\User\AreplyAction.class.php 第 5 行.
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+NOTIC: [2] Invalid argument supplied for foreach() D:\www\wg_fenxiao\WgCms\Lib\Action\User\AreplyAction.class.php 第 40 行.
+NOTIC: [2] Invalid argument supplied for foreach() D:\www\wg_fenxiao\WgCms\Lib\Action\User\AreplyAction.class.php 第 40 行.
+NOTIC: [2] Invalid argument supplied for foreach() D:\www\wg_fenxiao\WgCms\Lib\Action\User\AreplyAction.class.php 第 40 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-1.051061s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 124 行.
+NOTIC: [8] Undefined index: exceptCondition D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 263 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\7211be94ef344b0124b2339a8e0ea470.php 第 479 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-1.052061s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-1.070062s ]
+INFO: Run TokenBuild Behavior [ RunTime:-1.070062s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-1.071062s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-1.071062s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-1.072062s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-06-16T17:22:23+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Text&a=index&token=mhfcjx1421158741
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2048] Declaration of TextAction::insert() should be compatible with BaseAction::insert($name = '', $back = '/index') D:\www\wg_fenxiao\WgCms\Lib\Action\User\TextAction.class.php 第 5 行.
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-1.041060s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 124 行.
+NOTIC: [8] Undefined index: exceptCondition D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 263 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\301b687f5b452f5129c78c49981401e2.php 第 404 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-1.042060s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-1.058061s ]
+INFO: Run TokenBuild Behavior [ RunTime:-1.058061s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-1.059061s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-1.059061s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-1.059061s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-16T17:22:25+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Img&a=add
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2048] Declaration of ImgAction::insert() should be compatible with BaseAction::insert($name = '', $back = '/index') D:\www\wg_fenxiao\WgCms\Lib\Action\User\ImgAction.class.php 第 5 行.
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+NOTIC: [2] Invalid argument supplied for foreach() D:\www\wg_fenxiao\WgCms\Lib\Action\User\ImgAction.class.php 第 30 行.
+NOTIC: [8] Undefined variable: fid D:\www\wg_fenxiao\WgCms\Lib\Action\User\ImgAction.class.php 第 47 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-1.109064s ]
+INFO: [ view_template ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 124 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 263 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\521fcb79a648356e459947f305dfeb37.php 第 408 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-1.109064s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-1.124065s ]
+INFO: Run TokenBuild Behavior [ RunTime:-1.124065s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-1.125065s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-1.125065s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-1.126065s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-06-16T17:22:36+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Diymen&a=index&token=mhfcjx1421158741
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-1.040060s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 124 行.
+NOTIC: [8] Undefined index: exceptCondition D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 263 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\8581da73af9f203b07ce0f09a2e004a8.php 第 423 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-1.041060s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-1.058061s ]
+INFO: Run TokenBuild Behavior [ RunTime:-1.058061s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-1.059061s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-1.059061s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-1.060061s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-06-16T17:22:41+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Distribution&a=set&token=mhfcjx1421158741
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-1.047060s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 124 行.
+NOTIC: [8] Undefined index: exceptCondition D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 263 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\4c27e75dcba44bae9075bfb0c0afc96c.php 第 387 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-1.048060s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-1.062061s ]
+INFO: Run TokenBuild Behavior [ RunTime:-1.062061s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-1.063061s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-1.063061s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-1.064061s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-06-16T17:22:44+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Store&a=index&token=mhfcjx1421158741
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+NOTIC: [8] Undefined variable: parentCat D:\www\wg_fenxiao\WgCms\Lib\Action\User\StoreAction.class.php 第 43 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-1.095063s ]
+INFO: [ view_template ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./tpl/User/default/Store_tab.html): failed to open stream: No such file or directory D:\www\wg_fenxiao\Lib\Template\ThinkTemplate.class.php 第 624 行.
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 124 行.
+NOTIC: [8] Undefined index: exceptCondition D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined index: parentid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 301 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 376 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-1.096063s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-1.113064s ]
+INFO: Run TokenBuild Behavior [ RunTime:-1.114064s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-1.114064s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-1.115064s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-1.115064s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-16T17:48:15+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Store&a=index&token=mhfcjx1421158741
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.015001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015001s ]
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+NOTIC: [8] Undefined variable: parentCat D:\www\wg_fenxiao\WgCms\Lib\Action\User\StoreAction.class.php 第 43 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-1.172067s ]
+INFO: [ view_template ] --END-- [ RunTime:0.044003s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./tpl/User/default/Store_tab.html): failed to open stream: No such file or directory D:\www\wg_fenxiao\Lib\Template\ThinkTemplate.class.php 第 624 行.
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 124 行.
+NOTIC: [8] Undefined index: exceptCondition D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined index: parentid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 301 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 376 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-1.216070s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.061003s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-1.277073s ]
+INFO: Run TokenBuild Behavior [ RunTime:-1.278073s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-1.279073s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-1.280073s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-1.281073s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001001s ]
+
+[ 2016-06-16T17:48:16+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Store&a=index&token=mhfcjx1421158741
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+NOTIC: [8] Undefined variable: parentCat D:\www\wg_fenxiao\WgCms\Lib\Action\User\StoreAction.class.php 第 43 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-1.607091s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001001s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./tpl/User/default/Store_tab.html): failed to open stream: No such file or directory D:\www\wg_fenxiao\Lib\Template\ThinkTemplate.class.php 第 624 行.
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 124 行.
+NOTIC: [8] Undefined index: exceptCondition D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined index: parentid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 301 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 376 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-1.608092s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.027001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-1.635093s ]
+INFO: Run TokenBuild Behavior [ RunTime:-1.635093s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-1.636093s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-1.637093s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-1.637093s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-16T17:48:17+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Store&a=index&token=mhfcjx1421158741
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+NOTIC: [8] Undefined variable: parentCat D:\www\wg_fenxiao\WgCms\Lib\Action\User\StoreAction.class.php 第 43 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-2.537145s ]
+INFO: [ view_template ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./tpl/User/default/Store_tab.html): failed to open stream: No such file or directory D:\www\wg_fenxiao\Lib\Template\ThinkTemplate.class.php 第 624 行.
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 124 行.
+NOTIC: [8] Undefined index: exceptCondition D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined index: parentid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 301 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 376 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-2.538145s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.028001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-2.566146s ]
+INFO: Run TokenBuild Behavior [ RunTime:-2.567146s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-2.568146s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-2.568146s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-2.569146s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-06-16T17:48:18+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Store&a=index&token=mhfcjx1421158741
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+NOTIC: [8] Undefined variable: parentCat D:\www\wg_fenxiao\WgCms\Lib\Action\User\StoreAction.class.php 第 43 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-3.481200s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./tpl/User/default/Store_tab.html): failed to open stream: No such file or directory D:\www\wg_fenxiao\Lib\Template\ThinkTemplate.class.php 第 624 行.
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 124 行.
+NOTIC: [8] Undefined index: exceptCondition D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined index: parentid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 301 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 376 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-3.482200s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.072004s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-3.554204s ]
+INFO: Run TokenBuild Behavior [ RunTime:-3.555204s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-3.555204s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-3.556204s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-3.556204s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-16T17:48:19+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Store&a=setting&token=mhfcjx1421158741
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-2.743157s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 124 行.
+NOTIC: [8] Undefined index: exceptCondition D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 263 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\931ea8050b760be12de2138b10712592.php 第 354 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-2.744157s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.030001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-2.774158s ]
+INFO: Run TokenBuild Behavior [ RunTime:-2.774158s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-2.775158s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-2.775158s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-2.776158s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2016-06-16T17:48:24+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Store&a=index&token=mhfcjx1421158741
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+NOTIC: [8] Undefined variable: parentCat D:\www\wg_fenxiao\WgCms\Lib\Action\User\StoreAction.class.php 第 43 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-1.065061s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./tpl/User/default/Store_tab.html): failed to open stream: No such file or directory D:\www\wg_fenxiao\Lib\Template\ThinkTemplate.class.php 第 624 行.
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 124 行.
+NOTIC: [8] Undefined index: exceptCondition D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined index: parentid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 301 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 376 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-1.066061s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-1.083062s ]
+INFO: Run TokenBuild Behavior [ RunTime:-1.083062s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-1.083062s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-1.084062s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-1.084062s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2016-06-16T17:48:26+08:00 ] 0.0.0.0 /wg_fenxiao/index.php?g=User&m=Store&a=index&token=mhfcjx1421158741
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Undefined index: width D:\www\wg_fenxiao\WgCms\Lib\Action\UserAction.class.php 第 70 行.
+NOTIC: [8] Undefined variable: parentCat D:\www\wg_fenxiao\WgCms\Lib\Action\User\StoreAction.class.php 第 43 行.
+INFO: [ view_template ] --START--
+INFO: Run LocationTemplate Behavior [ RunTime:-1.056060s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./tpl/User/default/Store_tab.html): failed to open stream: No such file or directory D:\www\wg_fenxiao\Lib\Template\ThinkTemplate.class.php 第 624 行.
+NOTIC: [8] Use of undefined constant uid - assumed 'uid' D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 124 行.
+NOTIC: [8] Undefined index: exceptCondition D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined index: test D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 263 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined index: parentid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 294 行.
+NOTIC: [8] Undefined variable: cid D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 301 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined index: level D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 334 行.
+NOTIC: [8] Undefined variable: alert D:\www\wg_fenxiao\Conf\logs\Cache\User\df88e5ca277659c13ffbe813b31744d2.php 第 376 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-1.057060s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017001s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-1.074061s ]
+INFO: Run TokenBuild Behavior [ RunTime:-1.074061s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-1.075061s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-1.075061s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-1.076061s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001000s ]
+

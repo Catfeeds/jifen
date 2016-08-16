@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>我的推广-分店订单列表</title>
+    <link href="{wghd::RES}/distri/css/fdlb.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.css">
+    <link rel="stylesheet" href="{wghd::RES}/original/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <volist name="orderlist" id="vo">
+            <div class="fd">
+                <div class="left" style="width:100%">
+                    <ul class="left_ul">
+                        <li>分店类别：{wghd:$vo.typename}</li>
+                        <li>
+                            下单人：
+                            <eq name="vo.from_member.nickname" value="">
+                                未获取
+                                <else/>
+                                {wghd:$vo.from_member.nickname}
+                            </eq>
+                        </li>
+                        <li>
+                            下单人ID： <font style="color:red">{wghd::$set['startNums']+$vo[from_member][id]}</font>
+                        </li>
+                        <li>订单编号：{wghd:$vo['orderid']}</li>
+                        <li>
+                            订单金额： <font style="color:red">{wghd::sprintf("%.2f",$vo['orderMoney']/100)}</font>
+                            元
+                        </li>
+                        <li>下单时间：{wghd:$vo.addtime|date='Y-m-d H:i:s',###}</li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+                <!--left--> </div>
+        </volist>
+
+        <include file="Public:footer"/>
+
+    </div>
+    <!--container-->
+</body>
+</html>

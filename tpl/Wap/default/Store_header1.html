@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" /><meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta name="format-detection" content="telephone=no"/>
+<title>{wghd:$company.name}</title>
+<script src="{wghd::RES}/css/store/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="{wghd::RES}/css/store/js/jquery.lazyload.js" type="text/javascript"></script>
+<script src="{wghd::RES}/css/store/js/notification.js" type="text/javascript"></script>
+<script src="{wghd::RES}/css/store/js/swiper.min.js" type="text/javascript"></script>
+<script src="{wghd::RES}/css/store/js/main.js" type="text/javascript"></script>
+<script>
+	function hideFrom(){
+		$('#show_from').hide();
+	}
+</script>
+<link type="text/css" rel="stylesheet" href="{wghd::RES}/css/store/css/style_touch11.css">
+</head>
+<body>
+<div id="top"></div>
+<div id="scnhtm5" class="m-body">
+<div class="m-detail-mainout">
+<neq name="from_member_info" value="">
+<style>
+.show_info_bg{height:50px;background-color:#000; opacity:0.3;filter:alpha(opacity=30);width:100%;line-height:25px;position:fixed;left:0;top:0;z-index:9999}
+.show_info{height:50px;width:100%;line-height:25px;position:fixed;left:0;top:0;z-index:9999}
+.guanbi{float:right;margin-top:7px;line-height:30px;height:30px;padding:3px 10px;font-size:30px;font-weight:bold}
+.huanying{float:right;margin-right:5px;margin-top:7px;line-height:30px;height:30px;padding:3px 10px;background:#41C93D;border-radius:5px;color:#fff;}
+</style>
+<div id="show_from">
+	<div class="show_info_bg">
+	</div>
+	<div class="show_info">
+	<span class="guanbi" onclick="hideFrom()">×</span><a href="http://mp.weixin.qq.com/s?__biz=MzAwMzY5MzM0OQ==&mid=400127771&idx=1&sn=155994da0dfd38da021fba78c7be333e#rd"><span class="huanying">立即关注</span></a><img src="{wghd:$from_member_info.headimgurl}" style="float:left;width:50px;"><div style="float:left;padding-left:5px;color:#fff;font-size:14px;">{wghd:$from_member_info.nickname|msubstr=0,8}<br/>推荐</div>
+	</div>
+</div>
+</neq>
+<!--div><img src="http://tzhrmy.tzwg.net/uploads/m/mhfcjx1421158741/e/d/f/f/thumb_557ba1890ffb2.jpg" width="100%"></div-->
+<!--轮播--->
+<div class="focusPic">
+	<div class="views">
+		<ul class="warp" id="fd">
+			<volist name="banner" id="vo">
+			<li class="li"><a href="{wghd:$vo.url}"><img src="{wghd:$vo.picurl}"></a></li>
+			</volist>
+		</ul>
+	</div>
+		<ul class="tabs" style="display:none">
+			<volist name="banner" id="vo">
+			<li class="li">{wghd:$i}</li>
+			</volist>
+		</ul>
+</div>
+<script>
+var focusPic = new Swiper('.focusPic .views',{pagination: '.focusPic .tabs',autoplay:2000})
+</script>
+<div class="m-hd" style="position:relative">
+<div style="position:absolute;top:-44px;left:10px;"><img src="{wghd:$company.logourl}" style="width:80px;border-radius:50%;border:1px solid #C9C9C9"></div>
+<div style="position:absolute;top:-34px;left:100px;font-size:20px;color:#fff; font-family:Microsoft YaHei;text-shadow:#000 5px 5px 5px;">{wghd:$company.shortname}</div>
+<!--div><a href="javascript:history.go(-1);" class="back">返回</a></div-->
+<div class="tit"></div>
+<div><a href="{wghd::U('Store/products',array('token'=>$_GET['token'],'mid'=>$my['id']))}" class="all"><span style="display:block;padding-top:40px;text-align:center">全部宝贝</span></a></div>
+<div><a href="{wghd::U('Store/cart',array('token'=>$_GET['token'],'mid'=>$my['id']))}" class="cart"><span style="display:block;padding-top:40px;text-align:center">购物车</span><i class="cart_com"><if condition="$totalProductCount neq 0" >{wghd:$totalProductCount}</if></i></a></div>
+<div><a href="{wghd::U('Store/my',array('token'=>$_GET['token'],'mid'=>$my['id']))}" class="uc"><span style="display:block;padding-top:40px;text-align:center">我的订单</span></a></div>
+<div><a href="{wghd::U('Store/cats',array('token'=>$_GET['token'],'mid'=>$my['id']))}" class="cat"><span style="display:block;padding-top:40px;text-align:center">商品分类</span></a></div>
+<span style="width:10px;display:block"></span>
+</div>
+<ul class="sub-menu-list">
+<li><a href="{wghd::U('Store/cats',array('token' => $_GET['token'], 'catid' => $hostlist['id'],'mid'=>$my['id']))}">首页</a></li>
+<volist name="cats" id="hostlist" key="i"> 
+<li><a href="{wghd::U('Store/products',array('token' => $_GET['token'], 'catid' => $hostlist['id'],'mid'=>$my['id']))}">{wghd:$hostlist.name}</a></li>
+</volist>
+</ul>

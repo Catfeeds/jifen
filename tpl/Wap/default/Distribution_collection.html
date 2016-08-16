@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+<title>用户中心-我的收藏</title>
+<link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.css">
+<link rel="stylesheet" href="{wghd::RES}/original/css/style.css">
+</head>
+
+<body>
+	<div class="container">
+        <link href="{wghd::RES}/distri/css/fdlb.css" rel="stylesheet" type="text/css" />
+        <div class="info_edit_wrap_title">
+            <div class="info_edit_wrap_title_item info_edit_wrap_title_left close_edit_wrap"></div>
+            <div class="info_edit_wrap_title_item info_edit_wrap_title_center">我的收藏</div>
+            <div class="info_edit_wrap_title_item info_edit_wrap_title_right"></div>
+        </div>
+    	<volist name="list" id="vo">
+    	<neq name="vo.product" value="">
+            <a href="{wghd::U('Store/product',array('token'=>$token,'id'=>$vo['productid']))}">
+            <div class="fd">
+            	<div class="tx"><img src="{wghd:$vo.product.logourl}" width="115px;"></div><!--tx-->
+                <div class="left">
+                	<ul class="left_ul">
+                    	<li>商品名称：{wghd:$vo.product.name|msubstr=0,6,'utf-8',true}</li>
+                        <li>商品价格：{wghd:$vo.product.price}&nbsp;元</li>
+                        <li>收藏时间：{wghd:$vo.addtime|date='Y-m-d',###}</li>
+                    </ul>
+                </div><!--left-->
+                <div class="right"><img src="{wghd::RES}/distri/images/jt.png"></div><!--right-->
+                <div class="clear"></div>
+            </div>
+            </a>
+        	<else/>
+            <div class="fd" style="height:80px;">
+                <div class="left">
+                	<ul class="left_ul">
+                    	<li>该收藏商品已下架</li>
+                    </ul>
+                </div><!--left-->
+            </div>
+    	</neq>
+        </volist>
+    </div><!--container-->
+<include file="Public:footer"/>
+</body>
+</html>

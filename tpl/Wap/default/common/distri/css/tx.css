@@ -1,0 +1,164 @@
+@charset "utf-8";
+*{
+	margin:0px;
+	padding:0px;
+	border:none;
+	text-decoration:none;
+	color:#000;
+	list-style-type:none;
+}
+ul li{
+	list-style:none;
+}
+.clear{
+	clear:both;
+}
+ul{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+.container{
+	background:#f4f4f4;
+}
+
+
+
+/**text**/
+.text{
+	width:100%;
+	float:left;
+	height:auto;
+	padding-bottom:10px;
+	border-top:1px solid #b1b1b1;
+	border-bottom:1px solid #b1b1b1;
+	margin-top:15px;
+	background:#fff;
+}
+.cont{
+	width:100%;
+	height:65px;
+	float:left;
+	border-bottom:1px solid #ebe9e9;
+}
+.cont_left{
+	width:25%;
+	float:left;
+	font-size:1.8em;
+	color:#000;
+	font-family:"黑体";
+	line-height:65px;
+	padding-left:5%;
+	height:65px;
+}
+.cont_right{
+	width:68%;
+	float:left;
+	height:65px;
+}
+.cont_right .bd{
+	width:100%;
+	float:left;
+	height:65px;
+	line-height:65px;
+	font-size:1.6em;
+}
+
+.cont1{
+	width:100%;
+	height:65px;
+	float:left;
+	border-bottom:1px solid #ebe9e9;
+	font-size:1.6em;
+	color:#e16262;
+	text-align:center;
+	line-height:65px;
+}
+.cont2{
+	font-size:1.8em;
+	color:#000;
+}
+.bd1{
+	width:100%;
+	float:left;
+	height:65px;
+	line-height:65px;
+	font-size:1.1em;
+	text-align:center;
+}
+.tj{
+	width:35%;
+	display:block;
+	margin:0 auto;
+	height:60px;
+	line-height:60px;
+	margin-top:20px;
+	margin-bottom:20px;
+	font-size:1.8em;
+	color:#fff;
+	font-family:"黑体";
+	letter-spacing:3px;
+	background:#00d500;
+	border-radius:10px;
+	-webkit-border-radius:10px;/**IE**/
+	-moz-border-radius:10px;/**Firefox**/
+}
+
+.cont3{
+	width:100%;
+	height:65px;
+	float:left;
+	margin-bottom:15px;
+	border-top:1px solid #b1b1b1;
+	border-bottom:1px solid #b1b1b1;
+	background:#fff;
+	
+}
+.cont3 .cont_right1{
+	width:25%;
+	height:60px;
+	float:left;
+	background:#ff6501;
+	color:#fff;
+	font-size:1.5em;
+	border-radius: 10px;
+	font-weight:bold;
+	margin-top:2px;
+	line-height:60px;
+}
+
+.cont_left1{
+	width:60%;
+	float:left;
+	font-size:2.0em;
+	line-height:65px;
+	padding-left:5%;
+	color:#222222;
+}
+.cont_left1 .tb{
+	margin-top:4%;
+	float:left;
+}
+.cont_left1 .dd{
+	padding-left:10px;
+}
+.cont_right2 a{
+	float:left;
+	width:30%;
+	font-size:1.8em;
+	line-height:65px;
+	color:#7d7c7c;
+	text-align:right;
+	padding-right:5%;
+}
+
+
+
+
+
+
+
+
+
+
+

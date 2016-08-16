@@ -1,0 +1,158 @@
+<include file="Store:header"/>
+<link href="{wghd::RES}/distri/css/head.css" rel="stylesheet" type="text/css" />
+<form id="search_form" name="search_form" action="" method="post">
+	<div class="m-l-search">
+		<input id="search_name" class="inp-search" name="search_name" type="search" value="{wghd:$Think.request.keyword}" placeholder="输入关键字搜索">
+		<input class="btn-search" name="search-btn" type="submit" value="">
+	</div>
+</form>
+
+<!--div class="m-select c666 order_control">
+<span><a href="javascript:" order="time" class="arrow-down">时间<i><em></em></i></a></span>
+<span><a href="javascript:" order="salecount">销量<i><em></em></i></a></span>
+<span><a href="javascript:" order="price">价格<i><em></em></i></a></span>
+<span><a href="javascript:" order="discount">折扣<i><em></em></i></a></span>
+<input type="hidden" id="view_list" value="">
+<!-- <span class="filter"><a href="javascript:;" class="ary li">排列</a><a href="javascript:;" class="flt">筛选</a></span> -->
+</div-->
+<ul id="m_list" class="m-list ">
+<volist name="products" id="hostlist"> 
+	<li>
+		<div style="width:95%;margin:0 auto;background:#fff;">
+		<span class="pic">
+			<a href="{wghd::U('Store/product',array('token' => $token, 'id' => $hostlist['id'],'mid'=>$my['id']))}">
+			<img src="{wghd:$hostlist.logourl}" data-original="{wghd:$hostlist.logourl}" style="width:100%;">
+			</a>
+			<a class="t" href="{wghd::U('Store/product',array('token' => $token, 'id' => $hostlist['id'],'mid'=>$my['id']))}">{wghd:$hostlist.name|htmlspecialchars_decode}</a>
+			<b>￥{wghd:$hostlist.showprice}</b><br/>
+			<span style="font-size:12px;color:#585656">已售：{wghd:$hostlist.fakemembercount}</span>
+		</span>
+		</div>
+	</li>
+</volist>
+</ul>
+<!-- <div style="background:#4B514F;position:fixed;left:10px;bottom:10px;border-radius:5px;padding:5px 10px;background-color:rgba(0,0,0,0.7);font-size:16px;z-index:9999">
+	<a href="{wghd::U('Store/cart',array('token'=>$token,'mid'=>$my['id']))}" style="color:#fff">
+	购物车(<i class="cart_com" style="font-size:16px;">{wghd:$totalProductCount}</i>)
+	</a>
+	<a href="{wghd::U('Store/my',array('token'=>$token,'mid'=>$my['id']))}"style="color:#fff">
+	<span style="border-left:1px solid #fff;padding-left:5px;">我的订单</span>
+	</a>
+</div> -->
+<div class="more" style="width:100%;text-align:center;line-height:20px;overflow:hidden;display:none;" id="show_more" page="2" href="javascript:void(0);">加载中...请稍候</div>
+<input type="hidden" value="1" id="pageid" />
+<input type="hidden" id="canScroll" value="1" />
+<script type="text/javascript">
+$(function() {
+	$('#search_form').submit(function() {
+		var search_name = $('#search_name').val();
+		if (search_name == '') {
+			return false;
+		}
+	});
+
+	//点击排序
+	var base_url = '{wghd::U('Store/products',array('token'=>$token,'catid'=>$thisCat['id']))}';
+	var b_url = '<if condition="$isSearch neq 1">{wghd::U('Store/ajaxProducts',array('token'=>$token,'catid'=>$thisCat['id'],'ms'=>$_GET['ms'],'tj'=>$_GET['tj']))}<else/>{wghd::U('Store/ajaxProducts',array('token'=>$token,'keyword'=>$_GET['keyword'],'ms'=>$_GET['ms'],'tj'=>$_GET['tj']))}</if>'
+		method = 'DESC',
+		_get_method = '{wghd:$method}',
+		order = '{wghd:$order}',
+		_get_order  = '';
+	if (_get_order != '') {
+		order = _get_order;
+	}
+	$('.order_control a').removeClass('arrow-down');
+	if (_get_method == 'DESC')  {
+		method = 'ASC';
+		$('.order_control a[order="' + order + '"]').addClass('arrow-up');
+	} else {
+		$('.order_control a[order="' + order + '"]').addClass('arrow-down');
+	}
+	$('.order_control a').click(function() {
+		var order = $(this).attr('order');
+		var url = base_url + '&order=' + order+'&method='+method;
+		location.href = url;
+	});
+
+	/*---------------------加载更多--------------------*/
+	var total = {wghd:$count},
+		pagesize = 8,
+		pages = Math.ceil(total / pagesize);
+	var mid = {wghd:$my.id|default=0};
+	var com_link = '{wghd::U('Store/product',array('token'=>$token))}';
+	var label_arr = ["\u8bf7\u9009\u62e9\u6807\u7b7e","\u70ed\u5356","\u7206\u6b3e"];
+	if (pages > 1) {
+		var _page = $('#show_more').attr('page');
+		$(window).bind("scroll",function() {
+			if ($(document).scrollTop() + $(window).height() >= $(document).height()) {
+				$('#show_more').show().html('加载中...请稍候');
+				if (_page > pages) {
+					$('#show_more').show().html('没有更多了');
+					return;
+				}
+				if($('#canScroll').val()==0){//不要重复加载
+					return;
+				}
+				$('#canScroll').attr('value',0);
+				$.ajax({
+					type : "GET",
+					data : {'page' : _page, 'inajax' : 1},
+					url :  b_url + '&order=' + order + '&method=' + _get_method + '&pagesize='+pagesize,
+					dataType : "json",
+					success : function(RES) {
+						$('#canScroll').attr('value',1);
+						$('#show_more').hide().html('加载更多');
+						data = RES.products;
+						if(data.length){
+							$('#show_more').attr('page',parseInt(_page)+1);
+						}
+						_page = $('#show_more').attr('page');
+						var _tmp_html = '';
+						$.each(data, function(x, y) {
+							_tmp_html +=    '<li><div style="width:95%;margin:0 auto;background:#fff;"><span class="pic">' +
+							'<a href="' + com_link + '&id=' + y.id + '&mid=' + mid + '">' +
+							'<img src="' +y.logourl + '" style="width:100%;"/>' +
+							'</a><a class="t" href="' + com_link + '&id=' + y.id + '">' + y.name + '</a>';
+							_tmp_html += '<b>￥'+ y.showprice +'&nbsp;元</b>';
+							_tmp_html += '<br/><br/><span style="font-size:12px;color:#585656">已售：'+ y.fakemembercount +'</span></span></div></li>';
+						});
+						$('#m_list').append(_tmp_html);
+					}
+				});
+			}
+		});
+	}
+});
+</script>
+<include file="Public:footer"/>
+</body>
+<script>
+function onBridgeReady(){
+ WeixinJSBridge.call('showOptionMenu');
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+    if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+}else{
+    onBridgeReady();
+}
+</script>
+<script type="text/javascript">
+window.shareData = {  
+            "moduleName":"Store",
+            "moduleID":"{wghd:$products[0]['id']}",
+            "imgUrl": "{wghd:$products[0]['logourl']}", 
+            "timeLineLink": "{wghd::C('site_url') .  U('Store/products',array('token' => $token,'catid'=>$_GET['catid'],'mid'=>$my['id']))}",
+            "sendFriendLink": "{wghd::C('site_url') .  U('Store/products',array('token' => $token,'catid'=>$_GET['catid'],'mid'=>$my['id']))}",
+            "weiboLink": "{wghd::C('site_url') .  U('Store/products',array('token' => $token,'catid'=>$_GET['catid'],'mid'=>$my['id']))}",
+            "tTitle": "{wghd:$metaTitle}",
+            "tContent": "{wghd:$metaTitle}"
+        };
+</script>
+{wghd:$shareScript}
+</html>

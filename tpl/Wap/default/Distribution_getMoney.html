@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="target-densitydpi=device-dpi, width=640,user-scalable=0" name="viewport">
+<title>用户中心-我的提现</title>
+<link href="{wghd::RES}/distri/css/head.css" rel="stylesheet" type="text/css" />
+<link href="{wghd::RES}/distri/css/tx.css" rel="stylesheet" type="text/css" />
+<script src="{wghd::RES}/distri/js/jquery-1.8.3.min.js"></script>
+<style>
+.deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}.deploy_ctype_tip p{display:inline-block;padding:23px 34px;border:solid #d6d482 1px;background:#f5f4c5;font-size:1.6em;color:#8f772f;line-height:30px;border-radius:3px;}
+</style>
+</head>
+
+<body>
+	<div class="container">
+      <div class="text">
+        	<div class="cont">
+        		<div class="cont_left">真实姓名:</div><!--cont_left-->
+                <div class="cont_right">
+                  <input  type="text" name="name" value="{wghd:$my.name}" id="name" class="bd" placeholder="请输入真实姓名"/>
+                </div><!--cont_right-->
+       	    </div><!--cont-->
+            
+            <div class="cont">
+        		<div class="cont_left">联系电话:</div><!--cont_left-->
+                <div class="cont_right">
+                  <input type="text" name="tele" id="tele" value="{wghd:$my.tele}" class="bd" placeholder="请输入联系电话"/>
+                </div><!--cont_right-->
+       	    </div><!--cont-->
+        </div><!--text-->
+        
+        <div class="text">
+       	  <div class="cont1">您当前可提现的金额是{wghd::sprintf("%.2f",($order['status_4']-$my['alreadyGetMoney'])/100)}元</div><!--cont-->
+          <div class="cont1 cont2">注：每次提现金额不能大于200元</div><!--cont-->
+            <div class="cont1"><input name="money" id="money" type="text" class="bd1" value="" placeholder="请输入提现金额"/></div><!--cont-->
+            
+            
+        </div><!--text-->
+        <div class="clear"></div>
+        <input type="button" name="button" id="pxbtn" value="提交" class="tj"/>
+        <a href="{wghd::U('Distribution/getMoneyList',array('token'=>$token))}">
+        <div class="cont3">
+        	<div class="cont_left1"><img src="{wghd::RES}/distri/images/txjl.png" class="tb"><span class="dd">提现记录</span></div><!--cont_left-->
+            <div class="cont_right2"><a href="{wghd::U('Distribution/getMoneyList',array('token'=>$token))}">></a></div><!--cont_right-->
+        </div><!--cont3-->
+        </a>
+        <a href="{wghd::U('Distribution/getMoneyProcess',array('token'=>$token))}"><div class="cont3">
+        	<div class="cont_left1"><img src="{wghd::RES}/distri/images/yj.png" class="tb"><span class="dd">佣金结算流程说明</span></div><!--cont_left-->
+            <div class="cont_right2"><a href="{wghd::U('Distribution/getMoneyProcess',array('token'=>$token))}">></a></div><!--cont_right-->
+        </div><!--cont3-->
+		</a>
+<include file="Public:footer"/>
+    
+    </div><!--container-->
+<script>
+	$(document).ready(function() {
+
+	 $("#pxbtn").bind("click",
+		function() {
+
+			var self = $(this);
+			var wecha_id = "{wghd:$wecha_id}";
+			var name = $('#name').val();
+			var tele = $('#tele').val();
+			var money = $('#money').val();
+
+			if (wecha_id == '') {
+
+				showTip("异常的访问链接");
+
+				return;
+
+			}
+			if(name==''){
+				showTip("姓名不能为空");
+
+				return;
+			}
+			if(tele==''){
+				showTip("手机号码不能为空");
+
+				return;
+			}
+			if(money==''){
+				showTip("提现金额不能为空");
+
+				return;
+			}
+			if(isNaN(money)){
+				showTip("提现金额必须为整数数字");
+
+				return;
+			}
+			if(parseInt(money)>parseInt($('#nowMoney').text())){
+				showTip("提现金额超出可提现值");
+
+				return;
+			}
+			if(parseInt(money)>200){
+				showTip("每次提现金额不能大于200元");
+
+				return;
+			}
+			var submitData = {
+				name: name,
+				tele: tele,
+				money: money
+			};
+
+			$.post("{wghd::U('Distribution/getMoney',array('token'=>$token))}", submitData,
+			function(bakcdata) {
+				var obj = eval('(' + bakcdata + ')');
+
+				if (obj.success == 1) {
+
+					showTip(obj.info);
+					setTimeout("window.location.href='{wghd::U('Distribution/getMoneyList',array('token'=>$token))}'", 2000);
+
+					return
+
+				} else {
+
+					showTip(obj.info);
+
+					return
+
+				}
+
+			});
+
+		});
+	});
+	function showTip(tipTxt) {
+	  var div = document.createElement('div');
+	  div.innerHTML = '<div class="deploy_ctype_tip"><p>' + tipTxt + '</p></div>';
+	  var tipNode = div.firstChild;
+	  $(".container").after(tipNode);
+	  setTimeout(function () {
+		$(tipNode).remove();
+	  }, 1500);
+	}
+</script>
+</body>
+</html>

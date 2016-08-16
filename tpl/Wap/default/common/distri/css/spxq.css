@@ -1,0 +1,166 @@
+@charset "utf-8";
+*{
+	margin:0px;
+	padding:0px;
+	border:none;
+	text-decoration:none;
+	color:#000;
+	list-style-type:none;
+}
+ul li{
+	list-style:none;
+}
+.clear{
+	clear:both;
+}
+ul{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+
+
+
+/**text**/
+.text{
+	width:92%;
+	float:left;
+	height:65px;
+	font-size:2.0em;
+	line-height:65px;
+	padding-left:8%;
+}
+.text1{
+	width:92%;
+	float:left;
+	height:65px;
+	font-size:1.7em;
+	line-height:65px;
+	padding-left:8%;
+}
+.text1 .zi{
+	color:#ff6501;
+	font-size:1.3em;
+}
+.text1 .zi1{
+	text-decoration:line-through;
+}
+.text1 .zi2{
+	color:#a3a3a3;
+}
+.text2{
+	width:92%;
+	float:left;
+	height:65px;
+	padding-left:8%;
+}
+.text2 .zi3{
+	float:left;
+	height:65px;
+	line-height:65px;
+	width:15%;
+	font-size:1.7em;
+}
+.text2 .bdj{
+	width:120px;
+	float:left;
+	height:45px;
+	margin-top:10px;
+}
+.text2 .bdj .img2{
+	width:120px;
+	float:left;
+	height:45px;
+	border:1px solid #cccccc;
+}
+.text2 .bd{
+	width:120px;
+	float:left;
+	height:65px;
+}
+.text2 .bd .bd1{
+	width:120px;
+	float:left;
+	height:45px;
+	text-align:center;
+	margin-top:10px;
+	border-top:1px solid #cccccc;
+	border-left:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+	font-size:1.6em;
+	color:#222;
+	line-height:45px;
+}
+
+/**anniu**/
+.anniu{
+	width:90%;
+	float:left;
+	padding-left:5%;
+	padding-right:5%;
+	height:65px;
+	margin-top:15px;
+	margin-bottom:20px;
+}
+.anniu .an{
+	width:29%;
+	float:left;
+	height:65px;
+	margin-right:20px;
+}
+.anniu .an .img3{
+	width:100%;
+	float:left;
+	height:65px;
+	border:1px solid #cccccc;
+	border-radius:10px;
+	box-sizing:border-box;
+	-webkit-border-radius:10px;/**IE**/
+	-moz-border-radius:10px;/**Firefox**/
+}
+
+
+/**xq**/
+.xq{
+	width:100%;
+	float:left;
+	height:65px;
+	line-height:65px;
+	font-size:2.0em;
+	background:#fff;
+	border-bottom:1px solid #cccccc;
+	border-top:5px solid #ff6501;
+	text-align:center;
+	margin-top:10px;
+}
+
+.text5{
+	width:94%;
+	float:left;
+	height:auto;
+	padding-left:2.5%;
+	padding-right:3%;
+	margin-top:25px;
+	margin-bottom:15px;
+	font-size:1.8em;
+	color:#222;
+	line-height:35px;
+}
+.text5 .img5{
+	width:100%;
+	float:left;
+	height:auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

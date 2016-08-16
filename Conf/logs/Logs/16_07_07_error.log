@@ -1,0 +1,2 @@
+[ 2016-07-07T11:30:25+08:00 ] ERR: (ThinkException) Accès refusé pour l'utilisateur: 'root'@'@localhost' (mot de passe: NON)
+[ 2016-07-07T11:30:26+08:00 ] ERR: (ThinkException) Accès refusé pour l'utilisateur: 'root'@'@localhost' (mot de passe: NON)

@@ -1,0 +1,10 @@
+[ 2016-08-16T09:44:58+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:delCollection
+[ 2016-08-16T09:45:00+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:delCollection
+[ 2016-08-16T09:45:03+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:delCollection
+[ 2016-08-16T09:47:28+08:00 ] ERR: (ThinkException) Champ 'price7' inconnu dans order clause
+ [ SQL语句 ] : SELECT * FROM `pigcms_product_detail` WHERE ( `pid` = 88 ) ORDER BY price7 asc LIMIT 1  
+[ 2016-08-16T09:49:08+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:delCollection
+[ 2016-08-16T09:49:14+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:delCollection
+[ 2016-08-16T09:51:22+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:delCollection
+[ 2016-08-16T09:52:38+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:login
+[ 2016-08-16T09:54:40+08:00 ] ERR: (ThinkException) _TEMPLATE_NOT_EXIST_[./tpl/Wap/default/Distribution_login.html]

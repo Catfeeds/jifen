@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>我的分店</title>
+    <link href="{wghd::RES}/distri/css/wdfd.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{wghd::RES}/original/css/weui.min.css"></head>
+    <link rel="stylesheet" href="{wghd::RES}/original/css/style.css">
+    <link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.css">
+<body>
+    <div class="container">
+        <div class="title">
+            <div class="title_left">
+                <img <eq name="my.headimgurl" value="">
+                src="{wghd::RES}/distri/images/portrait.jpg"
+                <else/>
+                src="{wghd:$my.headimgurl}"
+            </eq>
+            class="img">
+        </div>
+        <!--title_left-->
+        <div class="title_right">
+            <ul class="title_ul">
+                <li>
+                    昵称:
+                    <eq name="my.headimgurl" value="">
+                        未获取
+                        <else/>
+                        {wghd:$my.nickname}
+                    </eq>
+                </li>
+                <li>关注时间:{wghd:$my.createtime|date='Y-m-d',###}</li>
+            </ul>
+        </div>
+        <!--title_right-->
+        <div class="clear"></div>
+    </div>
+    <!--title-->
+
+    <div class="weui_cells weui_cells_access" style="margin-top: 0;">
+        <a class="weui_cell" href="{wghd::U('Distribution/followOrder')}">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>累计销售</p>
+            </div>
+            <div class="weui_cell_ft">{wghd::sprintf("%.2f",$totalMoney/100)}元</div>
+        </a>
+        <a class="weui_cell" href="#yongjin">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>累计佣金</p>
+            </div>
+            <div class="weui_cell_ft">{wghd::sprintf("%.2f",$totalOfferMoney/100)}元</div>
+        </a>
+
+    </div>
+    <style>
+            .weui_cell_hd img{
+                width:20px;margin-right:5px;display:block
+            }
+        </style>
+    <eq name="Think.get.notBe" value="1">
+        <div style="color:red;text-align:center;line-height:40px;font-size:1.6em">您目前还未获得分店资格，无法提现</div>
+    </eq>
+    <div class="weui_cells_title">
+        分销详情：{wghd::$my['firstNums']+$my['secondNums']+$my['thirdNums']}家
+    </div>
+    <div class="weui_cells weui_cells_access">
+        <a class="weui_cell" href="{wghd::U('Distribution/memberList',array('type'=>
+            'first'))}">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>A分店</p>
+            </div>
+            <div class="weui_cell_ft">{wghd:$my.firstNums}家</div>
+        </a>
+        <a class="weui_cell" href="{wghd::U('Distribution/memberList',array('type'=>
+            'second'))}">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>B分店</p>
+            </div>
+            <div class="weui_cell_ft">{wghd:$my.secondNums}家</div>
+        </a>
+        <a class="weui_cell" href="{wghd::U('Distribution/memberList',array('type'=>
+            'third'))}">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>C分店</p>
+            </div>
+            <div class="weui_cell_ft">{wghd:$my.thirdNums}家</div>
+        </a>
+    </div>
+
+    <div class="weui_cells_title">所属分店总下单:{wghd:$orderNums}次</div>
+    <div class="weui_cells weui_cells_access">
+        <a class="weui_cell" href="javascript:;">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>点击链接</p>
+            </div>
+            <div class="weui_cell_ft">{wghd:$my.clickNums}次</div>
+        </a>
+        <a class="weui_cell" href="{wghd::U('Distribution/followList')}">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>普通A分店</p>
+            </div>
+            <div class="weui_cell_ft">{wghd:$my.followNums}家</div>
+        </a>
+        <a class="weui_cell" href="{wghd::U('Distribution/memberAllList')}">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>正式A分店</p>
+            </div>
+            <div class="weui_cell_ft">{wghd:$distriCount}家</div>
+        </a>
+        <a class="weui_cell" href="{wghd::U('Distribution/followOrder')}">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>分店总共下单</p>
+            </div>
+            <div class="weui_cell_ft">{wghd:$orderNums}次</div>
+        </a>
+    </div>
+
+    <div class="weui_cells_title" id="yongjin">我的佣金:{wghd::sprintf("%.2f",$totalOfferMoney/100)}元</div>
+    <div class="weui_cells">
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>已付款订单佣金</p>
+            </div>
+            <div class="weui_cell_ft">{wghd::sprintf("%.2f",$order['status_1']/100)}元</div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>未收货订单佣金</p>
+            </div>
+            <div class="weui_cell_ft">{wghd::sprintf("%.2f",$order['status_2']/100)}元</div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>已收货点单佣金</p>
+            </div>
+            <div class="weui_cell_ft">{wghd::sprintf("%.2f",$order['status_3']/100)}元</div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>可提现佣金总额</p>
+            </div>
+            <div class="weui_cell_ft">
+                {wghd::sprintf("%.2f",($order['status_4']-$my['alreadyGetMoney'])/100)}元
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>已提现佣金总额</p>
+            </div>
+            <div class="weui_cell_ft">{wghd::sprintf("%.2f",$my['alreadyGetMoney']/100)}元</div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <img src="{wghd::RES}/distri/images/jiant.png" alt=""></div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>已退款订单佣金</p>
+            </div>
+            <div class="weui_cell_ft">{wghd::sprintf("%.2f",$order['status_-1']/100)}元</div>
+        </div>
+    </div>
+
+    <div class="weui_cells weui_cells_access">
+        <a class="weui_cell" href="{wghd::U('Distribution/getMoney')}">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>申请提现</p>
+            </div>
+            <div class="weui_cell_ft">
+                {wghd::sprintf("%.2f",($order['status_4']-$my['alreadyGetMoney'])/100)}元
+            </div>
+        </a>
+    </div>
+</div>
+<include file="Public:footer"/>
+<!--container-->
+</body>
+</html>
