@@ -148,7 +148,6 @@ define(['jquery','ajaxfileupload'],function($,aimg){
 				fileElementId: 'shoplogo',
 				dataType: 'json',
 				success: function(data) {
-					console.log(data);
 					loading.hide();
 					if (data.status == 1) {
 						$("#headimg").attr("src", data.data);

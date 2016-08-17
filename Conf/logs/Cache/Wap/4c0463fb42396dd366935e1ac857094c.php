@@ -15,16 +15,17 @@
 
 	<div class='container'>
 		<div class="per_top_all">
-			<div class="per_top_img"><img src="<?php echo ($account["headimgurl"]); ?>"></div>
+			<div class="per_top_img">
+				<img src="<?php echo ($account["headimgurl"]); ?>"></div>
 			<div class="per_top_explain">
 				<div class="per_top_name">昵称：<?php echo ($account["username"]); ?></div>
-				<a href="<?php echo U('Distribution/tpupRecord',array('type'=> 1));?>" class='coad_bnfo_lage'>
+				<a href="<?php echo U('Distribution/tpupRecord',array('type'=> 1));?>" class='coad_lnfo_bage'>
 					<div class="per_top_see">充值记录</div>
 				</a>
-				<?php if(!empty($hasrefund)): ?><a href="<?php echo U('Distribution/topupRagree',array('type'=> 1));?>" class='coad_bnfo_lage'>
+				<?php if(!empty($hasrefund)): ?><a href="<?php echo U('Distribution/topupRagree',array('type'=> 1));?>" class='coad_lnfo_bage'>
 						<div class="per_top_see" style="">下级退款处理</div>
 					</a><?php endif; ?>
-				<?php if(!empty($upgradeefund)): ?><a href="<?php echo U('Distribution/topupRagree',array('type'=> 2));?>" class='coad_bnfo_lage'>
+				<?php if(!empty($upgradeefund)): ?><a href="<?php echo U('Distribution/topupRagree',array('type'=> 2));?>" class='coad_lnfo_bage'>
 						<div class="per_top_see" style="">下级升级退款</div>
 					</a><?php endif; ?>
 			</div>

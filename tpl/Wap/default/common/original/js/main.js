@@ -1,28 +1,34 @@
 requirejs.config({
 	paths:{
         "jquery":'jquery-1.11.1.min',
+        "velocity":"velocity.min",
+        "velocity-ui":"velocity.ui.min",
 	},
-	// shim: {
- //        "notification": {
- //            deps: [ "jquery" ]
- //        },
- //    },
+	shim:{
+        "velocity":{
+            deps:["jquery"]
+        },
+        "velocity-ui":{
+            deps:["velocity"]
+        }
+    },
 	urlArgs:"bust=" + (new Date()).getTime(),
 });
-requirejs(['jquery','personalInfoEdit','address','orders','common'],function($,pedit,address,orders){
+requirejs(['jquery','personalInfoEdit','address','orders','common'],function($,pedit,address,orders,common){
     var address_wrap = $('#address_list_wrap');
+    var common = new common.Common();
     //个人信息修改
     $(document).on('click','.info_edit',function(e){
-        loadPage(e,$(this),function(){
+        common.loadPage(e,$(this),function(){
             new pedit.PInfoEdit({});
-            editShow();
+            common.editShow();
         })
     })
     //地址列表
     $(document).on('click','#address_list_btn',function(e){
-        loadPage(e,$(this),function(){
+        common.loadPage(e,$(this),function(){
             new address.Address({});
-            editShow();
+            common.editShow();
         })
     })
 });

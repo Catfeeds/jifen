@@ -15,22 +15,23 @@
 
 	<div class='container'>
 		<div class="per_top_all">
-			<div class="per_top_img"><img src="{wghd:$account.headimgurl}"></div>
+			<div class="per_top_img">
+				<img src="{wghd:$account.headimgurl}"></div>
 			<div class="per_top_explain">
 				<div class="per_top_name">昵称：{wghd:$account.username}</div>
 				<a href="{wghd::U('Distribution/tpupRecord',array('type'=>
-							1))}" class='coad_bnfo_lage'>
+					1))}" class='coad_lnfo_bage'>
 					<div class="per_top_see">充值记录</div>
 				</a>
 				<notempty name="hasrefund">
 					<a href="{wghd::U('Distribution/topupRagree',array('type'=>
-								1))}" class='coad_bnfo_lage'>
+						1))}" class='coad_lnfo_bage'>
 						<div class="per_top_see" style="">下级退款处理</div>
 					</a>
 				</notempty>
 				<notempty name="upgradeefund">
 					<a href="{wghd::U('Distribution/topupRagree',array('type'=>
-								2))}" class='coad_bnfo_lage'>
+						2))}" class='coad_lnfo_bage'>
 						<div class="per_top_see" style="">下级升级退款</div>
 					</a>
 				</notempty>

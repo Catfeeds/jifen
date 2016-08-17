@@ -1,0 +1,1 @@
+define(['jquery','velocity','velocity-ui'],function($,Velocity))

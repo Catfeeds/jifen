@@ -1,6 +1,8 @@
-define(['jquery','city-picker.min'],function($){
+define(['jquery','common','city-picker.min'],function($,common){
 	var del_id;
+	var common2
 	function Address(){
+		common2 = new common.Common();
 		this._inite();
 	}
 	Address.prototype._inite=function(){
@@ -63,7 +65,7 @@ define(['jquery','city-picker.min'],function($){
 			str = $("<div class='shouhuo_name'>"+data.name+" "+data.tele+"</div><div class='shouhuo_dizhi iconfont'>"+data.province+data.city+data.county+data.address+"</div><div class='more'>&gt;</div>");
 			$('#myaddress').html(str);
 			checkAdd = 1;
-			editHide();
+			common2.editHide();
 
 			//安卓卡屏BUG
 			var u = navigator.userAgent;
@@ -77,12 +79,8 @@ define(['jquery','city-picker.min'],function($){
 	//显示编辑框
 	Address.prototype._showEditWrap = function(){
 		$(document).on('click',".add_edit_btn",function(e){
-			// var id = $(this).parents(".address").data('id');
-			// $('.show_wrap2').load(getAction('Distribution','editAddress')+"&id="+id,function(){
-			// 	editShow();
-			// });
-			loadPage(e,$(this),function(){
-				editShow();
+			common2.loadPage(e,$(this),function(){
+				common2.editShow();
 				$("#start").cityPicker({
 					  title: "选择出发地"
 					});
@@ -120,9 +118,9 @@ define(['jquery','city-picker.min'],function($){
 					success:function(data){
 						$("input[name='__hash__']").val(data.info);
 						if(data.status == 1){
-							injection('',getAction('Distribution','myAddress')+' .container',function(){
+							common2.injection('',getAction('Distribution','myAddress')+' .container',function(){
 								floatNotify.simple('添加成功');
-								editHide();
+								common2.editHide();
 							})
 						}else{
 							floatNotify.simple(data.data);
@@ -136,21 +134,13 @@ define(['jquery','city-picker.min'],function($){
 	//新增地址
 	Address.prototype._addNewAddress = function(){
 		$(document).on('click','#add_new_address',function(e){
-			load._show();
 			clearInput();
-			loadPage(e,$(this),function(){
-				editShow();
+			common2.loadPage(e,$(this),function(){
+				common2.editShow();
 				$("#start").cityPicker({
 					  title: "选择出发地"
 					});
 			})
-			// e.preventDefault();
-			// injection($('.show_wrap2'),getAction('Distribution','editAddress') + ' .container',function(){
-			// 	editShow();
-			// 	$("#start").cityPicker({
-			// 		  title: "选择出发地"
-			// 		});	
-			// },e)
 		})
 	}
 	//清除保存信息
@@ -165,7 +155,7 @@ define(['jquery','city-picker.min'],function($){
 	//关闭编辑框
 	Address.prototype._closeEditWrap = function(){
 		$(document).on('click','.close_address_edit_wrap',function(){
-			editHide();
+			common2.editHide();
 		})
 	}
 	//删除地址

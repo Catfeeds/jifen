@@ -321,9 +321,9 @@ class DistributionAction extends WapAction{
 		//设置一周修改一次
 		$mytime=basename($this->my['headimgurl'],".jpg");
 		$checktime=time()-86400*7;
-		if($mytime>$checktime){
-			$this->ajaxReturn("","",3);
-		}
+		// if($mytime>$checktime){
+		// 	$this->ajaxReturn("","",3);
+		// }
 
 		import("@.ORG.UploadFile");
 		$time=time();
@@ -506,6 +506,19 @@ class DistributionAction extends WapAction{
 		// if($hasrefund){
 		// 	$this->assign('hasrefund',$hasrefund);
 		// }
+		$this->display();
+	}
+	//充值升级记录
+	public function tpupRecord(){
+		$db = D('LevelOrders');
+		$type = $this->_get('type');
+		$condition = array(
+			'aid' => $this->account['id'],
+			'type' => $type,
+			'paid' => 1,
+		);
+		$records = $db->where($condition)->relation(true)->select();
+		$this->assign('list',$records);
 		$this->display();
 	}
 	//充值AJAX判断

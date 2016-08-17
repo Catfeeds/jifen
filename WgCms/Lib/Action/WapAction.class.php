@@ -260,6 +260,27 @@ class WapAction extends BaseAction
 			$this->assign('shareScript', $this->shareScript);
 		}
     }
+    //发送信息拼接订单样式
+    //type
+    //1:下单
+    //2：退款
+    public function sentMessageFormat($order_id,$type = 1){
+    	$order = M('Product_cart')->where(array('id'=>$order_id))->find();
+    	$upaccount = D('Account')->where(array('id'=>$order['bindaid']))->find();
+    	$downaccount = D('Account')->where(array('id'=>$order['aid']))->find();
+    	$ordermoney = $order['gold'] == 0 ? $order['price'].'元' : $order['gold'].'金币';
+    	$getmoney = $order['gold'] == 0 ? $order['price'].'元' : $order['gold'].'元';
+    	switch ($type) {
+    		case '1':
+    			$str = '亲。您的下级账号'.$downaccount['nickname'].'下单了，订单详情:\n订单号：'.$order['orderid'].'\n订单金额：'.$ordermoney.'\n获得金额：'.$getmoney.'\n时间：'.date('Y/m/d H:i:s',time()).'\n柒彩汇微信客服：j6464903';
+    			break;
+    		
+    		case '2':
+    			$str = '亲,'.$upaccount['nickname'].'。您的下级账号'.$downaccount['nickname'].'申请退款，订单详情:\n订单号：'.$order['orderid'].'\n订单金额：'.$ordermoney.'\n损失金额：'.$getmoney.'\n时间：'.date('Y/m/d H:i:s',time()).'\n柒彩汇微信客服：j6464903';
+    			break;
+    	}
+    	return $str;
+    }
     //向上级发送信息
 	public function sendupMessage($aid,$title,$content,$url){
 		$bindm = D('Account')->where(array('id'=>$aid))->relation(true)->find();
