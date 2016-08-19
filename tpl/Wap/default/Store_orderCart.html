@@ -1,205 +1,258 @@
-<include file="Store:header"/>
-<!-- 线路分类控制器 -->
-<form method="post" action="{wghd::U('Store/ordersave',array('token'=>$token))}" id="FromID">
-<div>
-	<div class="m-ck-module">
-	<h1>收货信息</h1>
-	<ul>
-		<li class="addr-info">
-			<ul class="addr-addnew-form addr-edit-form" id="addr-edit-form" style="display: none1;">
-				<li>
-					<label>收货人姓名：</label><span><input name="truename" id="truename" value="{wghd:$fans.name}" type="text" placeholder="输入收货人姓名"></span>
-					<label>手机：</label><span><input name="tel" id="tel" value="{wghd:$fans.tele}" type="text" placeholder="输入您的收货电话"></span>
-					<label>所属区域：</label><span><input name="province" id="province" value="{wghd:$fans.province}" type="text" style="width:60px;">&nbsp;省（直辖市）<input name="city" id="city" value="{wghd:$fans.city}" type="text" style="width:80px;">&nbsp;市&nbsp;<input name="county" id="county" value="{wghd:$fans.county}" type="text" style="width:100px;">&nbsp;县（区）</span>
-					<label>详细地址：</label><span><input name="address" id="address" value="{wghd:$fans.address}" type="text" placeholder="输入您的收货地址"></span>
-					<label>备注信息：</label><span><input name="remark" id="remark" value="{wghd:$fans.remark}" type="text" placeholder="输入您的备注信息"></span>
-				</li>
-			</ul>
-			<label>联系方式保存到用户库</label>
-			<input type="hidden" value="1" name="saveinfo" id="saveinfo" style="width: 16px;" checked="true"/>
-		</li>
-	</ul>
-	</div>
-	<if condition="$alipayConfig['open'] eq 1 OR $setting['paymode'] eq 1 OR $fans['balance'] gt 0">
-	<div class="m-ck-module">
-		<h1>付款方式</h1>
-		<ul id="payment_mode" class="rd">
-			<li>
-				<if condition="$alipayConfig['open'] eq 1">
-				<label><input name="paymode" value="1" type="radio" checked>在线支付</label>
-				</if>
-				<!-- <label><input name="paymode" value="2" type="radio">财付通</label> -->
-				<if condition="$setting['paymode'] eq 1">
-				<label><input name="paymode" value="3" type="radio">货到付款</label>
-				</if>
-				<if condition="$fans['balance'] gt 0">
-				<label><input name="paymode" value="4" type="radio">会员卡支付</label>
-				</if>
-			</li>    
-		</ul>
-	</div>
-	</if>
-	<!-- <div class="m-ck-module">
-		<h1>送货方式</h1>
-		<ul id="shipping" class="rd"><input id="delivery" type="hidden" name="delivery" value="">
-		<li shipping="15"><label><input name="dt_id" value="535" type="radio">普通快递<b class="c_red">0元</b></label></li></ul>
-	</div> -->
-<div class="m-ck-module">
-<h1>商品清单</h1>
-<ul>
-<ul class="m-cart-list">
-<volist name="products" id="p">
-	<if condition="empty($p['detail']) neq true">
-		<volist name="p['detail']" id="row">
-			<li>
-				<span class="pic"><img src="{wghd:$p.logourl}" width="75" height="75"></span>
-				<span class="con">
-				<i class="t">{wghd:$p.name}</i>
-				<i class="d"><if condition="empty($p['formatTitle']) neq true">{wghd:$p.formatTitle}：{wghd:$row.formatName}</if> <if condition="empty($p['colorTitle']) neq true">，{wghd:$p.colorTitle}：{wghd:$row.colorName}</if></i>
-				<p><label>数量：</label>{wghd:$row.count}　<label>销售价：</label><span class="price">￥{wghd:$row.price}</span></p>
-				</span>
-			</li>
-		</volist>
-	<else/>
-		<li>
-			<span class="pic"><img src="{wghd:$p.logourl}" width="75" height="75"></span>
-			<span class="con">
-			<i class="t">{wghd:$p.name}</i>
-			<p><label>数量：</label>{wghd:$p.count}　<label>销售价：</label><span class="price">￥{wghd:$p.price}</span></p>
-			</span>
-		</li>
-	</if>
-</volist>
-</ul>
-</ul>
-</div>
-<div class="m-cart-toal m-checkout-toal">
-<p id="price_total" class="check">商品总数：<b>{wghd:$totalCount}</b>　件<br>
-商品原总价：<b>{wghd:$totalFee}</b>　元<br>
-运费：<b>{wghd:$mailprice}</b>　元<br>
-<b>全场九二折</b><br>
-<!-- 优惠金额：0元<br> -->
-您共需支付：<b id="totalmoney"><php>{echo ($totalFee*0.92 + $mailprice);}</php></b>　元</p>
-<if condition="($setting['score'] gt 0) AND ($fans['total_score'] gt 0)">
-<p class="check">您的可用积分：<b>{wghd:$fans['total_score']}</b>　分<br/>
-使用积分兑换：<input type="text" name="score" style="border: 1px solid #cfcfcf;margin: 0 -1px;font-size: 16px;display: inline-block;text-align: center;height: 22px;width: 50px;border-radius: 0;background: -webkit-gradient(linear, 0 0, 0 100%, from(#e5e5e5),color-stop(0.3, #fff),to(#fff));-webkit-appearance: none;color: #999;" id="score"/>
-<span></span>
-</p>
-</if>
-<div id="show_msg" class="tip_blue"></div>
-<p class="act"><a id="sub_order" href="javascript:;" class="checkout">确认，提交订单</a></p>
-</div>
-</form>
-</div>
-</form>
-<script>
-var scale = "{wghd:$setting['score']}";
-var totalscore = "{wghd:$fans['total_score']}";
-$(document).ready(function(){
-	var total = parseInt($("#totalmoney").html());
-	$("#score").keyup(function(){
-		var num = parseInt($(this).val());
-		if (isNaN(num)) {
-			num = 0;
-		}
-		if (num > totalscore) {
-			$(this).val(totalscore);
-			return floatNotify.simple('您填写的积分超过了您的可用积分');
-			return false;
-		}
-		var t = total - num/scale;
-		if (t <= 0) {
-			$(this).val(total * scale);
-			t = 0;
-		}
-		$("#totalmoney").html(t);
+<!DOCTYPE html>
+<html lang="en" style="font-size: 20px;">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<title>下单结算</title>
+	<link rel="stylesheet" href="{wghd::RES}/address/css/address.css">
+	<link rel="stylesheet" href="{wghd::RES}/address/css/iconfont.css">
+    <link rel="stylesheet" href="{wghd::RES}/original/css/style.css">
+	<link rel="stylesheet" href="{wghd::RES}/original/css/weui.min.css">
+	<link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.min2.css">
+
+	<script type="text/javascript" src="{wghd::RES}/js/jquery-1.11.1.min.js"></script>
+
+	<script src="{wghd::RES}/original/js/notification.js" type="text/javascript" charset="utf-8"></script>
+	<link type="text/css" rel="stylesheet" href="{wghd::RES}/css/store/css/style_touch11.css">
+	<script type="text/javascript">
+var w,h,className;
+function getSrceenWH(){
+	w = $(window).width();
+	h = $(window).height();
+	$('#dialogBg').width(w).height(h);
+}
+
+window.onresize = function(){  
+	getSrceenWH();
+}  
+$(window).resize();  
+
+$(function(){
+	getSrceenWH();
+	
+	//显示弹框
+	$('.box a').click(function(){
+		className = $(this).attr('class');
+		$('#dialogBg').fadeIn(300);
+		$('#dialog').removeAttr('class').addClass('animated '+className+'').fadeIn();
 	});
-	$("#sub_order").click(function(){
-		var userName=$('#truename').val();
-		if($.trim(userName) == ""){
-			return floatNotify.simple('请填写姓名');
-			return false;
-		}
-		var userPhone = $("#tel").val()
-		if ($.trim(userPhone) == "") {
-			return floatNotify.simple('请填写您的手机号码');
-			return false;
-		}
-		if (userPhone.length != 11) {
-			return floatNotify.simple('请填写11位手机号码');
-			return false;
-		}
-		/*var patrn = /^(1(([35][0-9])|(47)|(85)|[8][01256789]))\d{8}$/;
-		if (!patrn.exec($.trim(userPhone))) {
-			return floatNotify.simple('手机号格式错误');
-			return false;
-		}*/
-		/*var classid = $('#classid').val();
-		var flag = 0;
-		$('#typeSpan select').each(function(){
-			if($(this).val()==-1){
-				flag = 1;
-			}
+	
+	//关闭弹窗
+	$('.claseDialogBtn').click(function(){
+		$('#dialogBg').fadeOut(300,function(){
+			$('#dialog').addClass('bounceOutUp').fadeOut();
 		});
-		if(flag==1){
-			return floatNotify.simple('请选择所属地区');
-			return false;
-		}*/
-		var province = $("#province").val();
-		if ($.trim(province) == "") {
-			return floatNotify.simple('请填写省（直辖市）');
-			return false;
-		}
-		var city = $("#city").val();
-		if ($.trim(city) == "") {
-			return floatNotify.simple('请填写市');
-			return false;
-		}
-		var county = $("#county").val();
-		if ($.trim(county) == "") {
-			return floatNotify.simple('请填写县（区）');
-			return false;
-		}
-		var address = $("#address").val();
-		if ($.trim(address) == "") {
-			return floatNotify.simple('请填写您的详细地址');
-			return false;
-		}
-		var remark = $("#remark").val()
-		$("#FromID").submit();
-		return false;
-		var saveinfo = $("#saveinfo").attr('checked') == 'checked' ? 1 : 0;
-		var data = {
-				province:province,
-				city:city,
-				county:county,
-				truename:userName,
-				tel:userPhone,
-				address:address,
-				remark:remark,
-				saveinfo:saveinfo,
-				token:"{wghd:$token}",
-		}
-		
-		$("#sub_order").html('提交中...').unbind();
-		$.get('index.php?g=Wap&m=Store&a=ordersave', data, function(response){
-			if (response.error_code == false) {
-				if (response.isopen == 1) {
-					location.href = "{wghd::U('Alipay/pay',array('token'=>$token,'success'=>1,'from'=> 'Store'))}" + '&orderName=' + response.orderName + '&single_orderid=' + response.orderid + '&price=' + response.price;
-				} else {
-					location.href = "{wghd::U('Store/my',array('token'=>$token,'success'=>1))}";
-				}
-			} else {
-				$("#sub_order").html('确认，提交订单').bind('click');
-				return floatNotify.simple(response.msg);
-			}
-			
-		}, 'json');
-		return true;
 	});
 });
 </script>
+</head>
+<body id="scnhtm5" style="position: relative;">
+	<div class="index_wrap">
+		<div id="shouhuo_add">
+			<a href="{wghd::U('Distribution/myAddress')}" id="address_list_btn">
+				<div class="shouhuo_add1" id="myaddress"></div>
+			</a>
+		</div>
+
+		<div class="shouhuo_all">
+			<div class="line"></div>
+
+			<volist name="products" id="p">
+				<if condition="empty($p['detail']) neq true">
+					<div class="shouhuo_all1">
+						<div class="shouhuo_img">
+							<img src="{wghd:$p.logourl}"/>
+						</div>
+						<div class="shouhuo_pro">
+							<div class="shouhuo_pro_name">{wghd:$p.name}</div>
+							<volist name="p['detail']" id="row">
+								<if condition="empty($p['formatTitle']) neq true">
+									<div class="shouhuo_pro_name">{wghd:$p.formatTitle}：{wghd:$row.formatName}</div>
+								</if>
+								<if condition="empty($p['colorTitle']) neq true">
+									<div class="shouhuo_pro_name">{wghd:$p.colorTitle}：{wghd:$row.colorName}</div>
+								</if>
+							</volist>
+						</div>
+						<div class="shouhuo_pro1">
+							<neq name="p.price" value="0">
+							<div class="shouhuo_pro_price">￥{wghd:$p.detail.0.price}</div>
+						</neq>
+							<div class="shouhuo_pro_price">x{wghd:$p.detail.0.count}</div>
+						</div>
+					</div>
+					<else/>
+					<div class="shouhuo_all1">
+						<div class="shouhuo_img">
+							<img src="{wghd:$p.logourl}"/>
+						</div>
+						<div class="shouhuo_pro">
+							<div class="shouhuo_pro_name">{wghd:$p.name}</div>
+						</div>
+						<div class="shouhuo_pro1">
+							<div class="shouhuo_pro_price">￥{wghd:$p.price}</div>
+							<div class="shouhuo_pro_price">x{wghd:$p.count}</div>
+						</div>
+					</div>
+				</if>
+			</volist>
+
+			<div class="line"></div>
+			<div class="shouhuo_all1">
+				<div class="shouhuo_yunfei">运费</div>
+				<div class="shouhuo_yunfei1">
+					<eq name="mailprice" value="0">
+						包邮
+						<else/>
+						{wghd:$mailprice}
+					</eq>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="line"></div>
+			<div class="shouhuo_all1">
+				<div class="shouhuo_yunfei">合计</div>
+				<div class="shouhuo_yunfei1">￥{wghd:$totalFee+$mailprice}</div>
+				<div class="clear"></div>
+			</div>
+			<div class="line"></div>
+		</div>
+		<input type="hidden" id="paymode" name="paymode" <if condition="($account['lid'] lt 4) AND ($account['lid'] neq 0)">value="2"<else/>value="1"</if>>
+		<div class="pay">
+			<div class="weui_cells_title" style="padding-left: 2%;">支付方式</div>
+			<div class="weui_cells weui_cells_radio">
+			  <if condition="($account.lid gt 3) OR ($account.lid eq 0)">
+			  <label class="weui_cell weui_check_label choose_paymode" data-pay="1" for="x11">
+			    <div class="weui_cell_bd weui_cell_primary">
+			      <p><label class="payway">微信支付</label></p>
+			    </div>
+			    <div class="weui_cell_ft">
+			      <input type="radio" class="weui_check" name="radio1" id="x11"  checked="checked">
+			      <span class="weui_icon_checked"></span>
+			    </div>
+			  </label>
+			</if>
+			<empty name="lid">
+				  <label class="weui_cell weui_check_label choose_paymode" data-pay="2" for="x12">
+				    <div class="weui_cell_bd weui_cell_primary">
+				      <p><label class="payway">积分支付</label>
+				      	<empty name="account">
+				      		<label>尚未登陆</label>
+				      		<else/>
+				      		<label style="color:#f59b10;">({wghd:$green|default=0})</label>
+				      	</empty>
+				      </p>
+				    </div>
+				    <div class="weui_cell_ft">
+				    <input type="radio" name="radio1" class="weui_check" id="x12" <if condition="($account['lid'] lt 4) AND ($account['lid'] neq 0)">checked="checked"</if>>
+				      <span class="weui_icon_checked"></span>
+				    </div>
+				  </label>
+			</empty>
+			</div>
+		</div>
+		<script>
+			(function($){
+				$('.choose_paymode').on('click',function(){
+					var paymode = $(this).data('pay');
+					var payname = $(this).find('.payway').text();
+					$('.pay_fangshi').text(payname);
+					$('#paymode').val(paymode);
+				})
+			})($)
+		</script>
+
+		<div class="remark_wrap" style="margin-top: 12px;">
+			<textarea style="border: none; width: 100%;height: 100px;border-bottom: 1px solid #e6e4e4;padding: 2%;" name="remark" id="remark" placeholder="备注信息"></textarea>
+		</div>
+
+		<div class="go_pay">
+			<div class="pay_left">
+				<div class="pay_heji">
+					合计:
+					<span>￥{wghd:$totalFee+$mailprice}</span>
+				</div>
+				<div class="pay_fangshi">微信支付</div>
+			</div>
+			<div class="pay_right" id="sub_order">去支付</div>
+		</div>
+	</div>
+	<empty name="account">
+		<input type="hidden" id="noaccount" value="1">
+	</empty>
 </body>
+	<script>
+	//获取默认地址
+	var add_wrap = $("#myaddress");
+	var checkAdd = 0;
+	$.ajax({
+		url:"{wghd::U('Distribution/getMyAddress',array('token' => $token, 'wecha_id'=>$wecha_id))}",
+		dataType:'json',
+		success:function(data){
+			if(data.status==1){
+				checkAdd=1;
+			}
+			add_wrap.html(data.data);
+		}
+	});
+	$("#sub_order").click(function(){
+		if($('#noaccount').val() == 1){
+			location.href = "{wghd::U('Distribution/login')}";
+			return;
+		}
+		var paymode = $('#paymode').val();
+		if(checkAdd !=1){
+			return floatNotify.simple('请选择地址');
+			return false;
+		}
+		if(paymode != 1){
+			//判断积分余额
+			$.ajax({
+				url:"{wghd::U('Store/orderCartJudge')}",
+				data:{money:{wghd:$totalFee+$mailprice}},
+				dataType:'json',
+				success:function(data){
+					if(data.status == 1){
+						confirm = floatNotify.confirm('确认使用积分支付吗？',"",
+							function(t,n){
+								if(n==true){
+						            var reamrk = $('#remark').val();
+									location.href = "{wghd::U('Store/ordersave',array('token' => $token, 'wecha_id'=>$wecha_id, 'orderid'=>$orderid,'lid'=>$lid,'normid'=>$normid,'remark'=>'"+reamrk+"','paymode'=>'"+paymode+"'))}";
+								}
+							this.hide();
+						}),
+						confirm.show();
+					}else{
+						floatNotify.simple(data.info);
+					}
+				}
+			});
+		}else{
+			var reamrk = $('#remark').val();
+			location.href = "{wghd::U('Store/ordersave',array('token' => $token, 'wecha_id'=>$wecha_id, 'orderid'=>$orderid,'lid'=>$lid,'normid'=>$normid,'remark'=>'"+reamrk+"','paymode'=>'"+paymode+"'))}";
+		}
+		// if(checkAdd == 1 && paymode!=1){
+		// 	//判断积分余额
+		// 	$.ajax({
+		// 		url:"{wghd::U('Store/orderCartJudge')}",
+		// 		data:{money:{wghd:$totalFee+$mailprice}},
+		// 		dataType:'json',
+		// 		success:function(data){
+		// 			if(data.status == 1){
+		// 	            var reamrk = $('#remark').val();
+		// 				location.href = "{wghd::U('Store/ordersave',array('token' => $token, 'wecha_id'=>$wecha_id, 'orderid'=>$orderid,'lid'=>$lid,'remark'=>'"+reamrk+"'))}";
+		// 			}else{
+		// 				floatNotify.simple(data.info);
+		// 			}
+		// 		}
+		// 	});
+		// }else{
+		// 	return floatNotify.simple('请选择地址');
+		// 	return false;
+		// }
+	});
+</script>
+
 <script>
 function onBridgeReady(){
  WeixinJSBridge.call('hideOptionMenu');
@@ -216,17 +269,25 @@ if (typeof WeixinJSBridge == "undefined"){
     onBridgeReady();
 }
 </script>
-<script type="text/javascript">
+	<script type="text/javascript">
 window.shareData = {  
             "moduleName":"Store",
             "moduleID":"0",
-            "imgUrl": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $token))}", 
-            "timeLineLink": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $token))}",
-            "sendFriendLink": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $token))}",
-            "weiboLink": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $token))}",
+            "imgUrl": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $_GET['token']))}", 
+            "timeLineLink": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $_GET['token']))}",
+            "sendFriendLink": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $_GET['token']))}",
+            "weiboLink": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $_GET['token']))}",
             "tTitle": "{wghd:$metaTitle}",
             "tContent": "{wghd:$metaTitle}"
         };
 </script>
-{wghd:$shareScript}
+	{wghd:$shareScript}
 </html>
+<!-- 加载信息框 -->
+<script type="text/javascript" src="{wghd::RES}/original/js/require.js" data-main="{wghd::RES}/original/js/main"></script>
+<script>
+    function getAction(module,action){
+    	var href= "http://{wghd:$url_par}?g=Wap&m="+module+"&a="+action;
+        return href;
+    }
+</script>

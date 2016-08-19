@@ -13,7 +13,8 @@
 	<link rel="stylesheet" href="{wghd::RES}/original/css/weui.min.css">
 	<link rel="stylesheet" href="{wghd::RES}/original/css/style.css">
 	<link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.min.css"></head>
-<body>
+    <link rel="stylesheet" href="{wghd::RES}/original/others2/main.css">
+<body style="position: relative;" id="scnhtm5">
 	<style>
 		html,body{
 			height: 100%;
@@ -29,55 +30,76 @@
 			<div class="weui-col-20 store_my_col_20 store_my_col_20_extend <eq name="Think.request.status" value="3">store_my_col_choose</eq>">已完成</div>
 		</div>
 		<div id="my_orders_content">
-			<volist id="list" name="orders">
+			<volist id="o" name="orders">
 				<div class="weui_cells" style="margin-top: 0; margin-bottom: 10px;">
-					<div class="weui_cell" style="padding: 5px;">
-						<div class="weui_cell_hd">
-							<img style="width: 70px; display: block;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block"></div>
-						<div class="weui_cell_bd weui_cell_primary">
-							<p style="font-size: 16px; line-height: 25px; text-indent: 5px;">产品名</p>
-							<p style="font-size: 16px; line-height: 25px; text-indent: 5px;">产品属性</p>
+					<volist name="o['productInfo']" id="row">
+						<div class="weui_cell" style="padding: 5px;">
+							<div class="weui_cell_hd">
+								<img style="width: 70px; display: block;" src="{wghd:$row.logourl}" alt="" style="width:20px;margin-right:5px;display:block"></div>
+							<div class="weui_cell_bd weui_cell_primary">
+								<p style="font-size: 16px; line-height: 25px; text-indent: 5px;">{wghd:$row.name}</p>
+								<notempty name="row['detail']">
+									<p style="font-size: 16px; line-height: 25px; text-indent: 5px;">
+										{wghd:$row.formatTitle}：{wghd:$row['detail'][0]['formatName']}
+									</p>
+									<p style="font-size: 16px; line-height: 25px; text-indent: 5px;">{wghd:$row.colorTitle}：{wghd:$row['detail'][0]['colorName']}</p>
+									<else/>								
+									<p style="font-size: 16px; line-height: 25px; text-indent: 5px;">默认属性</p>
+								</notempty>
+							</div>
+							<div class="weui_cell_ft">
+								<p>
+									<notempty name="row['detail']">
+		                            {wghd::sprintf("%.2f",$row['detail'][0]['showprice'])}
+		                            <else/>
+		                            {wghd::sprintf("%.2f",$row['showprice'])}
+		                            </notempty>
+								</p>
+								<p>×
+									<notempty name="row['detail']">
+		                            {wghd:$row['detail'][0]['count']}
+		                            <else/>
+		                            {wghd:$row['count']}
+		                            </notempty>
+								</p>
+							</div>
 						</div>
-						<div class="weui_cell_ft">
-							<p>10.00</p>
-							<p>×1</p>
-						</div>
-					</div>
+					</volist>
 					<div class="weui_cell" style="padding: 10px;">
 						<div class="weui_cell_bd weui_cell_primary">
 							<p style="font-size: 14px;">
 								共
-								<label>1</label>
+								<label>{wghd:$o['total']}</label>
 								件商品
 							</p>
 						</div>
 						<div class="weui_cell_ft" style="font-size: 14px;">
 							合计：￥
-							<lable>142.00</lable>
+							<lable><eq name="o.price" value="0">{wghd:$o['gold']}<else/>{wghd:$o['price']}</eq></lable>
 						</div>
 					</div>
 					<div class="weui_cell">
 						<div class="weui_cell_bd weui_cell_primary"></div>
 						<div class="weui_cell_ft">
-							<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary" style="font-size: 16px;">按钮</a>
-							<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default" style='margin-top: 0; font-size: 16px;'>按钮</a>
+							<if condition ="($o.paid eq 0) AND ($o.returnMoney eq 0)">
+								<a href="{wghd::U('Store/payNow',array('id'=>$o['id']))}" data-id="{wghd:$o.id}" class="weui_btn weui_btn_mini weui_btn_primary place_order" style="font-size: 16px;">立即支付</a>
+							</if>
+							<if condition="($o.sent eq 1) AND ($o.receive eq 0)">
+								<a href="javascript:;" data-id="{wghd:$o.id}" class="weui_btn weui_btn_mini weui_btn_primary get_product" style="font-size: 16px;">确认收货</a>
+							</if>
+							<a href="{wghd::U('Store/orderDetails',array('id'=>$o['orderid']))}" class="weui_btn weui_btn_mini weui_btn_primary coad_bnfo_lage" style="font-size: 16px;">订单详情</a>
 						</div>
 					</div>
 				</div>
 			</volist>
 		</div>
 	</div>
+	<include file="Public:footer"/>
 </body>
 </html>
+<script type="text/javascript" src="{wghd::RES}/original/js/require.js" data-main="{wghd::RES}/original/js/main"></script>
 <script>
-	(function($){
-		$(document).on('click','#orders_head div',function(){
-			var obj = $(this);
-			var status = parseInt(obj.index('#orders_head div'))-1;
-			var href = "index.php?g=Wap&m=Store&a=my&status="+status+' #my_orders_content';
-			$('#my_orders_content').load(href,function(){
-				obj.addClass('store_my_col_choose').siblings().removeClass('store_my_col_choose');
-			});
-		})
-	})($)
+    function getAction(module,action){
+        return "http://{wghd:$url_par}?g=Wap&m="+module+"&a="+action;
+    }
 </script>

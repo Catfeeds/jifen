@@ -30,14 +30,14 @@
     <div class="content_wrap index_wrap">
         <div class="dis_head">
             <img id="index_headimgurl" src="<?php echo ($account["headimgurl"]); ?>">
-            <p id="index_nickname"><?php echo ($account["petname"]); ?></p>
-            <a href="<?php echo U('Distribution/upgrade');?>" class='coad_lnfo_bage'>
+            <p id="index_nickname"><?php echo (($account["truename"])?($account["truename"]):"未填写"); ?></p>
+            <!-- <a href="<?php echo U('Distribution/upgrade');?>" class='coad_lnfo_bage'>
               <?php if(($account['lid'] != 0) AND ($account['lid'] > 1)): ?><p style='font-size: 1rem;'>会员等级:<?php echo ($account["level"]["name"]); ?>
                   <?php if(($account["lid"]) > "2"): ?><label style='color:#2ec357;'>(点击升级)</label><?php endif; ?>
                 </p>
                 <?php else: ?>
                 <?php if(($account["lid"]) == "0"): ?><p style='font-size: 1rem;'><label style='color:#2ec357;'>(点击成为会员)</label></p><?php endif; endif; ?>
-            </a>
+            </a> -->
         </div>
         <div class="weui_cells weui_cells_extend weui_cells_access">
             <a class="weui_cell weui_cell_extend coad_lnfo_bage" href="<?php echo U('Distribution/topUp');?>">

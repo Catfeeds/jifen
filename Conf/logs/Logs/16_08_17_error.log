@@ -1,3 +1,7 @@
 [ 2016-08-17T10:18:18+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:tpupRecord
 [ 2016-08-17T10:19:26+08:00 ] ERR: (ThinkException) Model:relation_METHOD_NOT_EXIST_
 [ 2016-08-17T10:20:37+08:00 ] ERR: (ThinkException) _TEMPLATE_NOT_EXIST_[./tpl/Wap/default/Distribution_tpupRecord.html]
+[ 2016-08-17T15:26:29+08:00 ] ERR: (ThinkException) Erreur de syntaxe près de 'LIMIT 1' à la ligne 1
+ [ SQL语句 ] : SELECT `bindaid` FROM `pigcms_distribution_account` WHERE id= LIMIT 1  
+[ 2016-08-17T17:43:51+08:00 ] ERR: (ThinkException) La table 'jifen_data.pigcms_distribution' n'existe pas
+ [ SQL语句 ] : SHOW COLUMNS FROM `pigcms_distribution`

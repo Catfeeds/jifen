@@ -5,20 +5,7 @@
 <h4 class="left">轮播图管理</h4>
 <div class="clr"></div>
 </div>
-<!--tab start-->
-<div class="tab">
-<ul>
-<li class="tabli" id="tab2"><a href="{wghd::U('Store/index',array('token'=>$token))}">商品分类管理</a></li>
-<li class="current tabli" id="tab2"><a href="{wghd::U('Store/banner',array('token'=>$token))}">轮播图管理</a></li>
-<li class="tabli" id="tab2"><a href="{wghd::U('Store/guanggao',array('token'=>$token))}">广告位图管理</a></li>
-<if condition="empty($catid) neq true">
-<li class="tabli" id="tab0"><a href="{wghd::U('Store/product',array('token'=>$token))}">商品管理</a></li>
-</if>
-<li class="tabli" id="tab2"><a href="{wghd::U('Store/orders',array('token'=>$token))}">订单管理</a></li>
-<!-- <li class="tabli" id="tab5"><a href="{wghd::U('Reply_info/set',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li> -->
-</ul>
-</div>
-<!--tab end-->
+<include file="Store:tab"/>
 <div class="cLine">
 <div class="pageNavigator left">
 <a href="{wghd::U('Store/bannerAdd', array('token' => $token, 'catid' => $catid))}" title="添加" class="btnGrayS vm bigbtn">

@@ -19,7 +19,7 @@
     </style>
     <div class="info_edit_wrap_title" style='background-color: #f1bf64; color: #fff;'>
         <div class="info_edit_wrap_title_item info_edit_wrap_title_left close_edit_wrap"></div>
-        <div class="info_edit_wrap_title_item info_edit_wrap_title_center"><eq name="Think.request.type" value="1">充值记录<else/>升级记录</eq></div>
+        <div class="info_edit_wrap_title_item info_edit_wrap_title_center">充值记录</div>
         <div class="info_edit_wrap_title_item info_edit_wrap_title_right"></div>
       </div>
 
@@ -37,15 +37,10 @@
                   {wghd:$list.member.nickname}
                 </eq>
               </h4>
-              <eq name="Think.request.type" value="1">
-              <p class="weui_media_desc">充值金币:{wghd:$list.gold}元</p>
+              <p class="weui_media_desc">充值积分:{wghd:$list.green}</p>
               <p class="weui_media_desc">充值时间:{wghd:$list.addtime|date='Y-m-d',###}</p>
-              <else/>
-              <p class="weui_media_desc">升级等级：{wghd:$list.level.name}</p>
-              <p class="weui_media_desc">升级时间：{wghd:$list.addtime|date='Y-m-d',###}</p>
-              </eq>
             </div>
-            <eq name="list.aid" value="$account['id']">
+            <!-- <eq name="list.aid" value="$account['id']">
               <switch name="list.return">
                 <case value="0">
                   <eq name="list.back" value="0">
@@ -69,7 +64,7 @@
                   <div class="weui_cell_ft editinfo_con" data-id={wghd:$list.id}>退款完成</div>
                 </case>
               </switch>
-            </eq>
+            </eq> -->
           </a>
         </volist>
       </div>

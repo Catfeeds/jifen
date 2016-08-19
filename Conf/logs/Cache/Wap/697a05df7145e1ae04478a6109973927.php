@@ -31,7 +31,7 @@
 	                	</p>
 	                </div>
 	                <div class="text2">
-	                	<span class="zi">￥<?php echo ($p["showprice"]); ?></span>
+	                	<span class="zi">￥<?php echo ($row["price"]); ?></span>
 	                    <span class="zi1 num_<?php echo ($p["id"]); ?>_<?php echo ($row["id"]); ?>">x<?php echo ($row["count"]); ?></span>
 	                </div>
 	                <div class="text3">
@@ -55,7 +55,7 @@
                 	<div class="h3"><?php echo ($p["name"]); ?></div>
                 </div>
                 <div class="text2">
-                	<span class="zi">￥<?php echo ($p["showprice"]); ?></span>
+                	<span class="zi">￥<?php echo ($p["price"]); ?></span>
                     <span class="zi1 num_<?php echo ($p["id"]); ?>_0">x<?php echo ($p["count"]); ?></span>
                 </div>
                 <div class="text3">

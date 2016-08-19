@@ -32,7 +32,7 @@
           <div class="weui_cell_bd weui_cell_primary">
             <p class="editinfo_title">真实姓名</p>
           </div>
-          <div class="weui_cell_ft editinfo_con" data-name="nickname"><?php echo ($account["nickname"]); ?></div>
+          <div class="weui_cell_ft editinfo_con" data-name="truename"><?php echo ($account["truename"]); ?></div>
         </a>
         <a class="weui_cell editinfo_btn" href="javascript:;">
           <div class="weui_cell_bd weui_cell_primary">

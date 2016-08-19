@@ -127,7 +127,7 @@ $fontColor: #404040;
 	}
 }
 .money_color1 {
-	color: #EC9D62 !important
+	color: #EC9D62;
 }
 .order_color1 {
 	color: #30C5E0 !important;
@@ -293,7 +293,7 @@ body{
 	a {
 		background-color: $box_bg;
 
-		&:nth-of-type(2n):not(:last-child) {
+		&:nth-of-type(3n):not(:last-child) {
 			margin-bottom: 10px;
 		}
 	}

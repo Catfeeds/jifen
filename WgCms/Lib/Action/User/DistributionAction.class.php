@@ -1,9 +1,19 @@
 <?php
 class DistributionAction extends UserAction{
-	public function set(){		
-		//if($this->_get('token')!=session('token')){$this->error('非法操作');}
+	public $set;
+	public $admin_account;
+	public function _initialize(){
+		parent::_initialize();
 		$data=D('Distribution_set');
 		$set=$data->where(array('token'=>session('token'),'uid'=>session('uid')))->find();
+		$this->set = $set;
+		$admin_account['red'] = M('Distribution_earning')->where('aid=-1')->sum('red');
+		$admin_account['usedred'] = abs(M('Distribution_earning')->where(array('aid'=>-1,'red'=>array('lt',0)))->sum('red'));
+		$this->admin_account = $admin_account;
+		$this->assign('admin_account',$admin_account);
+	}
+	public function set(){		
+		$set = $this->set;
 		$this->assign('set',$set);
 		if(IS_POST){
 			$_POST['token']=session('token');			
@@ -164,6 +174,173 @@ class DistributionAction extends UserAction{
 			$this->error('异常访问');
 		}
 	}
+	//账号列表
+	public function account(){
+		$db = D('Account');
+		$aid = $this->_get('id');
+		$type = $this->_get('type');
+		//详情页
+		if($aid && $type == 'detail'){
+			$account = $db->where(array('id'=>$aid))->relation(true)->find();
+			//创建者
+			if($account['createtype'] != 1){
+				$account['creater'] = M('Distribution_member')->where(array('wecha_id'=>$account['wecha_id']))->getField('nickname');
+			}else{
+				$account['creater'] = $account['wecha_id'];
+			}
+			//登陆者
+			$account['loginer'] ='';
+			if($account['mid'] != 0){
+				$account['loginer'] = $account['member']['nickname'];
+			}
+			if($account['ip']){
+				$account['loginer'] = $account['ip'];
+			}
+			//上级账号
+			if($account['bindaid'] != 0){
+				$account['bindac'] = M('Distribution_account')->where(array('id'=>$account['bindaid']))->getField('username');
+			}else{
+				$account['bindac'] = '';
+			}
+			
+			$data = array(
+				'totalearn' => $this->statistical('totalearn',$account['id']),//总收入
+				'applymoney' => $this->statistical('applymoney',$account['id']),		//已提现
+				'gold' => $this->statistical('gold',$account['id']),		//总金币
+				'ordernums' => $this->statistical('ordernums',$account['id']),		//处理订单总数
+				'shoporders' => $this->statistical('shoporders',$account['id']),		//购买订单总数
+			);
+			$account['detail'] = $data;
+			//子账号
+			$account['childs'] = $db->where(array('createid'=>$account['id'],'delete'=>0))->relation(true)->select();
+			$this->assign('info',$account);
+			$this->display('accountDetail');
+			exit();
+		}
+		//设置等级页面
+		if($aid && $type == 'upgrade'){
+			$account = $db->where(array('id'=>$aid))->relation(true)->find();
+			// if($account['lid']){
+			// 	$condition['lid'] = array('lt',$account['lid']);
+			// }
+			// if($account['lid'] !=0){
+			// 	$upgrade_condition = array(
+			// 		'lid' => array(array('lt',$account['lid']),array('gt',1),'and'),
+			// 	);
+			// }else{
+			// 	$upgrade_condition['lid'] = array('gt',1);
+			// }
+			$upgrade_condition['lid'] = array('neq',1);
+			$levels = M('Distribution_level')->where($upgrade_condition)->select();
+			$this->assign('info',$account);
+			$this->assign('list',$levels);
+			$this->display('setLevel');
+		}
+		//充值金币页面
+		if($aid && $type == 'topup'){
+			$account = $db->where(array('id'=>$aid))->relation(true)->find();
+			$account['gold'] = $this->statistical('gold',$account['id']);
+			$this->assign('info',$account);
+			$this->display('topup');
+		}
+		//充值现金页面
+		if($aid && $type == 'topupmoney'){
+			$account = $db->where(array('id'=>$aid))->relation(true)->find();
+			$account['balance'] = $this->statistical('balance',$account['id']);
+			$this->assign('info',$account);
+			$this->display('topupmoney');
+		}
+		//账号列表
+		if(!$aid && !$type){
+			$where['delete'] = 0;
+
+			if($this->_post('name')!=''){
+				$where['nickname|username'] = array('like','%'.$this->_post('name').'%');
+			}
+			//列表页
+			$count=$db->where($where)->count();
+			$page=new Page($count,25);
+
+			$list = $db->where($where)->relation(true)->limit($page->firstRow.','.$page->listRows)->select();
+			foreach ($list as $k => $v) {
+				$list[$k]['creater'] = M('Distribution_member')->where(array('wecha_id'=>$v['wecha_id']))->getField('nickname');
+				$list[$k]['bindac'] = M('Distribution_account')->field('id,nickname')->where(array('id'=>$v['bindaid']))->find();
+			}
+			$this->assign('page',$page->show());
+			$this->assign('list',$list);
+			$this->display();
+		}
+	}
+	//会员充值记录列表
+	public function topupRecord(){
+		$db = D('LevelOrders');
+		$type = $this->_get('type');
+		if($type == 'return'){
+			$id = $this->_get('id');
+			$order = $db->where(array('id'=>$id))->find();
+			$account = D('Account')->where('id='.$order['aid'])->find();
+			$data['username'] = $account['username'];
+			$data['price'] = $order['price'];
+			$data['topup_integral'] = $order['topup'];
+			$data['need_integral'] = $order['price'] * $this->set['inback']/100 - $data['topup_integral'];
+			$data['oid'] = $order['id'];
+			$data['aid'] = $account['id'];
+			$this->assign('info',$data);
+			$this->display('topup');
+			exit();
+		}
+		$records = $db->where(array('paid'=>1))->relation(true)->order('finish asc,id asc')->select();
+		foreach ($records as $k => $v) {
+			if($v['back'] == 1){
+				$records[$k]['member']['nickname'] = $v['ip'];
+			}
+			$records[$k]['need_integral'] = $v['price'] * $this->set['inback']/100 - $v['topup'];
+		}
+		$this->assign('list',$records);
+		$this->display();
+	}
+	//后台给账号返红色积分
+	public function accountTopup(){
+		$aid = $this->_post('aid');
+		$oid = $this->_post('oid');
+		$gold = $this->_post('gold');
+		//判断公司剩余红色积分
+		if($this->admin_account['red'] < $gold){
+			$this->error('公司积分不足');
+		}
+		//判断充值金币是够超出所需积分
+		// $order = D('LevelOrders')->field('price,topup')->where('id='.$oid)->find();
+		// $need_integral = $order['price'] * $this->set['inback']/100 - $order['topup'];
+		// if($gold > $need_integral){
+		// 	$this->error('超出所需积分');
+		// }
+
+		if(is_numeric($gold)){
+			//如果超出就直接冲满
+			$order = D('LevelOrders')->field('price,topup,finish')->where('id='.$oid)->find();
+			//判断该订单是否充值完毕
+			if($order['finish'] == 1){
+				$this->error('该订单已经充值完毕');
+			}else{
+				$need_integral = $order['price'] * $this->set['inback']/100 - $order['topup'];
+				if($gold >= $need_integral){
+					$gold = $need_integral;
+					$finish = 1;
+				}
+				D('LevelOrders')->where('id='.$oid)->setInc('topup',$gold);
+				$this->earnRecord($aid,$oid,0,0,$gold,0,5,$_SERVER['SERVER_ADDR']);
+				$r = $this->earnRecord(-1,$oid,0,0,-$gold,0,5,$_SERVER['SERVER_ADDR']);
+				if($r){
+					if($finish == 1){
+						D('LevelOrders')->where('id='.$oid)->setField('finish',1);
+					}
+					$this->success('充值成功',U('Distribution/topupRecord',array('id'=>$oid,'type'=>'return')));
+				}
+			}
+		}else{
+			$this->error('充值金额有误');
+		}
+	}
 	public function bank(){
 		$db = M('Distribution_bank');
 		if($this->_post('name')!=''){
@@ -246,14 +423,22 @@ class DistributionAction extends UserAction{
 		}
 	}
 	public function address(){
-		$db = M('Distribution_member');
+		$db = D('Address');
 		if($this->_post('name')!=''){
-			$where['name|nickname'] = array('like','%'.$this->_post('name').'%');
+			$maps['username'] = array('like','%'.$this->_post('name').'%');
+			$accounts = D('Account')->where($maps)->select();
+			foreach ($accounts as $k => $v) {
+				$astr .= $v['id'].",";
+			}
+			$astr = rtrim($astr,',');
+			$where['aid'] = array('in',$astr);
 		}
-		$where['token'] = session('token');
+
+		$where['choose'] = 1 ;
 		$count=$db->where($where)->count();
 		$page=new Page($count,25);
-		$list = $db->where($where)->limit($page->firstRow.','.$page->listRows)->order('id desc')->select();
+		$list = $db->where($where)->limit($page->firstRow.','.$page->listRows)->order('id desc')->relation(true)->select();
+
 		$this->assign('page',$page->show());
 		$this->assign('list',$list);
 		$this->display();

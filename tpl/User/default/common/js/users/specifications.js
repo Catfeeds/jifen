@@ -130,18 +130,12 @@
 		'format_name' : format_name,
 		'pid' : pid,
 		'price' : 0,
-		'price2' : 0,
-		'price3' : 0,
-		'price4' : 0,
-		'price5' : 0,
-		'price6' : 0,
-		'price7' : 0,
 		'num' : 0,
 	};
 	function normsInjectHtml(content){
 		num_wrap.val(0);
 		if($.trim(norms_wrap.html()).length == 0){
-			var norms_content = $("<td colspan='2'><table><tr><th>"+default_options['color_name']+"</th><th>"+default_options['format_name']+"</th><th>公司价</th><th>CEO价</th><th>大区价</th><th>官方价</th><th>省代价</th><th>市代价</th><th>游客价</th><th>库存</th></tr></table></td>");
+			var norms_content = $("<td colspan='2'><table><tr><th>"+default_options['color_name']+"</th><th>"+default_options['format_name']+"</th><th>销售价<th>库存</th></tr></table></td>");
 			norms_content.find('table').append(content);
 			norms_wrap.html(norms_content);
 		}else{
@@ -153,7 +147,7 @@
 		var new_norms_content ='';
 		$.extend(true, default_options, options);
 		new_norms_content = "<tr class='norms_data' data-id='"+default_options['id']+"' data-pid='"+default_options['pid']+"' data-colorid="+default_options['colorid']+" data-formatid="+default_options['formatid']+"><td>"+default_options['colorName']+"</td><td>"+default_options['formatName']+"</td>";
-		new_norms_content +="<td><input type='text' class='px validate' data-warn='公司价不能为空' value='"+default_options['price']+"' /></td><td><input type='text' class='px validate' data-warn='CEO价不能为空' value='"+default_options['price2']+"' /></td><td><input type='text' class='px validate' data-warn='大区价不能为空' value='"+default_options['price3']+"' /></td><td><input type='text' class='px validate' data-warn='官方价不能为空' value='"+default_options['price4']+"' /></td><td><input type='text' class='px validate' data-warn='省代价不能为空' value='"+default_options['price5']+"' /></td><td><input type='text' class='px validate' data-warn='市代价不能为空' value='"+default_options['price6']+"' /></td><td><input type='text' class='px validate' data-warn='游客价不能为空' value='"+default_options['price7']+"' /></td><td><input type='text' class='px norms_num' value='"+default_options['num']+"' /></td></tr>";
+		new_norms_content +="<td><input type='text' class='px validate' data-warn='销售价不能为空' value='"+default_options['price']+"' /></td><td><input type='text' class='px norms_num' value='"+default_options['num']+"' /></td></tr>";
 		return new_norms_content;
 	}
 
@@ -239,13 +233,7 @@
 					pid:pid,
 					color:obj.data('colorid'),
 					price:obj.find('td:eq(2) input').val(),
-					price2:obj.find('td:eq(3) input').val(),
-					price3:obj.find('td:eq(4) input').val(),
-					price4:obj.find('td:eq(5) input').val(),
-					price5:obj.find('td:eq(6) input').val(),
-					price6:obj.find('td:eq(7) input').val(),
-					price7:obj.find('td:eq(8) input').val(),
-					num:obj.find('td:eq(9) input').val(),
+					num:obj.find('td:eq(3) input').val(),
 				};
 			}
 		});

@@ -19,7 +19,7 @@
     </style>
     <div class="info_edit_wrap_title" style='background-color: #f1bf64; color: #fff;'>
         <div class="info_edit_wrap_title_item info_edit_wrap_title_left close_edit_wrap"></div>
-        <div class="info_edit_wrap_title_item info_edit_wrap_title_center"><?php if(($_REQUEST['type']) == "1"): ?>充值记录<?php else: ?>升级记录<?php endif; ?></div>
+        <div class="info_edit_wrap_title_item info_edit_wrap_title_center">充值记录</div>
         <div class="info_edit_wrap_title_item info_edit_wrap_title_right"></div>
       </div>
 
@@ -34,17 +34,14 @@
                   <?php else: ?>
                   <?php echo ($list["member"]["nickname"]); endif; ?>
               </h4>
-              <?php if(($_REQUEST['type']) == "1"): ?><p class="weui_media_desc">充值金币:<?php echo ($list["gold"]); ?>元</p>
+              <p class="weui_media_desc">充值积分:<?php echo ($list["green"]); ?></p>
               <p class="weui_media_desc">充值时间:<?php echo (date('Y-m-d',$list["addtime"])); ?></p>
-              <?php else: ?>
-              <p class="weui_media_desc">升级等级：<?php echo ($list["level"]["name"]); ?></p>
-              <p class="weui_media_desc">升级时间：<?php echo (date('Y-m-d',$list["addtime"])); ?></p><?php endif; ?>
             </div>
-            <?php if(($list["aid"]) == $account['id']): switch($list["return"]): case "0": if(($list["back"]) == "0"): ?><div class="weui_cell_ft editinfo_con" data-id=<?php echo ($list["id"]); ?> id="topup_apply_refund">申请退款</div><?php endif; break;?>
+            <!-- <?php if(($list["aid"]) == $account['id']): switch($list["return"]): case "0": if(($list["back"]) == "0"): ?><div class="weui_cell_ft editinfo_con" data-id=<?php echo ($list["id"]); ?> id="topup_apply_refund">申请退款</div><?php endif; break;?>
                 <?php case "1": ?><div class="weui_cell_ft editinfo_con" data-id=<?php echo ($list["id"]); ?>>退款申请中</div><?php break;?>
                 <?php case "2": ?><div class="weui_cell_ft editinfo_con" data-id=<?php echo ($list["id"]); ?>>退款完成</div><?php break; endswitch; endif; ?>
             <?php if(($list["bindaid"]) == $account["id"]): switch($list["return"]): case "1": ?><div class="weui_cell_ft editinfo_con" data-id=<?php echo ($list["id"]); ?> id="topup_agree_refund">同意退款</div><?php break;?>
-                <?php case "2": ?><div class="weui_cell_ft editinfo_con" data-id=<?php echo ($list["id"]); ?>>退款完成</div><?php break; endswitch; endif; ?>
+                <?php case "2": ?><div class="weui_cell_ft editinfo_con" data-id=<?php echo ($list["id"]); ?>>退款完成</div><?php break; endswitch; endif; ?> -->
           </a><?php endforeach; endif; else: echo "" ;endif; ?>
       </div>
     </div>

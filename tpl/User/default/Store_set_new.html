@@ -54,7 +54,7 @@ afterBlur: function(){this.sync();}
           <tr>
             <th>类别：</th>
             <td>
-              <select name="catid" id="catid" <eq name="catid" value="$level_cat_id">disabled</eq>>
+              <select name="catid" id="catid">
                 <volist name="CatList" id="vo">
                   <eq name="vo.parentid" value="0">
                     <option  value="{wghd:$vo.id}" <eq name="vo.id" value="$catid">selected</eq>
@@ -124,70 +124,20 @@ afterBlur: function(){this.sync();}
 <tr>
   <th>
     <span class="red">*</span>
-    游客价：
+    销售价：
   </th>
   <td>
-    <input type="text" id="price7" name="price7" value="{wghd:$set.price7|default=0}" class="validate norms_control px" data-warn="游客价不能为空"/>
+    <input type="text" id="price" name="price" value="{wghd:$set.price|default=0}" class="validate norms_control px" data-warn="销售价不能为空"/>
     元
   </td>
 </tr>
 <tr>
   <th>
     <span class="red">*</span>
-    市代价：
+    市场价：
   </th>
   <td>
-    <input type="text" id="price6" name="price6" value="{wghd:$set.price6|default=0}" class="validate norms_control px" data-warn="市代价不能为空"/>
-    元
-  </td>
-</tr>
-<tr>
-  <th>
-    <span class="red">*</span>
-    省代价：
-  </th>
-  <td>
-    <input type="text" id="price5" name="price5" value="{wghd:$set.price5|default=0}" class="validate norms_control px" data-warn="省代价不能为空"/>
-    元
-  </td>
-</tr>
-<tr>
-  <th>
-    <span class="red">*</span>
-    官方价：
-  </th>
-  <td>
-    <input type="text" id="price4" name="price4" value="{wghd:$set.price4|default=0}" class="validate norms_control px" data-warn="官方价不能为空"/>
-    元
-  </td>
-</tr>
-<tr>
-  <th>
-    <span class="red">*</span>
-    大区价：
-  </th>
-  <td>
-    <input type="text" id="price3" name="price3" value="{wghd:$set.price3|default=0}" class="validate norms_control px" data-warn="大区价不能为空"/>
-    元
-  </td>
-</tr>
-<tr>
-  <th>
-    <span class="red">*</span>
-    CEO价：
-  </th>
-  <td>
-    <input type="text" id="price2" name="price2" value="{wghd:$set.price2|default=0}" class="validate norms_control px" data-warn="CEO价不能为空"/>
-    元
-  </td>
-</tr>
-<tr>
-  <th>
-    <span class="red">*</span>
-    公司价：
-  </th>
-  <td>
-    <input type="text" id="price" name="price" value="{wghd:$set.price|default=0}" class="validate norms_control px" data-warn="公司价不能为空"/>
+    <input type="text" id="oprice" name="oprice" value="{wghd:$set.oprice|default=0}" class="px"/>
     元
   </td>
 </tr>
@@ -208,21 +158,6 @@ afterBlur: function(){this.sync();}
   </td>
 </tr>
 </if>
-<eq name="catid" value='$level_cat_id'>
-<tr>
-  <th><span class="red">*</span> 对应等级：</th>
-  <td>
-    <select name="lid" id="lid">
-      <option value="0">==选择对应等级==</option>
-      <volist id="list" name="levels">
-        <option value="{wghd:$list.id}" <eq name="set.lid" value="$list.id">selected</eq>
-        >{wghd:$list.name}
-      </option>
-    </volist>
-  </select>
-</td>
-</tr>
-</eq>
 <tr>
 <th>库存：</th>
 <td>
@@ -243,44 +178,6 @@ afterBlur: function(){this.sync();}
 (如果您不做假数据就设置为0)
 </td>
 </tr>
-<neq name="catid" value="$level_cat_id">
-<tr>
-<th>是否主打：</th>
-<td>
-  <input type="radio" name="featured" class="featured" value="1" id="featured_0" <if condition="$set['featured'] eq 1">checked</if>
-/>
-<label for="featured_0">主打</label>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="radio" name="featured" class="featured" value="0" id="featured_1" <if condition="$set['featured'] eq 0">checked</if>
-/>
-<label for="featured_1">非主打</label>
-</td>
-</tr>
-<tr>
-<th>是否特价：</th>
-<td>
-<input type="radio" name="specialoffer" class="specialoffer" value="1" id="specialoffer_0" <if condition="$set['specialoffer'] eq 1">checked</if>
-/>
-<label for="specialoffer_0">特价</label>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="radio" name="specialoffer" class="specialoffer" value="0" id="specialoffer_1" <if condition="$set['specialoffer'] eq 0">checked</if>
-/>
-<label for="specialoffer_1">非特价</label>
-</td>
-</tr>
-<tr>
-<th>是否秒杀：</th>
-<td>
-<input type="radio" name="secondskill" class="secondskill" value="1" id="secondskill_0" <if condition="$set['secondskill'] eq 1">checked</if>
-/>
-<label for="secondskill_0">秒杀</label>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="radio" name="secondskill" class="secondskill" value="0" id="secondskill_1" <if condition="$set['secondskill'] eq 0">checked</if>
-/>
-<label for="secondskill_1">非秒杀</label>
-</td>
-</tr>
-</neq>
 <tr>
 <th>是否下架：</th>
 <td>

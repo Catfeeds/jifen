@@ -1,0 +1,88 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="{wghd::RES}/css/cymain.css" />  
+
+<div class="content">
+         
+          <div class="cLineB">
+			<h4 class="left">会员充值列表</h4>
+			<div class="clr"></div>
+			</div>
+          <div class="cLine">
+            <div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <form method="post" action="index.php?ac=vote-manage&amp;id=9878" id="info">
+          <input name="delall" type="hidden" value="del">
+           <input name="wxid" type="hidden" value="gh_423dwjkewad">
+            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+					<th>账号ID</th>
+          <th>账号名</th>
+          <th>获得绿色积分</th>
+          <th>分红色积分</th>
+          <th>返红色积分</th>
+          <th>还需红色积分</th>
+          <th>退款状态</th>
+          <th>时间</th>
+          <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+                  <volist id="list" name="list">
+                <tr>
+                  <td>{wghd:$list.account.id}</td>
+                  <td>{wghd:$list.account.username}</td>
+                  <td>{wghd:$list.green}</td>
+                  <td>{wghd:$list.integral}</td>
+                  <td>{wghd:$list.topup}</td>
+                  <td>{wghd:$list.need_integral}</td>
+                  <td>
+                    <eq name="list.return" value="1">申请退款</eq> 
+                    <eq name="list.return" value="2">退款完成</eq> 
+                  </td>
+                  <td>{wghd:$list.addtime|date='Y-m-d H:i:s',###}</td>
+                  <td class="norightborder">
+                    <neq name="list.finish" value="1">
+                      <a href="{wghd::U('Distribution/topupRecord',array('id'=>$list['id'],'type'=>'return'))}" title="反红色积分">反红色积分</a>
+                    </neq>
+                    <!-- <eq name="list.back" value="1">
+                      <a href="{wghd::U('Distribution/retrunBackTopup',array('id'=>$list['id']))}" title="撤回">撤回</a>
+                    </eq> -->
+                    <!-- <if condition="($list.bindaid eq 0) AND ($list.return eq 1)">
+                      <a href="javascript:drop_confirm('您确定要删除吗?', '{wghd::U('Distribution/agreeTopupReturn',array('id'=>$list['id']))}');" title="同意退款">同意退款</a>
+                    </if> -->
+                  </td>
+                </tr>
+                  </volist>
+      			                
+                  
+              </tbody>
+            </table>
+           </form> 
+           <script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中内容！')
+}
+}</script>
+   </div> 
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages">{wghd:$page}</div>
+              </div>
+            <div class="clr"></div>
+          </div>
+  </div>
+<include file="Public:footer"/>

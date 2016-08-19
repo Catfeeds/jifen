@@ -14,7 +14,7 @@ requirejs.config({
     },
 	urlArgs:"bust=" + (new Date()).getTime(),
 });
-requirejs(['jquery','personalInfoEdit','address','orders','common'],function($,pedit,address,orders,common){
+requirejs(['jquery','personalInfoEdit','address','orders','common','topup'],function($,pedit,address,orders,common){
     var address_wrap = $('#address_list_wrap');
     var common = new common.Common();
     //个人信息修改

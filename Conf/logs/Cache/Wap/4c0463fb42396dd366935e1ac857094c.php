@@ -19,7 +19,7 @@
 				<img src="<?php echo ($account["headimgurl"]); ?>"></div>
 			<div class="per_top_explain">
 				<div class="per_top_name">昵称：<?php echo ($account["username"]); ?></div>
-				<a href="<?php echo U('Distribution/tpupRecord',array('type'=> 1));?>" class='coad_lnfo_bage'>
+				<a href="<?php echo U('Distribution/tpupRecord');?>" class='coad_lnfo_bage'>
 					<div class="per_top_see">充值记录</div>
 				</a>
 				<?php if(!empty($hasrefund)): ?><a href="<?php echo U('Distribution/topupRagree',array('type'=> 1));?>" class='coad_lnfo_bage'>
@@ -34,10 +34,10 @@
 			<div class="weui_cells weui_cells_form">
 				<div class="weui_cell">
 					<div class="weui_cell_hd">
-						<label class="weui_label">充值金额</label>
+						<label class="weui_label">充值积分</label>
 					</div>
 					<div class="weui_cell_bd weui_cell_primary">
-						<input class="weui_input" type="tel" id="gold_num" name="gold" placeholder="输入充值金额"></div>
+						<input class="weui_input" type="tel" id="gold_num" name="green" placeholder="输入充值积分"></div>
 				</div>
 			</div>
 			<div class='demos-content-padded'>

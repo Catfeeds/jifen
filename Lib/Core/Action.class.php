@@ -411,7 +411,7 @@ abstract class Action {
         }else{
             $this->assign('error',$message);// 提示信息
             //发生错误时候默认停留3秒
-            if(!$this->get('waitSecond'))    $this->assign('waitSecond','3');
+            if(!$this->get('waitSecond'))    $this->assign('waitSecond','1');
             // 默认发生错误的话自动返回上页
             if(!$this->get('jumpUrl')) $this->assign('jumpUrl',"javascript:history.back(-1);");
             $this->display(C('TMPL_ACTION_ERROR'));

@@ -55,7 +55,7 @@
 			<img src="<?php echo ($hostlist["logourl"]); ?>" data-original="<?php echo ($hostlist["logourl"]); ?>" style="width:100%;">
 			</a>
 			<a class="t" href="<?php echo U('Store/product',array('token' => $token, 'id' => $hostlist['id'],'mid'=>$my['id']));?>"><?php echo (htmlspecialchars_decode($hostlist["name"])); ?></a>
-			<b>￥<?php echo ($hostlist["showprice"]); ?></b><br/>
+			<b>￥<?php echo ($hostlist["price"]); ?></b><br/>
 			<span style="font-size:12px;color:#585656">已售：<?php echo ($hostlist["fakemembercount"]); ?></span>
 		</span>
 		</div>
@@ -143,7 +143,7 @@ $(function() {
 							'<a href="' + com_link + '&id=' + y.id + '&mid=' + mid + '">' +
 							'<img src="' +y.logourl + '" style="width:100%;"/>' +
 							'</a><a class="t" href="' + com_link + '&id=' + y.id + '">' + y.name + '</a>';
-							_tmp_html += '<b>￥'+ y.showprice +'&nbsp;元</b>';
+							_tmp_html += '<b>￥'+ y.price +'&nbsp;元</b>';
 							_tmp_html += '<br/><br/><span style="font-size:12px;color:#585656">已售：'+ y.fakemembercount +'</span></span></div></li>';
 						});
 						$('#m_list').append(_tmp_html);

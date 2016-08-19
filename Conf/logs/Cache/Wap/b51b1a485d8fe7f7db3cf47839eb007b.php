@@ -30,13 +30,13 @@
 		  <a class="weui_cell weui_cell_getmoneylist coad_lnfo_bage" href="<?php echo U('Distribution/myBill');?>">
 		    <div class="weui_cell_bd weui_cell_primary">
 		      <p>可提现金额(元)</p>
-		      <p><?php echo sprintf("%.2f",($totalOfferMoney2-$my['alreadyGetMoney'])/100);?></p>
+		      <p><?php echo sprintf("%.2f",$account['red']);?></p>
 		    </div>
 		    <div class="weui_cell_ft" id="test">账单</div>
 		  </a>
 		  <div class="weui_cell">
 		    <div class="weui_cell_bd weui_cell_primary">
-		      <p>累计收入(元)<a class="color_getmoneylist" href="<?php echo U('Distribution/followOrder');?>" style="font-size: 0.7rem;padding-left: 5px;">查看详情</a></p>
+		      <p>累计收入(元)<a class="color_getmoneylist" href="<?php echo U('Distribution/earnDetails',array('type'=>'red'));?>" style="font-size: 0.7rem;padding-left: 5px;">查看详情</a></p>
 		      <p class="color_getmoneylist"><?php echo sprintf("%.2f",$totalOfferMoney/100);?></p>
 		    </div>
 		  </div>

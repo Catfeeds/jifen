@@ -1,0 +1,36 @@
+[ 2016-08-18T08:36:24+08:00 ] ERR: (ThinkException) Model:relation_METHOD_NOT_EXIST_
+[ 2016-08-18T08:39:53+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:accountTopup
+[ 2016-08-18T09:24:05+08:00 ] ERR: (ThinkException) Erreur de syntaxe près de 'LIMIT 1' à la ligne 1
+ [ SQL语句 ] : SELECT SUM(red) AS tp_sum FROM `pigcms_distribution_earning` WHERE oid= LIMIT 1  
+[ 2016-08-18T10:19:47+08:00 ] ERR: (ThinkException) Champ 'black' inconnu dans field list
+ [ SQL语句 ] : UPDATE `pigcms_distribution_account` SET `green`=green+1,`red`=red+1,`black`=black+1 WHERE id=1
+[ 2016-08-18T10:20:45+08:00 ] ERR: (ThinkException) Champ 'black' inconnu dans field list
+ [ SQL语句 ] : UPDATE `pigcms_distribution_account` SET `green`=green+1,`red`=red+1,`black`=black+1 WHERE id=1
+[ 2016-08-18T10:22:25+08:00 ] ERR: (ThinkException) Champ 'black' inconnu dans field list
+ [ SQL语句 ] : UPDATE `pigcms_distribution_account` SET `green`=green+1,`red`=red+1,`black`=black+1 WHERE id=1
+[ 2016-08-18T10:27:13+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:test
+[ 2016-08-18T14:03:18+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:myOrders
+[ 2016-08-18T14:54:59+08:00 ] ERR: (ThinkException) Champ 'black' inconnu dans field list
+ [ SQL语句 ] : SELECT SUM(black) AS tp_sum FROM `pigcms_distribution_earning` WHERE ( `aid` = 1 ) LIMIT 1  
+[ 2016-08-18T14:55:08+08:00 ] ERR: (ThinkException) Champ 'black' inconnu dans field list
+ [ SQL语句 ] : SELECT SUM(black) AS tp_sum FROM `pigcms_distribution_earning` WHERE ( `aid` = 1 ) LIMIT 1  
+[ 2016-08-18T14:55:24+08:00 ] ERR: (ThinkException) Champ 'black' inconnu dans field list
+ [ SQL语句 ] : SELECT SUM(black) AS tp_sum FROM `pigcms_distribution_earning` WHERE ( `aid` = 1 ) LIMIT 1  
+[ 2016-08-18T15:18:55+08:00 ] ERR: (ThinkException) Champ 'price7' inconnu dans field list
+ [ SQL语句 ] : SELECT `price7` FROM `pigcms_product_detail` WHERE pid=3 ORDER BY price7 asc LIMIT 1  
+[ 2016-08-18T15:40:35+08:00 ] ERR: (ThinkException) Erreur de syntaxe près de 'LIMIT 1' à la ligne 1
+ [ SQL语句 ] : SELECT `username` FROM `pigcms_distribution_account` WHERE id= LIMIT 1  
+[ 2016-08-18T15:40:38+08:00 ] ERR: (ThinkException) Erreur de syntaxe près de 'LIMIT 1' à la ligne 1
+ [ SQL语句 ] : SELECT `username` FROM `pigcms_distribution_account` WHERE id= LIMIT 1  
+[ 2016-08-18T15:41:35+08:00 ] ERR: (ThinkException) Erreur de syntaxe près de 'LIMIT 1' à la ligne 1
+ [ SQL语句 ] : SELECT `username` FROM `pigcms_distribution_account` WHERE id= LIMIT 1  
+[ 2016-08-18T15:49:23+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:getMyAddress
+[ 2016-08-18T15:51:27+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:getMyAddress
+[ 2016-08-18T17:02:43+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:test
+[ 2016-08-18T17:23:29+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:orderCartJudge
+[ 2016-08-18T17:23:36+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:orderCartJudge
+[ 2016-08-18T17:23:36+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:orderCartJudge
+[ 2016-08-18T17:23:37+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:orderCartJudge
+[ 2016-08-18T17:23:37+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:orderCartJudge
+[ 2016-08-18T17:23:37+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:orderCartJudge
+[ 2016-08-18T17:35:09+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:orderDetails

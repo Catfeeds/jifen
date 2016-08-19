@@ -3,14 +3,11 @@ class StoreAction extends UserAction{
 	public $token;
 	public $product_model;
 	public $product_cat_model;
-	public $level_cat_id;
 	public function _initialize() {
 		parent::_initialize();
 		$this->canUseFunction('shop');
 		
 		$this->assign('isDining', 0);
-		$this->level_cat_id = 2;
-		$this->assign('level_cat_id',$this->level_cat_id);
 	}
 	
 	/**
@@ -19,7 +16,6 @@ class StoreAction extends UserAction{
 	public function index() {
 		$parentid = isset($_GET['parentid']) ? intval($_GET['parentid']) : 0;
 		$data = M('Product_cat');
-		// $where = array('token' => session('token'), 'cid' => $this->_cid, 'parentid' => $parentid, 'id'=>array('neq',$this->level_cat_id));
 		$where = array('token' => session('token'), 'cid' => $this->_cid, 'parentid' => $parentid);
         if (IS_POST) {
             $key = $this->_post('searchkey');
@@ -561,8 +557,8 @@ class StoreAction extends UserAction{
         	$list = $product_model->where($where)->order('sort desc,id asc')->limit($Page->firstRow.','.$Page->listRows)->select();
         }
         foreach ($list as $k => $v) {
-        	if(!$v['price7']){
-        		$list[$k]['price7'] = M('Product_detail')->where('pid='.$v['id'])->order('price7 asc')->getField('price7');
+        	if(!$v['price']){
+        		$list[$k]['price'] = M('Product_detail')->where('pid='.$v['id'])->order('price asc')->getField('price');
         	}
         }
 		$this->assign('page',$show);		
@@ -639,11 +635,6 @@ class StoreAction extends UserAction{
         	}
         	M('Product_attribute')->where(array('id' => array('in', $ids)))->delete();
         }
-        //等级商品
-        if($catid == $this->level_cat_id){
-        	$levels = M('Distribution_level')->where(array('lid'=>array('gt',3)))->select();
-        	$this->assign('levels',$levels);
-        }
         $CatList = M('Product_cat')->where(array('token' => session('token')))->select();
 		$this->assign('CatList', $CatList);
 		$this->assign('color', $this->color);
@@ -683,20 +674,6 @@ class StoreAction extends UserAction{
 				array_push($norms_arr, $data);
 				$this->assign('list',$norms_arr);
 			}
-		}
-	}
-	function test(){
-		// $test = '[{"format":53,"color":54,"colorid":54,"price":"1","price2":"2","price3":"0","price4":"0","price5":"0","price6":"0","price7":"0","num":"0"}]';
-		$test = '[{"format":53}]';
-		$a = json_decode($test);
-		if(is_object($a)){
-			echo 'aa';
-		}
-		echo count($a);
-		echo mysql_field_type($a);
-		foreach ($a as $v) {
-			$v = (array)$v;
-			dump($v);
 		}
 	}
 	/**
@@ -926,18 +903,18 @@ class StoreAction extends UserAction{
 		session('sns_where',serialize($where));
 		$orders		= $product_cart_model->where($where)->order('time DESC')->limit($Page->firstRow . ',' . $Page->listRows)->select();
 		//遍历处理者
-		foreach ($orders as $k => $v) {
-			if($v['bindaid']){
-				$orders[$k]['dealer'] = D('Account')->where('id='.$v['bindaid'])->getField('nickname');
-			}else{
-				$orders[$k]['dealer'] = '后台';
-			}
-		}
+		// foreach ($orders as $k => $v) {
+		// 	if($v['bindaid']){
+		// 		$orders[$k]['dealer'] = D('Account')->where('id='.$v['bindaid'])->getField('nickname');
+		// 	}else{
+		// 		$orders[$k]['dealer'] = '后台';
+		// 	}
+		// }
 		$unHandledCount = $product_cart_model->where(array('token' => $this->_session('token'), 'handled' => 0))->count();
-		foreach ($orders as $k => $v) {
-			$orders[$k]['username'] = D('Account')->where('id='.$v['waid'])->getField('username');
-			$orders[$k]['binduser'] = D('Account')->where('id='.$v['aid'])->getField('username');
-		}
+		// foreach ($orders as $k => $v) {
+		// 	$orders[$k]['username'] = D('Account')->where('id='.$v['waid'])->getField('username');
+		// 	$orders[$k]['binduser'] = D('Account')->where('id='.$v['aid'])->getField('username');
+		// }
 		$this->assign('unhandledCount', $unHandledCount);
 		$this->assign('orders', $orders);
 		$this->assign('page', $show);

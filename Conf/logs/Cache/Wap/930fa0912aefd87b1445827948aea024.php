@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="<?php echo RES;?>/original/css/weui.min.css">
     <link rel="stylesheet" href="<?php echo RES;?>/original/css/jquery-weui.min.css">
     <link rel="stylesheet" href="<?php echo RES;?>/original/css/style.css">
+    <link rel="stylesheet" href="<?php echo RES;?>/jifen/css/style.css">
 
     <link rel="stylesheet" href="<?php echo RES;?>/original/css/notification.css">
-
+    <link rel="stylesheet" href="<?php echo RES;?>/original/others/main2.css">
     <script src="<?php echo RES;?>/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
     <title><?php echo ($title); ?></title>
 </head>
@@ -27,7 +28,7 @@
     <div class="content_wrap index_wrap">
         <a class="dis_head info_edit" href="<?php echo U('Distribution/myInfo');?>">
             <img id="index_headimgurl" src="<?php echo ($account["headimgurl"]); ?>">
-            <p id="index_nickname"><?php echo ($account["nickname"]); ?></p>
+            <p id="index_nickname"><?php echo (($account["petname"])?($account["petname"]):"未填写"); ?></p>
         </a>
         <div class="weui_cells weui_cells_extend weui_cells_access">
             <a class="weui_cell weui_cell_extend coad_lnfo_bage cursor_ios" href="<?php echo U('Store/my');?>">
@@ -66,6 +67,33 @@
                         <p>已完成</p>
                     </a>
                 </div>
+            </div>
+             <a class="weui_cell weui_cell_extend coad_lnfo_bage" href="<?php echo U('Distribution/topUp');?>">
+                <div class="weui_cell_hd weui_cell_hd_extend iconfont2">&#xe999;</div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>充值积分</p>
+                </div>
+                <div class="weui_cell_ft"></div>
+            </a>
+            <div class="weui-row weui-row-extend weui-no-gutter">
+              <div class="weui-col-33">
+                  <a href="<?php echo U('Distribution/earnDetails',array('type'=>'green'));?>" class="coad_lnfo_bage">
+                      <p class="money_color1" style="color:green"><?php echo sprintf('%.1f',$account['green']);?></p>
+                      <p style="color:green">绿色积分</p>
+                  </a>
+              </div>
+              <div class="weui-col-33">
+                  <a href="<?php echo U('Distribution/getMoneyList');?>">
+                      <p class="money_color1" style="color:red"><?php echo sprintf('%.1f',$account['red']);?></p>
+                      <p style="color:red">红色积分</p>
+                  </a>
+              </div>
+              <div class="weui-col-33">
+                  <a href="<?php echo U('Distribution/earnDetails',array('type'=>'black'));?>" class="coad_lnfo_bage">
+                      <p class="money_color1" style="color:black"><?php echo sprintf('%.1f',$account['black']);?></p>
+                      <p style="color:black">黑色积分</p>
+                  </a>
+              </div>
             </div>
             <a class="weui_cell weui_cell_extend" href="<?php echo U('Distribution/myShop');?>">
                 <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe600;</div>

@@ -39,7 +39,7 @@ color: #fefefe;
                 <!--tx--> </div>
             <form id="form1" name="form1" method="post" action="#">
                 <div class="text"> <i class="icon1 iconfont">&#xe6ca;</i>
-                    <input name="username" id="username" type="text" class="name" value="" placeholder="微信号"/>    
+                    <input name="username" id="username" type="text" class="name" value="" placeholder="登陆账号"/>    
                 </div>
                 <div class="text"> <i class="icon1 iconfont">&#xe61a;</i>
                     <input name="nickname" id="nickname" type="text" class="name" value="" placeholder="真实姓名"/>    

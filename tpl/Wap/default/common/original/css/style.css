@@ -111,7 +111,7 @@ a {
     line-height: 2rem; }
 
 .money_color1 {
-  color: #EC9D62 !important; }
+  color: #EC9D62; }
 
 .order_color1 {
   color: #30C5E0 !important; }
@@ -264,7 +264,7 @@ body {
   margin-top: 0; }
   .weui_cells_extend a {
     background-color: rgba(255, 255, 255, 0.7); }
-    .weui_cells_extend a:nth-of-type(2n):not(:last-child) {
+    .weui_cells_extend a:nth-of-type(3n):not(:last-child) {
       margin-bottom: 10px; }
   .weui_cells_extend .weui_cell_hd_extend {
     width: 36px;

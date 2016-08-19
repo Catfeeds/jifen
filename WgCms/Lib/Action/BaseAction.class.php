@@ -195,8 +195,14 @@ class BaseAction extends Action
     //统计账号数据
     public function statistical($type,$aid){
         switch ($type) {
-            case 'balance'://余额
-                
+            case 'green'://绿色积分
+                $return = M('Distribution_earning')->where(array('aid'=>$aid))->sum('green');
+                break;
+            case 'red'://红色积分
+                $return = M('Distribution_earning')->where(array('aid'=>$aid))->sum('red');
+                break;
+            case 'black'://黑色积分
+                $return = M('Distribution_earning')->where(array('aid'=>$aid))->sum('black');
                 break;
             case 'ordernums'://处理订单数
                 $return = M('Product_cart')->where(array('bindaid'=>$aid,'paid'=>1))->count();
@@ -213,5 +219,35 @@ class BaseAction extends Action
                 break;
         }
         return $return;
+    }
+    //金币和现金收入支出记录
+    public function earnRecord($aid,$oid,$mid,$green,$red,$black,$status,$ip=''){
+        if($aid > 0){
+            if($green != 0){
+                D('Account')->where('id='.$aid)->setInc('green',$green);
+            }
+            if($red != 0){
+                D('Account')->where('id='.$aid)->setInc('red',$red);
+            }
+            if($black != 0){
+                D('Account')->where('id='.$aid)->setInc('black',$black);
+            }
+        }
+        $earndb = M('Distribution_earning');
+        $data = array(
+            'ip' => $ip,
+            'aid' => $aid,
+            'oid' => $oid,
+            'mid' => $mid,
+            'green' => $green,
+            'red' => $red,
+            'black' => $black,
+            'status' => $status,
+            'addtime' => time(),
+            'year' => date('Y',time()),
+            'month' => date('m',time()),
+            'day' => date('d',time()),
+        );
+        return $earndb->add($data);
     }
 }

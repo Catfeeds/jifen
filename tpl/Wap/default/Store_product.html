@@ -74,7 +74,9 @@ $(function(){
 			<div class="details_dashed"></div>
 			<div class="details_price">
 				现价：￥{wghd:$product.price} &nbsp;&nbsp;&nbsp;&nbsp;
-				<span>原价：￥{wghd:$product.oprice}</span>
+				<neq name="product.oprice" value="0">
+					<span>原价：￥{wghd:$product.oprice}</span>
+				</neq>
 			</div>
 			<div class="details_dashed"></div>
 			<div class="details_sale">销量：{wghd:$product.fakemembercount}件</div>

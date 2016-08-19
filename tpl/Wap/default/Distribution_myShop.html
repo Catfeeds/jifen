@@ -30,8 +30,8 @@
     <div class="content_wrap index_wrap">
         <div class="dis_head">
             <img id="index_headimgurl" src="{wghd:$account.headimgurl}">
-            <p id="index_nickname">{wghd:$account.petname}</p>
-            <a href="{wghd::U('Distribution/upgrade')}" class='coad_lnfo_bage'>
+            <p id="index_nickname">{wghd:$account.truename|default="未填写"}</p>
+            <!-- <a href="{wghd::U('Distribution/upgrade')}" class='coad_lnfo_bage'>
               <if condition="($account['lid'] neq 0) AND ($account['lid'] gt 1)">
                 <p style='font-size: 1rem;'>会员等级:{wghd:$account.level.name}
                   <gt name="account.lid" value="2">
@@ -43,7 +43,7 @@
                   <p style='font-size: 1rem;'><label style='color:#2ec357;'>(点击成为会员)</label></p>
                 </eq>
               </if>
-            </a>
+            </a> -->
         </div>
         <div class="weui_cells weui_cells_extend weui_cells_access">
             <a class="weui_cell weui_cell_extend coad_lnfo_bage" href="{wghd::U('Distribution/topUp')}">

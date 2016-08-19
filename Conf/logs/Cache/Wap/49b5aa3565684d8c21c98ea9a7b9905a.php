@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit();?><!-- <!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -11,17 +11,17 @@
 	<link rel="stylesheet" href="<?php echo RES;?>/original/css/weui.min.css">
 	<link rel="stylesheet" href="<?php echo RES;?>/original/css/jquery-weui.css">
 	<link rel="stylesheet" href="<?php echo RES;?>/original/css/style.css"></head>
-<body id="scnhtm5"> -->
+<body id="scnhtm5">
 	<div class="container">
 		
 		<div class="info_edit_wrap_title">
-			<div class="info_edit_wrap_title_item info_edit_wrap_title_left close_address_edit_wrap"></div>
+			<div class="info_edit_wrap_title_item info_edit_wrap_title_left close_edit_wrap"></div>
 			<div class="info_edit_wrap_title_item info_edit_wrap_title_center">编辑地址</div>
-			<div class="info_edit_wrap_title_item info_edit_wrap_title_right" id="address_save_btn">保存</div>
+			<div class="info_edit_wrap_title_item info_edit_wrap_title_right cursor_ios" id="address_save_btn">保存</div>
 		</div>
 		<form id="address_edit">
 			<input type="hidden" name="id" value="<?php echo ($info["id"]); ?>">
-			<input type="hidden" name="mid" value="<?php echo ($my["id"]); ?>">
+			<input type="hidden" name="aid" value="<?php echo ($account["id"]); ?>">
 			<div class="weui_cells weui_cells_form">
 				<div class="weui_cell">
 					<div class="weui_cell_hd">
@@ -71,9 +71,9 @@
 					});	
 		</script>
 	</div>
-<!-- </body>
-</html> -->
-<!-- <script src="<?php echo RES;?>/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
+<script src="<?php echo RES;?>/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="<?php echo RES;?>/original/js/notification.js" type="text/javascript"></script>
 <script src="<?php echo RES;?>/original/js/jquery-weui.min.js" type="text/javascript"></script>
 <script src="<?php echo RES;?>/original/js/city-picker.js" type="text/javascript"></script>

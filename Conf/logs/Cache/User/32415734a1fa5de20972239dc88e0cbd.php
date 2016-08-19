@@ -156,12 +156,12 @@ if (!isset($_SESSION['isQcloud'])){ ?>
         <div class="accountInfo">
 <table class="vipInfo" width="100%" border="0" cellpadding="0" cellspacing="0">
 <tr>
-<td><strong>VIP有效期：</strong><?php echo (date("Y-m-d",$thisUser["viptime"])); ?></td>
+<td><strong>公司红色积分：</strong><?php echo (($admin_account["red"])?($admin_account["red"]):0); ?></td>
 <td><strong>图文自定义：</strong><?php echo ($thisUser["diynum"]); ?>/<?php echo ($userinfo["diynum"]); ?></td>
 <td><strong>请求数：</strong><?php echo ($thisUser["connectnum"]); ?>/<?php echo ($userinfo["connectnum"]); ?></td>
 </tr>
 <tr>
-<td><strong>请求数剩余：</strong><?php echo ($userinfo['connectnum']-$_SESSION['connectnum']); ?></td>
+<td><strong>已使用：</strong><?php echo (($admin_account["usedred"])?($admin_account["usedred"]):0); ?></td>
 <td><strong>已使用：</strong><?php echo $_SESSION['diynum']; ?></td>
 <td><strong>当月剩余请求数：</strong><?php echo $userinfo['connectnum']-$_SESSION['connectnum']; ?></td>
 </tr>
@@ -258,7 +258,7 @@ if (!isset($_SESSION['isQcloud'])){ ?>
 <div class="catalogList">
 <ul id="menu">
 <?php
-$menus=array( array( 'name'=>'基础设置', 'iconName'=>'base', 'display'=>0, 'subs'=>array( array('name'=>'关注时回复与帮助','link'=>U('Areply/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Areply')), array('name'=>'微信－文本回复','link'=>U('Text/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Text')), array('name'=>'微信－图文回复','link'=>U('Img/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Img','a'=>'index')), array('name'=>'自定义LBS回复','link'=>U('Company/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Company')), array('name'=>'自定义菜单','link'=>U('Diymen/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Diymen')), array('name'=>'回答不上来的配置','link'=>U('Other/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Other')), )), array( 'name'=>'分销管理', 'iconName'=>'crm', 'display'=>0, 'subs'=>array( array('name'=>'分销设置','link'=>U('Distribution/set',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'set')), array('name'=>'分销提醒页','link'=>U('Distribution/forwardSet',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'forwardSet')), )), array( 'name'=>'会员管理', 'iconName'=>'card', 'display'=>0, 'subs'=>array( array('name'=>'会员列表','link'=>U('Distribution/member',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'member')), array('name'=>'会员收藏列表','link'=>U('Distribution/collection',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'collection')), array('name'=>'提现记录列表','link'=>U('Distribution/moneylist',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'moneylist')), array('name'=>'收货地址列表','link'=>U('Distribution/address',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'address')), )), array( 'name'=>'商城系统', 'iconName'=>'store', 'display'=>0, 'subs'=>array( array('name'=>'微信商城系统','link'=>U('Store/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Store')), )), ); ?>
+$menus=array( array( 'name'=>'基础设置', 'iconName'=>'base', 'display'=>0, 'subs'=>array( array('name'=>'关注时回复与帮助','link'=>U('Areply/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Areply')), array('name'=>'微信－文本回复','link'=>U('Text/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Text')), array('name'=>'微信－图文回复','link'=>U('Img/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Img','a'=>'index')), array('name'=>'自定义LBS回复','link'=>U('Company/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Company')), array('name'=>'自定义菜单','link'=>U('Diymen/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Diymen')), array('name'=>'回答不上来的配置','link'=>U('Other/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Other')), )), array( 'name'=>'分销管理', 'iconName'=>'crm', 'display'=>0, 'subs'=>array( array('name'=>'分销设置','link'=>U('Distribution/set',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'set')), array('name'=>'分销提醒页','link'=>U('Distribution/forwardSet',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'forwardSet')), )), array( 'name'=>'会员管理', 'iconName'=>'card', 'display'=>0, 'subs'=>array( array('name'=>'账号列表','link'=>U('Distribution/account',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'account')), array('name'=>'会员充值金币记录','link'=>U('Distribution/topupRecord',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'topupRecord')), array('name'=>'会员收藏列表','link'=>U('Distribution/collection',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'collection')), array('name'=>'提现记录列表','link'=>U('Distribution/moneylist',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'moneylist')), array('name'=>'收货地址列表','link'=>U('Distribution/address',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'address')), )), array( 'name'=>'商城系统', 'iconName'=>'store', 'display'=>0, 'subs'=>array( array('name'=>'微信商城系统','link'=>U('Store/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Store')), )), ); ?>
 <?php
 $i=0; $parms=$_SERVER['QUERY_STRING']; $parms1=explode('&',$parms); $parmsArr=array(); if ($parms1){ foreach ($parms1 as $p){ $parms2=explode('=',$p); $parmsArr[$parms2[0]]=$parms2[1]; } } $subMenus=array(); $t=0; $currentMenuID=0; $currentParentMenuID=0; foreach ($menus as $m){ $loopContinue=1; if ($m['subs']){ $st=0; foreach ($m['subs'] as $s){ $includeArr=1; if ($s['selectedCondition']){ foreach ($s['selectedCondition'] as $condition){ if (!in_array($condition,$parmsArr)){ $includeArr=0; break; } } } if ($includeArr){ if ($s['exceptCondition']){ foreach ($s['exceptCondition'] as $epkey=>$eptCondition){ if ($epkey=='a'){ $parm_a_values=explode(',',$eptCondition); if ($parm_a_values){ if (in_array($parmsArr['a'],$parm_a_values)){ $includeArr=0; break; } } }else { if (in_array($eptCondition,$parmsArr)){ $includeArr=0; break; } } } } } if ($includeArr){ $currentMenuID=$st; $currentParentMenuID=$t; $loopContinue=0; break; } $st++; } if ($loopContinue==0){ break; } } $t++; } foreach ($menus as $m){ $displayStr=''; if ($currentParentMenuID!=0||0!=$currentMenuID){ $m['display']=0; } if (!$m['display']){ $displayStr=' style="display:none"'; } if ($currentParentMenuID==$i){ $displayStr=''; } $aClassStr=''; if ($displayStr){ $aClassStr=' nav-header-current'; } if($i == 0){ echo '<a class="nav-header'.$aClassStr.'" style="border-top:none !important;"><b class="'.$m['iconName'].'"></b>'.$m['name'].'</a><ul class="ckit"'.$displayStr.'>'; }else{ echo '<a class="nav-header'.$aClassStr.'"><b class="'.$m['iconName'].'"></b>'.$m['name'].'</a><ul class="ckit"'.$displayStr.'>'; } if ($m['subs']){ $j=0; foreach ($m['subs'] as $s){ $selectedClassStr='subCatalogList'; if ($currentParentMenuID==$i&&$j==$currentMenuID){ $selectedClassStr='selected'; } $newStr=''; if ($s['test']){ $newStr.='<span class="test"></span>'; }else { if ($s['new']){ $newStr.='<span class="new"></span>'; } } if ($s['name']!='微信墙'&&$s['name']!='摇一摇'){ echo '<li class="'.$selectedClassStr.'"> <a href="'.$s['link'].'">'.$s['name'].'</a>'.$newStr.'</li>'; }else { switch ($s['name']){ case '微信墙': case '摇一摇': if (file_exists($_SERVER['DOCUMENT_ROOT'].'/PigCms/Lib/Action/User/WallAction.class.php')&&file_exists($_SERVER['DOCUMENT_ROOT'].'/PigCms/Lib/Action/User/ShakeAction.class.php')){ echo '<li class="'.$selectedClassStr.'"> <a href="'.$s['link'].'">'.$s['name'].'</a>'.$newStr.'</li>'; } break; } } if ($s['name']=='模板管理'&&is_dir($_SERVER['DOCUMENT_ROOT'].'/cms')&&!strpos($_SERVER['HTTP_HOST'],'pigcms')){ echo '<li class="subCatalogList"> <a href="/cms/manage/index.php">高级模板</a><span class="new"></span></li>'; } $j++; } } echo '</ul>'; $i++; } ?>
 
@@ -333,7 +333,7 @@ afterBlur: function(){this.sync();}
           <tr>
             <th>类别：</th>
             <td>
-              <select name="catid" id="catid" <?php if(($catid) == $level_cat_id): ?>disabled<?php endif; ?>>
+              <select name="catid" id="catid">
                 <?php if(is_array($CatList)): $i = 0; $__LIST__ = $CatList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if(($vo["parentid"]) == "0"): ?><option  value="<?php echo ($vo["id"]); ?>" <?php if(($vo["id"]) == $catid): ?>selected<?php endif; ?>
                     ><?php echo ($vo["name"]); ?>
                   </option>
@@ -387,70 +387,20 @@ afterBlur: function(){this.sync();}
 <tr>
   <th>
     <span class="red">*</span>
-    游客价：
+    销售价：
   </th>
   <td>
-    <input type="text" id="price7" name="price7" value="<?php echo (($set["price7"])?($set["price7"]):0); ?>" class="validate norms_control px" data-warn="游客价不能为空"/>
+    <input type="text" id="price" name="price" value="<?php echo (($set["price"])?($set["price"]):0); ?>" class="validate norms_control px" data-warn="销售价不能为空"/>
     元
   </td>
 </tr>
 <tr>
   <th>
     <span class="red">*</span>
-    市代价：
+    市场价：
   </th>
   <td>
-    <input type="text" id="price6" name="price6" value="<?php echo (($set["price6"])?($set["price6"]):0); ?>" class="validate norms_control px" data-warn="市代价不能为空"/>
-    元
-  </td>
-</tr>
-<tr>
-  <th>
-    <span class="red">*</span>
-    省代价：
-  </th>
-  <td>
-    <input type="text" id="price5" name="price5" value="<?php echo (($set["price5"])?($set["price5"]):0); ?>" class="validate norms_control px" data-warn="省代价不能为空"/>
-    元
-  </td>
-</tr>
-<tr>
-  <th>
-    <span class="red">*</span>
-    官方价：
-  </th>
-  <td>
-    <input type="text" id="price4" name="price4" value="<?php echo (($set["price4"])?($set["price4"]):0); ?>" class="validate norms_control px" data-warn="官方价不能为空"/>
-    元
-  </td>
-</tr>
-<tr>
-  <th>
-    <span class="red">*</span>
-    大区价：
-  </th>
-  <td>
-    <input type="text" id="price3" name="price3" value="<?php echo (($set["price3"])?($set["price3"]):0); ?>" class="validate norms_control px" data-warn="大区价不能为空"/>
-    元
-  </td>
-</tr>
-<tr>
-  <th>
-    <span class="red">*</span>
-    CEO价：
-  </th>
-  <td>
-    <input type="text" id="price2" name="price2" value="<?php echo (($set["price2"])?($set["price2"]):0); ?>" class="validate norms_control px" data-warn="CEO价不能为空"/>
-    元
-  </td>
-</tr>
-<tr>
-  <th>
-    <span class="red">*</span>
-    公司价：
-  </th>
-  <td>
-    <input type="text" id="price" name="price" value="<?php echo (($set["price"])?($set["price"]):0); ?>" class="validate norms_control px" data-warn="公司价不能为空"/>
+    <input type="text" id="oprice" name="oprice" value="<?php echo (($set["oprice"])?($set["oprice"]):0); ?>" class="px"/>
     元
   </td>
 </tr>
@@ -466,17 +416,6 @@ afterBlur: function(){this.sync();}
         </option><?php endforeach; endif; else: echo "" ;endif; ?>
     </select>
   </td>
-</tr><?php endif; ?>
-<?php if(($catid) == $level_cat_id): ?><tr>
-  <th><span class="red">*</span> 对应等级：</th>
-  <td>
-    <select name="lid" id="lid">
-      <option value="0">==选择对应等级==</option>
-      <?php if(is_array($levels)): $i = 0; $__LIST__ = $levels;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($i % 2 );++$i;?><option value="<?php echo ($list["id"]); ?>" <?php if(($set["lid"]) == $list["id"]): ?>selected<?php endif; ?>
-        ><?php echo ($list["name"]); ?>
-      </option><?php endforeach; endif; else: echo "" ;endif; ?>
-  </select>
-</td>
 </tr><?php endif; ?>
 <tr>
 <th>库存：</th>
@@ -498,42 +437,6 @@ afterBlur: function(){this.sync();}
 (如果您不做假数据就设置为0)
 </td>
 </tr>
-<?php if(($catid) != $level_cat_id): ?><tr>
-<th>是否主打：</th>
-<td>
-  <input type="radio" name="featured" class="featured" value="1" id="featured_0" <?php if($set['featured'] == 1): ?>checked<?php endif; ?>
-/>
-<label for="featured_0">主打</label>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="radio" name="featured" class="featured" value="0" id="featured_1" <?php if($set['featured'] == 0): ?>checked<?php endif; ?>
-/>
-<label for="featured_1">非主打</label>
-</td>
-</tr>
-<tr>
-<th>是否特价：</th>
-<td>
-<input type="radio" name="specialoffer" class="specialoffer" value="1" id="specialoffer_0" <?php if($set['specialoffer'] == 1): ?>checked<?php endif; ?>
-/>
-<label for="specialoffer_0">特价</label>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="radio" name="specialoffer" class="specialoffer" value="0" id="specialoffer_1" <?php if($set['specialoffer'] == 0): ?>checked<?php endif; ?>
-/>
-<label for="specialoffer_1">非特价</label>
-</td>
-</tr>
-<tr>
-<th>是否秒杀：</th>
-<td>
-<input type="radio" name="secondskill" class="secondskill" value="1" id="secondskill_0" <?php if($set['secondskill'] == 1): ?>checked<?php endif; ?>
-/>
-<label for="secondskill_0">秒杀</label>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="radio" name="secondskill" class="secondskill" value="0" id="secondskill_1" <?php if($set['secondskill'] == 0): ?>checked<?php endif; ?>
-/>
-<label for="secondskill_1">非秒杀</label>
-</td>
-</tr><?php endif; ?>
 <tr>
 <th>是否下架：</th>
 <td>

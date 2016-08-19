@@ -1,0 +1,50 @@
+<include file="Public:head" /> 
+  <div class="content"> 
+   <div class="cLineB"> 
+    <h4>充值红色积分</h4> 
+    <a href="{wghd::U('Distribution/account',array('p'=>$_GET['p']))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+   </div> 
+   <form class="form" method="post" action="{wghd::U('Distribution/accountTopup')}"> 
+    <input type="hidden" name="aid" value="{wghd:$info.aid}" /> 
+    <input type="hidden" name="oid" value="{wghd:$info.oid}" /> 
+     
+    <div class="msgWrap bgfc"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+       <tr> 
+        <th>账号:</th> 
+        <td>{wghd:$info.username}</td> 
+       </tr>
+       <tr> 
+        <th>订单价格:</th> 
+        <td>{wghd:$info.price|default=0}</td> 
+       </tr>
+       <tr> 
+        <th>已冲积分:</th> 
+        <td>{wghd:$info.topup_integral|default=0}</td> 
+       </tr>
+       <tr> 
+        <th>还需积分:</th> 
+        <td>{wghd:$info.need_integral|default=0}</td> 
+       </tr>
+       <tr> 
+        <th>充值积分:</th> 
+        <input type="hidden" name="id" value="{wghd:$info.id}">
+        <td>
+          <input class="px" type="text" name="gold">
+        </td> 
+       </tr>
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <button type="submit" name="button" class="btnGreen">保存</button> &nbsp; <a href="{wghd::U('Distribution/account',array('token'=>$token,'p'=>$_GET['p']))}" class="btnGray vm">取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+   </form> 
+   <script>
+     
+   </script>
+  </div> 
+  <include file="Public:footer" />

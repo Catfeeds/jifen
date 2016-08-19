@@ -64,17 +64,15 @@ class DistributionAction extends WapAction{
     public function register(){
     	$from = $this->_get('from');
     	if(IS_POST){
-    		$username = $this->_post('username');
+    		$username = rtrim($this->_post('username'));;
     		$password = $this->_post('password');
 			if($this->isExists($username)){
     			$this->error('微信号已存在');
     		}
-    		if($this->randomAid()){
-	    		$_POST['bindaid'] = $this->randomAid();
-	    		if($this->account && $from == 'myshop'){
+    		$_POST['bindaid'] = $this->my['bindaid'];
+    		if($this->account && $from == 'myshop'){
 	    			$_POST['createid'] = $this->account['id'];
 	    		}
-    		}
     		if($this->account){
     			$this->insert('Account','/myShop');
     		}else{
@@ -89,39 +87,6 @@ class DistributionAction extends WapAction{
     	$accounts = M('Distribution_account')->where(array('createid'=>$this->account['id'],'delete'=>0))->select();
     	$this->assign('list',$accounts);
     	$this->display();
-    }
-    //随机选取上级账号ID
-    public function randomAid(){
-    	$from = $this->_get('from');
-    	//自己开通账号
-    	if($this->account && $from == 'myshop'){
-    		return $this->account['id'];
-    	}
-    	if($this->my && $this->my['id'] != 0){
-	    	if($this->my['bindaid']){
-	    		$bindaccount = D('Account')->where('id='.$this->my['bindaid'])->find();
-	    		if($bindaccount['lid'] != 0){
-	    			return $this->my['bindaid'];
-	    		}else{
-	    			return 0;
-	    		}
-	    	}else{
-	    		return 0;
-	    	}
-    	}else{
-    		$wecha_id = $this->_post('wecha_id');
-    		$my = M('Distribution_memner')->where(array('wecha_id'=>$wecha_id))->find();
-    		if($my['bindaid']){
-	    		$bindaccount = D('Account')->where('id='.$my['bindaid'])->find();
-	    		if($bindaccount['lid'] != 0){
-	    			return $my['bindaid'];
-	    		}else{
-	    			return 0;
-	    		}
-	    	}else{
-	    		return 0;
-	    	}
-    	}
     }
     //AJAX判断注册
     public function registerAjax(){
@@ -355,7 +320,7 @@ class DistributionAction extends WapAction{
 	public function myAddress(){
 		$db=M("address_list");
 		$condition = array(
-			'mid' => $this->my['id'],
+			'aid' => $this->account['id'],
 		);
 		$list=$db->where($condition)->order('addtime desc')->select();
 		if($list){
@@ -438,12 +403,29 @@ class DistributionAction extends WapAction{
 	public function chooseAdd(){
 		$id=$_GET["id"];
 		$db = M("address_list");
-		$db->where(array("mid"=>$this->my['id'],'choose'=>1))->setField("choose",0);
-		$result=$db->where(array("mid=".$this->my['id'],'id'=>$id))->setField("choose",1);
+		$db->where(array("aid"=>$this->account['id'],'choose'=>1))->setField("choose",0);
+		$result=$db->where(array("aid=".$this->account['id'],'id'=>$id))->setField("choose",1);
+		$data = $db->where(array("aid=".$this->account['id'],'id'=>$id))->find();
 		if($result){
-			$this->ajaxReturn("","设置成功",1);
+			$this->ajaxReturn(json_encode($data),"设置成功",1);
 		}else{
 			$this->ajaxReturn("","设置失败",2);
+		}
+	}
+	//获取默认地址（AJAX）
+	public function getMyAddress(){
+
+		$db = D("Address");
+		$address=$db->where(array('aid'=>$this->account['id'],'choose'=>1))->find();
+		if($address){
+			$str.="<div class='shouhuo_name'>".$address['name']." ".$address['tele']."</div>";
+			$str.="<div class='shouhuo_dizhi iconfont'>".$address['province'].$address['city'].$address['county'].$address['address']."</div>";
+			$str.="<div class='more'>></div>";
+			$this->ajaxReturn($str,"",1);
+		}else{
+			$str.="<div class='shouhuo_name'>您还没有地址信息，点击添加</div>";
+			$str.="<div class='more'>></div>";
+			$this->ajaxReturn($str,"",2);
 		}
 	}
 
@@ -498,9 +480,6 @@ class DistributionAction extends WapAction{
 	}
 	//充值页面
 	public function topUp(){
-		// if($this->account['lid'] == 0){
-		// 	$this->error('非会员不能进行充值',U('Distribution/index'));
-		// }
 		//判断是否有下级退款充值
 		// $hasrefund = M('LevelOrders')->where(array('bindaid'=>$this->account['id'],'return'=>array('neq',0),'type'=>1))->select();
 		// if($hasrefund){
@@ -511,10 +490,8 @@ class DistributionAction extends WapAction{
 	//充值升级记录
 	public function tpupRecord(){
 		$db = D('LevelOrders');
-		$type = $this->_get('type');
 		$condition = array(
 			'aid' => $this->account['id'],
-			'type' => $type,
 			'paid' => 1,
 		);
 		$records = $db->where($condition)->relation(true)->select();
@@ -536,24 +513,41 @@ class DistributionAction extends WapAction{
 	public function topupCondtion($gold){
 		return array('status'=>1,'info'=>'');
 	}
+	public function test(){
+		$payHandel=new payHandle($this->token,'Distribution');
+		$payHandel->afterPay('I20160818135103');
+		// $totalprice = 0.01;
+		// $orderid = 'I20160805100150';
+		// $this->success('正在提交中...', U('Alipay/pay',array('token' => $this->token, 'wecha_id' => $this->wecha_id, 'success' => 1, 'from'=> 'Distribution', 'orderName' => $orderid, 'single_orderid' => $orderid, 'price' => $totalprice)));
+		// $list = D('Account')->where(array('mid'=>0))->select();
+		// foreach ($list as $k => $v) {
+		// 	if($v['wecha_id']){
+		// 		$mid = M('Distribution_member')->where(array('wecha_id'=>$v['wecha_id']))->getField('id');
+		// 		if($mid){
+		// 			D('Account')->where('id='.$v['id'])->setField('mid',$mid);
+		// 		}
+		// 	}
+		// }
+	}
+	
 	//充值提交
 	public function topupSubmit(){
-		$gold = $this->_post('gold');
-		$condition = $this->topupCondtion($gold);
+		$green = $this->_post('green');
+		$condition = $this->topupCondtion($green);
 		if($condition['status'] != 1){
 			$this->error($condition['info']);
 		}
 		if($condition['status'] == 1){
 			//插入充值订单表
 			$orderid = substr($this->wecha_id, -1, 4) . date("YmdHis");
-			$price = $gold;
+			$price = $green;
 			$_POST['orderid'] = $orderid;
 			$_POST['price'] = $price;
-			$_POST['type'] = 1;
 			$_POST['aid'] = $this->account['id'];
 			$_POST['bindaid'] = $this->account['bindaid'];
 			$_POST['mid'] = $this->my['id'];
 			$_POST['wecha_id'] = $this->my['wecha_id'];
+			$_POST['integral'] = $green * 0.5;
 			$db = D('LevelOrders');
 
 			if ($db->create() === false) {
@@ -779,6 +773,42 @@ class DistributionAction extends WapAction{
 		}else{
 			$this->display();
 		}
+	}
+	//收入明细
+	public function earnDetails(){
+		$type = $this->_get('type');
+		switch ($type) {
+			case 'red':
+				$info = $this->statistical('red',$this->account['id']);
+				$list = M('Distribution_earning')->where(array('aid'=>$this->account['id'],'red'=>array('neq',0)))->order('id desc')->select();
+				foreach ($list as $k => $v) {
+					$list[$k]['earn'] = $v['red'];
+				}
+				$name = '红色积分';
+				break;
+			
+			case 'green':
+				$info = $this->statistical('green',$this->account['id']);
+				$list = M('Distribution_earning')->where(array('aid'=>$this->account['id'],'green'=>array('neq',0)))->order('id desc')->select();
+				foreach ($list as $k => $v) {
+					$list[$k]['earn'] = $v['green'];
+				}
+				$name = '绿色积分';
+				break;
+
+			case 'black':
+				$info = $this->statistical('black',$this->account['id']);
+				$list = M('Distribution_earning')->where(array('aid'=>$this->account['id'],'black'=>array('neq',0)))->order('id desc')->select();
+				foreach ($list as $k => $v) {
+					$list[$k]['earn'] = $v['black'];
+				}
+				$name = '黑色积分';
+				break;
+		}
+		$this->assign('list',$list);
+		$this->assign('info',$info);
+		$this->assign('name',$name);
+		$this->display();
 	}
 	//我的收益
 	public function getMoneyList(){
@@ -1103,9 +1133,6 @@ class DistributionAction extends WapAction{
 			$account['petname'] =base64_decode($account['petname']);
 			$this->assign('account',$account);
 		}else{
-			if($this->account['lid'] == 0){
-				$this->error('请升级后获取二维码',U('Distribution/upgrade'));
-			}
 			if(!$this->checkPersonalInfoPerfect($this->account['id'])){
 				$this->error('请完善个人资料',U('Distribution/index'));
 			}

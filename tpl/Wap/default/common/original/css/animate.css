@@ -1,0 +1,59 @@
+.move_left-100{
+  -webkit-animation-timing-function: linear; animation-timing-function: linear; 
+  -webkit-animation-duration: 0.3s; animation-duration: 0.3s;
+  -webkit-animation-name: left-100; animation-name: left-100;
+  -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards;
+}
+.move_left-100-0{
+  -webkit-animation-timing-function: linear; animation-timing-function: linear; 
+  -webkit-animation-duration: 0.3s; animation-duration: 0.3s;
+  -webkit-animation-name: left-100-0; animation-name: left-100-0;
+  -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards;
+}
+.move_left100-0{
+  -webkit-animation-timing-function: linear; animation-timing-function: linear; 
+  -webkit-animation-duration: 0.3s; animation-duration: 0.3s;
+  -webkit-animation-name: left100-0; animation-name: left100-0;
+  -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards;
+}
+.move_left0-100{
+  -webkit-animation-timing-function: linear; animation-timing-function: linear; 
+  -webkit-animation-duration: 0.3s; animation-duration: 0.3s;
+  -webkit-animation-name: left0-100; animation-name: left0-100;
+  -webkit-animation-fill-mode: forwards; animation-fill-mode: forwards;
+}
+@-webkit-keyframes left-100 {
+  0% {left: 0;}
+  100% { left: -100%;}
+}
+@keyframes left-100 {
+  0% {left: 0;}
+  100% { left: -100%;}
+}
+
+@-webkit-keyframes left-100-0 {
+  0% {left: -100%;}
+  100% { left: 0;}
+}
+@keyframes left-100-0 {
+  0% {left: -100%;}
+  100% { left: 0;}
+}
+
+@-webkit-keyframes left100-0 {
+  0% {left: 100%;}
+  100% { left: 0;}
+}
+@keyframes left100-0 {
+  0% {left: 100%;}
+  100% { left: 0;}
+}
+
+@-webkit-keyframes left0-100 {
+  0% {left: 0;}
+  100% { left: 100%;}
+}
+@keyframes left0-100 {
+  0% {left: 0;}
+  100% { left: 100%;}
+}

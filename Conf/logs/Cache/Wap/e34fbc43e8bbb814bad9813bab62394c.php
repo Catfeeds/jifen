@@ -70,7 +70,7 @@ $(function(){
 			<div class="details_dashed"></div>
 			<div class="details_price">
 				现价：￥<?php echo ($product["price"]); ?> &nbsp;&nbsp;&nbsp;&nbsp;
-				<span>原价：￥<?php echo ($product["oprice"]); ?></span>
+				<?php if(($product["oprice"]) != "0"): ?><span>原价：￥<?php echo ($product["oprice"]); ?></span><?php endif; ?>
 			</div>
 			<div class="details_dashed"></div>
 			<div class="details_sale">销量：<?php echo ($product["fakemembercount"]); ?>件</div>

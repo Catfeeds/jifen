@@ -118,12 +118,12 @@ if (!isset($_SESSION['isQcloud'])){
         <div class="accountInfo">
 <table class="vipInfo" width="100%" border="0" cellpadding="0" cellspacing="0">
 <tr>
-<td><strong>VIP有效期：</strong>{wghd:$thisUser.viptime|date="Y-m-d",###}</td>
+<td><strong>公司红色积分：</strong>{wghd:$admin_account.red|default=0}</td>
 <td><strong>图文自定义：</strong>{wghd:$thisUser.diynum}/{wghd:$userinfo.diynum}</td>
 <td><strong>请求数：</strong>{wghd:$thisUser.connectnum}/{wghd:$userinfo.connectnum}</td>
 </tr>
 <tr>
-<td><strong>请求数剩余：</strong><php>echo ($userinfo['connectnum']-$_SESSION['connectnum']);</php></td>
+<td><strong>已使用：</strong>{wghd:$admin_account.usedred|default=0}</td>
 <td><strong>已使用：</strong><php>echo $_SESSION['diynum'];</php></td>
 <td><strong>当月剩余请求数：</strong><php>echo $userinfo['connectnum']-$_SESSION['connectnum'];</php></td>
 </tr>
@@ -252,8 +252,9 @@ array(
 'iconName'=>'card',
 'display'=>0,
 'subs'=>array(
-array('name'=>'会员列表','link'=>U('Distribution/member',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'member')),
-/*array('name'=>'会员升级记录','link'=>U('Distribution/levelRecord',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'levelRecord')),*/
+array('name'=>'账号列表','link'=>U('Distribution/account',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'account')),
+// array('name'=>'会员列表','link'=>U('Distribution/member',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'member')),
+array('name'=>'会员充值金币记录','link'=>U('Distribution/topupRecord',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'topupRecord')),
 array('name'=>'会员收藏列表','link'=>U('Distribution/collection',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'collection')),
 array('name'=>'提现记录列表','link'=>U('Distribution/moneylist',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'moneylist')),
 array('name'=>'收货地址列表','link'=>U('Distribution/address',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'address')),
