@@ -17,13 +17,18 @@
             <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
               <thead>
                 <tr>
+          <th>排序</th>
 					<th>账号ID</th>
           <th>账号名</th>
-          <th>获得绿色积分</th>
-          <th>分红色积分</th>
-          <th>返红色积分</th>
-          <th>还需红色积分</th>
-          <th>退款状态</th>
+          <th style="color: green;">绿色咪豆</th>
+          <th>黑色咪豆</th>
+          <th style="color: red;">补贴咪豆</th>
+          <th style="color: red;">下级返红</th>
+          <th>小计</th>
+          <th style="color: blue;">剩余补贴</th>
+          <th>后台充值</th>
+          <th>生成红色咪豆</th>
+          <th>配送次数</th>
           <th>时间</th>
           <th>操作</th>
                 </tr>
@@ -32,21 +37,27 @@
                 <tr></tr>
                   <volist id="list" name="list">
                 <tr>
+                  <td>{wghd:$key+1}</td>
                   <td>{wghd:$list.account.id}</td>
                   <td>{wghd:$list.account.username}</td>
-                  <td>{wghd:$list.green}</td>
-                  <td>{wghd:$list.integral}</td>
-                  <td>{wghd:$list.topup}</td>
-                  <td>{wghd:$list.need_integral}</td>
+                  <td style="color: green;">{wghd:$list.green}</td>
+                  <td>{wghd:$list.black}</td>
+                  <td style="color: red;">{wghd:$list.topup}</td>
+                  <td>{wghd:$list['green'] + $list['black'] + $list['topup']}</td>
+                  <td style="color: blue;">{wghd:$list.need_integral}</td>
                   <td>
-                    <eq name="list.return" value="1">申请退款</eq> 
-                    <eq name="list.return" value="2">退款完成</eq> 
+                    <eq name="list.back" value="1">是<else/>否</eq>
                   </td>
+                  <td>{wghd:$list.integral}</td>
+                  <td>{wghd:$list.distribution}</td>
                   <td>{wghd:$list.addtime|date='Y-m-d H:i:s',###}</td>
                   <td class="norightborder">
                     <neq name="list.finish" value="1">
-                      <a href="{wghd::U('Distribution/topupRecord',array('id'=>$list['id'],'type'=>'return'))}" title="反红色积分">反红色积分</a>
+                      <egt name="list.green" value="1000">
+                        <a style="background: #d00101 !important;color: #fff !important;" href="{wghd::U('Distribution/topupRecord',array('id'=>$list['id'],'type'=>'return'))}" title="反红色咪豆">补贴红色咪豆</a>
+                      </egt>
                     </neq>
+                     <a href="{wghd::U('Distribution/topupRecord',array('id'=>$list['id'],'type'=>'details'))}" title="明细">明细</a>
                     <!-- <eq name="list.back" value="1">
                       <a href="{wghd::U('Distribution/retrunBackTopup',array('id'=>$list['id']))}" title="撤回">撤回</a>
                     </eq> -->

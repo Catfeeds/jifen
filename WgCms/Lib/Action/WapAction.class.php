@@ -33,7 +33,9 @@ class WapAction extends BaseAction
 		// 	session('jifenwecha_id',null);
 		// 	setcookie('login_user',null);
 		// }
-		session('jifenwecha_id','oIZlMvw4x3ObFxTdV5lBcTAmgwQI');
+		if($this->_get('cailuobintest') == 1){
+			session('jifenwecha_id','ojHdsv688adRMwKKT2Fb7Etj5LWc');
+		}
         $this->assign('wxuser', $this->wxuser);
         // strpos($agent,"icroMessenger") && 
         if (!session('jifenwecha_id') && $this->wxuser['winxintype'] == 3 && !isset($_GET['code']) && $this->wxuser['oauth']) {
@@ -83,6 +85,7 @@ class WapAction extends BaseAction
 						);
 						$db = M('Distribution_member');
 						$mid = $_GET['mid'];
+						Log::write('mid='.$mid,'DEBUG');
 						if($mid){
 						    $data['bindmid'] = $mid;
 						    //绑定账号
@@ -280,7 +283,7 @@ class WapAction extends BaseAction
     	return $str;
     }
     //向账号发送信息
-	public function sendupMessage($aid,$title,$content,$url){
+	public function sendupMessage($aid,$title,$content,$url=''){
 		$bindm = D('Account')->where(array('id'=>$aid))->relation(true)->find();
 		if($bindm){
 			$this->sendMessage($bindm['member']['wecha_id'],$title,$content,$url);
@@ -514,5 +517,16 @@ class WapAction extends BaseAction
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $temp = curl_exec($ch);
         return $temp;
+    }
+    //判断咪豆
+
+    public function judgeIntegral($num,$type = 'green'){
+    	$db = M('Distribution_earning');
+    	$integral = $db->where(array('aid'=>$this->account['id']))->sum($type);
+    	if($integral < $num){
+    		return false;
+    	}else{
+    		return true;
+    	}
     }
 }

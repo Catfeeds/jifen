@@ -100,9 +100,9 @@
         </div>
         
         <div class="text">
-       	  <div class="cont1">您当前可提现的金额是{wghd::$getmoney}元</div><!--cont-->
+       	  <div class="cont1">您当前可提现的金额是{wghd::$account['red']}元</div><!--cont-->
        	  <div class="cont1">(注:请核对好您的账号与姓名,出现错误概不负责)</div><!--cont-->
-       	  <input type="hidden" id="nowMoney" value="{wghd::$getmoney}" />
+       	  <input type="hidden" id="nowMoney" value="{wghd::$account['red']}" />
        	  <div class="cont1" style="font-size: 1.1rem;line-height: 30px;height: 30px;">提现将扣除<eq name="_GET['type']" value="2">2%<else/>5%</eq>的手续费</div><!--cont-->
           <div class="cont1 cont2">注：每次提现金额在50到5万之间</div><!--cont-->
             <div class="cont1"><input name="money" id="money" type="text" class="bd1" value="" placeholder="请输入提现金额"/></div><!--cont-->

@@ -67,23 +67,32 @@ final class payHandle
         if (strtolower($this->getFrom()) == 'distribution') {
             if($orderData['handled'] == 0){
                 $set = M('Distribution_set')->find();
-                //自己充值绿色积分
-                $this->earnRecord($account['id'],$orderData['id'],$orderData['green'],0,0,6,$member['id']);
-                //返还上级积分
+                //自己充值绿色咪豆
+
+                $this->earnRecord($account['id'],$orderData['id'],$orderData['green'],0,0,6,$member['id'],0,$account['id']);
+                //返还上级咪豆
+
                 if($account['bindaid']){
-                    $this->earnRecord($account['bindaid'],$orderData['id'],0,$orderData['integral'] * $set['firstPer']/100,0,1,$member['id']);
-                    //返还上上级积分
+                    $this->earnRecord($account['bindaid'],$orderData['id'],0,$orderData['integral'] * $set['firstPer']/100,0,1,$member['id'],0,$account['id']);
+                    //返还上上级咪豆
+
                     $upupaid = D('Account')->where('id='.$account['bindaid'])->getField('bindaid');
                     if($upupaid){
-                        $this->earnRecord($upupaid,$orderData['id'],0,$orderData['integral'] * $set['secondPer']/100,0,2,$member['id']);
+                        $this->earnRecord($upupaid,$orderData['id'],0,$orderData['integral'] * $set['secondPer']/100,0,2,$member['id'],0,$account['id']);
+                    }else{//如果没有上上级 将分红返还给公司
+                        $this->earnRecord(-1,$orderData['id'],0,$orderData['integral'] * $set['secondPer']/100,0,13,$member['id'],0,$account['id']);
                     }
+                }else{//如果没有上级 将 两份返红给公司
+                    $this->earnRecord(-1,$orderData['id'],0,$orderData['integral'] * ($set['firstPer'] + $set['secondPer'])/100,0,12,$member['id'],0,$account['id']);
                 }
-                //返还代理点积分
+                //返还代理点咪豆
+
                 if($account['agent']){
-                    $this->earnRecord($account['agent'],$orderData['id'],0,$orderData['integral'] * $set['thirdPer']/100,0,3,$member['id']);
+                    $this->earnRecord(0,$orderData['id'],0,$orderData['integral'] * $set['thirdPer']/100,0,3,$member['id'],$account['agent'],$account['id']);
                 }
-                //返还公司积分
-                $this->earnRecord(-1,$orderData['id'],0,$orderData['integral'] * $set['comPer']/100,0,4,$member['id']);
+                //返还公司咪豆
+
+                $this->earnRecord(-1,$orderData['id'],0,$orderData['integral'] * $set['comPer']/100,0,4,$member['id'],0,$account['id']);
 
                 $order_model->where(array('orderid'=>$id))->setField('handled',1);
             }
@@ -91,7 +100,7 @@ final class payHandle
         return $thisOrder;
     }
     //金币和现金收入支出记录
-    public function earnRecord($aid,$oid,$green,$red,$black,$status,$mid){
+    public function earnRecord($aid,$oid,$green,$red,$black,$status,$mid,$gid = 0,$fromid = 0){
         if($aid > 0){
             if($green != 0){
                 D('Account')->where('id='.$aid)->setInc('green',$green);
@@ -106,8 +115,10 @@ final class payHandle
         $earndb = M('Distribution_earning');
         $data = array(
             'aid' => $aid,
+            'gid' => $gid,
             'oid' => $oid,
             'mid' => $mid,
+            'fromid' => $fromid,
             'green' => $green,
             'red' => $red,
             'black' => $black,

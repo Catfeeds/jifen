@@ -6,7 +6,7 @@
 <div class="content">
          
           <div class="cLineB">
-			<h4 class="left">会员充值列表</h4>
+			<h4 class="left">账号列表</h4>
 			</div>
                 <div class="cLine">
                   <div class="pageNavigator">
@@ -51,18 +51,16 @@
                   <!-- <td>{wghd:$list.creater}</td> -->
                   <td>{wghd:$list.bindac.nickname}</td>
                   <!-- <td>{wghd:$list.member.nickname}</td> -->
-                  <td>{wghd:$list.addtime|date='Y-m-d',###}</td>
+                  <td>{wghd:$list.addtime|date='Y-m-d H:i:s',###}</td>
                   <td class="norightborder">
                     <a href="{wghd::U('Distribution/account',array('id'=>$list['id'],'type'=>'detail','p'=>$_GET['p']))}" title="详细">详细</a> | 
-                    <a href="javascript:drop_confirm('您确定要删除吗?', '{wghd::U('Distribution/deleteAccount',array('id'=>$list['id']))}');" title="设置上级">删除</a>
+                    <!-- <a href="javascript:drop_confirm('您确定要删除吗?', '{wghd::U('Distribution/deleteAccount',array('id'=>$list['id']))}');" title="删除">删除</a> | -->
+                    <if condition="($list['admin'] neq 1) and ($list['bartender'] neq 1)">
+                      <a href="{wghd::U('Distribution/account',array('id'=>$list['id'],'type'=>'topup','p'=>$_GET['p']))}" title="充值绿色咪豆">充值</a>
+                    </if>
                   </td>
                 </tr>
-                  </volist>
-      			         <script>
-                  function bindupaccount(id){
-                    art.dialog.open('{wghd::U('Distribution/bindupaccount',array('token'=>$token,'dining'=>$isDining,'id'=>"'+id+'"))}',{lock:false,title:'设置上级',width:1000,height:620,yesText:'关闭',background: '#000',opacity: 0.87,close: function(){location.reload();}});
-                  }
-                  </script>          
+                  </volist>        
                   
               </tbody>
             </table>

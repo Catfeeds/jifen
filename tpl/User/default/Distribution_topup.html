@@ -1,7 +1,8 @@
 <include file="Public:head" /> 
   <div class="content"> 
    <div class="cLineB"> 
-    <h4>充值红色积分</h4> 
+    <h4>充值红色咪豆
+</h4> 
     <a href="{wghd::U('Distribution/account',array('p'=>$_GET['p']))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
    </div> 
    <form class="form" method="post" action="{wghd::U('Distribution/accountTopup')}"> 
@@ -20,15 +21,15 @@
         <td>{wghd:$info.price|default=0}</td> 
        </tr>
        <tr> 
-        <th>已冲积分:</th> 
+        <th>已冲红色咪豆:</th> 
         <td>{wghd:$info.topup_integral|default=0}</td> 
        </tr>
        <tr> 
-        <th>还需积分:</th> 
+        <th>还需红色咪豆:</th> 
         <td>{wghd:$info.need_integral|default=0}</td> 
        </tr>
        <tr> 
-        <th>充值积分:</th> 
+        <th>补贴红色咪豆:</th> 
         <input type="hidden" name="id" value="{wghd:$info.id}">
         <td>
           <input class="px" type="text" name="gold">

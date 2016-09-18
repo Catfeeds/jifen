@@ -1,0 +1,67 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="{wghd::RES}/css/cymain.css" />
+<script src="{wghd::STATICS}/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="{wghd::STATICS}/artDialog/plugins/iframeTools.js"></script>
+<script language="javascript" type="text/javascript" src="{wghd::RES}/My97DatePicker/WdatePicker.js"></script>
+
+<div class="content">
+
+  <div class="cLineB">
+    <h4 class="left" style="color: red;">代理点:{wghd:$agent.name}&nbsp;总收入:{wghd:$red}&nbsp;
+        <a href="{wghd::U('Distribution/agent',array('type'=>transferpage,'id'=>$agent['id']))}">
+          <input type="submit" class="btnGrayS" value="转账">
+        </a>
+      <a href="{wghd::U('Distribution/agent',array('type'=>transferDetails,'id'=>$agent['id']))}">
+        <input type="submit" class="btnGrayS" value="明细" style="display: inline-block;">
+      </a>
+    </h4>
+  </div>
+  <div class="cLine">
+    <div class="pageNavigator">
+      <span>
+        <form action="{wghd::U('Distribution/agent',array('type'=>'earndetails','id'=>$agent['id']))}" method="post" style="float: left;">
+          关键词：
+          <input type="text" name="name" class="px" value="{wghd:$Think.request.name}" placeholder="输入账号名">
+          <input class="Wdate" id="starttime" name="starttime" value="{wghd:$Think.post.starttime}" type="text" onClick="WdatePicker()" style="width:100px">&nbsp;到&nbsp;<input class="Wdate" id="endtime" name="endtime" value="{wghd:$Think.post.endtime}" type="text" onClick="WdatePicker()" style="width:100px">
+          <input type="submit" class="btnGrayS" value="搜索">
+        </form>
+      </span>
+
+    </div>
+
+    <div class="clr"></div>
+  </div>
+  <div class="msgWrap">
+    <input name="delall" type="hidden" value="del">
+    <input name="wxid" type="hidden" value="gh_423dwjkewad">
+    <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+      <thead>
+        <tr>
+          <th>账号ID</th>
+          <th>账号名</th>
+          <th style="color: red;">分到红色咪豆</th>
+          <th>时间</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr></tr>
+        <volist id="list" name="earns">
+          <tr>
+            <td>{wghd:$list.fromid}</td>
+            <td>{wghd:$list.account.username}</td>
+            <td style="color: red;">{wghd:$list.red|default=0}</td>
+            <td>{wghd:$list.addtime|date='Y-m-d H:i:s',###}</td>
+          </tr>
+        </volist>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="cLine">
+    <div class="pageNavigator right">
+      <div class="pages">{wghd:$page}</div>
+    </div>
+    <div class="clr"></div>
+  </div>
+</div>
+<include file="Public:footer"/>

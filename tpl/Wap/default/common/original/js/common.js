@@ -11,13 +11,13 @@ define(['jquery','loading','velocity','velocity-ui'],function($,loading,animate)
     var load;
     function Common(){
         //背景效果图
-        var imgitem = $('.movebg');
-        var nums = imgitem.length;
-        var index = 1;
-        setInterval(function() {
-            imgitem.eq(index).addClass('slideshow-image').siblings().removeClass('slideshow-image');
-            index >= nums - 1 ? index = 0 : index++;
-        }, 6000);
+        // var imgitem = $('.movebg');
+        // var nums = imgitem.length;
+        // var index = 1;
+        // setInterval(function() {
+        //     imgitem.eq(index).addClass('slideshow-image').siblings().removeClass('slideshow-image');
+        //     index >= nums - 1 ? index = 0 : index++;
+        // }, 6000);
 
         //设置HTML BODY定位
         $('html,body').css({'height':'100%'});

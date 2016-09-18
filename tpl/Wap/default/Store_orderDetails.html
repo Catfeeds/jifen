@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<title>Document</title>
+	<link rel="stylesheet" href="{wghd::RES}/original/others/main.css">
+	<link rel="stylesheet" href="{wghd::RES}/original/css/weui.min.css">
+	<link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.min.css">
+	<link rel="stylesheet" href="{wghd::RES}/original/css/style.css"></head>
+<body style="background:#efefef">
+	<div class="container">
+		<style>
+  .info_edit_wrap_title .info_edit_wrap_title_left:before{
+    border-color: #fff;
+  }
+</style>
+		<div class="info_edit_wrap_title" style='background-color: #f1bf64; color: #fff;'>
+			<div class="info_edit_wrap_title_item info_edit_wrap_title_left close_edit_wrap"></div>
+			<div class="info_edit_wrap_title_item info_edit_wrap_title_center">订单详情</div>
+			<div class="info_edit_wrap_title_item info_edit_wrap_title_right"></div>
+		</div>
+		<div class="fahuo_information">订单信息</div>
+		<div class="fahuo_all">
+			<div class="fahuo_box">
+				<div class="fahuo_item">订单生成时间</div>
+				<div class="fahuo_item1">{wghd:$info.time|date='Y-m-d H:m:i',###}</div>
+			</div>
+			<eq name="info.paid" value="1">
+				<div class="fahuo_box">
+					<div class="fahuo_item">订单支付时间</div>
+					<div class="fahuo_item1">{wghd:$info.buytime|date='Y-m-d H:m:i',###}</div>
+				</div>
+			</eq>
+			<div class="fahuo_box">
+				<div class="fahuo_item">价格</div>
+				<div class="fahuo_item1">
+					<eq name="info.integral" value="0">
+						{wghd:$info.price}元
+						<else/>
+						{wghd:$info.integral}咪豆
+
+					</eq>
+				</div>
+			</div>
+			<div class="fahuo_box">
+				<div class="fahuo_item">交易方式</div>
+				<div class="fahuo_item1">
+					<empty name="info.integral">
+						咪豆支付
+						<else/>
+						微信支付
+					</empty>
+				</div>
+			</div>
+			<div class="fahuo_box">
+				<div class="fahuo_item">交易单号</div>
+				<div class="fahuo_item1">{wghd:$info.orderid}</div>
+			</div>
+			<div class="fahuo_box">
+				<div class="fahuo_item">交易状态</div>
+				<div class="fahuo_item1">
+					<eq name="info.paid" value="1">
+						付款成功
+						<else/>
+						未付款
+					</eq>
+				</div>
+			</div>
+			<div class="fahuo_box">
+				<div class="fahuo_item">对应账号</div>
+				<div class="fahuo_item1">
+					{wghd:$info.account}
+				</div>
+			</div>
+			<neq name="info.adminid" value="0">
+				<div class="fahuo_box">
+					<div class="fahuo_item">订购信息</div>
+					<div class="fahuo_item1">
+						系统配送
+					</div>
+				</div>
+			</neq>
+			<neq name="info.returnMoney" value="0">
+				<div class="fahuo_box">
+					<div class="fahuo_item">退款状态</div>
+					<div class="fahuo_item1">
+						<switch name="info.returnMoney">
+							<case value="1">退款中</case>
+							<case value="2">退款成功</case>
+						</switch>
+					</div>
+				</div>
+			</neq>
+			<notempty name="info.remark">
+				<div class="fahuo_box">
+					<div class="fahuo_item">留言</div>
+					<div class="fahuo_item1">{wghd:$info.remark}</div>
+				</div>
+			</notempty>
+		</div>
+		<div class="fahuo_information">收件人信息</div>
+		<div class="fahuo_all">
+			<div class="fahuo_box">
+				<div class="fahuo_item">发货状态</div>
+				<div class="fahuo_item1">
+					<eq name="info.sent" value="1">
+						已发货
+						<else/>
+						未发货
+					</eq>
+				</div>
+			</div>
+			<div class="fahuo_box">
+				<div class="fahuo_item">收件人</div>
+				<div class="fahuo_item1">{wghd:$info.truename}</div>
+			</div>
+			<div class="fahuo_box">
+				<div class="fahuo_item">联系方式</div>
+				<div class="fahuo_item1">{wghd:$info.tel}</div>
+			</div>
+			<div class="fahuo_box">
+				<div class="fahuo_item">收件地址</div>
+				<div class="fahuo_item1">
+					{wghd:$info.province}{wghd:$info.city}{wghd:$info.county}{wghd:$info.address}
+				</div>
+			</div>
+		</div>
+		<if condition="($info['logistics'] neq null) AND ($info['logisticsid'] neq null)">
+			<div class="fahuo_information">物流信息</div>
+			<div class="fahuo_all">
+				<div class="fahuo_box">
+					<div class="fahuo_item">快递公司</div>
+					<div class="fahuo_item1">{wghd:$info.logistics}</div>
+				</div>
+				<div class="fahuo_box">
+					<div class="fahuo_item">快递单号</div>
+					<div class="fahuo_item1">{wghd:$info.logisticsid}</div>
+				</div>
+				<!-- <a style="display: block;text-indent: 85px;font-size: 15px;color: red;" href="http://m.kuaidi100.com/index_all.html?postid={wghd:$info['logisticsid']}">查看物流</a> -->
+			</div>
+		</if>
+		<!-- <if condition="($info.sent neq 1) AND ($info.returnMoney eq 0) AND ($info.paid eq 1) AND ($info.aid eq $account['id'])">
+			<a href="javascript:;" class="weui_btn weui_btn_disabled weui_btn_warn weui_btn_submit" style="background-color: #ebab37;margin-top: 10px;" data-id="{wghd:$info.id}" data-lid="{wghd:$info.lid}" id="order_apply_refund">申请退款</a>
+		</if> -->
+		<if condition ="($info.paid eq 0) AND ($info.returnMoney eq 0)">
+			<a href="{wghd::U('Store/payNow',array('id'=>
+				$info['id']))}" class="weui_btn weui_btn_disabled weui_btn_warn weui_btn_submit place_order" data-id="{wghd:$info.id}" style="background-color: #ebab37;margin-top: 10px;">立即付款
+			</a>
+		</if>
+		<!-- <if condition="($info.returnMoney eq 1) AND ($info.active eq 1) AND ($info.bindaid eq $account['id'])">
+			<a href="javascript:;" class="weui_btn weui_btn_disabled weui_btn_warn weui_btn_submit" style="background-color: #ebab37;margin-top: 10px;" data-id="{wghd:$info.id}" id="order_agree_refund">同意退款
+			</a>
+		</if> -->
+	</div>
+</body>
+</html>

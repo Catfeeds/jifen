@@ -1,19 +1,19 @@
-*{
+* {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-html,body,.container{
+html, body, .container {
 	width: 100%;
 }
-.clear{
+.clear {
 	clear: both;
 }
-.qrcode_bg{
+.qrcode_bg {
 	position: relative;
 	width: 100%;
 }
-.qrcode_wrap{
+.qrcode_wrap {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -22,34 +22,32 @@ html,body,.container{
 	-webkit-background-size: 100% 100%;
 	background-size: 100% 100%;
 }
-.qrcode_top{
-
-width: 65%;
-
-margin: 3% auto 0;
+.qrcode_top {
+	width: 65%;
+	margin: 3% auto 0;
 }
-.qrcode_top img{
+.qrcode_top img {
 	width: 100%;
 }
-.account_info{
+.account_info {
 	margin-top: 1%;
 	margin-left: 17%;
-	text-align\: c;
+	text-align: center;
 }
-.account_info_left{
+.account_info_left {
 	width: 26%;
 	float: left;
 }
-.account_info_left img{
+.account_info_left img {
 	width: 100%;
 	display: block;
 }
-.account_info_right{
+.account_info_right {
 	float: left;
 	margin-left: 5px;
 	max-width: 70%;
 }
-.account_info_right p:first-of-type{
+.account_info_right p:first-of-type {
 	background-color: #d73c8f;
 	height: 9vw;
 	line-height: 9vw;
@@ -58,33 +56,23 @@ margin: 3% auto 0;
 	color: #fff;
 	margin-top: 4vw;
 }
-.account_info_right p img{
-	
-width: 68%;
-	
-margin-top: 5px;
+.account_info_right p img {
+	width: 68%;
+	margin-top: 5px;
 }
-.qrcode_word_item{
-	
-text-align: center;
-	
-font-size: 4vw;
-	
-margin-top: 7px;
+.qrcode_word_item {
+	text-align: center;
+	font-size: 4vw;
+	margin-top: 7px;
 }
-.qrcode_img{
-
-width: 65%;
-
-margin: 2% auto 0;
-
-border: 1px dotted #7bbfdc;
-
-padding: 5px;
-
-overflow: hidden;
+.qrcode_img {
+	width: 65%;
+	margin: 2% auto 0;
+	border: 1px dotted #7bbfdc;
+	padding: 5px;
+	overflow: hidden;
 }
-.qrcode_img img{
+.qrcode_img img {
 	width: 100%;
 	display: block;
 }

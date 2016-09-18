@@ -6977,7 +6977,8 @@ INSERT INTO `pigcms_indent` (`id`, `uid`, `gid`, `month`, `uname`, `title`, `inf
 CREATE TABLE IF NOT EXISTS `pigcms_jsapi_ticket` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `token` varchar(50) NOT NULL,
-  `jsapi_ticket` varchar(300) NOT NULL COMMENT '积分',
+  `jsapi_ticket` varchar(300) NOT NULL COMMENT '咪豆
+',
   `updatetime` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `token` (`token`)

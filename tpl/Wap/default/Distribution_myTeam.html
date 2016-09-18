@@ -9,7 +9,7 @@
 		<div class="info_edit_wrap_title">
 			<div class="info_edit_wrap_title_item info_edit_wrap_title_left close_edit_wrap"></div>
 			<div class="info_edit_wrap_title_item info_edit_wrap_title_center">我的团队</div>
-			<div class="info_edit_wrap_title_item info_edit_wrap_title_right">{wghd::count($list)}</div>
+			<div class="info_edit_wrap_title_item info_edit_wrap_title_right">{wghd::count($list)}人</div>
 		</div>
 		<div class="weui_cells weui_cells_access">
 			<volist id="list" name="list">
@@ -17,9 +17,14 @@
 " href="{wghd::U('Distribution/memberList',array(ids=>$list['ids']))}"> -->
 				<a class="weui_cell" href="javascript:;">
 					<div class="weui_cell_bd weui_cell_primary">
-						<p>{wghd:$list.nickname}</p>
+						<p>{wghd:$list.username}</p>
 					</div>
-					<div>{wghd:$list.level.name|default="游客"}</div>
+					<eq name="list.bindaid" value="$account.id">
+						<div>一级账号</div>
+						<else/>
+						<div>二级账号</div>
+					</eq>
+					<!-- <div>{wghd:$list.addtime|date="Y-m-d",###}</div> -->
 				</a>
 			</volist>
 		</div>

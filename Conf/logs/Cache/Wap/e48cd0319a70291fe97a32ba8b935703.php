@@ -157,52 +157,48 @@ $(function() {
 <!--foot开始-->
 <div style="height: 60px;"></div>
 <div class="public_foot">
-    <div class="weui-row weui-no-gutter">
-      <div class="weui-col-25">
-        <a href="<?php echo U('Store/index');?>">
-          <p class="iconfont">&#xe60d;</p>
-          <p>首页</p>
-        </a>
-      </div>
-      <div class="weui-col-25">
-        <a href="<?php echo U('Store/cats');?>">
-          <p class="iconfont">&#xe60c;</p>
-          <p>分类</p>
-        </a>
-      </div>
-      <div class="weui-col-25">
-        <a href="<?php echo U('Store/cart');?>">
-          <p class="iconfont">&#xe60e;</p>
-          <p>购物车</p>
-        </a>
-      </div>
-      <div class="weui-col-25">
-        <a href="<?php echo U('Distribution/index');?>">
-          <p class="iconfont">&#xe6ca;</p>
-          <p>我的</p>
-        </a>
-      </div>
+  <div class="weui-row weui-no-gutter">
+    <div class="weui-col-25">
+      <a href="<?php echo U('Store/index');?>" class="public_footer_index">
+        <p class="iconfont">&#xe60d;</p>
+        <p>首页</p>
+      </a>
+    </div>
+    <div class="weui-col-25">
+      <a href="<?php echo U('Store/cats');?>" class="public_footer_products">
+        <p class="iconfont">&#xe60c;</p>
+        <p>分类</p>
+      </a>
+    </div>
+    <div class="weui-col-25">
+      <a href="<?php echo U('Store/cart');?>" class="public_footer_shopcat">
+        <p class="iconfont">&#xe60e;</p>
+        <p>购物车</p>
+      </a>
+    </div>
+    <div class="weui-col-25">
+      <a href="<?php echo U('Distribution/index');?>" class="public_my">
+        <p class="iconfont">&#xe6ca;</p>
+        <p>我的</p>
+      </a>
     </div>
 </div>
 
 <script>
-    (function($){
-      var module = "<?php echo MODULE_NAME;?>";
+    var module = "<?php echo MODULE_NAME;?>";
       var action = "<?php echo ACTION_NAME;?>";
-      var rule_wrap = $(".rule");
-      if(module == "Store" && action == "daily"){
-        $('.daily').addClass('choose');
+      if(module == "Store" && action == "index"){
+        $('.public_footer_index').addClass('public_footer_choose');
       }
       if(module == "Store" && action == "cats"){
-        $('.cats').addClass('choose');
+        $('.public_footer_products').addClass('public_footer_choose');
       }
-      if(module == "Store" && action == "index"){
-        $('.Sindex').addClass('choose');
+      if(module == "Store" && action == "cart"){
+        $('.public_footer_shopcat').addClass('public_footer_choose');
       }
       if(module == "Distribution" && action == "index"){
-        $('.Dindex').addClass('choose');
+        $('.public_my').addClass('public_footer_choose');
       }
-    })(jQuery)
   </script>
 <!--foot结束-->
 
@@ -222,8 +218,8 @@ if (typeof WeixinJSBridge == "undefined"){
     onBridgeReady();
 }
 </script>
-  <div class="clear"></div>
-    <?php if((ACTION_NAME) != "herolist"): ?><section class="foot"></section><?php endif; ?>
+<div class="clear"></div>
+<?php if((ACTION_NAME) != "herolist"): ?><section class="foot"></section><?php endif; ?>
 </body>
 <script>
 function onBridgeReady(){

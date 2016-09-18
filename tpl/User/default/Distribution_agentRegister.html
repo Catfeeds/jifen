@@ -1,0 +1,61 @@
+<include file="Public:head" /> 
+  <div class="content"> 
+   <div class="cLineB"> 
+    <h4>充值红色咪豆
+</h4> 
+    <a href="{wghd::U('Distribution/account',array('p'=>$_GET['p']))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+   </div> 
+   <form class="form" method="post" action="{wghd::U('Distribution/agent_register')}"> 
+    <div class="msgWrap bgfc"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+       <tr> 
+        <th>代理点名:</th> 
+        <td>
+          <input class="px" type="text" name="name">
+        </td> 
+       </tr>
+       <tr> 
+        <th>账号:</th> 
+        <td> 
+          <input class="px" type="text" name="username">
+        </td> 
+       </tr>
+       <tr> 
+        <th>密码:</th> 
+        <td>
+          <input class="px" type="text" name="password">
+        </td> 
+       </tr>
+       <tr> 
+        <th>身份证:</th> 
+        <td>
+          <input class="px" type="text" name="idCard">
+        </td> 
+       </tr>
+       <tr> 
+        <th>电话:</th> 
+        <td>
+          <input class="px" type="text" name="tele">
+        </td> 
+       </tr>
+       <tr> 
+        <th>收货地址:</th> 
+        <td>
+          <input class="px" type="text" name="address">
+        </td> 
+       </tr>
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <button type="submit" name="button" class="btnGreen">保存</button> &nbsp; <a href="{wghd::U('Distribution/account',array('token'=>$token,'p'=>$_GET['p']))}" class="btnGray vm">取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+   </form> 
+   <script>
+     
+   </script>
+  </div> 
+  <include file="Public:footer" />

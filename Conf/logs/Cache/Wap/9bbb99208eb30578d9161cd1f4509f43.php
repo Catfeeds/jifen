@@ -1,0 +1,229 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<title>商城注册协议</title>
+	<link rel="stylesheet" href="<?php echo RES;?>/original/css/weui.min.css">
+	<link rel="stylesheet" href="<?php echo RES;?>/original/css/jquery-weui.min.css"></head>
+</head>
+<body>
+	<div class="container">
+		<style>
+			.info_edit_wrap_title .info_edit_wrap_title_left:before {
+			    content: " ";
+			    display: inline-block;
+			    -webkit-transform: rotate(45deg);
+			    transform: rotate(45deg);
+			    height: 9px;
+			    width: 9px;
+			    border-width: 0 0 2px 2px;
+			    border-color: #000;
+			    border-style: solid;
+			    position: relative;
+			    top: 15px;
+			    margin-left: .3em;
+			}
+			.agreement_con p{
+				line-height: 28px;
+				text-align: justify;
+			}
+			.agreement_con{
+				padding: 8px;
+			}
+		</style>
+		<div class="info_edit_wrap_title">
+			<div class="info_edit_wrap_title_item info_edit_wrap_title_left close_edit_wrap"></div>
+			<div class="info_edit_wrap_title_item info_edit_wrap_title_center">商城注册协议</div>
+			<div class="info_edit_wrap_title_item info_edit_wrap_title_right"></div>
+		</div>
+		<div class="agreement_con">
+			<p align="center" style="margin-left:0cm;text-align:center;">
+				<b>【咪咪兔商城】用户注册协议</b>
+			</p>
+			<p style="margin-left:0cm;">
+				【<b>咪咪兔商城</b>】用户注册协议 本协议是您与网上商城服务商（咪咪兔商城）所有者（以下简称为“咪咪兔”平台）之间就咪咪兔商城服务等相关事宜所订立的契约，请您仔细阅读本注册协议，您点击<span>"</span>同意并继续<span>"</span>按钮后，本协议即构成对双方有约束力的法律文件。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				<b>第<span>1</span>条 本平台服务条款的确认和接纳</b>
+			</p>
+			<p style="margin-left:0cm;">
+				1.1【<b>咪咪兔商城</b>】平台是以咪豆（相当于商品兑换劵，不能直接兑换现金，仅起找差补零的作用）为媒介进行物品兑换的服务平台。是消费者满足自然需求的自购兑换平台。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				1.2 平台业务分两块：一是平台上的商家和消费者商品兑换；二是地面加盟实体店的交易结算。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				1.3 免费注册会员，如有需求，第一次必须用现金兑换成咪豆兑换平台商家的商品，当收获到咪咪兔商城平台补贴的咪豆后，用补贴的咪豆兑换地面“加盟实体店”的所需商品。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				1.4 咪豆兑换平台商品的订单由平台系统生成，不允许退单，只允许换货。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				1.5 咪豆是【咪咪兔商城】平台的商品兑换券。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				1.6在咪咪兔商城平台兑换物品需建立在会员的自然需求基础上，谢绝各种投资、投机行为。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				<b>第<span>2</span>条 本站服务条件确认</b>
+			</p>
+			<p style="margin-left:0cm;">
+				2.1 本站的各项电子服务的所有权和运作权归咪咪兔商城所有。用户同意所有注册协议条款并完成注册程序，才能成为本商城的正式用户。用户确认：本协议条款是处理双方权利义务的契约，始终有效，法律另有强制性规定或双方另有特别约定的，依其规定。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				2.2 用户点击同意本协议的，即视为用户确认自己具有享受本站服务、兑换商品等相应的权利能力和行为能力，能够独立承担法律责任。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				2.3 如果您在<span>18</span>周岁以下，您只能在父母或监护人的监护参与下才能使用本商城。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				2.4 咪咪兔商城保留在中华人民共和国大陆地区法施行之法律允许的范围内独自决定拒绝服务、关闭用户账户、清除或编辑内容或取消订单的权利。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				2.5 咪咪兔商城通过互联网依法为用户提供互联网信息等服务，用户在完全同意本协议及本商城规定的情况下方有权使用本商城的相关服务。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				2.6 用户必须自行准备如下设备和承担如下开支：（<span>1</span>）上网设备，包括并不限于电脑或者其他上网终端、调制解调器及其他必备的上网装置；（<span>2</span>）上网开支，包括并不限于网络接入费、上网设备租用费、手机流量费等。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				<b>第<span>3</span>条 用户信息</b>
+			</p>
+			<p style="margin-left:0cm;">
+				3.1 用户应自行诚信向本商城提供注册资料，用户同意其提供的注册资料真实、准确、完整、合法有效，用户注册资料如有变动的，应及时更新其注册资料。如果用户提供的注册资料不合法、不真实、不准确、不详尽的，用户需承担因此引起的相应责任及后果，并且咪咪兔商城保留终止用户使用咪咪兔商城各项服务的权利。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				3.2 用户在本商城进行浏览、下单购物、兑换等活动时，涉及用户真实姓名<span>/</span>名称、通信地址、联系电话、电子邮箱等隐私信息的，本商城将予以严格保密，除非得到用户的授权或法律另有规定，本商城不会向外界披露用户隐私信息。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				3.3 用户注册成功后，将产生用户名和密码等账户信息，您可以根据本站规定改变您的密码。用户应谨慎合理的保存、使用其用户名和密码。用户若发现任何非法使用用户账号或存在安全漏洞的情况，请立即通知本商城并向公安机关报案。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				3.4 用户同意，咪咪兔商城拥有通过邮件、短信电话等形式，向在本商城注册、购物用户、收货人发送订单信息、促销活动等告知信息的权利。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				3.5 用户不得将在本商城注册获得的账户借给他人使用，否则用户应承担由此产生的全部责任，并与实际使用人承担连带责任。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				3.6 用户同意，咪咪兔商城有权使用用户的注册信息、用户名、密码等信息，登录进入用户的注册账户，进行证据保全，包括但不限于公证、见证等。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				<b>第<span>4</span>条 用户依法言行义务</b>
+			</p>
+			<p style="margin-left:0cm;">
+				本协议依据国家相关法律法规规章制定，用户同意严格遵守以下义务：<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				（<span>1</span>）不得传输或发表：煽动抗拒、破坏宪法和法律、行政法规实施的言论，煽动颠覆国家政权，推翻社会主义制度的言论，煽动分裂国家、破坏国家统一的的言论，煽动民族仇恨、民族歧视、破坏民族团结的言论；<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				（<span>2</span>）从中国大陆向境外传输资料信息时必须符合中国有关法规；<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				（<span>3</span>）不得利用本商城从事洗钱、窃取商业秘密、窃取个人信息等违法犯罪活动；<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				（<span>4</span>）不得干扰本商城的正常运转，不得侵入本商城及国家计算机信息系统；<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				（<span>5</span>）不得传输或发表任何违法犯罪的、骚扰性的、中伤他人的、辱骂性的、恐吓性的、伤害性的、庸俗的，淫秽的、不文明的等信息资料；<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				（<span>6</span>）不得传输或发表损害国家社会公共利益和涉及国家安全的信息资料或言论；<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				（<span>7</span>）不得教唆他人从事本条所禁止的行为；<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				（<span>8</span>）不得利用在本商城注册的账户进行牟利性经营活动；<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				（<span>9</span>）不得发布任何侵犯他人著作权、商标权等知识产权或合法权利的内容；<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				用户应不时关注并遵守本商城不时公布或修改的各类合法规则规定。
+			本商城保有删除站内各类不符合法律政策或不真实的信息内容而无须通知用户的权利。 若用户未遵守以上规定的，本商城有权作出独立判断并采取暂停或关闭用户帐号等措施。用户须对自己在网上的言论和行为承担法律责任。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				<b>第<span>5</span>条 商品信息</b>
+			</p>
+			<p style="margin-left:0cm;">
+				本商城上的商品兑换咪豆、数量、是否有货等商品信息随时都有可能发生变动，本商城不作特别通知。由于商城上商品信息的数量极其庞大，虽然本商城会尽最大努力保证您所浏览商品信息的准确性，但由于众所周知的互联网技术因素等客观原因存在，本商城网页显示的信息可能会有一定的滞后性或差错，对此情形您知悉并理解；咪咪兔商城欢迎纠错，并会视情况给予纠错者一定的奖励。
+			为表述便利，商品和服务简称为<span>"</span>商品<span>"</span>或<span>"</span>货物<span>"</span>。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				<b>第<span>6</span>条 订单</b>
+			</p>
+			<p style="margin-left:0cm;">
+				6.1 在商城系统生成订单时，请您仔细确认商品的名称、价格、数量、型号、规格、尺寸、联系地址、电话、收货人等信息。收货人与用户本人不一致的，收货人的行为和意思表示视为用户的行为和意思表示，用户应对收货人的行为及意思表示的法律后果承担连带责任。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				6.2 除法律另有强制性规定外，双方约定如下：本商城上销售方展示的商品和兑换咪豆数等信息仅仅是交易信息的发布，您注册用户时须填写您希望购买的商品品类、收货人、联系方式、收货地址等内容；系统生成的订单信息是计算机信息系统根据您填写的内容自动生成的数据，您与商城之间仅就实际直接向您发出的商品建立了交易关系；只有在商城实际直接向您发出了订单中的商品时，您和商城之间就订单中已实际直接向您发出的商品才成立交易关系。您可以随时登录您在本商城注册的账户，查询您的订单状态。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				<b>第<span>7</span>条配送</b>
+			</p>
+			<p style="margin-left:0cm;">
+				7.1 咪咪兔商城将会把商品（货物）送到您所在区域最近的商城配送点，所有在本商城上列出的送货时间为参考时间，参考时间的计算是根据库存状况、正常的处理过程和送货时间、送货地点的基础上估计得出的。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				7.2 因如下情况造成订单延迟或无法配送等，商城不承担延迟配送的责任：<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				（<span>1</span>）用户提供的信息错误、地址不详细等原因导致的；<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				（<span>2</span>）货物送达后无人签收，导致无法配送或延迟配送的；<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				（<span>3</span>）情势变更因素导致的；<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				（<span>4</span>）不可抗力因素导致的，例如：自然灾害、交通戒严、突发战争等。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				<b>第<span>8</span>条 责任限制及不承诺担保</b>
+			</p>
+			<p style="margin-left:0cm;">
+				除非另有明确的书面说明<span>,</span>本商城及其所包含的或以其它方式通过本商城提供给您的全部信息、内容、材料、产品（包括软件）和服务，均是在<span>"</span>按现状<span>"</span>和<span>"</span>按现有<span>"</span>的基础上提供的。 除非另有明确的书面说明<span>,</span>咪咪兔商城不对本商城的运营及其包含在本商城上的信息、内容、材料、产品（包括软件）或服务作任何形式的、明示或默示的声明或担保（根据中华人民共和国法律另有规定的以外）。
+			如因不可抗力或其它本商城无法控制的原因使本商城销售系统崩溃或无法正常使用导致网上交易无法完成或丢失有关的信息、记录等，咪咪兔商城会合理地尽力协助处理善后事宜。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				<b>第<span>9</span>条 协议更新及用户关注义务</b>
+			</p>
+			<p style="margin-left:0cm;">
+				根据国家法律法规变化及网站运营需要，咪咪兔商城有权对本协议条款不时地进行修改，修改后的协议一旦被张贴在本站上即生效，并代替原来的协议。用户可随时登录查阅最新协议；用户有义务不时关注并阅读最新版的协议及网站公告。如用户不同意更新后的协议，可以且应立即停止接受咪咪兔商城依据本协议提供的服务；如用户继续使用本商城提供的服务的，即视为同意更新后的协议。咪咪兔商城建议您在使用本商城之前阅读本协议及本商城的公告。
+			如果本协议中任何一条被视为废止、无效或因任何理由不可执行，该条应视为可分的且并不影响任何其余条款的有效性和可执行性。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				<b>第<span>10</span>条 法律管辖和适用</b>
+			</p>
+			<p style="margin-left:0cm;">
+				10.1本协议的订立、执行和解释及争议的解决均应适用在中华人民共和国大陆地区适用之有效法律（但不包括其冲突法规则）。
+			如发生本协议与适用之法律相抵触时，则这些条款将完全按法律规定重新解释，而其它有效条款继续有效。 如缔约方就本协议内容或其执行发生任何争议，双方应尽力友好协商解决；协商不成时，任何一方均可向有管辖权的中华人民共和国大陆地区法院提起诉讼。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				<i><u>10.2</u></i><i><u>咪咪兔商城特别提醒注册会员用户<span>:&nbsp; 1)</span>会员</u></i><i><u>在本商城充值购物是在认可本商城商品的品质和商品销售价格以及认可购物订单由本商城系统根据品类库存生成的前提下所形成的交易行为；<span> 2</span>）会员在本商城的所有交易行为必须是建立在会员的自然家庭消费需求基础上；<span> 3</span>）本商城谢绝各种投资、投机行为，如因个人贪念在本商城做出投资、投机行为会员自己承担后果；<span> 4</span>）本商城根据自己的发展调整经营模式或因国家法律有变，禁止本商城模式的销售行为，商城只负责履行与会员之间未完成的货物订单不负责回收补贴咪豆。</u></i><i><u></u></i>
+			</p>
+			<p style="margin-left:0cm;">
+				<b>第<span>11</span>条 其他</b>
+			</p>
+			<p style="margin-left:0cm;">
+				11.1 咪咪兔商城网站所有者是指在政府部门依法许可或备案的咪咪兔商城网站经营主体。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				11.2 咪咪兔商城尊重用户和消费者厂家的合法权利，本协议及本网站上发布的各类规则、声明等其他内容，均是为了更好的、更加便利的为用户和消费者提供服务。本站欢迎用户和社会各界提出意见和建议，咪咪兔商城将虚心接受并适时修改本协议及本站上的各类规则。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				11.3 本协议内容中以黑体、加粗、下划线、斜体等方式显著标识的条款，请用户着重阅读。<span></span>
+			</p>
+			<p style="margin-left:0cm;">
+				11.4 您点击本协议下方的<span>"</span>注册<span>"</span>按钮即视为您完全接受本协议，在点击之前请您再次确认已知悉并完全理解本协议的全部内容。<span></span>
+			</p>
+			<br />
+		</div>
+	</div>
+</body>
+</html>

@@ -27,26 +27,27 @@
 			.getmoneylist .color_getmoneylist{color: #f66060}
 		</style>
 		<div class="weui_cells weui_cells_access weui_cells_getmoneylist">
-		  <a class="weui_cell weui_cell_getmoneylist coad_lnfo_bage" href="<?php echo U('Distribution/myBill');?>">
+		  <a class="weui_cell weui_cell_getmoneylist coad_lnfo_bage"  href="<?php echo U('Distribution/earnDetails',array('type'=>'red'));?>">
 		    <div class="weui_cell_bd weui_cell_primary">
-		      <p>可提现金额(元)</p>
+		      <p>可用红色咪豆</p>
 		      <p><?php echo sprintf("%.2f",$account['red']);?></p>
 		    </div>
-		    <div class="weui_cell_ft" id="test">账单</div>
+		    <div class="weui_cell_ft" id="test">查看详情</div>
 		  </a>
-		  <div class="weui_cell">
+		  <!-- <div class="weui_cell">
 		    <div class="weui_cell_bd weui_cell_primary">
-		      <p>累计收入(元)<a class="color_getmoneylist" href="<?php echo U('Distribution/earnDetails',array('type'=>'red'));?>" style="font-size: 0.7rem;padding-left: 5px;">查看详情</a></p>
-		      <p class="color_getmoneylist"><?php echo sprintf("%.2f",$totalOfferMoney/100);?></p>
+		      <p>累计收入(元)<a class="color_getmoneylist coad_lnfo_bage" href="<?php echo U('Distribution/earnDetails',array('type'=>'red'));?>" style="font-size: 0.7rem;padding-left: 5px;">查看详情</a></p>
+		      <p class="color_getmoneylist"><?php echo ($totalred); ?></p>
 		    </div>
 		  </div>
 		  <div class="weui-row weui-no-gutter weui-row-getmoneylist">
 		    <div class="weui-col-33"><p>待确认(元)</p><p><?php echo ($notget); ?></p></div>
 		    <div class="weui-col-33"><p>提现中(元)</p><p><?php echo ($notget); ?></p></div>
 		    <div class="weui-col-33"><p>已提现(元)</p><p><?php echo ($get); ?></p></div>
-		  </div>
+		  </div> -->
 		</div>
-		<a href="<?php echo U('Distribution/getMoney');?>" class="weui_btn weui_btn_primary weui_btn_getmoneylist">我要提现</a>
+		<!-- <a href="<?php echo U('Distribution/getMoney');?>" class="weui_btn weui_btn_primary weui_btn_getmoneylist">我要提现</a> -->
+		<?php if(($account["bartender"]) != "1"): ?><a href="<?php echo U('Distribution/transfer');?>" class="weui_btn weui_btn_primary weui_btn_getmoneylist coad_lnfo_bage">我要转账</a><?php endif; ?>
 	</div>
 </body>
 </html>

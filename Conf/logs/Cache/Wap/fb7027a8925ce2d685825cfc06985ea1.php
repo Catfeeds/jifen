@@ -40,17 +40,29 @@
           </div>
           <div class="weui_cell_ft editinfo_con" data-name="tele"><?php echo ($account["tele"]); ?></div>
         </a>
-        <a class="weui_cell editinfo_btn" href="javascript:;">
+       <!--  <a class="weui_cell editinfo_btn" href="javascript:;">
           <div class="weui_cell_bd weui_cell_primary">
             <p class="editinfo_title">微信名</p>
           </div>
           <div class="weui_cell_ft editinfo_con" data-name="petname"><?php echo ($account["petname"]); ?></div>
-        </a>
+        </a> -->
         <a class="weui_cell" href="javascript:;">
           <div class="weui_cell_bd weui_cell_primary">
             <p class="editinfo_title">当前账号</p>
           </div>
           <div class=" editinfo_con"><?php echo ($account["username"]); ?></div>
+        </a>
+        <a class="weui_cell" href="javascript:;">
+          <div class="weui_cell_bd weui_cell_primary">
+            <p class="editinfo_title">我的推荐码</p>
+          </div>
+          <div class=" editinfo_con"><?php echo ($account["recommend"]); ?></div>
+        </a>
+        <a class="weui_cell" href="javascript:;">
+          <div class="weui_cell_bd weui_cell_primary">
+            <p class="editinfo_title">我的代理点推荐码</p>
+          </div>
+          <div class=" editinfo_con"><?php echo ($account["agent"]["code"]); ?></div>
         </a>
         <a class="weui_cell editinfo_btn" href="javascript:;">
           <div class="weui_cell_bd weui_cell_primary">
@@ -73,6 +85,12 @@
         <div class="weui_cell info_edit_old_password" style="display: none;">
           <div class="weui_cell_bd weui_cell_primary weui_cell_infoedit" style="box-shadow: 0 0 5px #D6D6D6;">
             <input id="info_edit_old_password" class="weui_input weui_input_infoedit" type="password" placeholder="输入原密码" value="">
+            <span class="weui_infoedit_delete">×</span>
+          </div>
+        </div>
+        <div class="weui_cell info_edit_new_password" style="display: none;">
+          <div class="weui_cell_bd weui_cell_primary weui_cell_infoedit" style="box-shadow: 0 0 5px #D6D6D6;">
+            <input id="info_edit_new_password" class="weui_input weui_input_infoedit" type="password" placeholder="输入新密码" value="">
             <span class="weui_infoedit_delete">×</span>
           </div>
         </div>

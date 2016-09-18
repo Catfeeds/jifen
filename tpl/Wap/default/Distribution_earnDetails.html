@@ -31,20 +31,29 @@
 			<div class="weui-col-33">时间</div>
 		</div>
 		<volist id="list" name="list">
-			<div class="weui-row weui-no-gutter weui-row-myBill_list">
+			<div class="weui-row weui-no-gutter weui-row-myBill_list" style="-ms-flex-align: center;-webkit-align-items: center; -webkit-box-align: center;align-items: center;">
 				<div class="weui-col-33">{wghd:$list.earn|default=0}</div>
 				<div class="weui-col-33">
 					<switch name="list.status">
 						<case value="1">下级充值</case>
 						<case value="2">下下级充值</case>
 						<case value="3">代理收益</case>
-						<case value="5">公司返红</case>
-						<case value="6">充值绿色积分</case>
+						<case value="5">公司补贴</case>
+						<case value="6">充值绿色咪豆</case>
 						<case value="7">购物</case>
+						<case value="8">转账</case>
+						<case value="9">提现</case>
+						<case value="10">系统配送</case>
+						<case value="11">购物退款</case>
+						<case value="14">后台充值</case>
+						<case value="15">代理点转入</case>
 					</switch>
 				</div>
-				<div class="weui-col-33">{wghd:$list.addtime|date='Y-m-d',###}</div>
+				<div class="weui-col-33">{wghd:$list.addtime|date='Y-m-d H:i:s',###}</div>
 			</div>
+			<notempty name="list.remark">
+				<div style="font-size: 16px;">备注:{wghd:$list.remark}</div>
+			</notempty>
 		</volist>
 	</div>
 </body>

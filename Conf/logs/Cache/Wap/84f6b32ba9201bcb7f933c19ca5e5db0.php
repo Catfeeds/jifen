@@ -34,7 +34,8 @@
                   <?php else: ?>
                   <?php echo ($list["member"]["nickname"]); endif; ?>
               </h4>
-              <p class="weui_media_desc">充值积分:<?php echo ($list["green"]); ?></p>
+              <p class="weui_media_desc">充值咪豆
+:<?php echo ($list["green"]); ?></p>
               <p class="weui_media_desc">充值时间:<?php echo (date('Y-m-d',$list["addtime"])); ?></p>
             </div>
             <!-- <?php if(($list["aid"]) == $account['id']): switch($list["return"]): case "0": if(($list["back"]) == "0"): ?><div class="weui_cell_ft editinfo_con" data-id=<?php echo ($list["id"]); ?> id="topup_apply_refund">申请退款</div><?php endif; break;?>

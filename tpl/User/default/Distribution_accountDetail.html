@@ -1,0 +1,159 @@
+<include file="Public:head"/>
+<div class="content">
+
+  <div class="cLineB">
+    <h4>账号详细信息</h4>
+
+    <a href="{wghd::U('Distribution/account',array('p'=>$_GET['p']))}" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+  </div>
+
+  <div class="msgWrap bgfc">
+    <table class="userinfoArea" style=" margin:0;float:left" border="0" cellspacing="0" cellpadding="0" width="50%">
+      <tbody>
+        <tr>
+          <th width="120">账号头像：</th>
+          <td>
+            <img src="{wghd:$info.headimgurl}" style="width: 80px;" alt=""></td>
+        </tr>
+        <tr>
+          <th width="120">账号名：</th>
+          <td>{wghd:$info.username}</td>
+        </tr>
+        <tr>
+          <th width="120">电话：</th>
+          <td>{wghd:$info.tele}</td>
+        </tr>
+        <tr>
+          <th width="120">真实姓名：</th>
+          <td>
+            <span class="content_edit_item" data-name="nickname" style="display: inline-block;width: 102px;">{wghd:$info.nickname}</span>
+            <!-- <input type="button" value="修改姓名" class="btnGrayS content_edit_btn"></td> -->
+        </tr>
+        <tr>
+          <th width="120">登陆密码：</th>
+          <td> <span class="content_edit_item" data-name="password" style="display: inline-block; width: 120px; background: red;height: 26px;font-size: 17px;">******</span>
+            <input type="button" value="修改密码" class="btnGrayS content_edit_btn" style="background-color: red !important;
+    color: #fff !important;"></td>
+        </tr>
+        <script src="{wghd::RES}/js/jquery-1.11.1.min.js"></script>
+        <script>
+          (function($){
+            var save_btn = '<input type="button" value="保存" class="content_edit_save btnGrayS">';
+            var cancel_btn = '<input type="button" value="取消" class="content_edit_cancel btnGrayS">';
+            var extend_wrap = '<span class="content_extend_wrap">' + save_btn + cancel_btn +'</span>';
+            $(document).on('click','.content_edit_btn',function(){
+              var obj = $(this);
+              var edit_btn = obj.context;
+              var td_wrap = obj.parents('td');
+              var con_item = obj.prev('.content_edit_item');
+              var edit_name = con_item.data('name');
+              td_wrap.append(extend_wrap);
+              obj.remove();
+              con_item.attr('contenteditable','true').focus();
+              //取消按钮
+              $(document).on('click','.content_edit_cancel',function(){
+                td_wrap.find('.content_extend_wrap').remove();
+                td_wrap.append(edit_btn);
+              })
+              //保存按钮
+              $(document).on('click','.content_edit_save',function(){
+                var edit_con = con_item.text();
+                console.log(edit_con);
+                console.log(edit_name);
+                console.log("{wghd:$info.id}");
+                $.ajax({
+                  url:"{wghd::U('Distribution/accountDetailEdit')}",
+                  data:{name:edit_name,con:edit_con,id:"{wghd:$info.id}"},
+                  dataType:'json',
+                  success:function(data){
+                    console.log(data);
+                    alert(data.info)
+                    td_wrap.find('.content_extend_wrap').remove();
+                    td_wrap.append(edit_btn);
+                  }
+                })
+              })
+            })
+          })($)
+        </script>
+        <tr>
+          <th width="120">推荐二维码：</th>
+          <td>{wghd::$info['recommend']}</td>
+        </tr>
+        <!-- <tr>
+        <th width="120">创建者：</th>
+        <td>{wghd:$info.creater}</td>
+      </tr>
+      <tr>
+        <th width="120">现登陆者：</th>
+        <td>{wghd:$info.loginer}</td>
+      </tr>
+      -->
+      <tr>
+        <th width="120">创建时间：</th>
+        <td>{wghd:$info.addtime|date="Y-m-d H:i:s",###}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="userinfoArea" style=" margin:0;float:left" border="0" cellspacing="0" cellpadding="0" width="50%">
+    <tbody>
+      <tr>
+        <th width="120" style="color: green;">绿色咪豆:</th>
+        <td>
+          <a href="{wghd::U('Distribution/accountEarnDetails',array('type'=>'green','id'=>$info['id']))}" style="color: green;">
+          {wghd:$info.detail.green|default=0}
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <th width="120" style="color: red;">红色咪豆:</th>
+        <td>
+          <a href="{wghd::U('Distribution/accountEarnDetails',array('type'=>'red','id'=>$info['id']))}" style="color: red;">
+            {wghd:$info.detail.red|default=0}
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <th width="120">黑色咪豆:</th>
+        <td>{wghd:$info.detail.black|default=0}</td>
+      </tr>
+      <tr>
+        <th width="120">购买订单总数:</th>
+        <td>{wghd:$info.detail.shoporders|default=0}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="clear:both;"></div>
+  <h4>下级账号列表</h4>
+  <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+    <thead>
+      <tr>
+        <th>头像</th>
+        <th>用户名</th>
+        <th>登陆者</th>
+        <th>创建时间</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr></tr>
+      <volist id="list" name="info.childs">
+        <tr>
+          <td>
+            <img src="{wghd:$list.headimgurl}" width="50"></td>
+          <td>{wghd:$list.username}</td>
+          <td>{wghd:$list.member.nickname}</td>
+          <td>{wghd:$list.addtime|date="Y-m-d H:i:s",###}</td>
+        </tr>
+      </volist>
+
+    </tbody>
+  </table>
+
+  <div class="cLine">
+    <div class="pageNavigator right">
+      <div class="pages">{wghd:$page}</div>
+    </div>
+  </div>
+
+</div>
+<include file="Public:footer"/>

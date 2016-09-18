@@ -32,6 +32,11 @@
 	    		'foreign_key' => 'mid',
 	    		'mapping_fields' => 'nickname,wecha_id',
 	    	),
+	    	'agent' => array(
+	    		'mapping_type' => BELONGS_TO,
+	    		'class_name' => 'Distribution_agent',
+	    		'foreign_key' => 'agent',
+	    	),
 	    );
 	    protected function getWecha_id(){
 	    	return $this->my['wecha_id'];

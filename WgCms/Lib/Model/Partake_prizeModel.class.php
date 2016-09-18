@@ -3,7 +3,8 @@
     protected $_validate = array(
         array('title','require','名称不能为空',1),
 		array('chance','require','中奖率不能为空',1),
-		array('useScore','require','消耗积分不能为空',1),
+		array('useScore','require','消耗咪豆
+不能为空',1),
 		array('totalNums','require','奖品总数不能为空',1)
      );
     protected $_auto = array (

@@ -27,6 +27,10 @@ $(function(){
 		});
 	});
 	$("#quickBuy").click(function(){
+		if($('#checkadmin').val() != 1){
+			floatNotify.simple('商品库存有限，只能系统生成订单');
+			return false;
+		}
 		$("#TB_overlayBG").css({
 			display:"block",height:$(document).height()
 		});
@@ -47,6 +51,7 @@ $(function(){
 </head>
 
 <body id="scnhtm5">
+	<input type="hidden" value="<?php echo ($account["admin"]); ?>" id="checkadmin" />
 	<div class="slider">
 		<ul>
 			<?php if(empty($imageList) != true): if(is_array($imageList)): $i = 0; $__LIST__ = $imageList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$img): $mod = ($i % 2 );++$i;?><li>
@@ -150,7 +155,7 @@ $(function(){
 
 	<!--规格弹出框-->
 
-	<div id="details_shop">
+	<!-- <div id="details_shop">
 		<div class="details_shop_content">
 			<div class="details_products">
 				<div class="details_products_img">
@@ -169,7 +174,7 @@ $(function(){
 
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<div id="details_details">
 		<div class="tuwen">
@@ -359,6 +364,10 @@ function plus_minus(rowid, number,price) {
      $('#buy_num').attr('value',num);
 }
 function show_cart() {
+	if($('#checkadmin').val() != 1){
+		floatNotify.simple('商品库存有限，只能系统生成订单');
+		return false;
+	}
 	$("#btn_add_cart").attr("disable", false);
 	var count = parseInt($('#buy_num').val());
 	var did = parseInt($("#" + buyDetailId).attr('did'));

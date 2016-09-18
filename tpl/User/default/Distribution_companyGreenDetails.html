@@ -1,0 +1,96 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="{wghd::RES}/css/cymain.css" />  
+<script src="{wghd::STATICS}/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="{wghd::STATICS}/artDialog/plugins/iframeTools.js"></script>
+
+<div class="content">
+         
+          <div class="cLineB">
+			<h4 class="left">公司绿色积分收入</h4>
+			</div>
+                <div class="cLine">
+                  <div class="pageNavigator">
+        　　      <span>
+                    <form action="" method="post">
+                    关键词：
+                    <input type="text" name="name" class="px" value="{wghd:$Think.request.name}" placeholder="输入账号名">
+                    <input type="submit" class="btnGrayS" value="搜索">
+                     </form>
+                  </span>
+                   
+                  </div>
+                
+                  <div class="clr"></div>
+                </div>
+          <div class="msgWrap">
+          <form method="post" action="index.php?ac=vote-manage&amp;id=9878" id="info">
+          <input name="delall" type="hidden" value="del">
+           <input name="wxid" type="hidden" value="gh_423dwjkewad">
+            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+					<th>账号ID</th>
+          <th>账号名</th>
+          <th>绿色积分</th>
+          <th>来源</th>
+          <th>时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+                  <volist id="list" name="list">
+                <tr>
+                  <td>{wghd:$list.oprationer.id}</td>
+                  <td>{wghd:$list.oprationer.username}</td>
+                  <td>{wghd:$list.green}</td>
+                  <td>
+                    <switch name="list.status">
+                      <case value="1">下级充值</case>
+                      <case value="2">下下级充值</case>
+                      <case value="3">代理收益</case>
+                      <case value="4">充值返给公司</case>
+                      <case value="5">公司补贴</case>
+                      <case value="6">充值绿色咪豆</case>
+                      <case value="7">购物</case>
+                      <case value="8">转账</case>
+                      <case value="9">提现</case>
+                      <case value="10">系统配送</case>
+                      <case value="11">购物退款</case>
+                      <case value="12">没有上级返给公司</case>
+                      <case value="13">没有上上级返给公司</case>
+                      <case value="14">后台充值</case>
+                      <case value="15">代理点转入</case>
+                    </switch>
+                  </td>
+                  <td>{wghd:$list.addtime|date='Y-m-d H:i:s',###}</td>
+                </tr>
+                  </volist>        
+                  
+              </tbody>
+            </table>
+           </form> 
+           <script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中内容！')
+}
+}</script>
+   </div> 
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages">{wghd:$page}</div>
+              </div>
+            <div class="clr"></div>
+          </div>
+  </div>
+<include file="Public:footer"/>

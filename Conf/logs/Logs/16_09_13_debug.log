@@ -1,0 +1,10 @@
+[ 2016-09-13T14:06:49+08:00 ] DEBUG: sceneid=4
+[ 2016-09-13T14:06:49+08:00 ] DEBUG: sql=INSERT INTO `pigcms_distribution_member` (`nickname`,`headimgurl`,`province`,`city`,`country`,`sex`,`wecha_id`,`token`,`createtime`,`follow`) VALUES ('Hello World','http://wx.qlogo.cn/mmopen/BfPozEAqJGWvonE2ziaia7t72DKPq0xWEvFxd8nR5KcsZEAbK3T8doYsb272FTGbAMc49FNnLZqnZ9dibC8kpD1Via5VdicEpqBmu/0','浙江','台州','中国','1','ojHdsv688adRMwKKT2Fb7Etj5LWc','mhfcjx1421158741','1473746809','1')
+[ 2016-09-13T14:08:26+08:00 ] DEBUG: sceneid=4
+[ 2016-09-13T14:08:26+08:00 ] DEBUG: sql=INSERT INTO `pigcms_distribution_member` (`nickname`,`headimgurl`,`province`,`city`,`country`,`sex`,`wecha_id`,`token`,`bindmid`,`createtime`,`follow`) VALUES ('Hello World','http://wx.qlogo.cn/mmopen/BfPozEAqJGWvonE2ziaia7t72DKPq0xWEvFxd8nR5KcsZEAbK3T8doYsb272FTGbAMc49FNnLZqnZ9dibC8kpD1Via5VdicEpqBmu/0','浙江','台州','中国','1','ojHdsv688adRMwKKT2Fb7Etj5LWc','mhfcjx1421158741','4','1473746906','1')
+[ 2016-09-13T14:15:05+08:00 ] DEBUG: mid=
+[ 2016-09-13T14:16:44+08:00 ] DEBUG: mid=
+[ 2016-09-13T14:18:00+08:00 ] DEBUG: mid=4
+[ 2016-09-13T14:18:01+08:00 ] DEBUG: mid=4
+[ 2016-09-13T14:18:04+08:00 ] DEBUG: mid=4
+[ 2016-09-13T14:18:04+08:00 ] DEBUG: mid=4

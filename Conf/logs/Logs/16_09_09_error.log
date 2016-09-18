@@ -1,0 +1,18 @@
+[ 2016-09-09T08:44:35+08:00 ] ERR: 发生错误：错误代码40001,微信返回错误信息：invalid credential, access_token is invalid or not latest hint: [Vab3fA0010vr30!]openid=
+[ 2016-09-09T08:45:04+08:00 ] ERR: 发生错误：错误代码40001,微信返回错误信息：invalid credential, access_token is invalid or not latest hint: [Vknu80038vr37!]openid=
+[ 2016-09-09T08:45:37+08:00 ] ERR: 发生错误：错误代码40001,微信返回错误信息：invalid credential, access_token is invalid or not latest hint: [XzEvjA0071vr39!]openid=
+[ 2016-09-09T10:19:22+08:00 ] ERR: (ThinkException) Duplicata du champ '2' pour la clef 'PRIMARY'
+ [ SQL语句 ] : INSERT INTO `pigcms_level_orders` (`aid`,`id`,`green`,`orderid`,`price`,`bindaid`,`integral`,`needred`) VALUES ('2','2','1','120160909101922','1','0','0.5','5')
+[ 2016-09-09T11:46:30+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [P2JATA0924ge14]openid=
+[ 2016-09-09T13:36:56+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [.XBkla0550age1]openid=
+[ 2016-09-09T13:43:38+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:accountDetailEdit
+[ 2016-09-09T14:12:34+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:judgeOldPwd
+[ 2016-09-09T14:12:40+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:judgeOldPwd
+[ 2016-09-09T14:13:19+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:judgeOldPwd
+[ 2016-09-09T14:13:22+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:judgeOldPwd
+[ 2016-09-09T16:24:21+08:00 ] ERR: (ThinkException) _TEMPLATE_NOT_EXIST_[./tpl/User/default/Article_selfStudy.html]
+[ 2016-09-09T16:25:13+08:00 ] ERR: (ThinkException) La table 'jifen_data.pigcms_article_class' n'existe pas
+ [ SQL语句 ] : SHOW COLUMNS FROM `pigcms_article_class`
+[ 2016-09-09T16:28:21+08:00 ] ERR: (ThinkException) La table 'jifen_data.pigcms_article_class' n'existe pas
+ [ SQL语句 ] : SHOW COLUMNS FROM `pigcms_article_class`
+[ 2016-09-09T16:28:34+08:00 ] ERR: (ThinkException) _TEMPLATE_NOT_EXIST_[./tpl/User/default/Article_set.html]

@@ -1,0 +1,53 @@
+<include file="Public:head" /> 
+  <div class="content"> 
+   <div class="cLineB"> 
+    <h4>代理点转红色咪豆
+</h4> 
+    <a href="{wghd::U('Distribution/account',array('p'=>$_GET['p']))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+   </div> 
+   <form class="form" method="post" action="{wghd::U('Distribution/agent',array('type'=>transfer,'id'=>$agent['id']))}"> 
+    <div class="msgWrap bgfc"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+       <tr> 
+        <th>代理点:</th> 
+        <td>{wghd:$agent.name}</td> 
+       </tr>
+       <tr> 
+        <th>红色咪豆:</th> 
+        <td>{wghd:$agent.red|default=0}</td> 
+       </tr>
+       <tr> 
+        <th>转入推荐码:</th> 
+        <td>
+          <input class="px" type="text" name="code">
+        </td> 
+       </tr>
+       <tr> 
+        <th>转入红色积分:</th> 
+        <td>
+          <input class="px" type="text" name="red">
+        </td> 
+       </tr>
+       <tr> 
+        <th>备注:</th> 
+        <td>
+          <textarea name="remark" id="remark" style="width: 300px; height: 200px;" class="px">
+            
+          </textarea>
+        </td> 
+       </tr>
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <button type="submit" name="button" class="btnGreen">保存</button> &nbsp; <a href="{wghd::U('Distribution/account',array('token'=>$token,'p'=>$_GET['p']))}" class="btnGray vm">取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+   </form> 
+   <script>
+     
+   </script>
+  </div> 
+  <include file="Public:footer" />

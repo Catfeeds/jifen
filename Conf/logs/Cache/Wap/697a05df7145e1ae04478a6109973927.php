@@ -73,8 +73,8 @@
 		</li>
 		<div class="clear"></div><?php endif; endforeach; endif; else: echo "" ;endif; ?>
 </ul>
-
-<div class="m-cart-toal" style="margin: 0; position:fixed; bottom: 0; width: 100%;">
+<div style="height:80px"></div>
+<div class="m-cart-toal" style="margin: 0; position:fixed; bottom: 0; width: 100%; background-color: #fff;">
 <p class="check" style="font-size:1.4rem">商品总数:<b id="total_count"><?php echo ($totalCount); ?></b>　商品总额:<b id="total_price">￥<?php echo ($totalFee); ?></b></p>
 <p class="act">
 	<a href="<?php echo U('Store/products',array('token'=>$_GET['token'],'wecha_id'=>$wecha_id));?>" class="back">继续购物<i></i></a>

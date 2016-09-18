@@ -1,0 +1,53 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="{wghd::RES}/css/cymain.css" />
+<script src="{wghd::STATICS}/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="{wghd::STATICS}/artDialog/plugins/iframeTools.js"></script>
+<script language="javascript" type="text/javascript" src="{wghd::RES}/My97DatePicker/WdatePicker.js"></script>
+
+<div class="content">
+
+  <div class="cLineB">
+    <h4 class="left" style="color: red;">账号:{wghd:$account.username}的下级账号&nbsp;账号总数:{wghd::count($accounts)}</h4>
+  </div>
+  <div class="msgWrap">
+    <input name="delall" type="hidden" value="del">
+    <input name="wxid" type="hidden" value="gh_423dwjkewad">
+    <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+      <thead>
+        <tr>
+          <th>账号ID</th>
+          <th>账号名</th>
+          <th style="color: green;">绿色咪豆</th>
+          <th style="color: red;">红色咪豆</th>
+          <th>黑色咪豆</th>
+          <th>创建时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr></tr>
+        <volist id="list" name="accounts">
+          <tr>
+            <td>{wghd:$list.id}</td>
+            <td>{wghd:$list.username}</td>
+            <td style="color: green;">{wghd:$list.green|default=0}</td>
+            <td style="color: red;">{wghd:$list.red|default=0}</td>
+            <td>{wghd:$list.black|default=0}</td>
+            <td>{wghd:$list.addtime|date='Y-m-d',###}</td>
+            <td class="norightborder">
+              <a href="{wghd::U('Distribution/agent',array('type'=>'loweraccount','id'=>$list['id']))}">下级账号</a>
+            </td>
+          </tr>
+        </volist>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="cLine">
+    <div class="pageNavigator right">
+      <div class="pages">{wghd:$page}</div>
+    </div>
+    <div class="clr"></div>
+  </div>
+</div>
+<include file="Public:footer"/>

@@ -3,7 +3,8 @@
     protected $_validate = array(
 		array('keyword','require','关键词不能为空',1),
         array('title','require','名称不能为空',1),
-		array('score','require','每次积分数不能为空',1),
+		array('score','require','每次咪豆
+数不能为空',1),
 		array('starttime','require','开始时间不能为空',1),
 		array('endtime','require','结束时间不能为空',1),
 		array('endtime', 'checkdate', '结束时间不能小于开始时间',Model::MUST_VALIDATE,'callback',3),

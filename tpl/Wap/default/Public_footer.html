@@ -1,52 +1,48 @@
 <!--foot开始-->
 <div style="height: 60px;"></div>
 <div class="public_foot">
-    <div class="weui-row weui-no-gutter">
-      <div class="weui-col-25">
-        <a href="{wghd::U('Store/index')}">
-          <p class="iconfont">&#xe60d;</p>
-          <p>首页</p>
-        </a>
-      </div>
-      <div class="weui-col-25">
-        <a href="{wghd::U('Store/cats')}">
-          <p class="iconfont">&#xe60c;</p>
-          <p>分类</p>
-        </a>
-      </div>
-      <div class="weui-col-25">
-        <a href="{wghd::U('Store/cart')}">
-          <p class="iconfont">&#xe60e;</p>
-          <p>购物车</p>
-        </a>
-      </div>
-      <div class="weui-col-25">
-        <a href="{wghd::U('Distribution/index')}">
-          <p class="iconfont">&#xe6ca;</p>
-          <p>我的</p>
-        </a>
-      </div>
+  <div class="weui-row weui-no-gutter">
+    <div class="weui-col-25">
+      <a href="{wghd::U('Store/index')}" class="public_footer_index">
+        <p class="iconfont">&#xe60d;</p>
+        <p>首页</p>
+      </a>
+    </div>
+    <div class="weui-col-25">
+      <a href="{wghd::U('Store/cats')}" class="public_footer_products">
+        <p class="iconfont">&#xe60c;</p>
+        <p>分类</p>
+      </a>
+    </div>
+    <div class="weui-col-25">
+      <a href="{wghd::U('Store/cart')}" class="public_footer_shopcat">
+        <p class="iconfont">&#xe60e;</p>
+        <p>购物车</p>
+      </a>
+    </div>
+    <div class="weui-col-25">
+      <a href="{wghd::U('Distribution/index')}" class="public_my">
+        <p class="iconfont">&#xe6ca;</p>
+        <p>我的</p>
+      </a>
     </div>
 </div>
 
 <script>
-    (function($){
-      var module = "{wghd::MODULE_NAME}";
+    var module = "{wghd::MODULE_NAME}";
       var action = "{wghd::ACTION_NAME}";
-      var rule_wrap = $(".rule");
-      if(module == "Store" && action == "daily"){
-        $('.daily').addClass('choose');
+      if(module == "Store" && action == "index"){
+        $('.public_footer_index').addClass('public_footer_choose');
       }
       if(module == "Store" && action == "cats"){
-        $('.cats').addClass('choose');
+        $('.public_footer_products').addClass('public_footer_choose');
       }
-      if(module == "Store" && action == "index"){
-        $('.Sindex').addClass('choose');
+      if(module == "Store" && action == "cart"){
+        $('.public_footer_shopcat').addClass('public_footer_choose');
       }
       if(module == "Distribution" && action == "index"){
-        $('.Dindex').addClass('choose');
+        $('.public_my').addClass('public_footer_choose');
       }
-    })(jQuery)
   </script>
 <!--foot结束-->
 
@@ -66,7 +62,7 @@ if (typeof WeixinJSBridge == "undefined"){
     onBridgeReady();
 }
 </script>
-  <div class="clear"></div>
-    <neq name="ACTION_NAME" value="herolist">
-    <section class="foot"></section>
-    </neq>
+<div class="clear"></div>
+<neq name="ACTION_NAME" value="herolist">
+  <section class="foot"></section>
+</neq>

@@ -7,12 +7,60 @@ class DistributionAction extends UserAction{
 		$data=D('Distribution_set');
 		$set=$data->where(array('token'=>session('token'),'uid'=>session('uid')))->find();
 		$this->set = $set;
-		$admin_account['red'] = M('Distribution_earning')->where('aid=-1')->sum('red');
-		$admin_account['usedred'] = abs(M('Distribution_earning')->where(array('aid'=>-1,'red'=>array('lt',0)))->sum('red'));
-		$this->admin_account = $admin_account;
-		$this->assign('admin_account',$admin_account);
+	}
+	//公司收益明细
+	public function companyEarnDetails(){
+		$type = $this->_get('type');
+		switch ($type) {
+			case 'red':
+				$condition = array(
+					'aid' => -1,
+					'red' => array('neq',0),
+				);
+				break;
+			
+			case 'green':
+				$condition = array(
+					'aid' => array('neq',-1),
+					'green' => array('neq',0),
+				);
+				break;
+		}
+		$count = D('Earn')->where($condition)->count();
+		$page = new Page($count,25);
+		
+		$key = trim($this->_post('name'));
+		if($key && $type == 'red'){
+			$maps['username'] = array('like','%'.$key.'%');
+			$aid = D('Account')->where($maps)->getField('id');
+			if($aid){
+				$condition['fromid'] = $aid;
+			}
+		}
+		if($key && $type == 'green'){
+			$maps['username'] = array('like','%'.$key.'%');
+			$aid = D('Account')->where($maps)->getField('id');
+			if($aid){
+				$condition['aid'] = $aid;
+			}
+		}
+
+		$list = D('Earn')->relation(true)->where($condition)->limit($page->firstRow.','.$page->listRows)->order('addtime desc')->select();
+
+		$this->assign('page',$page->show());
+		$this->assign('list',$list);
+		switch ($type) {
+			case 'red':
+				$this->display('companyRedDetails');
+				break;
+			
+			case 'green':
+				$this->display('companyGreenDetails');
+				break;
+		}
 	}
 	public function set(){		
+		$data=D('Distribution_set');
 		$set = $this->set;
 		$this->assign('set',$set);
 		if(IS_POST){
@@ -204,58 +252,31 @@ class DistributionAction extends UserAction{
 			}
 			
 			$data = array(
-				'totalearn' => $this->statistical('totalearn',$account['id']),//总收入
-				'applymoney' => $this->statistical('applymoney',$account['id']),		//已提现
-				'gold' => $this->statistical('gold',$account['id']),		//总金币
-				'ordernums' => $this->statistical('ordernums',$account['id']),		//处理订单总数
+				'green' => $this->statistical('green',$account['id']),
+				'red' => $this->statistical('red',$account['id']),
+				'black' => $this->statistical('black',$account['id']),
 				'shoporders' => $this->statistical('shoporders',$account['id']),		//购买订单总数
 			);
 			$account['detail'] = $data;
 			//子账号
-			$account['childs'] = $db->where(array('createid'=>$account['id'],'delete'=>0))->relation(true)->select();
+			$account['childs'] = $db->where(array('bindaid'=>$account['id'],'delete'=>0))->relation(true)->select();
 			$this->assign('info',$account);
 			$this->display('accountDetail');
 			exit();
 		}
-		//设置等级页面
-		if($aid && $type == 'upgrade'){
-			$account = $db->where(array('id'=>$aid))->relation(true)->find();
-			// if($account['lid']){
-			// 	$condition['lid'] = array('lt',$account['lid']);
-			// }
-			// if($account['lid'] !=0){
-			// 	$upgrade_condition = array(
-			// 		'lid' => array(array('lt',$account['lid']),array('gt',1),'and'),
-			// 	);
-			// }else{
-			// 	$upgrade_condition['lid'] = array('gt',1);
-			// }
-			$upgrade_condition['lid'] = array('neq',1);
-			$levels = M('Distribution_level')->where($upgrade_condition)->select();
-			$this->assign('info',$account);
-			$this->assign('list',$levels);
-			$this->display('setLevel');
-		}
 		//充值金币页面
 		if($aid && $type == 'topup'){
 			$account = $db->where(array('id'=>$aid))->relation(true)->find();
-			$account['gold'] = $this->statistical('gold',$account['id']);
+			$account['green'] = $this->statistical('green',$account['id']);
 			$this->assign('info',$account);
-			$this->display('topup');
-		}
-		//充值现金页面
-		if($aid && $type == 'topupmoney'){
-			$account = $db->where(array('id'=>$aid))->relation(true)->find();
-			$account['balance'] = $this->statistical('balance',$account['id']);
-			$this->assign('info',$account);
-			$this->display('topupmoney');
+			$this->display('greenTopup');
 		}
 		//账号列表
 		if(!$aid && !$type){
 			$where['delete'] = 0;
 
 			if($this->_post('name')!=''){
-				$where['nickname|username'] = array('like','%'.$this->_post('name').'%');
+				$where['truename|username'] = array('like','%'.$this->_post('name').'%');
 			}
 			//列表页
 			$count=$db->where($where)->count();
@@ -264,32 +285,353 @@ class DistributionAction extends UserAction{
 			$list = $db->where($where)->relation(true)->limit($page->firstRow.','.$page->listRows)->select();
 			foreach ($list as $k => $v) {
 				$list[$k]['creater'] = M('Distribution_member')->where(array('wecha_id'=>$v['wecha_id']))->getField('nickname');
-				$list[$k]['bindac'] = M('Distribution_account')->field('id,nickname')->where(array('id'=>$v['bindaid']))->find();
+				$list[$k]['bindac'] = M('Distribution_account')->field('id,truename')->where(array('id'=>$v['bindaid']))->find();
 			}
 			$this->assign('page',$page->show());
 			$this->assign('list',$list);
 			$this->display();
 		}
 	}
+	//账号收入明细
+	public function accountEarnDetails(){
+		$type = $this->_get('type');
+		$aid = $this->_get('id');
+		$db = D('Earn');
+		$where['aid'] = $aid;
+		switch ($type) {
+			case 'green':
+				$where['green'] = array('neq',0);
+				break;
+			
+			case 'red':
+				$where['red'] = array('neq',0);
+				break;
+		}
+		$count = $db->where($where)->count();
+		$page = new Page($count,25);
+		$list = $db->where($where)->limit($page->firstRow.','.$page->listRows)->relation(true)->select();
+
+		//账号名
+		$username = D('Account')->where(array('id'=>$aid))->getField('username');
+
+		$this->assign('page',$page->show());
+		$this->assign('list',$list);
+		$this->assign('username',$username);
+		switch ($type) {
+			case 'green':
+				$this->display('accountGreenDetails');
+				break;
+			
+			case 'red':
+				$this->display('accountRedDetails');
+				break;
+		}
+	}
+	//修改账号信息
+	public function accountDetailEdit(){
+		$aid = $this->_get('id');
+		$name = $this->_get('name');
+		$edit_con = $this->_get('con');
+		$edit_con = $name == 'password' ? md5($edit_con) : $edit_con;
+		$data[$name] = $edit_con;
+		$data['updatetime'] = time();
+		$re = D('Account')->where('id='.$aid)->save($data);
+		if($re){
+			D('Account')->where('id='.$aid)->setField('changpwd',1);
+			$this->ajaxReturn('','修改成功',1);
+		}else{
+			$this->ajaxReturn('','修改失败',2);
+		}
+	}
+	//删除账号
+	public function deleteAccount(){
+		$id = $this->_get('id');
+		//$re = D('Account')->where('id='.$id)->setField('delete',1);
+		$re = D('Account')->where('id='.$id)->delete();
+		if($re){
+			$this->success('删除成功',U('Distribution/account'));
+		}else{
+			$this->error('删除成功',U('Distribution/account'));
+		}
+	}
+	public function greenTopup(){
+		$aid = $this->_post('aid');
+		$green = $this->_post('green');
+		$set = M('Distribution_set')->find();
+
+		//插入充值订单表
+		$orderid = substr($this->token, -1, 4) . date("YmdHis");
+		$price = $green;
+		$_POST['orderid'] = $orderid;
+		$_POST['price'] = $price;
+		$_POST['aid'] = $aid;
+		$_POST['bindaid'] = 0;
+		$_POST['paid'] = 1;
+		$_POST['back'] = 1;
+		$_POST['integral'] = $green * 0.5;
+		$_POST['needred'] = $green * $set['inback']/100;
+		$db = D('LevelOrders');
+		if ($db->create() === false) {
+		    $this->error($db->getError());
+		} else {
+		    $result = $db->add();
+		}
+
+		$re = $this->earnRecord($aid,0,0,$green,0,0,14,$_SERVER['SERVER_ADDR'],0,$aid);
+
+		$account = D('Account')->where('id='.$aid)->find();
+		$integral = $green;
+		if($account['bindaid']){
+		    $this->earnRecord($account['bindaid'],0,0,0,$integral * $set['firstPer']/100,0,1,$_SERVER['SERVER_ADDR'],0,$aid);
+		    //返还上上级咪豆
+
+		    $upupaid = D('Account')->where('id='.$account['bindaid'])->getField('bindaid');
+		    if($upupaid){
+		        $this->earnRecord($upupaid,0,0,0,$integral * $set['secondPer']/100,0,2,$_SERVER['SERVER_ADDR'],0,$aid);
+		    }else{//如果没有上上级 将分红返还给公司
+		        $this->earnRecord(-1,0,0,0,$integral * $set['secondPer']/100,0,13,$_SERVER['SERVER_ADDR'],0,$aid);
+		    }
+		}else{//如果没有上级 将 两份返红给公司
+		    $this->earnRecord(-1,0,0,0,$integral * ($set['firstPer'] + $set['secondPer'])/100,0,12,$_SERVER['SERVER_ADDR'],0,$aid);
+		}
+		//返还代理点咪豆
+
+		if($account['agent']){
+		    $this->earnRecord(0,0,0,0,$integral * $set['thirdPer']/100,0,3,$_SERVER['SERVER_ADDR'],$account['agent'],$aid);
+		}
+		//返还公司咪豆
+
+		$this->earnRecord(-1,0,0,0,$integral * $set['comPer']/100,0,4,$_SERVER['SERVER_ADDR'],0,$aid);
+
+		if($re){
+			$this->success('充值成功',U('Distribution/account',array('id'=>$aid,'type'=>'topup')));
+		}
+	}
+	//代理点列表
+	public function agent(){
+		$db = M('Distribution_agent');
+		$type = $this->_get('type');
+		$id = $this->_get('id');
+		if($type == 'register'){
+			$this->display('agentRegister');
+			exit();
+		}
+		if($type == 'edit'){
+			$agent = $db->where('id='.$id)->find();
+			$this->assign('info',$agent);
+			$this->display('agentEdit');
+			exit();
+		}
+		if($type == 'delete'){
+			$this->del_id('Distribution_agent','Distribution/agent');
+			exit();
+		}
+		if($type == 'accountdetails'){
+			$agent = $db->where('id='.$id)->find();
+			$where['agent'] = $id;
+			$count= D('Account')->where($where)->count();
+			$page=new Page($count,25);
+
+			//账号筛选
+			if($this->_post('name')!=''){
+				$where['username'] = array('like','%'.$this->_post('name').'%');
+			}
+			//时间
+			$starttime = $this->_post('starttime')!='' ? $this->_post('starttime'): $this->_request('starttime');
+			$endtime = $this->_post('endtime')!='' ? $this->_post('endtime'): $this->_request('endtime');
+
+			if($starttime && $endtime){
+				$starttime=date(strtotime($starttime));
+				$endtime=date(strtotime($endtime))+86400;
+				$where['addtime'] = array(array('gt',$starttime),array('lt',$endtime),'and');
+			}
+			$accounts = D('Account')->where($where)->limit($page->firstRow.','.$page->listRows)->select();
+			
+			$this->assign('agent',$agent);
+			$this->assign('accounts',$accounts);
+			$this->assign('page',$page->show());
+			$this->display('agentDetails');
+			exit();
+		}
+		if($type == 'loweraccount'){
+			$account = D('Account')->where('id='.$id)->find();
+
+			$where['bindaid'] = $id;
+
+			$count= D('Account')->where($where)->count();
+			$page=new Page($count,25);
+
+			$accounts = D('Account')->where($where)->limit($page->firstRow.','.$page->listRows)->select();
+			$this->assign('account',$account);
+			$this->assign('accounts',$accounts);
+			$this->assign('page',$page->show());
+			$this->assign('page',$page->show());
+			$this->display('loweraccount');
+			exit();
+		}
+		if($type == 'earndetails'){
+			$agent = $db->where('id='.$id)->find();
+			//时间
+			$starttime = $this->_post('starttime')!='' ? $this->_post('starttime'): $this->_request('starttime');
+			$endtime = $this->_post('endtime')!='' ? $this->_post('endtime'): $this->_request('endtime');
+			//时间筛选
+			if($starttime && $endtime){
+				$starttime=date(strtotime($starttime));
+				$endtime=date(strtotime($endtime))+86400;
+				$where['addtime'] = array(array('gt',$starttime),array('lt',$endtime),'and');
+			}
+			//账号筛选
+			if($this->_post('name')!=''){
+				$condition['username'] = array('like','%'.$this->_post('name').'%');
+				$aid = D('Account')->where($condition)->getField('id');
+				if($aid){
+					$where['aid'] = $aid;
+				}
+			}
+
+			//代理点红色积分
+			unset($where['agent']);
+			$where['gid'] = $id;
+			$red = M('Distribution_earning')->where(array('gid'=>$id,'aid'=>array("neq",-1)))->sum('red');
+
+			//分页
+			$count= D('Account')->where($where)->count();
+			$page=new Page($count,25);
+
+			//收入详细
+			$earns = D('Earn')->where($where)->relation(true)->limit($page->firstRow.','.$page->listRows)->select();
+
+			$this->assign('red',$red);
+			$this->assign('agent',$agent);
+			$this->assign('earns',$earns);
+			$this->assign('page',$page->show());
+			$this->display('agentEarnDetails');
+			exit();
+		}
+		if($type == 'transferpage'){
+			$agent = M('Distribution_agent')->where('id='.$id)->find();
+			$red =M('Distribution_earning')->where(array('gid'=>$id,'aid'=>array("neq",-1)))->sum('red');
+			$agent['red'] = $red;
+			$this->assign('agent',$agent);
+			$this->display('transferPage');
+			exit();
+		}
+		if($type == 'transfer'){
+			$db = D('Transfer');
+			$red= trim($this->_post('red'));
+			if(!is_numeric($red)){
+				$this->error('输入额度有误',U('Distribution/agent',array('type'=>'transferpage','id'=>$id)));
+			}
+			//判断代理点红色咪豆
+			$agent_red = M('Distribution_earning')->where(array('gid'=>$id,'aid'=>array("neq",-1)))->sum('red');
+			if($red > $agent_red){
+				$this->error('代理点咪豆不足',U('Distribution/agent',array('type'=>'transferpage','id'=>$id)));
+			}
+			//判断推荐码是否正确
+			$code = $this->_post('code');
+			$account = D('Account')->where(array('recommend'=>$code))->find();
+			if(!$account){
+				$this->error('该推荐码账号不存在',U('Distribution/agent',array('type'=>'transferpage','id'=>$id)));
+			}
+			$remark = $this->_post('remark');
+			$data = array(
+				'gid' => $id,
+				'intoId' => $account['id'],
+				'red' => $red,
+				'remark' => $remark,
+				'ip' => $_SERVER['SERVER_ADDR'],
+				'addtime' => time(),
+				'year' => date('Y',time()),
+				'month' => date('m',time()),
+				'day' => date('d',time()),
+			);
+			$re = $db->add($data);
+			if($re){
+				$this->earnRecord($account['id'],0,0,0,$red,0,15,$_SERVER['SERVER_ADDR'],0,0,$id,$remark);
+				$this->earnRecord(0,0,0,0,-$red,0,15,$_SERVER['SERVER_ADDR'],$id);
+				$this->success('转账成功',U('Distribution/agent',array('type'=>'transferpage','id'=>$id)));
+			}else{
+				$this->error('转账失败',U('Distribution/agent',array('type'=>'transferpage','id'=>$id)));
+			}
+			exit();
+		}
+		if($type == 'transferDetails'){
+			$db = D('Transfer');
+			$list = $db->where(array('gid'=>$id))->relation(true)->select();
+			$this->assign('list',$list);
+			$this->display('transferDetails');
+			exit();
+		}
+
+		if($this->_post('name')!=''){
+			$where['name'] = array('like','%'.$this->_post('name').'%');
+		}
+
+		//列表页
+		$count=$db->where($where)->count();
+		$page=new Page($count,25);
+
+		$list = $db->where($where)->limit($page->firstRow.','.$page->listRows)->select();
+		foreach ($list as $k => $v) {
+			$list[$k]['red'] = $this->statistical('agentred',$v['id']);
+		}
+		$this->assign('page',$page->show());
+		$this->assign('list',$list);
+		$this->display();
+	}
+	public function agent_register(){
+		//判断重复
+		$name = rtrim($_POST['name']);
+		$username = rtrim($_POST['username']);
+		$password = rtrim($_POST['username']);
+		if(!$name || !$username || !$password){
+			$this->error('信息不能为空');
+		}
+		$condition = array(
+			'name' => $name,
+			'username' => $username,
+			'_logic' => 'OR',
+		);
+		$agent = M('Distribution_agent')->where($condition)->find();
+		if($agent){
+			$this->error('代理点名或账号已经存在');
+			exit();
+		}
+		$_POST['code'] = String::randString(6,3);
+		$_POST['addtime'] = time();
+		$_POST['year'] = date('Y',time());
+		$_POST['month'] = date('m',time());
+		$_POST['day'] = date('d',time());
+		$this->insert('Distribution_agent','/agent');
+	}
+	public function agent_edit(){
+		$this->save('Distribution_agent','/agent');
+	}
 	//会员充值记录列表
 	public function topupRecord(){
 		$db = D('LevelOrders');
 		$type = $this->_get('type');
+		$id = $this->_get('id');
 		if($type == 'return'){
-			$id = $this->_get('id');
 			$order = $db->where(array('id'=>$id))->find();
 			$account = D('Account')->where('id='.$order['aid'])->find();
 			$data['username'] = $account['username'];
 			$data['price'] = $order['price'];
 			$data['topup_integral'] = $order['topup'];
-			$data['need_integral'] = $order['price'] * $this->set['inback']/100 - $data['topup_integral'];
+			$data['need_integral'] = $order['needred'] - $data['topup_integral'];
 			$data['oid'] = $order['id'];
 			$data['aid'] = $account['id'];
 			$this->assign('info',$data);
 			$this->display('topup');
 			exit();
 		}
-		$records = $db->where(array('paid'=>1))->relation(true)->order('finish asc,id asc')->select();
+		if($type == 'details'){
+			$list = M('Distribution_earning')->where(array('status'=>5,'oid'=>$id,'aid'=>array('gt',0)))->select();
+			$this->assign('list',$list);
+			$this->display('topupdetails');
+			exit();
+		}
+		$records = $db->where(array('paid'=>1))->relation(true)->order('addtime asc')->select();
 		foreach ($records as $k => $v) {
 			if($v['back'] == 1){
 				$records[$k]['member']['nickname'] = $v['ip'];
@@ -299,30 +641,49 @@ class DistributionAction extends UserAction{
 		$this->assign('list',$records);
 		$this->display();
 	}
-	//后台给账号返红色积分
+	//会员转账记录
+	public function transferRecord(){
+		$db = D('Transfer');
+
+		$count=$db->count();
+		$page=new Page($count,25);
+		$list = $db->limit($page->firstRow.','.$page->listRows)->order('id desc')->relation(true)->select();
+		
+		$this->assign('page',$page->show());
+		$this->assign('list',$list);
+		$this->display();
+	}
+	//后台给账号返红色咪豆
+
 	public function accountTopup(){
 		$aid = $this->_post('aid');
 		$oid = $this->_post('oid');
 		$gold = $this->_post('gold');
-		//判断公司剩余红色积分
-		if($this->admin_account['red'] < $gold){
-			$this->error('公司积分不足');
+		if(!is_numeric($gold) || $gold<=0){
+			$this->error('咪豆
+输入有误');
 		}
-		//判断充值金币是够超出所需积分
+		//判断公司剩余红色咪豆
+
+		if($this->admin_account['red'] < $gold){
+			$this->error('公司咪豆不足');
+		}
+		//判断充值金币是够超出所需咪豆
+
 		// $order = D('LevelOrders')->field('price,topup')->where('id='.$oid)->find();
 		// $need_integral = $order['price'] * $this->set['inback']/100 - $order['topup'];
 		// if($gold > $need_integral){
-		// 	$this->error('超出所需积分');
+		// 	$this->error('超出所需咪豆');
 		// }
 
 		if(is_numeric($gold)){
 			//如果超出就直接冲满
-			$order = D('LevelOrders')->field('price,topup,finish')->where('id='.$oid)->find();
+			$order = D('LevelOrders')->field('price,topup,finish,needred')->where('id='.$oid)->find();
 			//判断该订单是否充值完毕
 			if($order['finish'] == 1){
 				$this->error('该订单已经充值完毕');
 			}else{
-				$need_integral = $order['price'] * $this->set['inback']/100 - $order['topup'];
+				$need_integral = $order['needred'];
 				if($gold >= $need_integral){
 					$gold = $need_integral;
 					$finish = 1;

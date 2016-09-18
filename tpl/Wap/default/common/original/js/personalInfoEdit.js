@@ -19,6 +19,7 @@ define(['jquery','ajaxfileupload'],function($,aimg){
 				$("#info_edit_item").attr('type','password');
 				$("#info_edit_item").attr('placeholder','输入新密码');
 				$('.info_edit_old_password').show();
+				$('.info_edit_new_password').show();
 			}else{
 				$("#info_edit_item").attr('type','text');
 			}
@@ -71,6 +72,11 @@ define(['jquery','ajaxfileupload'],function($,aimg){
 					var reg = /^[A-Za-z0-9]{6,16}$/;
 					if(reg.test(new_info) == false){
 					    return floatNotify.simple('密码必须由6-16位字母、数字组成');
+					}
+					var newpassword = $('#info_edit_new_password').val();
+					//判断两次密码是否相同
+					if(new_info != newpassword){
+						return floatNotify.simple('两次密码不相同');
 					}
 				}
 

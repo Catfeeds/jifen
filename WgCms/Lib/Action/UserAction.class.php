@@ -9,6 +9,23 @@ class UserAction extends BaseAction
     protected function _initialize()
     {
         parent::_initialize();
+        //红色信息
+        $condition = array(
+            'aid' => array(array('eq',-1),array('eq',3),'or'),
+        );
+        $admin_account['red'] = M('Distribution_earning')->where($condition)->sum('red');
+        $condition['red'] = array('lt',0);
+        $admin_account['usedred'] = abs(M('Distribution_earning')->where($condition)->sum('red'));
+        //绿色信息
+        $admin_account['green'] = M('LevelOrders')->where('paid=1')->sum('green');
+        $admin_account['agreen'] = M('LevelOrders')->where(array('paid'=>1,'back'=>array('neq',1),))->sum('green');
+        $admin_account['cgreen'] = M('LevelOrders')->where(array('paid'=>1,'back'=>array('eq',1),))->sum('green');
+        //黑色信息
+        $admin_account['black'] = M('Distribution_earning')->sum('black');
+        
+        $this->admin_account = $admin_account;
+        $this->assign('admin_account',$admin_account);
+        
         $userinfo = M('User_group')->where(array('id' => session('gid')))->find();
         $this->assign('userinfo', $userinfo);
         $this->userGroup = $userinfo;

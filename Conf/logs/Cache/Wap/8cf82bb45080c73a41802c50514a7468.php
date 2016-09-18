@@ -13,7 +13,8 @@
 	<link rel="stylesheet" href="<?php echo RES;?>/original/css/weui.min.css">
 	<link rel="stylesheet" href="<?php echo RES;?>/original/css/style.css">
 	<link rel="stylesheet" href="<?php echo RES;?>/original/css/jquery-weui.min.css"></head>
-    <link rel="stylesheet" href="<?php echo RES;?>/original/others2/main.css">
+    <link rel="stylesheet" href="<?php echo RES;?>/original/others/main.css">
+    <link rel="stylesheet" href="<?php echo RES;?>/original/others/main2.css">
 <body style="position: relative;" id="scnhtm5">
 	<style>
 		html,body{
@@ -45,9 +46,9 @@
 							</div>
 							<div class="weui_cell_ft">
 								<p>
-									<?php if(!empty($row['detail'])): echo sprintf("%.2f",$row['detail'][0]['showprice']);?>
+									<?php if(!empty($row['detail'])): echo sprintf("%.2f",$row['detail'][0]['price']);?>
 		                            <?php else: ?>
-		                            <?php echo sprintf("%.2f",$row['showprice']); endif; ?>
+		                            <?php echo sprintf("%.2f",$row['price']); endif; ?>
 								</p>
 								<p>×
 									<?php if(!empty($row['detail'])): echo ($row['detail'][0]['count']); ?>
@@ -72,9 +73,10 @@
 					<div class="weui_cell">
 						<div class="weui_cell_bd weui_cell_primary"></div>
 						<div class="weui_cell_ft">
+							<!-- <?php if(($o["paid"]) == "0"): ?><a href="<?php echo U('Store/payNow',array('id'=>$o['id']));?>" data-id="<?php echo ($o["id"]); ?>" class="weui_btn weui_btn_mini weui_btn_primary cancel_order" style="font-size: 16px; background: #EF4F4F;">取消订单</a><?php endif; ?> -->
 							<?php if(($o["paid"] == 0) AND ($o["returnMoney"] == 0)): ?><a href="<?php echo U('Store/payNow',array('id'=>$o['id']));?>" data-id="<?php echo ($o["id"]); ?>" class="weui_btn weui_btn_mini weui_btn_primary place_order" style="font-size: 16px;">立即支付</a><?php endif; ?>
 							<?php if(($o["sent"] == 1) AND ($o["receive"] == 0)): ?><a href="javascript:;" data-id="<?php echo ($o["id"]); ?>" class="weui_btn weui_btn_mini weui_btn_primary get_product" style="font-size: 16px;">确认收货</a><?php endif; ?>
-							<a href="<?php echo U('Store/orderDetails',array('id'=>$o['orderid']));?>" class="weui_btn weui_btn_mini weui_btn_primary coad_bnfo_lage" style="font-size: 16px;">订单详情</a>
+							<a href="<?php echo U('Store/orderDetails',array('id'=>$o['orderid']));?>" class="weui_btn weui_btn_mini weui_btn_primary coad_lnfo_bage" style="font-size: 16px;">订单详情</a>
 						</div>
 					</div>
 				</div><?php endforeach; endif; else: echo "" ;endif; ?>
@@ -83,52 +85,48 @@
 	<!--foot开始-->
 <div style="height: 60px;"></div>
 <div class="public_foot">
-    <div class="weui-row weui-no-gutter">
-      <div class="weui-col-25">
-        <a href="<?php echo U('Store/index');?>">
-          <p class="iconfont">&#xe60d;</p>
-          <p>首页</p>
-        </a>
-      </div>
-      <div class="weui-col-25">
-        <a href="<?php echo U('Store/cats');?>">
-          <p class="iconfont">&#xe60c;</p>
-          <p>分类</p>
-        </a>
-      </div>
-      <div class="weui-col-25">
-        <a href="<?php echo U('Store/cart');?>">
-          <p class="iconfont">&#xe60e;</p>
-          <p>购物车</p>
-        </a>
-      </div>
-      <div class="weui-col-25">
-        <a href="<?php echo U('Distribution/index');?>">
-          <p class="iconfont">&#xe6ca;</p>
-          <p>我的</p>
-        </a>
-      </div>
+  <div class="weui-row weui-no-gutter">
+    <div class="weui-col-25">
+      <a href="<?php echo U('Store/index');?>" class="public_footer_index">
+        <p class="iconfont">&#xe60d;</p>
+        <p>首页</p>
+      </a>
+    </div>
+    <div class="weui-col-25">
+      <a href="<?php echo U('Store/cats');?>" class="public_footer_products">
+        <p class="iconfont">&#xe60c;</p>
+        <p>分类</p>
+      </a>
+    </div>
+    <div class="weui-col-25">
+      <a href="<?php echo U('Store/cart');?>" class="public_footer_shopcat">
+        <p class="iconfont">&#xe60e;</p>
+        <p>购物车</p>
+      </a>
+    </div>
+    <div class="weui-col-25">
+      <a href="<?php echo U('Distribution/index');?>" class="public_my">
+        <p class="iconfont">&#xe6ca;</p>
+        <p>我的</p>
+      </a>
     </div>
 </div>
 
 <script>
-    (function($){
-      var module = "<?php echo MODULE_NAME;?>";
+    var module = "<?php echo MODULE_NAME;?>";
       var action = "<?php echo ACTION_NAME;?>";
-      var rule_wrap = $(".rule");
-      if(module == "Store" && action == "daily"){
-        $('.daily').addClass('choose');
+      if(module == "Store" && action == "index"){
+        $('.public_footer_index').addClass('public_footer_choose');
       }
       if(module == "Store" && action == "cats"){
-        $('.cats').addClass('choose');
+        $('.public_footer_products').addClass('public_footer_choose');
       }
-      if(module == "Store" && action == "index"){
-        $('.Sindex').addClass('choose');
+      if(module == "Store" && action == "cart"){
+        $('.public_footer_shopcat').addClass('public_footer_choose');
       }
       if(module == "Distribution" && action == "index"){
-        $('.Dindex').addClass('choose');
+        $('.public_my').addClass('public_footer_choose');
       }
-    })(jQuery)
   </script>
 <!--foot结束-->
 
@@ -148,8 +146,8 @@ if (typeof WeixinJSBridge == "undefined"){
     onBridgeReady();
 }
 </script>
-  <div class="clear"></div>
-    <?php if((ACTION_NAME) != "herolist"): ?><section class="foot"></section><?php endif; ?>
+<div class="clear"></div>
+<?php if((ACTION_NAME) != "herolist"): ?><section class="foot"></section><?php endif; ?>
 </body>
 </html>
 <script type="text/javascript" src="<?php echo RES;?>/original/js/require.js" data-main="<?php echo RES;?>/original/js/main"></script>

@@ -261,7 +261,7 @@ function recalc() {
         }
     );
 
-    //产品积分统计
+    //产品咪豆统计
     $("[id^=total_points]").calc(
 
         "qty * price",

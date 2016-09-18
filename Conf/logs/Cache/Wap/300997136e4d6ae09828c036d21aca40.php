@@ -118,7 +118,8 @@ $(function(){
 			  </label><?php endif; ?>
 			<?php if(empty($lid)): ?><label class="weui_cell weui_check_label choose_paymode" data-pay="2" for="x12">
 				    <div class="weui_cell_bd weui_cell_primary">
-				      <p><label class="payway">积分支付</label>
+				      <p><label class="payway">绿色咪豆
+支付</label>
 				      	<?php if(empty($account)): ?><label>尚未登陆</label>
 				      		<?php else: ?>
 				      		<label style="color:#f59b10;">(<?php echo (($green)?($green):0); ?>)</label><?php endif; ?>
@@ -184,14 +185,14 @@ $(function(){
 			return false;
 		}
 		if(paymode != 1){
-			//判断积分余额
+			//判断咪豆余额
 			$.ajax({
 				url:"<?php echo U('Store/orderCartJudge');?>",
 				data:{money:<?php echo ($totalFee+$mailprice); ?>},
 				dataType:'json',
 				success:function(data){
 					if(data.status == 1){
-						confirm = floatNotify.confirm('确认使用积分支付吗？',"",
+						confirm = floatNotify.confirm('确认使用咪豆支付吗？',"",
 							function(t,n){
 								if(n==true){
 						            var reamrk = $('#remark').val();
@@ -210,7 +211,8 @@ $(function(){
 			location.href = "<?php echo U('Store/ordersave',array('token' => $token, 'wecha_id'=>$wecha_id, 'orderid'=>$orderid,'lid'=>$lid,'normid'=>$normid,'remark'=>'"+reamrk+"','paymode'=>'"+paymode+"'));?>";
 		}
 		// if(checkAdd == 1 && paymode!=1){
-		// 	//判断积分余额
+		// 	//判断咪豆
+余额
 		// 	$.ajax({
 		// 		url:"<?php echo U('Store/orderCartJudge');?>",
 		// 		data:{money:<?php echo ($totalFee+$mailprice); ?>},

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{wghd::RES}/original/css/bgmove.css">
     <link rel="stylesheet" href="{wghd::RES}/original/css/weui.min.css">
     <link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.min.css">
-    <link rel="stylesheet" href="{wghd::RES}/original/css/style.css">
+    <link rel="stylesheet" href="{wghd::RES}/original/css/style.css?time={wghd::time()}">
     <link rel="stylesheet" href="{wghd::RES}/jifen/css/style.css">
 
     <link rel="stylesheet" href="{wghd::RES}/original/css/notification.css">
@@ -18,19 +18,282 @@
 </head>
 <body id="scnhtm5">
     <!-- 轮播背景 -->
-    <div class="slideshow">
-        <div class="movebg slideshow-image" style="background-image: url('{wghd::RES}/original/images/1.jpg');"></div>
-        <div class="movebg" style="background-image: url('{wghd::RES}/original/images/2.jpg')"></div>
-        <div class="movebg" style="background-image: url('{wghd::RES}/original/images/3.jpg')"></div>
-        <div class="movebg" style="background-image: url('{wghd::RES}/original/images/4.jpg')"></div>
-    </div>
-    <!-- 轮播背景 -->
-    <div class="content_wrap index_wrap">
-        <a class="dis_head info_edit" href="{wghd::U('Distribution/myInfo')}">
-            <img id="index_headimgurl" src="{wghd:$account.headimgurl}">
-            <p id="index_nickname">{wghd:$account.petname|default="未填写"}</p>
-        </a>
-        <div class="weui_cells weui_cells_extend weui_cells_access">
+    <!-- <div class="slideshow">
+    <div class="movebg slideshow-image" style="background-image: url('{wghd::RES}/original/images/1.jpg');"></div>
+    <div class="movebg" style="background-image: url('{wghd::RES}/original/images/2.jpg')"></div>
+    <div class="movebg" style="background-image: url('{wghd::RES}/original/images/3.jpg')"></div>
+    <div class="movebg" style="background-image: url('{wghd::RES}/original/images/4.jpg')"></div>
+</div>
+-->
+<!-- 轮播背景 -->
+<div class="content_wrap index_wrap">
+    <a class="dis_head info_edit" href="{wghd::U('Distribution/mypic')}">
+        <img id="index_headimgurl" src="{wghd:$account.headimgurl}">
+        <p id="index_nickname">{wghd:$account.username|default="未填写"}</p>
+        <neq name="account.admin" value="1">
+            <p style="font-size: 15px;">
+                推荐二维码:
+                <label>{wghd:$account.recommend}</label>
+            </p>
+        </neq>
+        <div class="clear"></div>
+    </a>
+    <div class="weui_cells weui_cells_extend weui_cells_access">
+        <neq name="account.admin" value="1">
+                <eq name="account.bartender" value="1">
+                    <a class="weui_cell weui_cell_extend info_edit" href="{wghd::U('Distribution/myInfo')}">
+                        <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe601;</div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>我的资料</p>
+                        </div>
+                        <div class="weui_cell_ft"></div>
+                    </a>
+                    <a class="weui_cell weui_cell_extend" href="javascript:;" onclick="if(window.confirm('确认退出？')){location.href='{wghd::U('Distribution/loginoutAjax')}'}">
+                        <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe61b;</div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>退出登陆</p>
+                        </div>
+                        <div class="weui_cell_ft"></div>
+                    </a>
+                    <div class="weui_search_bar" id="search_bar">
+                      <form class="weui_search_outer" action="#" method="post" id="bartender_account_select"> 
+                        <div class="weui_search_inner">
+                          <i class="weui_icon_search"></i>
+                          <input name="username" type="search" class="weui_search_input" id="account_search_input" placeholder="搜索账号" required/>
+                          <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+                        </div>
+                        <label for="account_search_input" class="weui_search_text" id="search_text" style="top: 4px;">
+                          <i class="weui_icon_search"></i>
+                          <span>搜索账号</span>
+                        </label>
+                      </form>
+                      <a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+                    </div>
+                    <div class="weui_search_bar" id="search_bar">
+                      <form class="weui_search_outer" action="#" method="post" id="bartender_agent_select"> 
+                        <div class="weui_search_inner">
+                          <i class="weui_icon_search"></i>
+                          <input name="agentname" type="search" class="weui_search_input" id="agent_search_input" placeholder="搜索代理点" required/>
+                          <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+                        </div>
+                        <label for="agent_search_input" class="weui_search_text" id="search_text" style="top: 4px;">
+                          <i class="weui_icon_search"></i>
+                          <span>搜索代理点</span>
+                        </label>
+                      </form>
+                      <a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+                    </div>
+                    <script>
+                         $('#account_search_input').keydown(function(event){
+                             if(event.keyCode == 13){
+                                $('#bartender_account_select').submit();
+                             }
+                         })
+                         $('#agent_search_input').keydown(function(event){
+                             if(event.keyCode == 13){
+                                $('#bartender_agent_select').submit();
+                             }
+                         })
+                    </script>
+                    <div class="weui-row weui-row-extend weui-no-gutter">
+                        <div class="weui-col-100">
+                            <a href="javascript:;">
+                                <p class="money_color1" style="color:red; font-size: 1.6rem;">{wghd:$account['red']}</p>
+                                <p style="color:red; font-size: 0.9rem;">转账咪豆</p>
+                            </a>
+                        </div>
+                    </div>
+                    <style>
+                        .weui-row-extend2{
+                            padding: 0;text-align: center;font-size: 20px;color: #4a8586;
+                        }
+                        .extend-green{
+                            color: green;
+                        }
+                        .extend-red{
+                            color: red;
+                        }
+                        .index_font_size{
+                            font-size: 17px;
+                        }
+                    </style>
+                    <!-- <div class="weui-row-extend weui-row-extend2" id="index_detail">明细∨</div> -->
+                    <div id="index_show_details">
+                        <div class="weui-row weui-row-extend weui-row-extend2 weui-no-gutter">
+                            <div class="weui-col-25 cursor_ios extend-red index_font_size">红色咪豆</div>
+                            <div class="weui-col-25 cursor_ios index_font_size">账号</div>
+                            <div class="weui-col-25 cursor_ios index_font_size">代理点</div>
+                            <div class="weui-col-25 cursor_ios index_font_size">时间</div>
+                        </div>
+                        <volist name="transfers" id="list">
+                            <div class="weui-row weui-row-extend weui-row-extend2 weui-no-gutter" style="-ms-flex-align: center;-webkit-align-items: center; -webkit-box-align: center;align-items: center;">
+                                <div class="weui-col-25 cursor_ios extend-red index_font_size">({wghd:$key+1}){wghd:$list.red|default=0}</div>
+                                <div class="weui-col-25 cursor_ios index_font_size">{wghd:$list.outaccount.username}</div>
+                                <div class="weui-col-25 cursor_ios index_font_size">{wghd:$list.outagent.name}</div>
+                                <div class="weui-col-25 cursor_ios index_font_size">{wghd:$list.addtime|date="Y-m-d H:i:s",###}</div>
+                            </div>
+                            <div style="background-color: #fff; font-size: 16px;">备注：{wghd:$list.remark}</div>
+                        </volist>
+                    </div>                   
+                    <else/>
+                    <a class="weui_cell weui_cell_extend coad_lnfo_bage" href="{wghd::U('Distribution/topUp')}" style="background-color: #28b2f1; text-align: center;">
+                        <!-- <div class="weui_cell_hd weui_cell_hd_extend iconfont2">&#xe999;</div> -->
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p style="font-size: 20px;color: #fff;height: 35px;line-height: 35px;">充值咪豆</p>
+                        </div>
+                        <div class="weui_cell_ft"></div>
+                    </a>
+                    <div class="weui-row weui-row-extend weui-no-gutter">
+                        <div class="weui-col-25">
+                            <a href="{wghd::U('Distribution/earnDetails',array('type'=>
+                                'green'))}" class="coad_lnfo_bage">
+                                <p class="money_color1" style="color:green; font-size: 1.6rem;">{wghd::sprintf('%.1f',$account['green'])}</p>
+                                <p style="color:green; font-size: 0.9rem;">绿色咪豆</p>
+                            </a>
+                        </div>
+                        <div class="weui-col-25">
+                            <a href="{wghd::U('Distribution/earnDetails',array('type'=>
+                                'black'))}" class="coad_lnfo_bage">
+                                <p class="money_color1" style="color:black; font-size: 1.6rem;">{wghd::sprintf('%.1f',$account['black'])}</p>
+                                <p style="color:black; font-size: 0.9rem;">黑色咪豆</p>
+                            </a>
+                        </div>
+                        <div class="weui-col-25">
+                            <a href="{wghd::U('Distribution/getMoneyList')}" class="coad_lnfo_bage">
+                                <p class="money_color1" style="color:red; font-size: 1.6rem;">{wghd::sprintf('%.1f',$account_data['red2'])}</p>
+                                <p style="color:red; font-size: 0.9rem;">公司补贴</p>
+                            </a>
+                        </div>
+                        <div class="weui-col-25">
+                            <a href="{wghd::U('Distribution/getMoneyList')}" class="coad_lnfo_bage">
+                                <p class="money_color1" style="color:red; font-size: 1.6rem;">{wghd::sprintf('%.1f',$account_data['red1'])}</p>
+                                <p style="color:red; font-size: 0.9rem;">转账咪豆</p>
+                            </a>
+                        </div>
+                    </div>
+                    <style>
+                                    .weui-row-extend2{
+                                        padding: 0;text-align: center;font-size: 20px;color: #4a8586;
+                                    }
+                                    .extend-green{
+                                        color: green;
+                                    }
+                                    .extend-red{
+                                        color: red;
+                                    }
+                                    .index_font_size{
+                                        font-size: 17px;
+                                    }
+                                </style>
+                    <!-- <div class="weui-row-extend weui-row-extend2" id="index_detail">明细∨</div> -->
+                    <div id="index_show_details">
+                        <div class="weui-row weui-row-extend weui-row-extend2 weui-no-gutter">
+                            <div class="weui-col-33 cursor_ios extend-green index_font_size">绿色咪豆</div>
+                            <div class="weui-col-33 cursor_ios index_font_size">黑色咪豆</div>
+                            <div class="weui-col-33 cursor_ios index_font_size">时间</div>
+                        </div>
+                        <volist name="lolist" id="list">
+                            <div class="weui-row weui-row-extend weui-row-extend2 weui-no-gutter" style="-ms-flex-align: center;-webkit-align-items: center; -webkit-box-align: center;align-items: center;">
+                                <div class="weui-col-33 cursor_ios extend-green index_font_size">{wghd:$list.green|default=0}({wghd:$list.distribution|default=0})</div>
+                                <div class="weui-col-33 cursor_ios index_font_size">{wghd:$list.black|default=0}</div>
+                                <div class="weui-col-33 cursor_ios index_font_size">{wghd:$list.addtime|date="Y-m-d H:i:s",###}</div>
+                            </div>
+                        </volist>
+                    </div>
+                    <script>
+                                    (function($){
+                                        $('#index_detail').click(function(){
+                                            $('#index_show_details').slideToggle();
+                                        })
+                                    })($)
+                                </script>
+                    <a class="weui_cell weui_cell_extend coad_lnfo_bage cursor_ios" href="{wghd::U('Store/my')}">
+                        <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe603;</div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>我的订单</p>
+                        </div>
+                        <div class="weui_cell_ft weui_cell_ft_extend">查看全部订单</div>
+                    </a>
+                    <div class="weui-row weui-row-extend weui-no-gutter">
+                        <div class="weui-col-25 cursor_ios">
+                            <a href="{wghd::U('Store/my',array('status'=>
+                                0))}" class="coad_lnfo_bage">
+                                <notempty name="cart_data.unpaid">
+                                    <span>{wghd:$cart_data.unpaid}</span>
+                                </notempty>
+                                <p class="iconfont">&#xe606;</p>
+                                <p>待付款</p>
+                            </a>
+                        </div>
+                        <div class="weui-col-25 cursor_ios">
+                            <a href="{wghd::U('Store/my',array('status'=>
+                                1))}" class="coad_lnfo_bage">
+                                <notempty name="cart_data.unsent">
+                                    <span>{wghd:$cart_data.unsent}</span>
+                                </notempty>
+                                <p class="iconfont">&#xe605;</p>
+                                <p>待发货</p>
+                            </a>
+                        </div>
+                        <div class="weui-col-25 cursor_ios">
+                            <a href="{wghd::U('Store/my',array('status'=>
+                                2))}" class="coad_lnfo_bage">
+                                <notempty name="cart_data.unreceive">
+                                    <span>{wghd:$cart_data.unreceive}</span>
+                                </notempty>
+                                <p class="iconfont">&#xe604;</p>
+                                <p>待收货</p>
+                            </a>
+                        </div>
+                        <div class="weui-col-25 cursor_ios">
+                            <a href="{wghd::U('Store/my',array('status'=>
+                                3))}" class="coad_lnfo_bage">
+                                <notempty name="cart_data.finished">
+                                    <span>{wghd:$cart_data.finished}</span>
+                                </notempty>
+                                <p class="iconfont">&#xe608;</p>
+                                <p>已完成</p>
+                            </a>
+                        </div>
+                    </div>
+                    <a class="weui_cell weui_cell_extend coad_lnfo_bage" href="{wghd::U('Distribution/ChooseTeam')}">
+                        <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe600;</div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>团队管理</p>
+                        </div>
+                        <div class="weui_cell_ft"></div>
+                    </a>
+                    <a class="weui_cell weui_cell_extend coad_lnfo_bage" href="{wghd::U('Distribution/collection')}" id="my_collection">
+                        <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe602;</div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>我的收藏</p>
+                        </div>
+                        <div class="weui_cell_ft"></div>
+                    </a>
+                    <a class="weui_cell weui_cell_extend info_edit" href="{wghd::U('Distribution/myInfo')}">
+                        <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe601;</div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>我的资料</p>
+                        </div>
+                        <div class="weui_cell_ft"></div>
+                    </a>
+                    <a class="weui_cell weui_cell_extend" href="{wghd::U('Distribution/generateQrcode')}">
+                        <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe607;</div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>推广二维码</p>
+                        </div>
+                        <div class="weui_cell_ft"></div>
+                    </a>
+
+                    <a class="weui_cell weui_cell_extend" href="{wghd::U('Distribution/myAddress')}" id="address_list_btn">
+                        <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe609;</div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>地址列表</p>
+                        </div>
+                        <div class="weui_cell_ft"></div>
+                    </a>
+                </eq>
+            <else/>
             <a class="weui_cell weui_cell_extend coad_lnfo_bage cursor_ios" href="{wghd::U('Store/my')}">
                 <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe603;</div>
                 <div class="weui_cell_bd weui_cell_primary">
@@ -80,80 +343,28 @@
                     </a>
                 </div>
             </div>
-             <a class="weui_cell weui_cell_extend coad_lnfo_bage" href="{wghd::U('Distribution/topUp')}">
-                <div class="weui_cell_hd weui_cell_hd_extend iconfont2">&#xe999;</div>
+            <a class="weui_cell weui_cell_extend" href="{wghd::U('Distribution/myAddress')}" id="address_list_btn">
+                <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe609;</div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <p>充值积分</p>
+                    <p>地址列表</p>
                 </div>
                 <div class="weui_cell_ft"></div>
             </a>
-            <div class="weui-row weui-row-extend weui-no-gutter">
-              <div class="weui-col-33">
-                  <a href="{wghd::U('Distribution/earnDetails',array('type'=>'green'))}" class="coad_lnfo_bage">
-                      <p class="money_color1" style="color:green">{wghd::sprintf('%.1f',$account['green'])}</p>
-                      <p style="color:green">绿色积分</p>
-                  </a>
-              </div>
-              <div class="weui-col-33">
-                  <a href="{wghd::U('Distribution/getMoneyList')}">
-                      <p class="money_color1" style="color:red">{wghd::sprintf('%.1f',$account['red'])}</p>
-                      <p style="color:red">红色积分</p>
-                  </a>
-              </div>
-              <div class="weui-col-33">
-                  <a href="{wghd::U('Distribution/earnDetails',array('type'=>'black'))}" class="coad_lnfo_bage">
-                      <p class="money_color1" style="color:black">{wghd::sprintf('%.1f',$account['black'])}</p>
-                      <p style="color:black">黑色积分</p>
-                  </a>
-              </div>
-            </div>
-            <a class="weui_cell weui_cell_extend" href="{wghd::U('Distribution/myShop')}">
-                <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe600;</div>
+        </neq>
+        <neq name="account.bartender" value="1">
+            <a class="weui_cell weui_cell_extend" href="javascript:;" onclick="if(window.confirm('确认退出？')){location.href='{wghd::U('Distribution/loginoutAjax')}'}">
+                <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe61b;</div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <p>我的分店</p>
+                    <p>退出登陆</p>
                 </div>
                 <div class="weui_cell_ft"></div>
             </a>
-            <a class="weui_cell weui_cell_extend coad_lnfo_bage" href="{wghd::U('Distribution/collection')}" id="my_collection">
-                <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe602;</div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>我的收藏</p>
-                </div>
-                <div class="weui_cell_ft"></div>
-            </a>
-            <a class="weui_cell weui_cell_extend info_edit" href="{wghd::U('Distribution/myInfo')}">
-                <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe601;</div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>我的资料</p>
-                </div>
-                <div class="weui_cell_ft"></div>
-            </a>
-            <!--  <a class="weui_cell weui_cell_extend" href="javascript:;">
-            <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe607;</div>
-            <div class="weui_cell_bd weui_cell_primary">
-                <p>推广二维码</p>
-            </div>
-            <div class="weui_cell_ft"></div>
-        </a>
-        -->
-        <a class="weui_cell weui_cell_extend" href="{wghd::U('Distribution/myAddress')}" id="address_list_btn">
-            <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe609;</div>
-            <div class="weui_cell_bd weui_cell_primary">
-                <p>地址列表</p>
-            </div>
-            <div class="weui_cell_ft"></div>
-        </a>
-        <a class="weui_cell weui_cell_extend" href="javascript:;" onclick="if(window.confirm('确认退出？')){location.href='{wghd::U('Distribution/loginoutAjax')}'}">
-            <div class="weui_cell_hd weui_cell_hd_extend iconfont">&#xe61b;</div>
-            <div class="weui_cell_bd weui_cell_primary">
-                <p>退出登陆</p>
-            </div>
-            <div class="weui_cell_ft"></div>
-        </a>
+        </neq>
     </div>
     <include file="Public:footer"/>
 </div>
-<!-- <div class="show_wrap"></div> -->
+<!-- <div class="show_wrap"></div>
+-->
 </body>
 </html>
 <!-- 加载信息框 -->

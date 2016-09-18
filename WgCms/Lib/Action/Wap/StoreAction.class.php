@@ -30,15 +30,20 @@ class StoreAction extends WapAction{
 		$this->assign('company',$company);
 
 		//判断是否登陆
-		if(!$_COOKIE['login_user'] && ACTION_NAME !='register' && ACTION_NAME !='login' && ACTION_NAME !='test'){
-			if(ACTION_NAME == 'generateQrcode' && $_GET['aid'] != ''){
+		// if(!$_COOKIE['login_user'] && ACTION_NAME !='register' && ACTION_NAME !='login' && ACTION_NAME !='test'){
+		// 	if(ACTION_NAME == 'generateQrcode' && $_GET['aid'] != ''){
 
-			}else{
-				$this->redirect(U('Distribution/login'));
-			}
-		}
+		// 	}else{
+		// 		$this->redirect(U('Distribution/login'));
+		// 	}
+		// }
 		if($_COOKIE['login_user']){
 			$account = D('Account')->where(array('username'=>$_COOKIE['login_user'],'delete'=>0))->relation(true)->find();
+			if($account['changpwd'] == 1){
+				D('Account')->where(array('username'=>$_COOKIE['login_user'],'delete'=>0))->setField('changpwd',0);
+				setcookie('login_user',NULL);
+				$this->error('请登陆',U('Distribution/login'));
+			}
 			if($account){
 				if(!$account['wecha_id']){
     				$Wdata['wecha_id'] = $this->wecha_id;
@@ -53,7 +58,7 @@ class StoreAction extends WapAction{
     			$this->error('请登陆',U('Distribution/login'));
 			}
 		}
-		$url_par = $_SERVER['SERVER_ADDR'].$_SERVER['PHP_SELF'];
+		$url_par = $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 		$this->assign('url_par',$url_par);
 	}
 	
@@ -83,7 +88,7 @@ class StoreAction extends WapAction{
 				}
 			}
 		}
-		$cats = $this->product_cat_model->where(array('token' => $this->token))->order('sort asc,id asc')->select();
+		$cats = $this->product_cat_model->where(array('token' => $this->token))->order('sort desc,id asc')->select();
 		foreach($cats as $key=>$value){
 			$cats[$key]['products'] = $this->product_model->where(array('catid'=>$value['id'],'isopen'=>1))->limit(4)->order('sort desc,id DESC')->select();
 		}
@@ -396,6 +401,10 @@ class StoreAction extends WapAction{
 	 * 添加购物车
 	 */
 	public function addProductToCart() {
+		if($this->account['admin'] != 1){
+			echo 'error';
+			exit();
+		}
 		$count = isset($_GET['count']) ? intval($_GET['count']) : 1;
 		// if (empty($this->wecha_id)) {
 		// 	echo false;
@@ -735,18 +744,18 @@ class StoreAction extends WapAction{
 		}else{
 			$this->error('请选择地址');
 		}
-
+		$row['agentid'] = $this->account['agent'];
 		$row['idNumber'] = $this->_post('idNumber');
 		$row['remark'] = $this->_request('remark');
 		$row['token'] = $this->token;
 		$row['wecha_id'] = $this->wecha_id;
-		$row['waid'] = $this->account['id'];
 		$row['time'] = $time = time();
 		$row['paymode'] = isset($_GET['paymode']) ? intval($_GET['paymode']) : 1;
 		$discount = 1;//折扣
 		$normal_rt = 0;
 		$normid = $this->_get('normid');
-
+		//如果是管理员支付 获取账号ID
+		$aid = $this->_get('aid');
 
 		$carts = $this->_getCart();
 		if ($carts){
@@ -792,15 +801,12 @@ class StoreAction extends WapAction{
 			$row['month'] = date('m');
 			$row['day'] = date('d');
 			$row['hour'] = date('H');
-			//订单激活状态
-			$row['active'] = 1;
-			//提交对象账号
-			$row['bindaid'] = $this->account['bindaid'];
-			//提交人
-			if($my['id']){
-				$row['mid'] = $this->my['id'];
+			if($this->account['admin'] == 1){
+				$row['aid'] = $aid;
+				$row['adminid'] = $this->account['id'];
+			}else{
+				$row['aid'] = $this->account['id'];
 			}
-			$row['aid'] = $this->account['id'];
 			$product_cart_model = M('product_cart');
 			$normal_rt = $product_cart_model->add($row);
 			//TODO 发货的短信提醒
@@ -844,45 +850,181 @@ class StoreAction extends WapAction{
 			}
 			session($this->session_cart_name,null);
 			$alipayConfig = M('Alipay_config')->where(array('token' => $this->token))->find();
-			if ($alipayConfig['open'] && $totalprice && $row['paymode'] == 1) {
-				$this->success('正在提交中...', U('Alipay/pay',array('token' => $this->token, 'wecha_id' => $this->wecha_id, 'success' => 1, 'from'=> 'Store', 'orderName' => $orderid, 'single_orderid' => $orderid, 'price' => $totalprice)));
-			} else {
-				if($this->memberPay($normal_rt)){
-					$this->success('支付成功', U('Distribution/index'));
-				}else{
-					$this->error('积分余额不足', U('Distribution/index'));
+			if($this->account['admin'] == 1){//管理员发货
+				$admin_buy_data = array(
+					'paid' => 1,
+					'buytime' => time(),
+				);
+				M('product_cart')->where('id='.$normal_rt)->save($admin_buy_data);
+				$this->earnRecord($aid,$cart['id'],$this->my['id'],-$totalprice,0,$totalprice,10);
+				$this->success('支付成功', U('Store/my'));
+			}else{
+				if ($alipayConfig['open'] && $totalprice && $row['paymode'] == 1) {
+					$this->success('正在提交中...', U('Alipay/pay',array('token' => $this->token, 'wecha_id' => $this->wecha_id, 'success' => 1, 'from'=> 'Store', 'orderName' => $orderid, 'single_orderid' => $orderid, 'price' => $totalprice)));
+				} else {
+					if($this->memberPay($normal_rt)){
+						$this->success('支付成功', U('Distribution/index'));
+					}else{
+						$this->error('咪豆余额不足', U('Distribution/index'));
+					}
 				}
 			}
 		} else {
 			$this->error('订单生成失败');
 		} 
 	}
-	//判断会员金币余额
-	public function myGold($pay){
-		$db = M('Distribution_earning');
-		$gold = $db->where(array('aid'=>$this->account['id']))->sum('green');
-		if($gold < $pay){
-			return false;
-		}else{
-			return true;
+	public function ordersaveAjax() {
+		//支付需要登陆
+		if(!$this->account){
+			$this->ajaxReturn('','请登陆',0);
 		}
-	}
-	//会员购买判断金币
-	public function orderCartJudge(){
-		$money = $this->_get('money');
-		if($this->myGold($money)){
-			$this->ajaxReturn('','',1);
+		$row = array();
+		$row['orderid'] = $orderid = substr($this->wecha_id, -1, 4) . date("YmdHis");
+		//赋值地址
+		$address = M('Address_list')->where(array('aid'=>$this->account['id'],'choose'=>1))->find();
+		if($address){
+			$row['province'] = $address['province'];
+			$row['city'] = $address['city'];
+			$row['county'] = $address['county'];
+			$row['truename'] = $address['name'];
+			$row['tel'] = $address['tele'];
+			$row['address'] = $address['address'];
 		}else{
-			$this->ajaxReturn('','金币不足',2);
+			$this->ajaxReturn('','请选择地址',0);
 		}
+		$row['agentid'] = $this->account['agent'];
+		$row['idNumber'] = $this->_post('idNumber');
+		$row['remark'] = $this->_request('remark');
+		$row['token'] = $this->token;
+		$row['wecha_id'] = $this->wecha_id;
+		$row['time'] = $time = time();
+		$row['paymode'] = isset($_GET['paymode']) ? intval($_GET['paymode']) : 1;
+		$discount = 1;//折扣
+		$normal_rt = 0;
+		$normid = $this->_get('normid');
+		//如果是管理员支付 获取账号ID
+		$aid = $this->_get('aid');
+
+		$carts = $this->_getCart();
+		if ($carts){
+			$calCartInfo = $this->calCartInfo($carts);
+			foreach ($carts as $pid => $rowset) {
+				$total = 0;
+				if (is_array($rowset)) {
+					foreach ($rowset as $did => $ro) {
+						$temp = M('Product_detail')->where(array('id' => $did, 'pid' => $pid))->find();//setDec('num', $ro['count']);
+						if ($temp['num'] < $ro['count']) {
+							$this->ajaxReturn('','购买的量超过了库存',0);
+						}
+						$total += $ro['count'];
+					}
+				} else {
+					$total = $rowset;
+				}
+				$tmp = M('product')->where(array('id' => $pid, 'num' => array('egt', $total)))->find();
+				if(!$this->judgePorductLimit($pid,$total)){
+					$this->ajaxReturn('','商品超出购买次数',0);
+				}
+				if ($tmp['num'] < $total) {
+					$this->ajaxReturn('','购买的量超过了库存',0);
+				}
+			}
+			
+			$setting = M('Product_setting')->where(array('token' => $this->token))->find();
+			//运费
+			$freight = $this->_get('freight','intval');
+			$totalprice = $calCartInfo[1]*$discount + $calCartInfo[2] + $freight;
+			$row['total'] = $calCartInfo[0];
+			if($row['paymode'] != 1){
+				$row['integral'] = $totalprice;
+			}else{
+				$row['price'] = $totalprice;
+			}
+
+			$row['diningtype'] = 0;
+			$row['buytime'] = '';
+			$row['tableid'] = 0;
+			$row['info'] = serialize($carts);
+			$row['groupon']=0;
+			$row['dining'] = 0;
+			$row['year'] = date('Y');
+			$row['month'] = date('m');
+			$row['day'] = date('d');
+			$row['hour'] = date('H');
+			if($this->account['admin'] == 1){
+				$row['aid'] = $aid;
+				$row['adminid'] = $this->account['id'];
+			}else{
+				$row['aid'] = $this->account['id'];
+			}
+			$product_cart_model = M('product_cart');
+			$normal_rt = $product_cart_model->add($row);
+			//TODO 发货的短信提醒
+			if ($normal_rt) { 
+				//Sms::sendSms($this->token, "您的顾客{$userInfo['name']}刚刚下了一个订单，订单号：{$orderid}，请您注意查看并处理");
+			}
+		}
+		if ($normal_rt){
+			$product_model = M('product');
+			$product_cart_list_model = M('product_cart_list');
+			$crow = array();
+			$tdata = $this->getCat($carts);
+			foreach ($carts as $k => $c){
+				$crow['cartid'] = $normal_rt;
+				$crow['aid'] = $this->account['id'];
+				$crow['productid'] = $k;
+				$crow['price'] = $tdata[1][$k]['totalPrice']*$discount;//$c['price'];
+				$crow['total'] = $tdata[1][$k]['total'];
+				$crow['wecha_id'] = $row['wecha_id'];
+				$crow['token'] = $row['token'];
+				$crow['time'] = $time;
+				$product_cart_list_model->add($crow);
+			}
+			
+			//删除库存
+			//增加已售
+			foreach ($carts as $pid => $rowset) {
+				$total = 0;
+				if (is_array($rowset)) {
+					foreach ($rowset as $did => $ro) {
+						M('Product_detail')->where(array('id' => $did, 'pid' => $pid))->setDec('num', $ro['count']);
+						$total += $ro['count'];
+					}
+				} else {
+					$total = $rowset;
+				}
+				$product_model->where(array('id' => $pid))->setDec('num', $total);
+				$product_model->where(array('id' => $pid))->setInc('fakemembercount', $total);
+				//增加真实销量
+				$product_model->where(array('id' => $pid))->setInc('salecount', $total);
+			}
+			$finished = $this->_get('finished');
+			if($finished == 1){
+				session($this->session_cart_name,null);
+			}
+			$alipayConfig = M('Alipay_config')->where(array('token' => $this->token))->find();
+			if($this->account['admin'] == 1){//管理员发货
+				$admin_buy_data = array(
+					'paid' => 1,
+					'buytime' => time(),
+				);
+				M('product_cart')->where('id='.$normal_rt)->save($admin_buy_data);
+				$this->earnRecord($aid,$cart['id'],$this->my['id'],-$totalprice,0,$totalprice,10,0,0,$this->account['id']);
+				$this->ajaxReturn('','支付成功', 1);
+			}else{
+				$this->ajaxReturn('','只有管理员能操作', 0);
+			}
+		} else {
+			$this->ajaxReturn('','订单生成失败',0);
+		} 
 	}
-	//会员金币支付订单
+	//会员咪豆支付订单
 	public function memberPay($order_id){
 		$cart = M('Product_cart')->where(array('id'=>$order_id))->find();
 		log::write('order_id='.$order_id,'DEBUG');
-		if($this->myGold($cart['integral'])){
-			$type = $cart['lid'] == 0 ? 5:6;
-			$this->earnRecord($this->account['id'],$cart['id'],$this->my['id'],-$cart['integral'],0,$cart['integral'],7);
+		$integral = $cart['integral'] == 0 ? $cart['price'] : $cart['integral'];
+		if($this->myGold($integral,$this->account['id'])){
+			$this->earnRecord($this->account['id'],$cart['id'],$this->my['id'],-$integral,0,$integral,7);
 			M('Product_cart')->where(array('id'=>$order_id))->save(array('buytime'=>time(),'paid'=>1));
 
 			//发送支付信息
@@ -895,7 +1037,40 @@ class StoreAction extends WapAction{
 			return false;
 		}
 	}
-	
+	//管理员给会员购物 判断会员信息
+	public function judgeMember(){
+		$pay = $this->_get('pay','intval');
+		$aid = $this->_get('aid');
+		$account = D('Account')->where('id='.$aid)->find();
+		if($account){
+			if(!$this->myGold($pay,$aid)){
+				$gold = $this->statistical('green',$aid);
+				$this->ajaxReturn($gold,'会员绿色咪豆不足',2); 
+			}else{
+				$this->ajaxReturn($aid,'',1); 
+			}
+		}else{
+			$this->ajaxReturn('','该会员不存在',2); 
+		}
+	}
+	//判断会员咪豆余额
+	public function myGold($pay,$aid){
+		$gold = $this->statistical('green',$aid);
+		if($gold < $pay){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	//会员购买判断金币
+	public function orderCartJudge(){
+		$money = $this->_get('money');
+		if($this->myGold($money,$this->account['id'])){
+			$this->ajaxReturn('','',1);
+		}else{
+			$this->ajaxReturn('','绿色咪豆不足',2);
+		}
+	}
 	//我的订单立即支付
 	public function payNow(){
 		$order_id = $this->_get('id');
@@ -917,7 +1092,7 @@ class StoreAction extends WapAction{
 			$orderid = substr($this->wecha_id, -1, 4) . date("YmdHis");
 			M('Product_cart')->where(array('id'=>$order_id))->setField('orderid',$orderid);
 			log::write('order_id1='.$order_id,'DEBUG');
-			if($order['integral']){
+			if($order['integral'] != 0){
 				if($this->memberPay($order_id)){
 					$this->success('支付成功');
 				}else{
@@ -932,6 +1107,10 @@ class StoreAction extends WapAction{
 	}
 	
 	public function orderCart() {
+		//支付需要登陆
+		if(!$this->account){
+			$this->error('请登陆',U('Distribution/login'));
+		}
 		if (empty($this->wecha_id)) {
 			session($this->session_cart_name,null);
 		}
@@ -951,7 +1130,8 @@ class StoreAction extends WapAction{
 			$this->error('没有购买商品!', U('Store/cart', array('token' => $this->token)));
 		}
 		$list = $data[0];
-		//判断积分
+		//判断咪豆
+
 		$green = $this->statistical('green',$this->account['id']);
 		$this->assign('green', $green);
 
@@ -960,7 +1140,83 @@ class StoreAction extends WapAction{
 		$this->assign('totalCount', $totalCount);
 		$this->assign('mailprice', $data[2]);
 		$this->assign('metaTitle', '购物车结算');
-		$this->display();
+		if($this->account['admin'] == 1){
+			// $alist = D('Account')->where(array('admin'=>array('neq',1)))->select();
+			// $this->assign('accounts',$alist);
+			$agents = M('Distribution_agent')->select();
+		    $this->assign('agents',$agents);
+			$this->display('adiminCart');
+		}else{
+			$this->display();
+		}
+	}
+	//通过选择代理点查询账号
+	public function selectAccountListFromGid(){
+		$gid = $this->_get('gid');
+		$accounts = D('Account')->where(array('agent'=>$gid))->select();
+		if($accounts){
+			$str = '<option selected="" value="0">查询账号信息</option>';
+			foreach ($accounts as $k => $v) {
+				$str .='<option value="'.$v['id'].'">'.$v['username'].'(绿1:'.$v['green'].')</option>';
+			}
+		}else{
+			$str = '<option selected="" value="0">该代理下没有账号</option>';
+		}
+		$this->ajaxReturn('',$str,1);
+	}
+	//select 查询用户积分
+	public function selectGetAccountInfo(){
+		$aid = $this->_get('aid');
+		$account = D('Account')->where('id='.$aid)->find();
+		$pay = $this->_get('pay','intval');
+		if($account){
+			$data = array(
+				'green' => $account['green'],
+				'balack' => $account['balack'],
+			);
+			$info = '<a href="javascript:;" style="color:green;">绿:<label class="green" style="color:green;">'.$account['green'].'</label></a><a href="javascript:;">黑:<label class="black">'.$account['black'].'</label></a>';
+			$account_data = '';
+			if($this->myGold($pay,$account['id'])){
+				$account_data .= '<div class="weui_cell">';
+				$account_data .=	'<div class="weui_cell_hd">';
+				$account_data .=		'<label class="weui_label" style="width:50px;">账号</label>';
+				$account_data .=		'</div>';
+				$account_data .=	'<div class="weui_cell_bd weui_cell_primary">';
+				$account_data .=		'<input class="weui_input account_name" type="text" value="'.$account['username'].'" placeholder="请输入账号">';
+				$account_data .=		'</div>';
+				$account_data .=	'<div class="weui_cell_ft">';
+				$account_data .=		'<div class="account_info">';
+				$account_data .=		'<a href="javascript:;" style="color:green;">';
+				$account_data .=			'绿:<label class="green" style="color:green;">'.$account['green'].'</label></a><a href="javascript:;">';
+				$account_data .=			'黑:<label class="black">'.$account['black'].'</label>';
+				$account_data .=		'</a>';
+				$account_data .=		'<input type="hidden" class="account_id" value="'.$account['id'].'"></div>';
+				$account_data .=		'</div>';
+				$account_data .=	'</div>';
+			}
+		}else{
+			$info = '';
+		}
+		$this->ajaxReturn($account_data,$info,1);
+	}
+	//查询用户积分
+	public function getAccountInfo(){
+		$username = $this->_get('username');
+		$pay = $this->_get('pay','intval');
+		$account = D('Account')->where(array('username'=>$username))->find();
+		if($account){
+			if(!$this->myGold($pay,$account['id'])){
+				$this->ajaxReturn('','该账号咪豆不足',0);
+			}
+			$data = array(
+				'green' => $account['green'],
+				'black' => $account['black'],
+			);
+			$info = '<a href="javascript:;" style="color:green;">绿:<label class="green" style="color:green;">'.$account['green'].'</label></a><a href="javascript:;">黑:<label class="black">'.$account['black'].'</label></a><input type="hidden" class="account_id" value="'.$account['id'].'" />';
+			$this->ajaxReturn($info,'',1);
+		}else{
+			$this->ajaxReturn('','没有该账号',0);
+		}
 	}
 	
 	public function my(){
@@ -969,7 +1225,14 @@ class StoreAction extends WapAction{
 		$start = ($page - 1) * $offset;
 		$product_cart_model = M('product_cart');
 		$status = $this->_get('status');
-		$where = array('token'=>$this->token,'wecha_id'=>$this->wecha_id, 'groupon' => 0, 'dining' => 0);
+		$where = array('token'=>$this->token, 'groupon' => 0, 'dining' => 0);
+		//判断是否是管理员
+		if($this->account['admin'] == 1){
+			$where['adminid'] = $this->account['id'];
+		}else{
+			$where['aid'] = $this->account['id'];
+		}
+		//搜索提交对象
 		if($status==0&&$status!=NULL){
 			$where['paid'] = 0;
 		}elseif($status==1){
@@ -992,7 +1255,12 @@ class StoreAction extends WapAction{
 				$pids = array_keys($products);
 				$o['productInfo'] = array();
 				if ($pids) {
-					$o['productInfo'] = M('product')->where(array('id' => array('in', $pids)))->select();
+					$o['productInfo'] = $this->showPrice($this->getCat($products)[0]);
+					foreach ($o['productInfo'] as $k => $v) {
+						$o['allmailprice']+=$v['mailprice'];
+						$o['productInfo'][$k]['count'] = $products[$v['id']];
+						$o['productInfo'][$k]['detail'] = $this->showPrice($o['productInfo'][$k]['detail']);
+					}
 				}
 				$list[] = $o;
 			}
@@ -1007,6 +1275,20 @@ class StoreAction extends WapAction{
 		//是否要支付
 		$alipayConfig = M('Alipay_config')->where(array('token' => $this->token))->find();
 		$this->assign('alipayConfig',$alipayConfig);
+		$this->display();
+	}
+	//客户订单详情
+	public function orderDetails(){
+		$id = $this->_get('id');
+		$cart = M('Product_cart')->where(array('orderid'=>$id))->find();
+		if($cart['bindaid']){
+			$newest_cart_id = M('Product_cart')->where(array('orderid'=>$cart['orderid'],'active'=>1))->getField('bindaid');
+			$cart['binda'] = M('Distribution_account')->where(array('id'=>$newest_cart_id))->getField('username');
+		}
+		if($cart['aid']){
+			$cart['account'] = M('Distribution_account')->where(array('id'=>$cart['aid']))->getField('username');
+		}
+		$this->assign('info',$cart);
 		$this->display();
 	}
 	
@@ -1086,17 +1368,19 @@ class StoreAction extends WapAction{
 		$product_cart_list_model = M('product_cart_list');
 		$thisOrder = $product_cart_model->where(array('id'=> $cartid))->find();
 		if (empty($thisOrder)) {
-			exit(json_encode(array('error_code' => true, 'msg' => '没有此订单')));
+			$this->ajaxReturn('','没有此订单',2);
+			// exit(json_encode(array('error_code' => true, 'msg' => '没有此订单')));
 		}
 		$id = $thisOrder['id'];
 		if (empty($thisOrder['paid'])) {
 			//删除订单和订单列表
 			$product_cart_model->where(array('id' => $cartid))->delete();
 			$product_cart_list_model->where(array('cartid' => $cartid))->delete();
-			//还原积分
-			$userinfo_model = M('Distribution_member');
-			$thisUser = $userinfo_model->where(array('token'=>$this->token,'wecha_id'=>$this->wecha_id))->find();
-			$userinfo_model->where(array('id' => $thisUser['id']))->setInc('total_score', $thisOrder['score']);
+			//还原咪豆
+
+			// $userinfo_model = M('Distribution_member');
+			// $thisUser = $userinfo_model->where(array('token'=>$this->token,'wecha_id'=>$this->wecha_id))->find();
+			// $userinfo_model->where(array('id' => $thisUser['id']))->setInc('total_score', $thisOrder['score']);
 			F('fans_token_wechaid', NULL);
 			//商品销量做相应的减少
 			$carts = unserialize($thisOrder['info']);
@@ -1114,9 +1398,11 @@ class StoreAction extends WapAction{
 				$product_model->where(array('id' => $pid))->setInc('num', $total);
 				$product_model->where(array('id' => $pid))->setDec('salecount', $total);
 			}
-			exit(json_encode(array('error_code' => false, 'msg' => '订单取消成功')));
+			$this->ajaxReturn('','订单取消成功',1);
+			// exit(json_encode(array('error_code' => false, 'msg' => '订单取消成功')));
 		}
-		exit(json_encode(array('error_code' => true, 'msg' => '购买成功的订单不能取消')));
+		$this->ajaxReturn('','购买成功的订单不能取消',2);
+		// exit(json_encode(array('error_code' => true, 'msg' => '购买成功的订单不能取消')));
 	}
 	public function returnCart(){
 		$cartid = isset($_GET['cartid']) && intval($_GET['cartid'])? intval($_GET['cartid']) : 0;
@@ -1125,21 +1411,22 @@ class StoreAction extends WapAction{
 		$product_cart_list_model = M('product_cart_list');
 		$thisOrder = $product_cart_model->where(array('id'=> $cartid))->find();
 		if (empty($thisOrder)) {
-			exit(json_encode(array('error_code' => true, 'msg' => '没有此订单')));
+			$this->ajaxReturn($product_cart_model->getLastsql(),'没有此订单',-1);
 		}
 		$id = $thisOrder['id'];
 		if ($thisOrder['paid']==1) {
 			if ($thisOrder['sent']==0) {
 				$data['returnMoney'] = 1;
+				$data['restarttime'] = time();
 				$data['returnReason'] = $this->_post('reason');
 				if(M('product_cart')->where('id='.$cartid)->save($data)){
-					exit(json_encode(array('error_code' => false, 'msg' => '申请退款成功,等待商家处理')));
+					$this->ajaxReturn('','申请退款成功,等待商家处理',1);
 				}
 			}else{
-				exit(json_encode(array('error_code' => true, 'msg' => '已发货订单不能申请退款')));
+				$this->ajaxReturn('','已发货订单不能申请退款',-1);
 			}
 		}else{
-			exit(json_encode(array('error_code' => true, 'msg' => '未付款的订单不能申请退款')));
+			$this->ajaxReturn('','未付款的订单不能申请退款',-1);
 		}
 	}
 	public function delCart(){
@@ -1437,6 +1724,19 @@ class StoreAction extends WapAction{
 		$data['status'] = $status;
 		$db = M('Distribution_ordermoney');
 		$db->where($condition)->save($data);
+	}
+	//文章列表
+	public function article(){
+		$this->assign("title",'新闻列表');
+
+		if(IS_POST){
+			$where['title'] = array('like', "%".$_POST['search_name']."%");
+		}
+
+		$list=M("img")->where($where)->order('createtime asc')->select();
+
+		$this->assign("list",$list);
+		$this->display();
 	}
 }
 

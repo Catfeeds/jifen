@@ -118,14 +118,25 @@ if (!isset($_SESSION['isQcloud'])){
         <div class="accountInfo">
 <table class="vipInfo" width="100%" border="0" cellpadding="0" cellspacing="0">
 <tr>
-<td><strong>公司红色积分：</strong>{wghd:$admin_account.red|default=0}</td>
-<td><strong>图文自定义：</strong>{wghd:$thisUser.diynum}/{wghd:$userinfo.diynum}</td>
-<td><strong>请求数：</strong>{wghd:$thisUser.connectnum}/{wghd:$userinfo.connectnum}</td>
+<td>
+<a href="{wghd::U('Distribution/companyEarnDetails',array('type'=>'red'))}">
+<strong style="font-size: 18px; color: red;">公司红色咪豆
+：{wghd:$admin_account.red|default=0} </strong>
+</a>
+</td>
+<td>
+<a href="{wghd::U('Distribution/companyEarnDetails',array('type'=>'green'))}">
+<strong style="font-size: 18px; color: green;">充值绿色咪豆
+：{wghd:$admin_account.green|default=0}</strong>
+</a>
+</td>
+<td><strong style="font-size: 18px;">黑色咪豆
+：{wghd:$admin_account.black|default=0}</strong></td>
 </tr>
 <tr>
 <td><strong>已使用：</strong>{wghd:$admin_account.usedred|default=0}</td>
-<td><strong>已使用：</strong><php>echo $_SESSION['diynum'];</php></td>
-<td><strong>当月剩余请求数：</strong><php>echo $userinfo['connectnum']-$_SESSION['connectnum'];</php></td>
+<td><p>会员充值：{wghd:$admin_account.agreen|default=0}</p><p>后台充值：{wghd:$admin_account.cgreen|default=0}</p></td>
+<td></td>
 </tr>
 
 </table>
@@ -230,7 +241,7 @@ array(
 'subs'=>array(
 array('name'=>'关注时回复与帮助','link'=>U('Areply/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Areply')),
 array('name'=>'微信－文本回复','link'=>U('Text/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Text')),
-array('name'=>'微信－图文回复','link'=>U('Img/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Img','a'=>'index')),
+array('name'=>'微信－图文回复(新闻)','link'=>U('Img/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Img','a'=>'index')),
 /*array('name'=>'微信－多图文回复','link'=>U('Img/multi',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Img','a'=>'multi')),*/
 /*array('name'=>'微信－语音回复','link'=>U('Voiceresponse/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Voiceresponse')),*/
 array('name'=>'自定义LBS回复','link'=>U('Company/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Company')),
@@ -254,11 +265,20 @@ array(
 'subs'=>array(
 array('name'=>'账号列表','link'=>U('Distribution/account',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'account')),
 // array('name'=>'会员列表','link'=>U('Distribution/member',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'member')),
-array('name'=>'会员充值金币记录','link'=>U('Distribution/topupRecord',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'topupRecord')),
+array('name'=>'代理点列表','link'=>U('Distribution/agent',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'agent')),
+array('name'=>'补贴记录','link'=>U('Distribution/topupRecord',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'topupRecord')),
+array('name'=>'会员转账记录','link'=>U('Distribution/transferRecord',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'transferRecord')),
 array('name'=>'会员收藏列表','link'=>U('Distribution/collection',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'collection')),
-array('name'=>'提现记录列表','link'=>U('Distribution/moneylist',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'moneylist')),
+// array('name'=>'提现记录列表','link'=>U('Distribution/moneylist',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'moneylist')),
 array('name'=>'收货地址列表','link'=>U('Distribution/address',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Distribution','a'=>'address')),
 )),
+// array(
+// 'name'=>'新闻管理',
+// 'iconName'=>'store',
+// 'display'=>0,
+// 'subs'=>array(
+// array('name'=>'新闻列表','link'=>U('Article/selfStudy',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Article')),
+// )),
 array(
 'name'=>'商城系统',
 'iconName'=>'store',

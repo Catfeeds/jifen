@@ -1301,23 +1301,27 @@ class StoreAction extends UserAction{
 		if($id){
 			$cart = $order->where(array('id'=>$id,'token'=>$token,'returnMoney'=>1))->find();
 			if($cart){
-				if($cart['bindaid'] != 0){
-					$this->error('没有权限操作该订单');
-				}
+				// if($cart['bindaid'] != 0){
+				// 	$this->error('没有权限操作该订单');
+				// }
 				$data['returnMoney'] = 2;
+				$data['refinishtime'] = time();
 				if($order->where(array('id'=>$id,'token'=>$token,'returnMoney'=>1))->save($data)){
-					$product_cart = $order->where('id='.$id)->find();
-					if($product_cart['beDistri']==1){//退款后取消分销
-						$productData['distritime'] = 0;
-						M('Distribution_member')->where(array('token'=>$token,'wecha_id'=>$product_cart['wecha_id']))->save($productData);
-					}
-					$moneyData['status'] = -1;
-					M('Distribution_ordermoney')->where('order_id='.$id)->save($moneyData);//佣金退回
+					// $product_cart = $order->where('id='.$id)->find();
+					// if($product_cart['beDistri']==1){//退款后取消分销
+					// 	$productData['distritime'] = 0;
+					// 	M('Distribution_member')->where(array('token'=>$token,'wecha_id'=>$product_cart['wecha_id']))->save($productData);
+					// }
+					// $moneyData['status'] = -1;
+					// M('Distribution_ordermoney')->where('order_id='.$id)->save($moneyData);//佣金退回
 					/*$ordermoney = M('Distribution_ordermoney')->where('order_id='.$id)->select();//订单数返还
 					foreach($ordermoney as $key=>$value){
 						M('Distribution_member')->where('id='.$value['mid'])->setDec('orderNums');
 					}*/
-					$this->returnCartOpration($cart['orderid'],0,2);
+					// $this->returnCartOpration($cart['orderid'],0,2);
+					//返还咪豆
+
+					$this->earnRecord($cart['aid'],$cart['id'],0,$cart['integral'],0,-$cart['integral'],11,$_SERVER['SERVER_ADDR']);
 					$this->success('退款完成成功');
 				}else{
 					$this->error('退款完成失败');

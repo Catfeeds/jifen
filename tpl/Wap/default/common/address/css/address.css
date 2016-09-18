@@ -2924,6 +2924,7 @@ table {
       font-size: 0.6rem;
       padding-bottom: 5px; }
   .go_pay .pay_right {
+    cursor: pointer;
     background: #f66060;
     border-radius: 5px;
     font-size: 0.6rem;

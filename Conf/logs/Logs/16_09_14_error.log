@@ -1,0 +1,8 @@
+[ 2016-09-14T10:56:32+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [8l4apa0928zbg9]openid=
+[ 2016-09-14T10:57:20+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [OnlHOa0976zbg7]openid=
+[ 2016-09-14T13:56:44+08:00 ] ERR: (ThinkException) La table 'jifen_data.pigcms_agent_tansfer_records' n'existe pas
+ [ SQL语句 ] : SHOW COLUMNS FROM `pigcms_agent_tansfer_records`
+[ 2016-09-14T14:10:31+08:00 ] ERR: (ThinkException) Model:relation_METHOD_NOT_EXIST_
+[ 2016-09-14T16:06:19+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [eM80oA0515zbg7]openid=
+[ 2016-09-14T16:28:57+08:00 ] ERR: (ThinkException) _XML_TAG_ERROR_ : condition="(list['admin'] neq 1) and ( list['bartender'] neq 1)"
+                      <a href="{wghd::U('Distribution/account',array('id'=

@@ -5,6 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 <title>{wghd:$company.name}</title>
 <link href="{wghd::RES}/css/store/css/main.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{wghd::RES}/original/css/weui.min.css">
 <link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.min.css">
 <link rel="stylesheet" href="{wghd::RES}/original/css/style.css">
 <script type="text/javascript" src="{wghd::RES}/css/store/js/jquery-1.9.1.min.js"></script>
@@ -47,168 +48,106 @@ jQuery(document).ready(function ($) {
 
 <div class="clear"></div>
 <div class="index_nav">
-  <li>
-    <a href="{wghd::U('Store/products',array('token'=>$_GET['token']))}">
-        <div style="width:45px;margin:0 auto"><i class="iconfont">&#xe616;</i></div>
-          <p>全部商品</p>
-      </a>
-  </li>
-  <li>
-    <a href="{wghd::U('Store/cats',array('token'=>$_GET['token']))}">
-        <div style="width:45px;margin:0 auto"><i class="iconfont">&#xe615;</i></div>
-          <p>商品分类</p>
-      </a>
-  </li>
-  <li>
-    <a href="{wghd::U('Store/my',array('token'=>$_GET['token']))}">
-        <div style="width:45px;margin:0 auto"><i class="iconfont">&#xe617;</i></div>
-          <p>我的订单</p>
-      </a>
-  </li>
-  <li>
-    <a href="{wghd::U('Store/cart',array('token'=>$_GET['token']))}">
-        <div style="width:45px;margin:0 auto"><i class="iconfont">&#xe60e;</i></div>
-          <p>购物车</p>
-      </a>
-  </li>
-  <li>
-    <a href="{wghd::U('Distribution/index',array('token'=>$_GET['token']))}">
-        <div style="width:45px;margin:0 auto"><i class="iconfont">&#xe6ca;</i></div>
-          <p>个人中心</p>
-      </a>
-  </li>
+  
 </div>
-<volist name="guanggao" id="list">
-  <div class="ad" style="margin-top: 0;">
+
+  <style type="text/css">
+     .index_news_all{
+      background: #fff;
+     }
+     .index_left_img{
+      width: 40px;
+      height: 40px;
+      background:#fb2d9a; 
+      border-radius: 50%;
+     }
+     .index_left_img p{
+      width: 100%;
+      text-align: center;
+      font-size: 25px;
+      line-height: 42px;
+      color: #fff;  
+     }
+
+     .index_middle_all{
+      margin-left: 10px;
+     }
+     .index_middle_all_title{
+      font-size: 24px;
+      color: #000;
+     }
+     .index_middle_all_details{
+      font-size: 16px;
+      color: #000;
+     }
+     .index_right_all_title{
+      background:#fb2d9a;
+      width: 70px;
+      height: 70px;
+      margin-right: 0;
+      color: #fff;
+     }
+  </style>
+  <a href="{wghd::U('Store/article')}">
+  <div class="weui_cells index_news_all" style="margin-top: 0;">
+        <div class="weui_cell" style="padding-right:0px;">
+          <div class="weui_cell_hd index_left_img">
+            <p class="iconfont">&#xe61a;</p>
+          </div>
+          <div class="weui_cell_bd weui_cell_primary index_middle_all">
+            <p class="index_middle_all_title">新闻中心</p>
+            <p class="index_middle_all_details">咪咪兔最新讯息公告</p>
+          </div>
+          <!-- <div class="weui_cell_ft index_right_all" style="padding-right:0px;">
+             <p class="index_right_all_img"></p>
+             <p class="index_right_all_title">说明文字</p>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </a>
+  <div class="index_cat_class">
+  <volist id="list" name="cats">
+    <div class="weui_cells" style="width: 33.33333333333333%;float: left;margin-top: 5px; padding: 4px;">
+    <a href="{wghd::U('Store/products',array('catid' => $list['id']))}">
+          <div class="weui_cell" style="padding: 0;">
+            <div class="weui_cell_hd"><img src="{wghd:$list.logourl}" alt="" style="width:40px; height: 40px;margin-right:5px;display:block"></div>
+            <div class="weui_cell_bd weui_cell_primary">
+              <p style="color: #fff;">{wghd:$list.name}</p>
+            </div>
+          </div>
+    </a>
+        </div>   
+  </volist>
+  </div>
+  <volist name="guanggao" id="list">
+  <div class="ad" style="margin-top: 10px;">
     <a href="{wghd:$list.url}">
       <img src="{wghd:$list.picurl}" />
     </a>
   </div>  
 </volist>
-<!-- <div id="item">
-     <div class="item_all">
-          <div class="item_icon">
-               <div class="item_pic"><img src="{wghd::RES}/css/store/images/index_04.png" /></div>
-               <div class="item_name">跨境专区</div>
-          </div>
-         <div class="item_icon">
-              <div class="item_pic"><img src="{wghd::RES}/css/store/images/index_06.png" /></div>
-              <div class="item_name">海外直销</div>
-       </div>
-          <div class="item_icon">
-               <div class="item_pic"><img src="{wghd::RES}/css/store/images/index_09.png" /></div>
-               <div class="item_name">闪电发货</div>
-          </div>
-          <div class="item_icon">
-               <div class="item_pic"><img src="{wghd::RES}/css/store/images/index_10.png" /></div>
-               <div class="item_name">满299包邮</div>
-          </div>
-          <div class="item_icon">
-               <div class="item_pic"><img src="{wghd::RES}/css/store/images/index_12.png" /></div>
-               <div class="item_name">正品保障</div>
-          </div>
-          <div class="clear"></div>
-     </div>
-</div> -->
-<!-- <div id="theme">
-    <div class="theme_all1">
-          <div class="theme_title">
-              <div class="theme_pic"></div>
-              <div class="theme_name">主题馆</div>
-              <div class="clear"></div>
-          </div>
-        <volist id="list2" name="cats">
-          <eq name="list2['parentid']" value="0">
-            <div class="theme_all">
-                <a href="{wghd::U('Store/products',array('token' => $token,'catid' => $list2['id']))}">
-                 <div class="theme_img"><img src="{wghd:$list2.logourl}" /></div>
-                 <div class="theme_all_name">
-                      <div class="theme_all_name1">{wghd:$list2.name}</div>
-                 </div>
-                </a>
-            </div>
-          </eq>
-        </volist>
-    </div>
-</div> -->
-<notempty name="fproducts">
-  <div id="new">
-       <div class="new_all">
-            <div class="new_title">
-          <span style="float:right;padding-right:15px;"><a href="{wghd::U('Store/products')}" style="color:#666666;line-height:25px;">更多</a></span>
-                 <div class="new_pic"></div>
-                 <div class="new_name">主打商品</div>
-                 <div class="clear"></div>
-          </div>
-        <volist name="fproducts" id="hostlist2">
-        <a href="{wghd::U('Store/product',array('token' => $token, 'id' => $hostlist2['id']))}">
-        <div class="new_pro">
-           <div class="new_pro_pic"><img src="{wghd:$hostlist2.logourl}" /></div>
-           <div class="new_pro_all">
-              <div class="new_pro_name">{wghd:$hostlist2.name}</div>
-              <!-- <div class="new_pro_details">{wghd:$hostlist2.des}</div> -->
-              <div class="new_cart">
-                 <div class="new_price">￥{wghd:$hostlist2.showprice}</div>
-                 <div class="new_sales">销量：{wghd:$hostlist2.fakemembercount}</div>
-                 <!-- <div class="new_cart_pic"><img src="{wghd::RES}/css/store/images/index_28.png" /></div> -->
-                 <div class="clear"></div>
-              </div>
-           </div>
-        </div>
-        </a>
-        </volist>
-      </div> 
-  </div>
-</notempty>
 <volist id="list" name="cats">
 <eq name="list['parentid']" value="0">
-<!-- <div id="theme">
-    <div class="theme_all1">
-          <div class="theme_title">
-              <div class="theme_pic"></div>
-              <div class="theme_name">{wghd:$list.name}</div>
-              <div class="clear"></div>
-          </div>
-        <volist id="list2" name="cats">
-          <eq name="list2['parentid']" value="$list.id">
-            <div class="theme_all">
-                <a href="{wghd::U('Store/products',array('token' => $token, 'wecha_id'=>$wecha_id,'catid' => $list2['id']))}">
-                 <div class="theme_img"><img src="{wghd:$list2.logourl}" /></div>
-                 <div class="theme_all_name">
-                      <div class="theme_all_name1">{wghd:$list2.name}</div>
-                      <div class="theme_all_name2">{wghd:$list2.des}</div>
-                 </div>
-                </a>
-            </div>
-          </eq>
-        </volist>
-    </div>
-</div> -->
-<div id="new">
-     <div class="new_all">
+<div id="product">
+     <div class="pro_main new_all">
           <div class="new_title">
 				<span style="float:right;padding-right:15px;"><a href="{wghd::U('Store/products',array('token' => $token, 'catid' => $list['id']))}" style="color:#666666;line-height:25px;">更多</a></span>
                <div class="new_pic"></div>
                <div class="new_name">{wghd:$list.name}</div>
                <div class="clear"></div>
         </div>
-		  <volist name="list['products']" id="hostlist2">
-			<a href="{wghd::U('Store/product',array('token' => $token, 'id' => $hostlist2['id']))}">
-			<div class="new_pro">
-				 <div class="new_pro_pic"><img src="{wghd:$hostlist2.logourl}" /></div>
-				 <div class="new_pro_all">
-					  <div class="new_pro_name">{wghd:$hostlist2.name}</div>
-					  <!-- <div class="new_pro_details">{wghd:$hostlist2.des}</div> -->
-					  <div class="new_cart">
-						   <div class="new_price">￥{wghd:$hostlist2.showprice}</div>
-						   <div class="new_sales">销量：{wghd:$hostlist2.fakemembercount}</div>
-						   <!-- <div class="new_cart_pic"><img src="{wghd::RES}/css/store/images/index_28.png" /></div> -->
-						   <div class="clear"></div>
-					  </div>
-				 </div>
-			</div>
-			</a>
-		  </volist>
+		  <volist name="bproducts" id="hostlist">
+            <div class="pro_all">
+                <a href="{wghd::U('Store/product',array('id' => $hostlist['id']))}">
+                 <div class="pro_pic"><img src="{wghd:$hostlist.logourl}" /></div>
+                 <div class="line"></div>
+                 <div class="pro_name">{wghd:$hostlist.name|msubstr=0,11}</div>
+                 <div class="line1"></div>
+                 <div class="pro_price">现价:￥{wghd:$hostlist.price} &nbsp;&nbsp; <span>已售:{wghd:$hostlist.fakemembercount}</span></div>
+                </a>
+            </div>
+          </volist>
     </div> 
 </div>
 </eq>
@@ -216,35 +155,22 @@ jQuery(document).ready(function ($) {
 
 <div id="product">
      <div class="pro_main">
-          <!-- <volist name="cats" id="cats">
-            <volist name="cats['products']" id="hostlist">
-                <div class="pro_all">
-                    <a href="{wghd::U('Store/product',array('token' => $token, 'id' => $hostlist['id']))}">
-                     <div class="pro_pic"><img src="{wghd:$hostlist.logourl}" /></div>
-                     <div class="line"></div>
-                     <div class="pro_name">{wghd:$hostlist.name|msubstr=0,15}</div>
-                     <div class="line1"></div>
-                     <div class="pro_price">现价:￥{wghd:$hostlist.price} &nbsp;&nbsp; <span>已售:{wghd:$hostlist.fakemembercount}</span></div>
-                    </a>
-                </div>
-            </volist>
-          </volist> -->
           <volist name="bproducts" id="hostlist">
             <div class="pro_all">
-                <a href="{wghd::U('Store/product',array('token' => $token, 'id' => $hostlist['id']))}">
+                <a href="{wghd::U('Store/product',array('id' => $hostlist['id']))}">
                  <div class="pro_pic"><img src="{wghd:$hostlist.logourl}" /></div>
                  <div class="line"></div>
                  <div class="pro_name">{wghd:$hostlist.name|msubstr=0,11}</div>
                  <div class="line1"></div>
-                 <div class="pro_price">现价:￥{wghd:$hostlist.showprice} &nbsp;&nbsp; <span>已售:{wghd:$hostlist.fakemembercount}</span></div>
+                 <div class="pro_price">现价:￥{wghd:$hostlist.price} &nbsp;&nbsp; <span>已售:{wghd:$hostlist.fakemembercount}</span></div>
                 </a>
             </div>
           </volist>
      </div>
 </div>
 
-  <div class="clear"></div>
-    <div class="copy" style="text-align:center;line-height:20px;font-size:12px;">技术支持：微广互动</div>
+  <!-- <div class="clear"></div>
+    <div class="copy" style="text-align:center;line-height:20px;font-size:12px;">技术支持：微广互动</div> -->
 <include file="Public:footer"/>
 
 
@@ -270,9 +196,9 @@ window.shareData = {
             "moduleName":"Store",
             "moduleID":"{wghd:$res['id']}",
             "imgUrl": "{wghd:$res['pic']}", 
-            "timeLineLink": "{wghd::C('site_url') .  U('Store/index',array('token' => $token,'mid'=>$my['id'],'aid'=>$account['id']))}",
-            "sendFriendLink": "{wghd::C('site_url') .  U('Store/index',array('token' => $token,'mid'=>$my['id'],'aid'=>$account['id']))}",
-            "weiboLink": "{wghd::C('site_url') .  U('Store/products',array('token' => $token,'mid'=>$my['id'],'aid'=>$account['id']))}",
+            "timeLineLink": "{wghd::C('site_url') .  U('Store/index',array('mid'=>$my['id'],'aid'=>$account['id']))}",
+            "sendFriendLink": "{wghd::C('site_url') .  U('Store/index',array('mid'=>$my['id'],'aid'=>$account['id']))}",
+            "weiboLink": "{wghd::C('site_url') .  U('Store/products',array('mid'=>$my['id'],'aid'=>$account['id']))}",
             "tTitle": "{wghd:$company.name}",
             "tContent": "{wghd:$res.text}"
         };

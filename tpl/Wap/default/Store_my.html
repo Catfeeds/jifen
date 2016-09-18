@@ -13,7 +13,8 @@
 	<link rel="stylesheet" href="{wghd::RES}/original/css/weui.min.css">
 	<link rel="stylesheet" href="{wghd::RES}/original/css/style.css">
 	<link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.min.css"></head>
-    <link rel="stylesheet" href="{wghd::RES}/original/others2/main.css">
+    <link rel="stylesheet" href="{wghd::RES}/original/others/main.css">
+    <link rel="stylesheet" href="{wghd::RES}/original/others/main2.css">
 <body style="position: relative;" id="scnhtm5">
 	<style>
 		html,body{
@@ -50,9 +51,9 @@
 							<div class="weui_cell_ft">
 								<p>
 									<notempty name="row['detail']">
-		                            {wghd::sprintf("%.2f",$row['detail'][0]['showprice'])}
+		                            {wghd::sprintf("%.2f",$row['detail'][0]['price'])}
 		                            <else/>
-		                            {wghd::sprintf("%.2f",$row['showprice'])}
+		                            {wghd::sprintf("%.2f",$row['price'])}
 		                            </notempty>
 								</p>
 								<p>×
@@ -81,13 +82,16 @@
 					<div class="weui_cell">
 						<div class="weui_cell_bd weui_cell_primary"></div>
 						<div class="weui_cell_ft">
+							<!-- <eq name="o.paid" value="0">
+								<a href="{wghd::U('Store/payNow',array('id'=>$o['id']))}" data-id="{wghd:$o.id}" class="weui_btn weui_btn_mini weui_btn_primary cancel_order" style="font-size: 16px; background: #EF4F4F;">取消订单</a>
+							</eq> -->
 							<if condition ="($o.paid eq 0) AND ($o.returnMoney eq 0)">
 								<a href="{wghd::U('Store/payNow',array('id'=>$o['id']))}" data-id="{wghd:$o.id}" class="weui_btn weui_btn_mini weui_btn_primary place_order" style="font-size: 16px;">立即支付</a>
 							</if>
 							<if condition="($o.sent eq 1) AND ($o.receive eq 0)">
 								<a href="javascript:;" data-id="{wghd:$o.id}" class="weui_btn weui_btn_mini weui_btn_primary get_product" style="font-size: 16px;">确认收货</a>
 							</if>
-							<a href="{wghd::U('Store/orderDetails',array('id'=>$o['orderid']))}" class="weui_btn weui_btn_mini weui_btn_primary coad_bnfo_lage" style="font-size: 16px;">订单详情</a>
+							<a href="{wghd::U('Store/orderDetails',array('id'=>$o['orderid']))}" class="weui_btn weui_btn_mini weui_btn_primary coad_lnfo_bage" style="font-size: 16px;">订单详情</a>
 						</div>
 					</div>
 				</div>

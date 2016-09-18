@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  text-decoration: none;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; }
+
+body, ul, ol, li, p, h1, h2, h3, h4, h5, h6, form, fieldset, table, td, img, div, dl, dt, dd {
+  margin: 0;
+  padding: 0;
+  border: 0; }
+
+body {
+  color: #333;
+  font: 14px "Microsoft YaHei" !important;
+  line-height: 24px;
+  margin: 0 auto;
+  min-width: 320px;
+  max-width: 640px; }
+
+a {
+  color: #000; }
+
+li {
+  list-style-type: none;
+  padding-bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 12px;
+  font-weight: normal; }
+
+input, button, textarea, select {
+  font: 100% "Microsoft YaHei" !important; }
+
+img {
+  display: block; }
+
+.clear {
+  clear: both; }
+
+.index_left {
+  float: left; }
+  .index_left .index_left_title {
+    width: 64%; }
+    .index_left .index_left_title img {
+      max-width: 100%; }
+
+/*# sourceMappingURL=mian.css.map */

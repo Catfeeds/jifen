@@ -1,4 +1,5 @@
-define(['jquery'],function($){
+define(['jquery','common'],function($,common){
+		var common2 = new common.Common();
 		//客户订单顶部筛选
 		$(document).on('click','#orders_head div',function(){
 			var obj = $(this);
@@ -11,27 +12,18 @@ define(['jquery'],function($){
 		//申请退款
 		$(document).on('click','#order_apply_refund',function(){
 			var cart_id = $(this).data('id');
-			var lid = $(this).data('lid');
-			var warn = '';
-			console.log('aas');
-			if(lid == 0){
-				warn = "确定申请退款吗？";
-			}else{
-				warn = "该订单是升级订单,确认退款？"
-			}
-			confirm =floatNotify.confirm(warn, "",
+			confirm =floatNotify.confirm("确定申请退款吗？", "",
 			    function(t, n) {
 			        if(n==true){
 			        	$.ajax({
 			        		url:"index.php?g=Wap&m=Store&a=returnCart",
 			        		data:{cartid:cart_id},
 			        		dataType:'json',
-			        		type:'post',
 			        		success:function(data){
 			        			console.log(data);
 			        			floatNotify.simple(data.info);
 			        			if(data.status == 1){
-			        				editHide();
+			        				common2.editHide();
 			        			}
 			        		}
 			        	});
@@ -57,6 +49,30 @@ define(['jquery'],function($){
 			// 		}
 			// 	}
 			// });
+		})
+		//取消订单
+		$(document).on('click','.cancel_order',function(e){
+			e.preventDefault();
+			var obj = $(this);
+			var cartid = $(this).data('id');
+			confirm = floatNotify.confirm('确认取消该订单？',"",function(t,n){
+				if(n == true){
+					$.ajax({
+						url:getAction('Store','cancelCart'),
+						data:{cartid:cartid},
+						dataType:"json",
+						success:function(data){
+							console.log(data);
+							floatNotify.simple(data.info);
+							if(data.status == 1){
+								obj.perents('.weui_cells').hide();
+							}
+						}
+					});
+				}
+				this.hide();
+			});
+			confirm.show();
 		})
 		//确认收货
 		$(document).on('click','.get_product',function(e){

@@ -4,15 +4,15 @@
 <div class="content">
          
           <div class="cLineB">
-			<h4 class="left">收货地址列表</h4>
-			<div class="clr"></div>
-			</div>
+      <h4 class="left">收货地址列表</h4>
+      <div class="clr"></div>
+      </div>
           <div class="cLine">
             <div class="pageNavigator">
   　　      <span>
               <form action="" method="post">
               关键词：
-              <input type="text" name="name" class="px" value="{wghd:$Think.request.name}">
+              <input type="text" name="name" class="px" value="{wghd:$Think.request.name}" placeholder="输入账号">
               <input type="submit" class="btnGrayS" value="搜索">
                </form>
             </span>
@@ -28,27 +28,25 @@
             <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
               <thead>
                 <tr>
-					<th>会员ID</th>
-					<th>微信名</th>
-					<th>微信头像</th>
-					<th>姓名</th>
-					<th>联系电话</th>
-					<th>收货地址</th>
+          <th>账号ID</th>
+          <th>账号名</th>
+          <th>姓名</th>
+          <th>联系电话</th>
+          <th>收货地址</th>
                 </tr>
               </thead>
               <tbody>
                 <tr></tr>
                   <volist id="list" name="list">
                 <tr>
-                  <td>{wghd:$list.id}</td>
-                  <td>{wghd:$list.nickname}</td>
-                  <td><img src="{wghd:$list.headimgurl}" width="50"></td>
+                  <td>{wghd:$list.account.id}</td>
+                  <td>{wghd:$list.account.username}</td>
                   <td>{wghd:$list.name}</td>
                   <td>{wghd:$list.tele}</td>
-				  <td>{wghd:$list.address}</td>
+                  <td>{wghd:$list.province}{wghd:$list.city}{wghd:$list.county}{wghd:$list.address}</td>
                 </tr>
                   </volist>
-      			                
+                            
                   
               </tbody>
             </table>

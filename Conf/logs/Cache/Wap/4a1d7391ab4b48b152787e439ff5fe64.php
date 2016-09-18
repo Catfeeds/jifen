@@ -5,38 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="<?php echo RES;?>/original/qrcode/css/qrcode.css">
+    <link rel="stylesheet" href="<?php echo RES;?>/jifen/css/qrcode.css">
     <script src="<?php echo RES;?>/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
     <title>我的二维码</title>
 </head>
-<body>
-    <div class="container">
-        <img src="<?php echo RES;?>/original/qrcode/img/qrcodebg.jpg" alt="" class="qrcode_bg">
-        <div class="qrcode_wrap">
-            <div class="qrcode_top">
-                <img src="<?php echo RES;?>/original/qrcode/img/qrcode_top.png" alt=""></div>
-            <div class="account_info">
-                <div class="account_info_left">
-                    <img src="<?php echo ($account["headimgurl"]); ?>" alt=""></div>
-                <div class="account_info_right">
-                    <p>我是<?php echo ($account["petname"]); ?></p>
-                    <p>
-                        <img src="<?php echo RES;?>/original/qrcode/img/word1.png" alt=""></p>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <p class='qrcode_word_item'>[长按图片识别二维码添加]</p>
-            <div class="qrcode_img">
-                <img src="<?php echo ($account["wxcode"]); ?>" alt=""></div>
+<body style="background:#1c8d7c;" max-width="640px">
+    <!-- <div class="index_left">
+        <div class="index_left_title">
+            <img src="<?php echo RES;?>/jifen/images/index_03.png"></div>
+        <div class="index_left_bg">
+            <div class="index_left_img">
+                <img src="<?php echo RES;?>/jifen/images/index_09.png"></div>
+            <div class="index_left_txt">推荐二维码:<?php echo ($account["recommend"]); ?></div>
         </div>
+    </div> -->
+    <div class="index_right">
+        <div class="index_right_img">
+            <img src="<?php echo ($account["headimgurl"]); ?>">
+        </div>
+        <div class="index_right_name"><?php echo ($account["member"]["nickname"]); ?></div>
+        <div class="index_right_name">我的推荐码:<a href="javascript:;" style="color: #fff;font-size: 30px;"><?php echo ($account["recommend"]); ?></a></div>
     </div>
+    <div class="index_all">
+        <div class="index_people">
+            <img src="<?php echo RES;?>/jifen/images/index_10.png"></div>
+        <div class="index_erweima">
+            <img src="<?php echo ($account["wxcode"]); ?>"></div>
+    </div>
+    <div class="index_details">[长按图片识别二维码添加]</div>
 </body>
-    <script>
-    (function($){
-        img_h = $('.account_info_left').width();
-        $('.account_info_left img').height(img_h);
-    })($)
-</script>
     <script>
 function onBridgeReady(){
  WeixinJSBridge.call('showOptionMenu');

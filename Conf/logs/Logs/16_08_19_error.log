@@ -1,0 +1,28 @@
+[ 2016-08-19T09:42:21+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:index
+[ 2016-08-19T09:48:07+08:00 ] ERR: (ThinkException) _TEMPLATE_NOT_EXIST_[./tpl/User/default/Distribution_agent.html]
+[ 2016-08-19T09:48:09+08:00 ] ERR: (ThinkException) Champ 'nickname' inconnu dans field list
+ [ SQL语句 ] : SELECT `id`,`nickname` FROM `pigcms_distribution_account` WHERE ( `id` = 2 ) LIMIT 1  
+[ 2016-08-19T09:48:14+08:00 ] ERR: (ThinkException) Champ 'nickname' inconnu dans field list
+ [ SQL语句 ] : SELECT `id`,`nickname` FROM `pigcms_distribution_account` WHERE ( `id` = 2 ) LIMIT 1  
+[ 2016-08-19T10:06:11+08:00 ] ERR: (ThinkException) Action:randString_METHOD_NOT_EXIST_
+[ 2016-08-19T10:15:32+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Distirbution
+[ 2016-08-19T10:15:42+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Distirbution
+[ 2016-08-19T11:04:28+08:00 ] ERR: 发生错误：错误代码41001,微信返回错误信息：access_token missing hint: [eaUAaa0994vr19]openid=
+[ 2016-08-19T14:06:16+08:00 ] ERR: (ThinkException) Action:ajax_METHOD_NOT_EXIST_
+[ 2016-08-19T14:06:53+08:00 ] ERR: (ThinkException) Action:ajax_METHOD_NOT_EXIST_
+[ 2016-08-19T14:07:26+08:00 ] ERR: (ThinkException) Action:ajax_METHOD_NOT_EXIST_
+[ 2016-08-19T14:08:15+08:00 ] ERR: (ThinkException) Action:ajax_METHOD_NOT_EXIST_
+[ 2016-08-19T14:15:13+08:00 ] ERR: (ThinkException) Erreur de syntaxe près de 'WHERE ( `recommend` = null )' à la ligne 1
+ [ SQL语句 ] : UPDATE `pigcms_distribution_account` SET `red`=red+ WHERE ( `recommend` = null )
+[ 2016-08-19T14:15:36+08:00 ] ERR: (ThinkException) Erreur de syntaxe près de 'WHERE ( `recommend` = null )' à la ligne 1
+ [ SQL语句 ] : UPDATE `pigcms_distribution_account` SET `red`=red+ WHERE ( `recommend` = null )
+[ 2016-08-19T14:41:18+08:00 ] ERR: (ThinkException) Erreur de syntaxe près de 'WHERE id=214' à la ligne 1
+ [ SQL语句 ] : UPDATE `pigcms_distribution_member` SET  WHERE id=214
+[ 2016-08-19T14:41:53+08:00 ] ERR: (ThinkException) Erreur de syntaxe près de 'WHERE id=214' à la ligne 1
+ [ SQL语句 ] : UPDATE `pigcms_distribution_member` SET  WHERE id=214
+[ 2016-08-19T14:43:02+08:00 ] ERR: (ThinkException) Erreur de syntaxe près de 'WHERE id=214' à la ligne 1
+ [ SQL语句 ] : UPDATE `pigcms_distribution_member` SET  WHERE id=214
+[ 2016-08-19T14:43:44+08:00 ] ERR: (ThinkException) Erreur de syntaxe près de 'WHERE id=214' à la ligne 1
+ [ SQL语句 ] : UPDATE `pigcms_distribution_member` SET  WHERE id=214
+[ 2016-08-19T15:33:11+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:myOrders
+[ 2016-08-19T15:33:17+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:orderDetails

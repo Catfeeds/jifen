@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+	<title>{wghd:$title}</title>
+    <link rel="stylesheet" href="{wghd::RES}/original/css/weui.min.css">
+    <link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.css">
+</head>
+<body>
+	<div class="container" id="transfer">
+		<div class="info_edit_wrap_title">
+        <div class="info_edit_wrap_title_item info_edit_wrap_title_left close_edit_wrap">返回</div>
+        <div class="info_edit_wrap_title_item info_edit_wrap_title_center">转账</div>
+        <div class="info_edit_wrap_title_item info_edit_wrap_title_right"></div>
+      </div>
+      <div class="weui_cells_form" style="padding-top: 10px;">
+        <div class="weui_cell">
+          <div class="weui_cell_bd weui_cell_primary weui_cell_infoedit" style="box-shadow: 0 0 5px #D6D6D6;">
+            <input class="weui_input weui_input_infoedit code" type="text" placeholder="输入对方推荐码" value="">
+            <span class="weui_infoedit_delete">×</span>
+          </div>
+        </div>
+        <div class="weui_cell">
+          <div class="weui_cell_bd weui_cell_primary weui_cell_infoedit" style="box-shadow: 0 0 5px #D6D6D6;">
+            <input id="info_edit_item" class="weui_input weui_input_infoedit red" type="text" placeholder="输入红色咪豆
+额度" value="0">
+            <span class="weui_infoedit_delete">×</span>
+          </div>
+        </div>
+        <div class="weui_cells weui_cells_form" style="margin: 16px;box-shadow: 0 0 5px #D6D6D6;border-radius: 6px;">
+          <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+              <textarea class="weui_textarea transfer_remark" placeholder="备注:" rows="3" id="weui_textarea"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="weui_cells" style="padding: 0 10px; background-color: rgba(255,255,255,0);">
+        <a href="javascript:;" class="weui_btn weui_btn_primary save_info">确认转账</a>
+      </div>
+	</div>
+</body>
+</html>

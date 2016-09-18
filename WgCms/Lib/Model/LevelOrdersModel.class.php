@@ -2,7 +2,7 @@
 	class LevelOrdersModel extends RelationModel{
 		public $my;
 		protected function _initialize(){
-			$this->my = M('Distribution_member')->where(array('wecha_id'=>$_SESSION['qchwecha_id']))->find();
+			$this->my = M('Distribution_member')->where(array('wecha_id'=>$_SESSION['jifenwecha_id']))->find();
 		}
 		protected $tableNmae='level_orders';
 		protected $_link = array(

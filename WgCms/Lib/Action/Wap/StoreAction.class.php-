@@ -476,7 +476,8 @@ class StoreAction extends WapAction{
 		$row['wecha_id'] = $this->wecha_id;
 		$row['time'] = $time = time();
 		$row['paymode'] = isset($_POST['paymode']) ? intval($_POST['paymode']) : 0;
-		//积分
+		//咪豆
+
 		$score = isset($_POST['score']) ? intval($_POST['score']) : 0;
 		$normal_rt = 0;
 		$carts = $this->_getCart();
@@ -758,7 +759,8 @@ class StoreAction extends WapAction{
 			//删除订单和订单列表
 			$product_cart_model->where(array('id' => $cartid))->delete();
 			$product_cart_list_model->where(array('cartid' => $cartid))->delete();
-			//还原积分
+			//还原咪豆
+
 			$userinfo_model = M('Distribution_member');
 			$thisUser = $userinfo_model->where(array('token'=>$this->token,'wecha_id'=>$this->wecha_id))->find();
 			$userinfo_model->where(array('id' => $thisUser['id']))->setInc('total_score', $thisOrder['score']);

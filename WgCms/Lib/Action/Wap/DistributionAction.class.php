@@ -1,6 +1,8 @@
 <?php
 class DistributionAction extends WapAction{
 	private $my;
+	private $set;
+	private $account;
     public function __construct(){
         parent::_initialize();
 		$agent = $_SERVER['HTTP_USER_AGENT']; 
@@ -16,12 +18,13 @@ class DistributionAction extends WapAction{
 
 		$this->my = $my;
 		$set = M('Distribution_set')->where(array('token'=>$token))->find();
+		$this->set = $set;
 
 		$this->assign('set',$set);
         $this->assign('my',$my);
 
 		//判断是否登陆
-		if(!$_COOKIE['login_user'] && ACTION_NAME !='register' && ACTION_NAME !='login' && ACTION_NAME !='test'){
+		if(!$_COOKIE['login_user'] && ACTION_NAME !='register' && ACTION_NAME !='login' && ACTION_NAME !='test' && ACTION_NAME !='judgeMemberCode' && ACTION_NAME != 'agreement'){
 			if(ACTION_NAME == 'generateQrcode' && $_GET['aid'] != ''){
 
 			}else{
@@ -30,6 +33,11 @@ class DistributionAction extends WapAction{
 		}
 		if($_COOKIE['login_user']){
 			$account = D('Account')->where(array('username'=>$_COOKIE['login_user'],'delete'=>0))->relation(true)->find();
+			if($account['changpwd'] == 1){
+				D('Account')->where(array('username'=>$_COOKIE['login_user'],'delete'=>0))->setField('changpwd',0);
+				setcookie('login_user',NULL);
+				$this->error('请登陆',U('Distribution/login'));
+			}
 			if($account){
 				if(!$account['wecha_id']){
     				$Wdata['wecha_id'] = $this->wecha_id;
@@ -56,9 +64,12 @@ class DistributionAction extends WapAction{
         		break;
         }
         $this->assign('title',$title);
-
-        $url_par = $_SERVER['SERVER_ADDR'].$_SERVER['PHP_SELF'];
+        $url_par = $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 		$this->assign('url_par',$url_par);
+    }
+    //协议
+    public function agreement(){
+    	$this->display();
     }
     //注册页面
     public function register(){
@@ -66,20 +77,54 @@ class DistributionAction extends WapAction{
     	if(IS_POST){
     		$username = rtrim($this->_post('username'));;
     		$password = $this->_post('password');
-			if($this->isExists($username)){
-    			$this->error('微信号已存在');
+    		$code = $this->_post('code');
+    		$agent = $this->searchAgent($code);
+    		if(!$agent){
+    			$this->error('代理推荐码错误不能注册');
     		}
-    		$_POST['bindaid'] = $this->my['bindaid'];
+			if($this->isExists($username)){
+    			$this->error('账号已存在');
+    		}
+
+    		$_POST['agent'] = $agent;
+
+    		$recommend = $_POST['mcode'];
+    		if($recommend){
+    			$upaccount = D('Account')->field('bindaid,id')->where(array('recommend'=>$recommend))->find();
+    			$_POST['bindaid'] = $upaccount['id'];
+    			$_POST['secondid'] = $upaccount['bindaid'];
+    		}
+
     		if($this->account && $from == 'myshop'){
 	    			$_POST['createid'] = $this->account['id'];
 	    		}
+	    	$_POST['recommend'] = String::randString(6,3);
     		if($this->account){
-    			$this->insert('Account','/myShop');
+    			$this->insert('Account','/index');
     		}else{
     			$this->insert('Account','/login');
     		}
     	}else{
     		$this->display();
+    	}
+    }
+    //查询代理点
+    public function searchAgent($code = ''){
+    	$db = M('Distribution_agent');
+    	$agent = $db->where(array('code'=>$code))->find();
+    	if($agent){
+    		return $agent['id'];
+    	}else{
+    		return false;
+    	}
+    }
+    //AJAX判断推荐码是够正确
+    public function judgeCodeAjax(){
+    	$code = $this->_get('code');
+    	if(!$this->searchAgent($code)){
+    		$this->ajaxReturn($db->getLastsql(),'该推荐码不存在',2);
+    	}else{
+    		$this->ajaxReturn('','',1);
     	}
     }
     //下级账号列表
@@ -97,14 +142,14 @@ class DistributionAction extends WapAction{
     		$this->ajaxReturn('','',2);//已存在该用户名
     	}
     }
-    //判断账号是否存在
-    public function isExists($username){
-    	$db = M('distribution_account');
-    	$account = $db->where(array('username'=>$username,'delete'=>0))->find();
-    	if($account){
-    		return true;
+    //判断账号是否存在(AJAX)
+    public function isExistsAjax(){
+    	$username = $this->_get('username');
+    	$aid = $this->isExists($username);
+    	if($aid){
+    		$this->ajaxReturn($aid,'',1);
     	}else{
-    		return false;
+    		$this->ajaxReturn('','账号不存在',2);
     	}
     }
     //登陆页面
@@ -218,8 +263,9 @@ class DistributionAction extends WapAction{
     }
     //个人中心
 	public function index(){
-		$cart = M('ProductCart')->where(array('wecha_id'=>$this->wecha_id))->select();
+		$cart = M('ProductCart')->where(array('aid'=>$this->account['id']))->select();
 		$cart_data = array();
+		$account_data = array();
 		foreach ($cart as $k => $v) {
 			if($v['paid'] == 0){
 				$cart_data['unpaid'] >= 9 ? $cart_data['unpaid'] = 'N' : $cart_data['unpaid']++;
@@ -234,10 +280,41 @@ class DistributionAction extends WapAction{
 				$cart_data['finished'] >= 9 ? 'N' : $cart_data['finished']++;
 			}
 		}
+		//转账红色咪豆
+		$account_data['red1'] = M("Distribution_earning")->where(array('aid'=>$this->account['id'],'status'=>array('neq',5)))->sum('red');
+		//公司返红色咪豆
+		$account_data['red2'] =M("Distribution_earning")->where(array('aid'=>$this->account['id'],'status'=>array('eq',5)))->sum('red');
+		$lolist = M('LevelOrders')->where(array('aid'=>$this->account['id'],'paid'=>1))->order('addtime asc')->select();
+
+		//店小二查看转账红色咪豆
+		if($this->account['bartender'] == 1){
+			//搜索
+			$username = trim($this->_post('username'));
+			$agentname = trim($this->_post('agentname'));
+			if($username){
+				$maps['username'] = array('like','%'.$username.'%');
+				$aid = D('Account')->where($maps)->getField('id');
+				if($aid){
+					$condition['rolloutId'] = $aid;
+				}
+			}
+			if($agentname){
+				$maps['name'] = array('like','%'.$agentname.'%');
+				$gid = D('Distribution_agent')->where($maps)->getField('id');
+				if($gid){
+					$condition['gid'] = $gid;
+				}
+			}
+
+			$condition['intoId'] = $this->account['id'];
+			$transfers = D('Transfer')->where($condition)->relation(true)->order('addtime desc')->select();
+			$this->assign('transfers',$transfers);
+		}
+		$this->assign('lolist',$lolist);
 		$this->assign('cart_data',$cart_data);
+		$this->assign('account_data',$account_data);
 		$this->display();
 	}
-	//个人信息
 	//个人信息
 	public function myInfo(){
 		if(IS_POST){
@@ -281,6 +358,9 @@ class DistributionAction extends WapAction{
 			$this->display();
 		}
 	}
+	public function mypic(){
+		$this->display();
+	}
 	//AJAX上传图片(功能)
 	public function headpic(){
 		//设置一周修改一次
@@ -306,10 +386,11 @@ class DistributionAction extends WapAction{
 		$upload=new UploadFile($config);
 		$z=$upload->uploadOne($_FILES['shoplogo']);
 		if($z){
-			$pic=$z['0']['savepath'].$time.".jpg";
-			M('Distribution_member')->where(array('wecha_id'=>$this->wecha_id))->setField('headimgurl',$pic);
+			$pic=C('site_url').'/'.$z['0']['savepath'].$time.".jpg";
+			M('Distribution_account')->where(array('id'=>$this->account['id']))->setField('headimgurl',$pic);
 			$this->ajaxReturn($pic,"",1);
 		}else{
+			M('Distribution_account')->where(array('id'=>$this->account['id']))->setField('headimgurl',$this->account['headimgurl']);
 			$this->ajaxReturn("","",2);
 		}
 	}
@@ -444,10 +525,28 @@ class DistributionAction extends WapAction{
 		}
 		$this->display();
 	}
+	//团队选择
+	public function ChooseTeam(){
+		$condition['delete'] = 0;
+		$condition['bindaid|secondid'] = $this->account['id'];
+		$count = D('Account')->where($condition)->count();
+		$this->assign('count',$count);
+		$this->display();
+	}
 	//团队管理
 	public function myTeam(){
-		// $team = $this->statisticalTeam((string)$this->account['id']);
-		$team = D('Account')->where(array('bindaid'=>$this->account['id'],'delete'=>0))->relation(true)->select();
+		$level = $this->_get('level');
+		$condition['delete'] = 0;
+		switch ($level) {
+			case '1':
+				$condition['bindaid'] = $this->account['id'];
+				break;
+			
+			case '2':
+				$condition['secondid'] = $this->account['id'];
+				break;
+		}
+		$team = D('Account')->where($condition)->relation(true)->select();
 		$this->assign('list',$team);
 		$this->display();
 	}
@@ -514,8 +613,9 @@ class DistributionAction extends WapAction{
 		return array('status'=>1,'info'=>'');
 	}
 	public function test(){
+		// session('jifenwecha_id',NULL);
 		$payHandel=new payHandle($this->token,'Distribution');
-		$payHandel->afterPay('I20160818135103');
+		$payHandel->afterPay('c20160913183352');
 		// $totalprice = 0.01;
 		// $orderid = 'I20160805100150';
 		// $this->success('正在提交中...', U('Alipay/pay',array('token' => $this->token, 'wecha_id' => $this->wecha_id, 'success' => 1, 'from'=> 'Distribution', 'orderName' => $orderid, 'single_orderid' => $orderid, 'price' => $totalprice)));
@@ -547,9 +647,9 @@ class DistributionAction extends WapAction{
 			$_POST['bindaid'] = $this->account['bindaid'];
 			$_POST['mid'] = $this->my['id'];
 			$_POST['wecha_id'] = $this->my['wecha_id'];
-			$_POST['integral'] = $green * 0.5;
+			$_POST['integral'] = $green;
+			$_POST['needred'] = $green * $this->set['inback']/100;
 			$db = D('LevelOrders');
-
 			if ($db->create() === false) {
 			    $this->error($db->getError());
 			} else {
@@ -592,7 +692,7 @@ class DistributionAction extends WapAction{
 		$type		= $this->_get('type');
 		$wecha_id	= $this->wecha_id;
 		if($type=='first'){
-			$condition['fid'] = $this->my['id'];
+			$condition['bindmid'] = $this->my['id'];
 			$flag = 1;
 			$level = 'A';
 		}
@@ -707,6 +807,79 @@ class DistributionAction extends WapAction{
 		$this->assign('member',$member);
 		$this->display();
 	}
+	//抖索会员二维码
+	public function searchMemberCode($code){
+		$db = D('Account');
+		$aid = $db->where(array('recommend'=>$code))->getField('id');
+		if($aid){
+			return $aid;
+		}else{
+			return 0;
+		}
+	}
+	//AJAX判断会员推荐码
+	public function judgeMemberCode(){
+		$code = $this->_get('code');
+		if($code != ''){
+			if($this->searchMemberCode($code)){
+				$this->ajaxReturn('','',1);
+			}else{
+				$this->ajaxReturn('','该会员推荐码不存在',2);
+			}
+		}else{
+			$this->ajaxReturn('','推荐码不能为空',3);
+		}
+	}
+	//转账
+	public function transfer(){
+		if(IS_POST){
+			$db = D('Account');
+			$red = $this->_post('red');
+			$code = $this->_post('code');
+			$remark = $this->_post('remark');
+			$account = $db->where(array('recommend'=>$code))->find();
+			if($account){
+				if($account['id'] == $this->account['id']){
+					$this->ajaxReturn('','不能给自己转账',2);
+				}
+				$this->earnRecord($account['id'],0,$this->my['id'],0,$red,0,8,0,0,$this->account['id'],0,$remark);
+				$re = $this->earnRecord($this->account['id'],0,$this->my['id'],0,-$red,0,8);
+				if($re){
+					$data = array(
+						'rolloutId' => $this->account['id'],
+						'intoId' => $account['id'],
+						'red' => $red,
+						'remark' => $remark,
+						'addtime' => time(),
+						'year' => date('Y',time()),
+						'month' => date('m',time()),
+						'day' => date('d',time()),
+					);
+					M('Distribution_transfer_records')->add($data);
+					$content = '好友'.$this->account['username'].'向您转账'.$red.'红色咪豆';
+					$this->sendupMessage($account['id'],'转账',$content,U('Distribution/index'));
+					$this->ajaxReturn($content,'转账成功',1);
+				}else{
+					$this->ajaxReturn('','转账失败',2);
+				}
+			}else{
+				$this->ajaxReturn('','账号不存在',2);
+			}
+		}else{
+			$this->display();
+		}
+	}
+	//AJAX判断余额
+	public function judgeIntegralAjax(){
+		$type = $this->_get('type');
+		$num = $this->_get('num');
+		if(!$this->judgeIntegral($num,$type)){
+			$this->ajaxReturn('','咪豆
+余额不足',2);
+		}else{
+			$this->ajaxReturn('','',1);
+		}
+	}
 	public function getMoney(){
 		$token	= $this->token;
 		$wecha_id	= $this->wecha_id;
@@ -716,7 +889,7 @@ class DistributionAction extends WapAction{
 		// 	exit();
 		// }
 		$id = $this->my['id'];
-		$order['status_4'] = M('Distribution_ordermoney')->where(array('token'=>$token,'mid'=>$id,'status'=>4))->sum('offerMoney');//已审核
+		$order['status_4'] = $this->statistical('red',$this->account['id']);//总收入
 		$this->assign('order',$order);
 		if(IS_POST){
 			$name = $this->_post('name');
@@ -750,13 +923,13 @@ class DistributionAction extends WapAction{
 				$data['money'] = $money*100;
 				$data['token'] = $this->token;
 				$data['applytime'] = time();
-				if(($order['status_4']-$this->my['alreadyGetMoney'])<$money*100){
+				if($order['status_4'] < $money){
 					$arr = array('success'=>-1,'info'=>'提现金额超出可提现值');
 					echo json_encode($arr);
 					exit;
 				}
 				if(M('Distribution_applystore')->add($data)){
-					M('Distribution_member')->where('id='.$this->my['id'])->setInc('alreadyGetMoney',$money*100);
+					$this->earnRecord($this->account['aid'],0,$this->my['id'],0,-$money,0,9);
 					$arr = array('success'=>1,'info'=>'提现申请成功，请等待审核');
 					echo json_encode($arr);
 					exit;
@@ -780,11 +953,11 @@ class DistributionAction extends WapAction{
 		switch ($type) {
 			case 'red':
 				$info = $this->statistical('red',$this->account['id']);
-				$list = M('Distribution_earning')->where(array('aid'=>$this->account['id'],'red'=>array('neq',0)))->order('id desc')->select();
+				$list = M('Distribution_earning')->where(array('aid'=>$this->account['id'],'gid'=>0,'red'=>array('neq',0)))->order('id desc')->select();
 				foreach ($list as $k => $v) {
 					$list[$k]['earn'] = $v['red'];
 				}
-				$name = '红色积分';
+				$name = '红色咪豆';
 				break;
 			
 			case 'green':
@@ -793,7 +966,7 @@ class DistributionAction extends WapAction{
 				foreach ($list as $k => $v) {
 					$list[$k]['earn'] = $v['green'];
 				}
-				$name = '绿色积分';
+				$name = '绿色咪豆';
 				break;
 
 			case 'black':
@@ -802,7 +975,7 @@ class DistributionAction extends WapAction{
 				foreach ($list as $k => $v) {
 					$list[$k]['earn'] = $v['black'];
 				}
-				$name = '黑色积分';
+				$name = '黑色咪豆';
 				break;
 		}
 		$this->assign('list',$list);
@@ -832,6 +1005,10 @@ class DistributionAction extends WapAction{
 				// $list[$key]['nickname'] = $info['nickname'];
 				// $list[$key]['headimgurl'] = $info['headimgurl'];
 			}
+			//总红色收入
+			$totalred= $this->statistical('totalred',$this->account['id']);
+			$this->assign('totalred',$totalred);
+
 			$notget=sprintf("%.2f", $notget);
 			$get=sprintf("%.2f", $get);
 			$this->assign("notget",$notget);
@@ -957,7 +1134,6 @@ class DistributionAction extends WapAction{
 		$qrcode_url='https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token='.$json->access_token;
 		//{"action_name": "QR_LIMIT_SCENE", "action_info": {"scene": {"scene_id": 123}}}
 		$data['action_name']='QR_LIMIT_SCENE';
-		$data['action_info']['scene']['scene_id']=$mid;
 		$data['action_info']['scene']['scene_id']=$mid;
 		$post=$this->api_notice_increment($qrcode_url,json_encode($data));
 		//if($post ==false ) $this->error('微信接口返回信息错误，请联系管理员');
@@ -1133,11 +1309,12 @@ class DistributionAction extends WapAction{
 			$account['petname'] =base64_decode($account['petname']);
 			$this->assign('account',$account);
 		}else{
-			if(!$this->checkPersonalInfoPerfect($this->account['id'])){
-				$this->error('请完善个人资料',U('Distribution/index'));
-			}
+			// if(!$this->checkPersonalInfoPerfect($this->account['id'])){
+			// 	$this->error('请完善个人资料',U('Distribution/index'));
+			// }
 			if(!$this->account['wxcode']){
-				$wxcode = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$this->makeCode($this->token,'',$this->account['id']);
+				$ticket = $this->makeCode($this->token,'',$this->my['id']);
+				$wxcode = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$ticket;
 				D('Account')->where('id='.$this->account['id'])->setField('wxcode',$wxcode);
 				$this->account['wxcode'] = $wxcode;
 				$this->assign('account',$this->account);

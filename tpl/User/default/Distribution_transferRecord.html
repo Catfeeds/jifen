@@ -1,0 +1,51 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="{wghd::RES}/css/cymain.css" />  
+
+<div class="content">
+         
+          <div class="cLineB">
+			<h4 class="left">会员转账记录列表</h4>
+			<div class="clr"></div>
+			</div>
+          <div class="cLine">
+            <div class="clr"></div>
+          </div>
+          <div class="msgWrap">
+          <form method="post" action="index.php?ac=vote-manage&amp;id=9878" id="info">
+          <input name="delall" type="hidden" value="del">
+           <input name="wxid" type="hidden" value="gh_423dwjkewad">
+            <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+					<th>转出账号</th>
+          <th>转入账号</th>
+          <th style="color:red;">转账红色咪豆</th>
+          <th>备注</th>
+          <th>转账时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+                  <volist id="list" name="list">
+                <tr>
+                  <td>{wghd:$list.outaccount.username}</td>
+                  <td>{wghd:$list.getaccount.username}</td>
+                  <td style="color:red;">{wghd:$list.red}</td>
+                  <td>{wghd:$list.remark}</td>
+                  <td>{wghd:$list.addtime|date='Y-m-d H:i:s',###}</td>
+                </tr>
+                  </volist>
+      			                
+                  
+              </tbody>
+            </table>
+           </form> 
+   </div> 
+          <div class="cLine">
+            <div class="pageNavigator right">
+                 <div class="pages">{wghd:$page}</div>
+              </div>
+            <div class="clr"></div>
+          </div>
+  </div>
+<include file="Public:footer"/>
