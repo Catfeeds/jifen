@@ -156,10 +156,18 @@ if (!isset($_SESSION['isQcloud'])){ ?>
         <div class="accountInfo">
 <table class="vipInfo" width="100%" border="0" cellpadding="0" cellspacing="0">
 <tr>
-<td><strong style="font-size: 18px; color: red;">公司红色咪豆
-：<?php echo (($admin_account["red"])?($admin_account["red"]):0); ?> </strong></td>
-<td><strong style="font-size: 18px; color: green;">充值绿色咪豆
-：<?php echo (($admin_account["green"])?($admin_account["green"]):0); ?></strong></td>
+<td>
+<a href="<?php echo U('Distribution/companyEarnDetails',array('type'=>'red'));?>">
+<strong style="font-size: 18px; color: red;">公司红色咪豆
+：<?php echo (($admin_account["red"])?($admin_account["red"]):0); ?> </strong>
+</a>
+</td>
+<td>
+<a href="<?php echo U('Distribution/companyEarnDetails',array('type'=>'green'));?>">
+<strong style="font-size: 18px; color: green;">充值绿色咪豆
+：<?php echo (($admin_account["green"])?($admin_account["green"]):0); ?></strong>
+</a>
+</td>
 <td><strong style="font-size: 18px;">黑色咪豆
 ：<?php echo (($admin_account["black"])?($admin_account["black"]):0); ?></strong></td>
 </tr>
@@ -309,7 +317,6 @@ $i=0; $parms=$_SERVER['QUERY_STRING']; $parms1=explode('&',$parms); $parmsArr=ar
           <th style="color: green;">绿色咪豆</th>
           <th>黑色咪豆</th>
           <th style="color: red;">补贴咪豆</th>
-          <th style="color: red;">下级返红</th>
           <th>小计</th>
           <th style="color: blue;">剩余补贴</th>
           <th>后台充值</th>

@@ -282,7 +282,7 @@ class DistributionAction extends UserAction{
 			$count=$db->where($where)->count();
 			$page=new Page($count,25);
 
-			$list = $db->where($where)->relation(true)->limit($page->firstRow.','.$page->listRows)->select();
+			$list = $db->where($where)->relation(true)->limit($page->firstRow.','.$page->listRows)->order('addtime desc')->select();
 			foreach ($list as $k => $v) {
 				$list[$k]['creater'] = M('Distribution_member')->where(array('wecha_id'=>$v['wecha_id']))->getField('nickname');
 				$list[$k]['bindac'] = M('Distribution_account')->field('id,truename')->where(array('id'=>$v['bindaid']))->find();
@@ -660,8 +660,7 @@ class DistributionAction extends UserAction{
 		$oid = $this->_post('oid');
 		$gold = $this->_post('gold');
 		if(!is_numeric($gold) || $gold<=0){
-			$this->error('咪豆
-输入有误');
+			$this->error('咪豆输入有误');
 		}
 		//判断公司剩余红色咪豆
 

@@ -614,11 +614,11 @@ class DistributionAction extends WapAction{
 	}
 	public function test(){
 		// session('jifenwecha_id',NULL);
-		$payHandel=new payHandle($this->token,'Distribution');
-		$payHandel->afterPay('c20160913183352');
-		// $totalprice = 0.01;
-		// $orderid = 'I20160805100150';
-		// $this->success('正在提交中...', U('Alipay/pay',array('token' => $this->token, 'wecha_id' => $this->wecha_id, 'success' => 1, 'from'=> 'Distribution', 'orderName' => $orderid, 'single_orderid' => $orderid, 'price' => $totalprice)));
+		// $payHandel=new payHandle($this->token,'Distribution');
+		// $payHandel->afterPay('c20160919113209');
+		$totalprice = 0.01;
+		$orderid = 'c20160919113212';
+		$this->success('正在提交中...', U('Alipay/pay',array('token' => $this->token, 'wecha_id' => $this->wecha_id, 'success' => 1, 'from'=> 'Distribution', 'orderName' => $orderid, 'single_orderid' => $orderid, 'price' => $totalprice)));
 		// $list = D('Account')->where(array('mid'=>0))->select();
 		// foreach ($list as $k => $v) {
 		// 	if($v['wecha_id']){
@@ -1524,5 +1524,11 @@ class DistributionAction extends WapAction{
 			}
 		}
 		$this->redirect(U('Distribution/index',array('token'=>$token)));
+	}
+	/**
+	 * 支付成功后的回调函数
+	 */
+	public function payReturn() {
+	   $this->redirect(U('Distribution/index'));
 	}
 }?>
