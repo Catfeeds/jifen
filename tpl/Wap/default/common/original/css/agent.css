@@ -53,7 +53,7 @@ img {
   margin: 0 auto;
   left: 0;
   right: 0;
-  top: 28%;
+  top: 23%;
   border-radius: 5px;
   max-width: 640px; }
   .agent_wrap .agent_content {
@@ -95,6 +95,7 @@ img {
     .agent_wrap .agent_content .agent_username:after, .agent_wrap .agent_content .agent_password:after {
       content: "\e6ca";
       position: absolute;
+      left: 0;
       top: 19px;
       color: #fb8b06;
       font-size: 22px; }
@@ -104,7 +105,7 @@ img {
       content: "\e618"; }
     .agent_wrap .agent_content .agent_checkbox_item {
       margin-top: 10px; }
-    .agent_wrap .agent_content .agent_submit_item input {
+    .agent_wrap .agent_content .agent_submit_item .form-submit {
       border: none;
       background-color: #fb8b06;
       width: 100%;
@@ -129,5 +130,10 @@ img {
     font-size: 1.2rem;
     color: #fff;
     line-height: 2rem; }
+
+.all_records_stype {
+  font-size: 16px;
+  border-bottom: 1px solid #ccc;
+  text-indent: 5px; }
 
 /*# sourceMappingURL=agent.css.map */

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+<title>我的分店</title>
+<link href="{wghd::RES}/distri/css/fdlb.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.css">
+    <link rel="stylesheet" href="{wghd::RES}/original/css/style.css">
+</head>
+
+<body>
+	<div class="container">
+	<volist name="list" id="vo">
+        <a href="{wghd::U('Agent/myTeam',array('aid'=>$vo['id']))}">
+            <div class="fd fd1">
+            	<div class="tx">
+                    <img src="{wghd:$vo.headimgurl}" width="115px;">
+                </div>
+                <div class="left">
+                	<ul class="left_ul">
+                    	<li>
+                            <label style="color: green;">绿:{wghd::sprintf('%.0f',$vo['green'])}</label>
+                            <label style="color: red;">红:{wghd::sprintf('%.0f',$vo['red'])}</label>
+                            <label style="color: black;">黑:{wghd::sprintf('%.0f',$vo['black'])}</label>
+                        </li>
+                        <li>账号:{wghd:$vo.username}</li>
+                        <li>创建时间:{wghd:$vo.addtime|date='Y-m-d',###}</li>
+                    </ul>
+                </div><!--left-->
+                <div class="right"><img src="{wghd::RES}/distri/images/jt.png"></div><!--right-->
+                <div class="clear"></div>
+            </div>
+        </a>
+    </volist>
+    	
+    
+    </div><!--container-->
+</body>
+</html>

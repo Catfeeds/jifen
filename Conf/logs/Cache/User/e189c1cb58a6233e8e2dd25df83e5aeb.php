@@ -312,6 +312,15 @@ $i=0; $parms=$_SERVER['QUERY_STRING']; $parms1=explode('&',$parms); $parmsArr=ar
         <td><?php echo (($agent["red"])?($agent["red"]):0); ?></td> 
        </tr>
        <tr> 
+        <th>选择:</th> 
+        <td>
+          <select class="weui_select" name="type" id="type">
+            <option selected="" value="1">账号(默认)</option>
+            <option value="2">代理</option>
+          </select>
+        </td> 
+       </tr>
+       <tr> 
         <th>转入推荐码:</th> 
         <td>
           <input class="px" type="text" name="code">

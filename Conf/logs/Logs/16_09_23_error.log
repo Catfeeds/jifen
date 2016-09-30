@@ -1,0 +1,7 @@
+[ 2016-09-23T11:27:14+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Agent
+[ 2016-09-23T11:30:29+08:00 ] ERR: 发生错误：错误代码40001,微信返回错误信息：invalid credential, access_token is invalid or not latest hint: [09h.cA0567vr33!]openid=
+[ 2016-09-23T15:08:51+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [XpBZ7A0669zbg7]openid=
+[ 2016-09-23T15:48:38+08:00 ] ERR: (ThinkException) La table 'jifen_data.pigcms_company_branch_reocrds' n'existe pas
+ [ SQL语句 ] : SHOW COLUMNS FROM `pigcms_company_branch_reocrds`
+[ 2016-09-23T17:02:00+08:00 ] ERR: (ThinkException) Erreur de syntaxe près de '' à la ligne 1
+ [ SQL语句 ] : UPDATE `pigcms_company_branch` SET `proportion`='0' WHERE id=

@@ -23,7 +23,7 @@
         <div class="index_right_img">
             <img src="<?php echo ($account["headimgurl"]); ?>">
         </div>
-        <div class="index_right_name"><?php echo ($account["member"]["nickname"]); ?></div>
+        <!-- <div class="index_right_name"><?php echo ($account["member"]["nickname"]); ?></div> -->
         <div class="index_right_name">我的推荐码:<a href="javascript:;" style="color: #fff;font-size: 30px;"><?php echo ($account["recommend"]); ?></a></div>
     </div>
     <div class="index_all">

@@ -124,10 +124,14 @@
                         <?php if(is_array($transfers)): $i = 0; $__LIST__ = $transfers;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($i % 2 );++$i;?><div class="weui-row weui-row-extend weui-row-extend2 weui-no-gutter" style="-ms-flex-align: center;-webkit-align-items: center; -webkit-box-align: center;align-items: center;">
                                 <div class="weui-col-25 cursor_ios extend-red index_font_size">(<?php echo ($key+1); ?>)<?php echo (($list["red"])?($list["red"]):0); ?></div>
                                 <div class="weui-col-25 cursor_ios index_font_size"><?php echo ($list["outaccount"]["username"]); ?></div>
-                                <div class="weui-col-25 cursor_ios index_font_size"><?php echo ($list["outagent"]["name"]); ?></div>
-                                <div class="weui-col-25 cursor_ios index_font_size"><?php echo (date("Y-m-d H:i:s",$list["addtime"])); ?></div>
+                                <div class="weui-col-25 cursor_ios index_font_size"><?php echo ($list["fromagent"]["name"]); ?></div>
+                                <div class="weui-col-25 cursor_ios index_font_size" <?php if(!empty($list["fromgid"])): ?>style="color: red;"<?php endif; ?>><?php echo (date("Y-m-d H:i:s",$list["addtime"])); ?></div>
                             </div>
-                            <div style="background-color: #fff; font-size: 16px;">备注：<?php echo ($list["remark"]); ?></div><?php endforeach; endif; else: echo "" ;endif; ?>
+                            <div style="background-color: #fff; font-size: 16px; margin-bottom: 8px;">
+                                <?php if(!empty($list["fromgid"])): ?><a href="javascript:;" style="color: red;">(代理点转入)</a><?php endif; ?>
+
+                                    <label <?php if(!empty($list["fromgid"])): ?>style="color: red;"<?php endif; ?>>备注：<?php echo ($list["remark"]); ?></label>
+                            </div><?php endforeach; endif; else: echo "" ;endif; ?>
                     </div>                   
                     <?php else: ?>
                     <a class="weui_cell weui_cell_extend coad_lnfo_bage" href="<?php echo U('Distribution/topUp');?>" style="background-color: #28b2f1; text-align: center;">

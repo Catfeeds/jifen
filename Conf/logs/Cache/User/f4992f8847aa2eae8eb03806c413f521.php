@@ -156,10 +156,18 @@ if (!isset($_SESSION['isQcloud'])){ ?>
         <div class="accountInfo">
 <table class="vipInfo" width="100%" border="0" cellpadding="0" cellspacing="0">
 <tr>
-<td><strong style="font-size: 18px; color: red;">公司红色咪豆
-：<?php echo (($admin_account["red"])?($admin_account["red"]):0); ?> </strong></td>
-<td><strong style="font-size: 18px; color: green;">充值绿色咪豆
-：<?php echo (($admin_account["green"])?($admin_account["green"]):0); ?></strong></td>
+<td>
+<a href="<?php echo U('Distribution/companyEarnDetails',array('type'=>'red'));?>">
+<strong style="font-size: 18px; color: red;">公司红色咪豆
+：<?php echo (($admin_account["red"])?($admin_account["red"]):0); ?> </strong>
+</a>
+</td>
+<td>
+<a href="<?php echo U('Distribution/companyEarnDetails',array('type'=>'green'));?>">
+<strong style="font-size: 18px; color: green;">充值绿色咪豆
+：<?php echo (($admin_account["green"])?($admin_account["green"]):0); ?></strong>
+</a>
+</td>
 <td><strong style="font-size: 18px;">黑色咪豆
 ：<?php echo (($admin_account["black"])?($admin_account["black"]):0); ?></strong></td>
 </tr>
@@ -294,6 +302,7 @@ $i=0; $parms=$_SERVER['QUERY_STRING']; $parms1=explode('&',$parms); $parmsArr=ar
    <form class="form" method="post" action="<?php echo U('Distribution/accountTopup');?>"> 
     <input type="hidden" name="aid" value="<?php echo ($info["aid"]); ?>" /> 
     <input type="hidden" name="oid" value="<?php echo ($info["oid"]); ?>" /> 
+    <input type="hidden" name="cbid" value="<?php echo ($cbid); ?>" /> 
      
     <div class="msgWrap bgfc"> 
      <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 

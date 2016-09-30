@@ -129,10 +129,16 @@
                             <div class="weui-row weui-row-extend weui-row-extend2 weui-no-gutter" style="-ms-flex-align: center;-webkit-align-items: center; -webkit-box-align: center;align-items: center;">
                                 <div class="weui-col-25 cursor_ios extend-red index_font_size">({wghd:$key+1}){wghd:$list.red|default=0}</div>
                                 <div class="weui-col-25 cursor_ios index_font_size">{wghd:$list.outaccount.username}</div>
-                                <div class="weui-col-25 cursor_ios index_font_size">{wghd:$list.outagent.name}</div>
-                                <div class="weui-col-25 cursor_ios index_font_size">{wghd:$list.addtime|date="Y-m-d H:i:s",###}</div>
+                                <div class="weui-col-25 cursor_ios index_font_size">{wghd:$list.fromagent.name}</div>
+                                <div class="weui-col-25 cursor_ios index_font_size" <notempty name="list.fromgid">style="color: red;"</notempty>>{wghd:$list.addtime|date="Y-m-d H:i:s",###}</div>
                             </div>
-                            <div style="background-color: #fff; font-size: 16px;">备注：{wghd:$list.remark}</div>
+                            <div style="background-color: #fff; font-size: 16px; margin-bottom: 8px;">
+                                <notempty name="list.fromgid">
+                                    <a href="javascript:;" style="color: red;">(代理点转入)</a>
+                                </notempty>
+
+                                    <label <notempty name="list.fromgid">style="color: red;"</notempty>>备注：{wghd:$list.remark}</label>
+                            </div>
                         </volist>
                     </div>                   
                     <else/>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>{wghd:$title}</title>
+  <link rel="stylesheet" href="{wghd::RES}/original/css/weui.min.css">
+  <link rel="stylesheet" href="{wghd::RES}/original/css/jquery-weui.css"></head>
+<body>
+  <div class="container">
+    <style>
+      .weui_cells_myBill{margin-top: 0;background-color: #f66060;}
+      .weui_cell_myBill{color: #fff;padding: 15px 5px;}
+      .weui-row-myBill{background-color: #BDBDBD;}
+      .weui-row-myBill div{text-align: center;line-height: 35px;}
+      .weui-row-myBill_list div{text-align: center;line-height: 35px; font-size: 0.7rem;}
+    </style>
+    <div class="weui_cells weui_cells_myBill">
+      <div class="weui_cell weui_cell_myBill">
+        <div class="weui_cell_bd weui_cell_primary">
+          <p>下级充值记录明细</p>
+        </div>
+      </div>
+    </div>
+    <div class="weui-row weui-no-gutter weui-row-myBill">
+      <div class="weui-col-25">账号</div>
+      <div class="weui-col-25">充值</div>
+      <div class="weui-col-25">配送次数</div>
+      <div class="weui-col-25">时间</div>
+    </div>
+    <style>
+      .account_headimgurl{
+        width: 70%;
+        margin: 5px auto 0;
+        display: block;
+      }
+      .account_username{
+        line-height: 20px;
+      }
+      .weui-row{
+        border-bottom: 1px solid #ccc;
+      }
+      .product_logourl{
+        width: 70%;
+        margin: 5px auto 0;
+        display: block;
+      }
+      .product_name{
+        line-height: 20px;
+      }
+    </style>
+    <volist id="list" name="list">
+        <div class="weui-row weui-no-gutter weui-row-myBill_list" style="-ms-flex-align: center;-webkit-align-items: center; -webkit-box-align: center;align-items: center;">
+          <div class="weui-col-25">
+            <img class="account_headimgurl" src="{wghd:$list.account.headimgurl}">
+            <p class="account_username">{wghd:$list.account.username}</p>
+          </div>
+          <div class="weui-col-25" style="color:green;">
+            <p style="color: green;">{wghd:$list.green}</p>
+            <!-- <eq name="list.back" value="1">
+              <p style="color: red;">(后台充值)</p>
+            </eq> -->
+          </div>
+          <div class="weui-col-25">{wghd:$list.distribution}</div>
+          <div class="weui-col-25">{wghd:$list.addtime|date='Y-m-d H:i:s',###}</div>
+        </div>
+    </volist>
+  </div>
+</body>
+</html>

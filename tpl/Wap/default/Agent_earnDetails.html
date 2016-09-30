@@ -22,18 +22,19 @@
         <div class="weui_cell_bd weui_cell_primary">
           <p>{wghd:$name}</p>
         </div>
-        <div class="weui_cell_ft" style="color: #fff">{wghd::sprintf('%.2f',$info)}</div>
+        <div class="weui_cell_ft" style="color: #fff">{wghd:$agent.red}</div>
       </div>
     </div>
     <div class="weui-row weui-no-gutter weui-row-myBill">
-      <div class="weui-col-33">{wghd:$name}</div>
-      <div class="weui-col-33">来源</div>
-      <div class="weui-col-33">时间</div>
+      <div class="weui-col-25">{wghd:$name}</div>
+      <div class="weui-col-25">类型</div>
+      <div class="weui-col-25">来自</div>
+      <div class="weui-col-25">时间</div>
     </div>
     <volist id="list" name="list">
       <div class="weui-row weui-no-gutter weui-row-myBill_list" style="-ms-flex-align: center;-webkit-align-items: center; -webkit-box-align: center;align-items: center;">
-        <div class="weui-col-33">{wghd:$list.earn|default=0}</div>
-        <div class="weui-col-33">
+        <div class="weui-col-25">{wghd:$list.earn|default=0}</div>
+        <div class="weui-col-25">
           <switch name="list.status">
             <case value="1">下级充值</case>
             <case value="2">下下级充值</case>
@@ -46,10 +47,19 @@
             <case value="10">系统配送</case>
             <case value="11">购物退款</case>
             <case value="14">后台充值</case>
-            <case value="15">代理点转入</case>
+            <case value="15">转账号</case>
+            <case value="16">转代理点</case>
           </switch>
         </div>
-        <div class="weui-col-33">{wghd:$list.addtime|date='Y-m-d H:i:s',###}</div>
+        <div class="weui-col-25">
+          <neq name="list.fromid" value="0">
+            {wghd:$list.account.username}
+          </neq>
+          <neq name="list.fromgid" value="0">
+            {wghd:$list.fromagent.name}
+          </neq>
+        </div>
+        <div class="weui-col-25">{wghd:$list.addtime|date='Y-m-d H:i:s',###}</div>
       </div>
       <notempty name="list.remark">
         <div style="font-size: 16px;">备注:{wghd:$list.remark}</div>

@@ -358,6 +358,15 @@ class DistributionAction extends WapAction{
 			$this->display();
 		}
 	}
+	//判断旧密码
+	public function judgeOldPwd(){
+		$password = $this->_post('password');
+		if(md5($password) == $this->account['password']){
+			$this->ajaxReturn('','',1);
+		}else{
+			$this->ajaxReturn('','密码错误',2);
+		}
+	}
 	public function mypic(){
 		$this->display();
 	}
@@ -783,7 +792,6 @@ class DistributionAction extends WapAction{
 		$token		= $this->token;
 		$wecha_id	= $this->wecha_id;
 		$condition['token'] = $token;
-		$condition['bindmid'] = $this->my['id'];
 		$db = M('Distribution_member');
 		$follow = $db->where($condition)->order('id desc')->select();
 		$this->assign('follow',$follow);

@@ -17,6 +17,11 @@
 				'foreign_key' => 'gid',
 				'class_name' => 'Distribution_agent',
 			),
+			'fromagent' => array(
+				'mapping_type' => BELONGS_TO,
+				'foreign_key' => 'fromgid',
+				'class_name' => 'Distribution_agent',
+			),
 		);
 	}
 ?>

@@ -377,7 +377,7 @@ class DistributionAction extends UserAction{
 		    $result = $db->add();
 		}
 
-		$re = $this->earnRecord($aid,0,0,$green,0,0,14,$_SERVER['SERVER_ADDR'],0,$aid);
+		$re = $this->earnRecord($aid,$orderid,0,$green,0,0,14,$_SERVER['SERVER_ADDR'],0,$aid);
 
 		$account = D('Account')->where('id='.$aid)->find();
 		$integral = $green;
@@ -499,7 +499,7 @@ class DistributionAction extends UserAction{
 			$page=new Page($count,25);
 
 			//收入详细
-			$earns = D('Earn')->where($where)->relation(true)->limit($page->firstRow.','.$page->listRows)->select();
+			$earns = D('Earn')->where($where)->relation(true)->limit($page->firstRow.','.$page->listRows)->order('addtime desc')->select();
 
 			$this->assign('red',$red);
 			$this->assign('agent',$agent);
@@ -527,28 +527,57 @@ class DistributionAction extends UserAction{
 			if($red > $agent_red){
 				$this->error('代理点咪豆不足',U('Distribution/agent',array('type'=>'transferpage','id'=>$id)));
 			}
-			//判断推荐码是否正确
 			$code = $this->_post('code');
-			$account = D('Account')->where(array('recommend'=>$code))->find();
-			if(!$account){
-				$this->error('该推荐码账号不存在',U('Distribution/agent',array('type'=>'transferpage','id'=>$id)));
-			}
-			$remark = $this->_post('remark');
-			$data = array(
-				'gid' => $id,
-				'intoId' => $account['id'],
-				'red' => $red,
-				'remark' => $remark,
-				'ip' => $_SERVER['SERVER_ADDR'],
-				'addtime' => time(),
-				'year' => date('Y',time()),
-				'month' => date('m',time()),
-				'day' => date('d',time()),
-			);
-			$re = $db->add($data);
-			if($re){
+			$type = $this->_post('type');
+			//转账给账号
+			if($type == 1){
+				//判断推荐码是否正确
+				$account = D('Account')->where(array('recommend'=>$code))->find();
+				if(!$account){
+					$this->error('该推荐码账号不存在',U('Distribution/agent',array('type'=>'transferpage','id'=>$id)));
+				}
+				$remark = $this->_post('remark');
+				$data = array(
+					'gid' => $id,
+					'intoId' => $account['id'],
+					'red' => $red,
+					'remark' => $remark,
+					'ip' => $_SERVER['SERVER_ADDR'],
+					'addtime' => time(),
+					'year' => date('Y',time()),
+					'month' => date('m',time()),
+					'day' => date('d',time()),
+				);
+				$re = $db->add($data);
 				$this->earnRecord($account['id'],0,0,0,$red,0,15,$_SERVER['SERVER_ADDR'],0,0,$id,$remark);
 				$this->earnRecord(0,0,0,0,-$red,0,15,$_SERVER['SERVER_ADDR'],$id);
+			}
+			//转账给代理
+			if($type == 2){
+				//判断推荐码是否正确
+				$agent = M('Distribution_agent')->where(array('code'=>$code))->find();
+				if(!$agent){
+					$this->error('该代理点不存在');
+				}
+				$remark = $this->_post('remark');
+				$data = array(
+					'fromgid' => $id,
+					'gid' => $agent['id'],
+					'red' => $red,
+					'remark' => $remark,
+					'ip' => $_SERVER['SERVER_ADDR'],
+					'addtime' => time(),
+					'year' => date('Y',time()),
+					'month' => date('m',time()),
+					'day' => date('d',time()),
+				);
+				$re = $db->add($data);
+				//相应代理点增加红色咪豆
+				$this->earnRecord(0,0,0,0,$red,0,16,$_SERVER['SERVER_ADDR'],$agent['id'],0,$id,$remark);
+				//代理点减红色积分
+				$re = $this->earnRecord(0,0,0,0,-$red,0,16,$_SERVER['SERVER_ADDR'],$id,0,0,$remark);
+			}
+			if($re){
 				$this->success('转账成功',U('Distribution/agent',array('type'=>'transferpage','id'=>$id)));
 			}else{
 				$this->error('转账失败',U('Distribution/agent',array('type'=>'transferpage','id'=>$id)));
@@ -557,7 +586,12 @@ class DistributionAction extends UserAction{
 		}
 		if($type == 'transferDetails'){
 			$db = D('Transfer');
-			$list = $db->where(array('gid'=>$id))->relation(true)->select();
+			$condition = array(
+				'gid' => $id,
+				'fromgid' => $id,
+				'_logic' => 'OR',
+			);
+			$list = $db->where(array('gid'=>$id))->relation(true)->order('addtime desc')->select();
 			$this->assign('list',$list);
 			$this->display('transferDetails');
 			exit();
@@ -583,7 +617,7 @@ class DistributionAction extends UserAction{
 		//判断重复
 		$name = rtrim($_POST['name']);
 		$username = rtrim($_POST['username']);
-		$password = rtrim($_POST['username']);
+		$password = rtrim($_POST['password']);
 		if(!$name || !$username || !$password){
 			$this->error('信息不能为空');
 		}
@@ -602,9 +636,12 @@ class DistributionAction extends UserAction{
 		$_POST['year'] = date('Y',time());
 		$_POST['month'] = date('m',time());
 		$_POST['day'] = date('d',time());
+		$_POST['password'] = md5($password);
 		$this->insert('Distribution_agent','/agent');
 	}
 	public function agent_edit(){
+		$password = rtrim($_POST['password']);
+		$_POST['password'] = md5($password);
 		$this->save('Distribution_agent','/agent');
 	}
 	//会员充值记录列表
@@ -612,6 +649,9 @@ class DistributionAction extends UserAction{
 		$db = D('LevelOrders');
 		$type = $this->_get('type');
 		$id = $this->_get('id');
+		$cbid = $this->_get('cbid');
+		$branch_db = M('Company_branch');
+		$branch = $branch_db->where(array('id'=>$cbid))->find();
 		if($type == 'return'){
 			$order = $db->where(array('id'=>$id))->find();
 			$account = D('Account')->where('id='.$order['aid'])->find();
@@ -622,6 +662,7 @@ class DistributionAction extends UserAction{
 			$data['oid'] = $order['id'];
 			$data['aid'] = $account['id'];
 			$this->assign('info',$data);
+			$this->assign('cbid',$cbid);
 			$this->display('topup');
 			exit();
 		}
@@ -631,15 +672,42 @@ class DistributionAction extends UserAction{
 			$this->display('topupdetails');
 			exit();
 		}
-		$records = $db->where(array('paid'=>1))->relation(true)->order('addtime asc')->select();
-		foreach ($records as $k => $v) {
-			if($v['back'] == 1){
-				$records[$k]['member']['nickname'] = $v['ip'];
+		if($type == 'list' && $cbid && $branch){
+			$count = $db->where(array('paid'=>1))->count();
+			$page = new Page($count,25);
+
+			$records = $db->where(array('paid'=>1))->relation(true)->order('addtime asc')->limit($page->firstRow.','.$page->listRows)->select();
+			foreach ($records as $k => $v) {
+				if($v['back'] == 1){
+					$records[$k]['member']['nickname'] = $v['ip'];
+				}
+				$records[$k]['need_integral'] = $v['price'] * $this->set['inback']/100 - $v['topup'];
 			}
-			$records[$k]['need_integral'] = $v['price'] * $this->set['inback']/100 - $v['topup'];
+			$this->assign('cbid',$cbid);
+			$this->assign('list',$records);
+			$this->assign('page',$page->show());
+			$this->display();
+			exit();
 		}
-		$this->assign('list',$records);
-		$this->display();
+		$branch_list = $branch_db->select();
+		$this->assign('branch_list',$branch_list);
+		$this->display('companyBranch');
+	}
+	//改变分支占比
+	public function changeBranchProportion(){
+		$p = $this->_get('p');
+		$cbid = $this->_get('cbid');
+		$p = rtrim($p);
+		$db = M('Company_branch');
+		$re = '';
+		if($cbid && $p){
+			$re = $db->where('id='.$cbid)->setField('proportion',$p);
+		}
+		if($re){
+			$this->ajaxReturn('','修改成功',1);
+		}else{
+			$this->ajaxReturn('','修改失败',2);
+		}
 	}
 	//会员转账记录
 	public function transferRecord(){
@@ -654,17 +722,18 @@ class DistributionAction extends UserAction{
 		$this->display();
 	}
 	//后台给账号返红色咪豆
-
 	public function accountTopup(){
 		$aid = $this->_post('aid');
 		$oid = $this->_post('oid');
+		$cbid = $this->_post('cbid');
 		$gold = $this->_post('gold');
 		if(!is_numeric($gold) || $gold<=0){
 			$this->error('咪豆输入有误');
 		}
 		//判断公司剩余红色咪豆
-
-		if($this->admin_account['red'] < $gold){
+		$branch_db = M('Company_branch');
+		$branch = $branch_db->where(array('id'=>$cbid))->find();
+		if($branch['red'] < $gold){
 			$this->error('公司咪豆不足');
 		}
 		//判断充值金币是够超出所需咪豆
@@ -688,13 +757,29 @@ class DistributionAction extends UserAction{
 					$finish = 1;
 				}
 				D('LevelOrders')->where('id='.$oid)->setInc('topup',$gold);
+				//返账号红色咪豆
 				$this->earnRecord($aid,$oid,0,0,$gold,0,5,$_SERVER['SERVER_ADDR']);
+				//公司账号减红色咪豆
 				$r = $this->earnRecord(-1,$oid,0,0,-$gold,0,5,$_SERVER['SERVER_ADDR']);
+				//对分支操作
+				$branch_records_db = M('Company_branch_records');
+				$data = array(
+					'cbid' => $cbid,
+					'aid' => $aid,
+					'red' => -$gold,
+					'status' => 2,
+					'addtime' => time(),
+					'year' => date('Y',time()),
+					'month' => date('m',time()),
+					'day' => date('d',time()),
+				);
+				$branch_records_db->add($data);
+				$branch_db->where(array('id'=>$cbid))->setDec('red',$gold);
 				if($r){
 					if($finish == 1){
 						D('LevelOrders')->where('id='.$oid)->setField('finish',1);
 					}
-					$this->success('充值成功',U('Distribution/topupRecord',array('id'=>$oid,'type'=>'return')));
+					$this->success('充值成功',U('Distribution/topupRecord',array('id'=>$oid,'type'=>'return','cbid'=>$cbid)));
 				}
 			}
 		}else{

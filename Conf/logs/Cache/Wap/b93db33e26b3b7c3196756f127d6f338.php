@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-	<title><?php echo ($title); ?></title>
+	  <title><?php echo ($title); ?></title>
     <link rel="stylesheet" href="<?php echo RES;?>/original/css/weui.min.css">
     <link rel="stylesheet" href="<?php echo RES;?>/original/css/jquery-weui.css">
 </head>
 <body>
-	<div class="container" id="transfer">
+	<div class="container" id="agent_transfer">
 		<div class="info_edit_wrap_title">
         <div class="info_edit_wrap_title_item info_edit_wrap_title_left close_edit_wrap">返回</div>
         <div class="info_edit_wrap_title_item info_edit_wrap_title_center">转账</div>
@@ -19,15 +19,12 @@
       <div class="weui_cells_form" style="padding-top: 10px;">
         <div class="weui_cell weui_cell_select">
           <div class="weui_cell_bd weui_cell_primary">
-            <select class="weui_select" name="select1">
-              <option selected="" value="0">选择</option>
-              <option value="1">微信号</option>
-              <option value="2">QQ号</option>
-              <option value="3">Email</option>
+            <select class="weui_select" name="type" id="type">
+              <option selected="" value="1">账号(默认)</option>
+              <option value="2">代理</option>
             </select>
           </div>
         </div>
-
         <div class="weui_cell">
           <div class="weui_cell_bd weui_cell_primary weui_cell_infoedit" style="box-shadow: 0 0 5px #D6D6D6;">
             <input class="weui_input weui_input_infoedit code" type="text" placeholder="输入对方推荐码" value="">

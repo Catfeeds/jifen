@@ -282,6 +282,13 @@ class WapAction extends BaseAction
     	}
     	return $str;
     }
+    //向代理点发送信息
+    public function sendToAgentMessage($gid,$title,$content,$url=''){
+    	$agent = M('Distribution_agent')->where(array('id'=>$gid))->find();
+		if($agent){
+			$this->sendMessage($agent['wecha_id'],$title,$content,$url);
+		}
+    }
     //向账号发送信息
 	public function sendupMessage($aid,$title,$content,$url=''){
 		$bindm = D('Account')->where(array('id'=>$aid))->relation(true)->find();

@@ -821,7 +821,11 @@ class StoreAction extends WapAction{
 			$tdata = $this->getCat($carts);
 			foreach ($carts as $k => $c){
 				$crow['cartid'] = $normal_rt;
-				$crow['aid'] = $this->account['id'];
+				if($this->account['admin'] == 1){
+					$crow['aid'] = $aid;
+				}else{
+					$crow['aid'] = $this->account['id'];
+				}
 				$crow['productid'] = $k;
 				$crow['price'] = $tdata[1][$k]['totalPrice']*$discount;//$c['price'];
 				$crow['total'] = $tdata[1][$k]['total'];
@@ -1157,7 +1161,7 @@ class StoreAction extends WapAction{
 		if($accounts){
 			$str = '<option selected="" value="0">查询账号信息</option>';
 			foreach ($accounts as $k => $v) {
-				$str .='<option value="'.$v['id'].'">'.$v['username'].'(绿1:'.$v['green'].')</option>';
+				$str .='<option value="'.$v['id'].'">'.$v['username'].'(绿:'.$v['green'].')</option>';
 			}
 		}else{
 			$str = '<option selected="" value="0">该代理下没有账号</option>';

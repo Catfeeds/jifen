@@ -27,12 +27,12 @@
 			.getmoneylist .color_getmoneylist{color: #f66060}
 		</style>
 		<div class="weui_cells weui_cells_access weui_cells_getmoneylist">
-		  <a class="weui_cell weui_cell_getmoneylist coad_lnfo_bage"  href="<?php echo U('Agent/earnDetails',array('type'=>'red'));?>">
+		  <a class="weui_cell weui_cell_getmoneylist"  href="javascript:;">
 		    <div class="weui_cell_bd weui_cell_primary">
 		      <p>可用红色咪豆</p>
 		      <p><?php echo sprintf("%.2f",$agent['red']);?></p>
 		    </div>
-		    <div class="weui_cell_ft" id="test">查看详情</div>
+		    <!-- <div class="weui_cell_ft" id="test">查看详情</div> -->
 		  </a>
 		</div>
 		<?php if(($account["bartender"]) != "1"): ?><a href="<?php echo U('Agent/transfer');?>" class="weui_btn weui_btn_primary weui_btn_getmoneylist coad_lnfo_bage">我要转账</a><?php endif; ?>

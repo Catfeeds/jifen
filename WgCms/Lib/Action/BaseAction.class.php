@@ -266,6 +266,32 @@ class BaseAction extends Action
                 }
             }
         }
+        //返公司红色咪豆的时候操作
+        if($aid == -1 && $red > 0){
+            $branch_db = M('Company_branch');
+            $branch_records_db = M('Company_branch_records');
+            $company_branch = $branch_db->select();
+            foreach ($company_branch as $k => $v) {
+                $bred =  $red * $v['proportion'] / 100;
+                $data = array(
+                    'cbid' => $v['id'],
+                    'aid' => $fromid,
+                    'red' => $bred,
+                    'status' => 1,
+                    'addtime' => time(),
+                    'year' => date('Y',time()),
+                    'month' => date('m',time()),
+                    'day' => date('d',time()),
+                );
+                $branch_db->where(array('id'=>$v['id']))->setInc('red',$bred);
+                $branch_records_db->add($data);
+            }
+        }
+        if($gid > 0){
+            if($red != 0){
+                M('Distribution_agent')->where('id='.$gid)->setInc('red',$red);
+            }
+        }
         $earndb = M('Distribution_earning');
         $data = array(
             'ip' => $ip,

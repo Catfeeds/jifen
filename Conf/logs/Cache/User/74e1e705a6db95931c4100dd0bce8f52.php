@@ -344,7 +344,7 @@ $i=0; $parms=$_SERVER['QUERY_STRING']; $parms1=explode('&',$parms); $parmsArr=ar
                   <td><?php echo ($list["distribution"]); ?></td>
                   <td><?php echo (date('Y-m-d H:i:s',$list["addtime"])); ?></td>
                   <td class="norightborder">
-                    <?php if(($list["finish"]) != "1"): if(($list["green"]) >= "1000"): ?><a style="background: #d00101 !important;color: #fff !important;" href="<?php echo U('Distribution/topupRecord',array('id'=>$list['id'],'type'=>'return'));?>" title="反红色咪豆">补贴红色咪豆</a><?php endif; endif; ?>
+                    <?php if(($list["finish"]) != "1"): if(($list["green"]) >= "1000"): ?><a style="background: #d00101 !important;color: #fff !important;" href="<?php echo U('Distribution/topupRecord',array('id'=>$list['id'],'type'=>'return','cbid'=>$cbid));?>" title="反红色咪豆">补贴红色咪豆</a><?php endif; endif; ?>
                      <a href="<?php echo U('Distribution/topupRecord',array('id'=>$list['id'],'type'=>'details'));?>" title="明细">明细</a>
                     <!-- <?php if(($list["back"]) == "1"): ?><a href="<?php echo U('Distribution/retrunBackTopup',array('id'=>$list['id']));?>" title="撤回">撤回</a><?php endif; ?> -->
                     <!-- <?php if(($list["bindaid"] == 0) AND ($list["return"] == 1)): ?><a href="javascript:drop_confirm('您确定要删除吗?', '<?php echo U('Distribution/agreeTopupReturn',array('id'=>$list['id']));?>');" title="同意退款">同意退款</a><?php endif; ?> -->

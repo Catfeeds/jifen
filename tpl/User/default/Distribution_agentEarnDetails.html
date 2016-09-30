@@ -39,7 +39,9 @@
         <tr>
           <th>账号ID</th>
           <th>账号名</th>
-          <th style="color: red;">分到红色咪豆</th>
+          <th>代理点</th>
+          <th style="color: red;">红色咪豆</th>
+          <th>类型</th>
           <th>时间</th>
         </tr>
       </thead>
@@ -49,7 +51,25 @@
           <tr>
             <td>{wghd:$list.fromid}</td>
             <td>{wghd:$list.account.username}</td>
+            <td>{wghd:$list.fromagent.name}</td>
             <td style="color: red;">{wghd:$list.red|default=0}</td>
+            <td>
+              <switch name="list.status">
+                <case value="1">下级充值</case>
+                <case value="2">下下级充值</case>
+                <case value="3">代理收益</case>
+                <case value="5">公司补贴</case>
+                <case value="6">充值绿色咪豆</case>
+                <case value="7">购物</case>
+                <case value="8">转账</case>
+                <case value="9">提现</case>
+                <case value="10">系统配送</case>
+                <case value="11">购物退款</case>
+                <case value="14">后台充值</case>
+                <case value="15">代理点转账号</case>
+                <case value="16">代理点转代理点</case>
+              </switch>
+            </td>
             <td>{wghd:$list.addtime|date='Y-m-d H:i:s',###}</td>
           </tr>
         </volist>

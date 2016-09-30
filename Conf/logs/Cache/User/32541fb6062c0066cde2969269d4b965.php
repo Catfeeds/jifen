@@ -156,10 +156,18 @@ if (!isset($_SESSION['isQcloud'])){ ?>
         <div class="accountInfo">
 <table class="vipInfo" width="100%" border="0" cellpadding="0" cellspacing="0">
 <tr>
-<td><strong style="font-size: 18px; color: red;">公司红色咪豆
-：<?php echo (($admin_account["red"])?($admin_account["red"]):0); ?> </strong></td>
-<td><strong style="font-size: 18px; color: green;">充值绿色咪豆
-：<?php echo (($admin_account["green"])?($admin_account["green"]):0); ?></strong></td>
+<td>
+<a href="<?php echo U('Distribution/companyEarnDetails',array('type'=>'red'));?>">
+<strong style="font-size: 18px; color: red;">公司红色咪豆
+：<?php echo (($admin_account["red"])?($admin_account["red"]):0); ?> </strong>
+</a>
+</td>
+<td>
+<a href="<?php echo U('Distribution/companyEarnDetails',array('type'=>'green'));?>">
+<strong style="font-size: 18px; color: green;">充值绿色咪豆
+：<?php echo (($admin_account["green"])?($admin_account["green"]):0); ?></strong>
+</a>
+</td>
 <td><strong style="font-size: 18px;">黑色咪豆
 ：<?php echo (($admin_account["black"])?($admin_account["black"]):0); ?></strong></td>
 </tr>
@@ -301,9 +309,10 @@ $i=0; $parms=$_SERVER['QUERY_STRING']; $parms1=explode('&',$parms); $parmsArr=ar
     <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
       <thead>
         <tr>
-          <th>代理点</th>
-          <th style="color:red;">红色咪豆</th>
+          <th>来自代理点</th>
           <th>转入账号</th>
+          <th>转入代理点</th>
+          <th style="color:red;">红色咪豆</th>
           <th>备注</th>
           <th>时间</th>
         </tr>
@@ -311,9 +320,12 @@ $i=0; $parms=$_SERVER['QUERY_STRING']; $parms1=explode('&',$parms); $parmsArr=ar
       <tbody>
         <tr></tr>
         <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($i % 2 );++$i;?><tr>
-            <td><?php echo ($list["agent"]["name"]); ?></td>
-            <td style="color:red;"><?php echo ($list["red"]); ?></td>
+            <td><?php echo ($list["fromagent"]["name"]); ?></td>
             <td><?php echo ($list["getaccount"]["username"]); ?></td>
+            <td>
+              <?php if(!empty($list["fromgid"])): echo ($list["outagent"]["name"]); endif; ?>
+            </td>
+            <td style="color:red;"><?php echo ($list["red"]); ?></td>
             <td><?php echo ($list["remark"]); ?></td>
             <td><?php echo (date('Y-m-d H:i:s',$list["addtime"])); ?></td>
           </tr><?php endforeach; endif; else: echo "" ;endif; ?>

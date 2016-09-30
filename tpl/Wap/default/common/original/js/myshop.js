@@ -15,6 +15,13 @@ requirejs.config({
 	urlArgs:"bust=" + (new Date()).getTime(),
 });
 // var index_wrap = $('.content_wrap');
-requirejs(['jquery','common','topup'],function($,common){
-	var common = new common.Common();
+requirejs(['jquery','common','edit_agent_info','agenttransfer'],function($,common,gedit){
+    var common = new common.Common();
+    //个人信息修改
+    $(document).on('click','.info_edit',function(e){
+        common.loadPage(e,$(this),function(){
+            new gedit.PInfoEdit({});
+            common.editShow();
+        })
+    })
 })

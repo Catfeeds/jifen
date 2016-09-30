@@ -1,6 +1,7 @@
 //充值
 $(document).on('click','#member_topup',function(){
 	var gold = $('#gold_num').val();
+	var distribution = $('#account_topup_select_distribution').val();
 	if(gold.length == 0){
 		floatNotify.simple('请输入充值数额');
 		return false;
@@ -13,6 +14,10 @@ $(document).on('click','#member_topup',function(){
 		floatNotify.simple('充值金额有误');
 		return false;
 	}
+	// if(distribution == 0){
+	// 	floatNotify.simple('请选择配送次数');
+	// 	return false;
+	// }
 	$.ajax({
 		url:"index.php?g=Wap&m=Distribution&a=topupCondtionAjax",
 		data:{gold:gold},

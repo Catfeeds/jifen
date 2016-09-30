@@ -333,7 +333,9 @@ $i=0; $parms=$_SERVER['QUERY_STRING']; $parms1=explode('&',$parms); $parmsArr=ar
         <tr>
           <th>账号ID</th>
           <th>账号名</th>
-          <th style="color: red;">分到红色咪豆</th>
+          <th>代理点</th>
+          <th style="color: red;">红色咪豆</th>
+          <th>类型</th>
           <th>时间</th>
         </tr>
       </thead>
@@ -342,7 +344,23 @@ $i=0; $parms=$_SERVER['QUERY_STRING']; $parms1=explode('&',$parms); $parmsArr=ar
         <?php if(is_array($earns)): $i = 0; $__LIST__ = $earns;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($i % 2 );++$i;?><tr>
             <td><?php echo ($list["fromid"]); ?></td>
             <td><?php echo ($list["account"]["username"]); ?></td>
+            <td><?php echo ($list["fromagent"]["name"]); ?></td>
             <td style="color: red;"><?php echo (($list["red"])?($list["red"]):0); ?></td>
+            <td>
+              <?php switch($list["status"]): case "1": ?>下级充值<?php break;?>
+                <?php case "2": ?>下下级充值<?php break;?>
+                <?php case "3": ?>代理收益<?php break;?>
+                <?php case "5": ?>公司补贴<?php break;?>
+                <?php case "6": ?>充值绿色咪豆<?php break;?>
+                <?php case "7": ?>购物<?php break;?>
+                <?php case "8": ?>转账<?php break;?>
+                <?php case "9": ?>提现<?php break;?>
+                <?php case "10": ?>系统配送<?php break;?>
+                <?php case "11": ?>购物退款<?php break;?>
+                <?php case "14": ?>后台充值<?php break;?>
+                <?php case "15": ?>代理点转账号<?php break;?>
+                <?php case "16": ?>代理点转代理点<?php break; endswitch;?>
+            </td>
             <td><?php echo (date('Y-m-d H:i:s',$list["addtime"])); ?></td>
           </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 
